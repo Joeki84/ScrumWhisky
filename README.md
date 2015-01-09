@@ -8,8 +8,11 @@ INSTALLATIE DB + SOURCE FILES
 1.	Gebruik PHP 5.5 (XAMPP ) ps je kan perfect meerdere versies tegelijk van Apache en Mysql geïnstalleerd hebben (http://netcologne.dl.sourceforge.net/project/xampp/XAMPP%20Windows/5.5.19/xampp-win32-5.5.19-0-VC11-installer.exe)
 
 2.	Open php.ini en zorg voor de volgende regels onder de sectie [XDebug] (bijschrijven of uit commentariëren)
+3.	
 xdebug.remote_enable = 0
+
 xdebug.remote_handler = "dbgp"
+
 xdebug.remote_host = "127.0.0.1"
 
 3.	Herstart Apache
