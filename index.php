@@ -12,6 +12,8 @@ $output = new Output();
 
 $em = $entityManager;
 
+
+
 try {
   $output->render('homepage.html.twig', array());
 } catch (Exception $ex) {
