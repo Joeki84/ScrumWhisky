@@ -3,7 +3,7 @@
 INSTALLEER COMPOSER
 
 1.	Zie https://getcomposer.org/doc/00-intro.md#installation-windows
-2.	
+
 2.	Belangrijk is de volgende lijn (C:\xampp\php;C:\ProgramData\ComposerSetup\bin) toe te voegen aan de Windows path systeemvariabele, en vervolgens de pc te heropstarten, zodat het nieuwe path bij het starten van windows ingelezen wordt.
 
 INSTALLATIE DB + SOURCE FILES
