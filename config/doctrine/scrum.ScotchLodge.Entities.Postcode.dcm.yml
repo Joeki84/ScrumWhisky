@@ -1,0 +1,27 @@
+scrum\ScotchLodge\Entities\Postcode:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  table: postcode
+  indexes:
+    postcode_idx:
+      columns: [ postcode ]
+
+  oneToMany:
+    users:
+      tagretEntity: scrum\ScotchLodge\Entities\User
+      mappedBy: postcode
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+        
+  fields:
+    postcode:
+      type: string
+      length: 4
+      nullable: false
+    town:
+      type: string
+      length: 100

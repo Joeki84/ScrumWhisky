@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Registreer
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <form  action="{{ urlFor('user_register') }}" method="POST">
+      <div class="form-group">
+        <label for="id">text</label>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
