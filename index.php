@@ -15,9 +15,12 @@ $classloader->register();
 $output = new Output();
 
 try {
-  include 'config/routes/Test/Test.php';
-  include 'config/routes/Test/Countries.php';
-  include 'config/routes/Test/Form.php';
+  /* routes */
+  include 'config/routes/Test/test.php';
+  include 'config/routes/Test/countries.php';
+  include 'config/routes/Test/form.php';
+  include 'config/routes/User/Registration/register.php';
+  
   $app->run();
     
 } catch (Exception $ex) {

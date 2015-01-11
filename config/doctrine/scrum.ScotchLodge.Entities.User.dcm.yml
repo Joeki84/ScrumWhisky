@@ -11,6 +11,7 @@ scrum\ScotchLodge\Entities\User:
   manyToOne:
     postcode:
       targetEntity: scrum\ScotchLodge\Entities\Postcode
+      inversedBy: users
       joinColumn:
         name: postcode_id
         referencedColumnName: id

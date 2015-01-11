@@ -2,6 +2,8 @@
 
 namespace scrum\ScotchLodge\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Postcode entity
  *
@@ -12,7 +14,13 @@ class Postcode {
   private $id;
   private $postcode;
   private $town;
+  private $users;
 
+  function __construct($users) {
+    $this->users = new ArrayCollection();
+  }
+
+  
   function getId() {
     return $this->id;
   }
@@ -25,6 +33,10 @@ class Postcode {
     return $this->town;
   }
 
+  function getUsers() {
+    return $this->users;
+  }
+
   function setId($id) {
     $this->id = $id;
   }
@@ -35,6 +47,10 @@ class Postcode {
 
   function setTown($town) {
     $this->town = $town;
+  }
+
+  function setUsers($users) {
+    $this->users = $users;
   }
 
 }

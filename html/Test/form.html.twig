@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="container">
-    <form class="form" action="{{ app.urlFor('test_form', []) }}" method="POST">
+    <form action="{{ app.urlFor('test_form', []) }}" method="POST">
       <div class="form-group">
         <label class="form-control" for="name">Vul naam in: </label>
         <input class="form-control" type="type" id="name" name="name" />

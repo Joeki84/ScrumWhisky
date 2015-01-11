@@ -8,7 +8,7 @@ scrum\ScotchLodge\Entities\Postcode:
 
   oneToMany:
     users:
-      tagretEntity: scrum\ScotchLodge\Entities\User
+      targetEntity: scrum\ScotchLodge\Entities\User
       mappedBy: postcode
 
   id:
