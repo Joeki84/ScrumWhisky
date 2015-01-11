@@ -1,0 +1,15 @@
+{
+  "require": {    
+    "doctrine/orm": "2.5.*@dev",
+    "symfony/yaml": "2.7.*@dev",
+    "twig/twig": "1.16.*@dev",
+    "slim/slim": "2.*",
+    "slim/extras": "dev-master",
+    "vlucas/valitron": "dev-master"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src/"
+    }
+  }
+}
