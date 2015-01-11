@@ -1,4 +1,4 @@
 $(function() {
-  alert('roekoe');
+  console.log('roekoe');
 });
 

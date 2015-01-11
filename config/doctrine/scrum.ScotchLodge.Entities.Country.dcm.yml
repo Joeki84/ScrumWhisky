@@ -1,6 +1,6 @@
 scrum\ScotchLodge\Entities\Country:
   type: entity
-  repositoryClass: scrum\ScotchLodge\Data
+  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
   table: country
   indexes:
     country_code_idx:
