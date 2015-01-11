@@ -5,7 +5,7 @@ namespace scrum\ScotchLodge\Entities;
 /**
  * Country entity
  *
- * @author jvb
+ * @author jan van biervliet
  */
 class Country {
 

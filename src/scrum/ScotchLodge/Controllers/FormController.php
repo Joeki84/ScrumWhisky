@@ -4,6 +4,11 @@ namespace scrum\ScotchLodge\Controllers;
 
 use scrum\ScotchLodge\Controllers\Controller;
 
+/**
+ * FormController controller
+ *
+ * @author jan van biervliet
+ */
 class FormController extends Controller {
 
   public function __construct($em, $app) {
