@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Registratie voltooid
+{% endblock title %}
+
+{% block messages %} 
+  
+  {% block info_messages %}
+    {% if  info is defined %}
+      <div class="container info">
+      {{ info }}
+      </div>
+    {% endif %}
+  {% endblock info_messages %}
+
+{% endblock messages %}
+
+{% block content %}        
+{% endblock content %}

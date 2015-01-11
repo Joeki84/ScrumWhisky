@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Controllers;
 
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * RegistrationController controller
@@ -11,7 +12,7 @@ use scrum\ScotchLodge\Service\Registration\RegistrationService;
  * @author jan van biervliet
  */
 class RegistrationController extends Controller {
-
+  /* @var $srv RegistrationService */
   private $srv;
 
   public function __construct($em, $app) {
@@ -21,10 +22,22 @@ class RegistrationController extends Controller {
 
   public function processRegistration() {
     try {
-      $this->srv->processRegistration();
+      $user = $this->srv->processRegistration();
+      if ($user) {        
+        $this->getApp()->redirect($this->getApp()->urlFor('user_register_ok'));
+      } else {
+        $errors = $this->srv->getErrors();
+        $postcodes = $this->srv->getPostcodes();
+        $this->getApp()->render('Registration\register.html.twig', array('app' => $this->getApp(), 'errors' => $errors, 'postcodes' => $postcodes));
+      }
+      
     } catch (Exception $e) {
       $this->getApp()->render('probleem.html.twig');
     }
+  }
+  
+  public function getPostcodes() {    
+    return $this->srv->getPostcodes();
   }
 
 }

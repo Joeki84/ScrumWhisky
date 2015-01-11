@@ -3,6 +3,33 @@
   margin-top: 50px;
 }
 
+/*messages*/
+/*errors*/
+.errors {
+  border-radius: 3px;
+  background-color: #FFE1E2;
+  margin-top: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.errors ul {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.errors li {
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+.info {
+  border-radius: 3px;
+  background-color: #ECFFF1;
+  margin-top: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+
+/*header*/
 #head {
   height: 100px;
   border: 1px solid #e2e2e2;
