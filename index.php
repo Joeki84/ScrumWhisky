@@ -16,8 +16,8 @@ $output = new Output();
 
 try {
   include 'config/routes/Test/Test.php';
-  include 'config/routes/Test/Form.php';
   include 'config/routes/Test/Countries.php';
+  include 'config/routes/Test/Form.php';
   $app->run();
     
 } catch (Exception $ex) {

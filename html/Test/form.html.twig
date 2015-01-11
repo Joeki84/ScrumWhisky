@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  FORM VB
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <form class="form" action="{{ app.urlFor('test_form', []) }}" method="POST">
+      <div class="form-group">
+        <label class="form-control" for="name">Vul naam in: </label>
+        <input class="form-control" type="type" id="name" name="name" />
+      </div>
+
+      <input class="form-control" type="submit" id="submit" name="submit" value="Stem" />
+    </form>
+  </div>
+{% endblock content %}

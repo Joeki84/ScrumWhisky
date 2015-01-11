@@ -10,8 +10,8 @@ class CountryController extends Controller {
   
   private $repo;
   
-  function __construct($em) {
-    parent::__construct($em);
+  function __construct($em, $app) {
+    parent::__construct($em, $app);
     $this->repo = $em->getRepository('scrum\ScotchLodge\Entities\Country');
   }
   

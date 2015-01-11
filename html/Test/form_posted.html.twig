@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  FORM POSTED
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    {{ app.request.post('name') }}
+  </div>
+{% endblock content %}
