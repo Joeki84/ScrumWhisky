@@ -18,6 +18,6 @@ $app->post('/registreer', function() use ($app, $contr) {
   }
 })->name('user_register_process');
 
-$app->get('/registreer/ok', function() use ($app){
-  $app->render('Registration/register_confirm.html.twig', array('info' => 'Registratie voltooid'));
+$app->get('/registreer/ok', function() use ($app, $contr){
+  $contr->registrationConfirm();  
 })->name('user_register_ok');

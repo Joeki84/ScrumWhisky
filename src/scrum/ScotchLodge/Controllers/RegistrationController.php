@@ -23,8 +23,10 @@ class RegistrationController extends Controller {
   public function processRegistration() {
     try {
       $user = $this->srv->processRegistration();
-      if ($user) {        
-        $this->getApp()->redirect($this->getApp()->urlFor('user_register_ok'));
+      if ($user) {
+        //$this->getApp()->render('Registration\register_confirm.html.twig', array('info' => 'Registratie gelukt'));
+        $url = $this->getApp()->urlFor('user_register_ok');
+        $this->getApp()->redirect(  $this->getApp()->urlFor('user_register_ok'));
       } else {
         $errors = $this->srv->getErrors();
         $postcodes = $this->srv->getPostcodes();
@@ -34,6 +36,10 @@ class RegistrationController extends Controller {
     } catch (Exception $e) {
       $this->getApp()->render('probleem.html.twig');
     }
+  }
+  
+  public function registrationConfirm() {
+    $this->getApp()->render('Registration/register_confirm.html.twig', array('info' => 'Registratie voltooid'));
   }
   
   public function getPostcodes() {    
