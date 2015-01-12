@@ -20,7 +20,7 @@ abstract class Controller {
   
   function __construct($em, $app) {
     $this->em = $em;
-    $this->app = $app;     
+    $this->app = $app;
   }
 
   public function getEntityManager() {

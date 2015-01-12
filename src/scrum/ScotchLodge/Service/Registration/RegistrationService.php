@@ -3,9 +3,7 @@
 namespace scrum\ScotchLodge\Service\Registration;
 
 use scrum\ScotchLodge\Entities\User;
-use Doctrine\ORM\Repository;
-use Valitron\Validator;
-use scrum\ScotchLodge\Service\Registration\RegistrationValidation as Val;
+use scrum\ScotchLodge\Service\Validation\RegistrationValidation as Val;
 
 /**
  * RegistrationService registration services

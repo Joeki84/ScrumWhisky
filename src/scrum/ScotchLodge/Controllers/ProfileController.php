@@ -20,11 +20,14 @@ class ProfileController extends Controller {
   
   public function verifyUserCredentials() {
     $app = $this->getApp();
-    $username = $app()->request->post('gebruikersnaam');
-    $password = $app()->request->post('wachtwoord'); 
-    
-    $verified = $this->srv->verify($username, $password);
-    
-    $app->render('main_page', array('app' => $app));
+    $username = $app->request->post('gebruikersnaam');
+    $password = $app->request->post('wachtwoord'); 
+    $verified = $this->srv->confirmPassword($username, $password);
+    if ($verified) {
+      $_SESSION['user'] = $this->srv->getUser();
+      $app->redirect($app->urlFor('main_page'));
+    } else {
+      $app->render('Profile\logon.html.twig', array('app' => $app, 'errors' => ['Ongeldige inloggegevens'] ));
+    }
   }
 }

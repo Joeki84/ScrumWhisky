@@ -3,6 +3,7 @@
 namespace scrum\ScotchLodge\Service\Profile;
 
 use Doctrine\ORM\EntityManager;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * ProfileService
@@ -12,19 +13,40 @@ use Doctrine\ORM\EntityManager;
 class ProfileService {
 
   private $em;
-  
+
+  /* var $user User */
+  private $user;
+
   public function __construct($em) {
-    $this->em = $em;    
+    $this->em = $em;
   }
 
-  public function retrieveUserByUsername($name) {
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
-    $user = $repo->findBy(array('username'));
-    return $user;
+  public function retrieveUserByUsername($username) {
+    $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->findBy(array('username' => $username));
+    return count($user) > 0 ? $user[0] : null;
   }
-  
-  public function verify ($username, $password) {
+
+  public function confirmPassword($username, $password) {
+    /* var $user User */
     $user = $this->retrieveUserByUsername($username);
+    $this->user = $user;
+
+    if (isset($user) && $user != null) {
+      $hash = $user->getPassword();
+
+      if (password_verify($password, $hash)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  function getUser() {
+    return $this->user;
   }
 
 }

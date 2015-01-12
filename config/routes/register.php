@@ -12,8 +12,7 @@ $app->get('/registreer', function() use ($app, $contr) {
 })->name('user_register');
 
 $app->post('/registreer', function() use ($app, $contr) {
-  if ($app->request->isPost()) {
-    $postcodes = $contr->getPostcodes();
+  if ($app->request->isPost()) {    
     $contr->processRegistration();
   }
 })->name('user_register_process');

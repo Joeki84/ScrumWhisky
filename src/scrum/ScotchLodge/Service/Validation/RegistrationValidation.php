@@ -1,8 +1,7 @@
 <?php
 
-namespace scrum\ScotchLodge\Service\Registration;
+namespace scrum\ScotchLodge\Service\Validation;
 
-use scrum\ScotchLodge\Service\Registration\Validation;
 use Valitron\Validator;
 
 class RegistrationValidation extends Validation {
