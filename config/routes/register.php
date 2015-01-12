@@ -7,7 +7,8 @@ $contr = new RegistrationController($em, $app);
 $app->get('/registreer', function() use ($app, $contr) {
   if ($app->request->isGet()) {
     $postcodes = $contr->getPostcodes();
-    $app->render('Registration/register.html.twig', array('app' => $app, 'postcodes' => $postcodes));
+    $globals = $contr->getGlobals();
+    $app->render('Registration/register.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
   }
 })->name('user_register');
 

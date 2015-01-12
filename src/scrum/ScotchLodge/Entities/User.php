@@ -67,19 +67,19 @@ class User {
     return $this->address;
   }
 
-  function getCan_review() {
+  function getCanReview() {
     return $this->can_review;
   }
 
-  function getCan_create_category() {
+  function canCreateCategory() {
     return $this->can_create_category;
   }
 
-  function getCan_create_event() {
+  function canCreateEvent() {
     return $this->can_create_event;
   }
 
-  function getIs_admin() {
+  function isAdmin() {
     return $this->is_admin;
   }
 
@@ -103,11 +103,11 @@ class User {
     $this->password = $password;
   }
 
-  function setLast_login($last_login) {
+  function setLastLogin($last_login) {
     $this->last_login = $last_login;
   }
 
-  function setFirst_name($first_name) {
+  function setFirstName($first_name) {
     $this->first_name = $first_name;
   }
 
@@ -123,19 +123,19 @@ class User {
     $this->address = $address;
   }
 
-  function setCan_review($can_review) {
+  function setCanReview($can_review) {
     $this->can_review = $can_review;
   }
 
-  function setCan_create_category($can_create_category) {
+  function setCanCreateCategory($can_create_category) {
     $this->can_create_category = $can_create_category;
   }
 
-  function setCan_create_event($can_create_event) {
+  function setCanCreateEvent($can_create_event) {
     $this->can_create_event = $can_create_event;
   }
 
-  function setIs_admin($is_admin) {
+  function setAdmin($is_admin) {
     $this->is_admin = $is_admin;
   }
 

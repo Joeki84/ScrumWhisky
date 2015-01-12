@@ -27,7 +27,7 @@ class ProfileController extends Controller {
       $_SESSION['user'] = $this->srv->getUser();
       $app->redirect($app->urlFor('main_page'));
     } else {
-      $app->render('Profile\logon.html.twig', array('app' => $app, 'errors' => ['Ongeldige inloggegevens'] ));
+      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens'] ));
     }
   }
 }

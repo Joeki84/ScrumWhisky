@@ -36,11 +36,10 @@ class RegistrationController extends Controller {
       if ($user) {
         $url = $this->getApp()->urlFor('user_register_ok');
         $this->getApp()->redirect(  $this->getApp()->urlFor('user_register_ok'));
-      } else {
-        $errors = $this->processErrors($this->srv->getErrors());
-        
+      } else {        
+        $errors = $this->processErrors($this->srv->getErrors());        
         $postcodes = $this->srv->getPostcodes();
-        $this->getApp()->render('Registration\register.html.twig', array('app' => $this->getApp(), 'errors' => $errors, 'postcodes' => $postcodes));
+        $this->getApp()->render('Registration\register.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors, 'postcodes' => $postcodes));
       }
       
     } catch (Exception $e) {

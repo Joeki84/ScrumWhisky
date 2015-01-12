@@ -45,7 +45,7 @@ class RegistrationService {
     $user->setUsername($username);
     $user->setEmail($email);    
     $user->setPassword($hash);
-    $user->setFirst_name($first_name);
+    $user->setFirstName($first_name);
     $user->setSurname($surname);
 
     $val = new Val($app, $em);
