@@ -13,6 +13,7 @@ return array(
     'dbname' => 'whisky'
     ),
   'slim' => array(
+    'debug' => true,
     'templates.path' => 'html',
     'log.level' => 4,
     'log.enabled' => true,

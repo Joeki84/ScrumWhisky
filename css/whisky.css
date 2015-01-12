@@ -2,6 +2,31 @@
 .margin-top-50 {
   margin-top: 50px;
 }
+.floatright {
+  float: right;
+}
+.floatleft {
+  float: left;
+}
+.clearboth {
+  clear: both;
+}
+
+/*header*/
+#head {
+  height: 100px;
+  border: 1px solid #e2e2e2;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+/*topmenu*/
+#topmenu {}
+
+
 
 /*messages*/
 /*errors*/
@@ -26,15 +51,4 @@
   margin-top: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
-}
-
-
-/*header*/
-#head {
-  height: 100px;
-  border: 1px solid #e2e2e2;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
 }

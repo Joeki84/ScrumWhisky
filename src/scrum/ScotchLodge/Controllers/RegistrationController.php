@@ -39,7 +39,7 @@ class RegistrationController extends Controller {
   }
   
   public function registrationConfirm() {
-    $this->getApp()->render('Registration/register_confirm.html.twig', array('info' => 'Registratie voltooid'));
+    $this->getApp()->render('Registration/register_confirm.html.twig', array('app' => $this->getApp(), 'info' => 'Registratie voltooid'));
   }
   
   public function getPostcodes() {    

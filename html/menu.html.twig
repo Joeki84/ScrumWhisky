@@ -1,0 +1,20 @@
+<div class="container">
+
+  {% if app is null or app is not defined %}
+    <span style="color:red">text</span>
+  {% endif %}
+
+  <nav id="reg-menu">
+    <ul class="nav nav-pills floatright">
+      <li><a href="{{ app.urlFor('user_register') }}">Registreer</a></li>
+      <li><a href="#">Wachtwoord vergeten</a></li>
+      <li><a href="#">Aanmelden</a></li>
+    </ul>
+  </nav>
+      <nav id="topmenu" class="clearboth">
+    <ul class="nav nav-tabs">
+      <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
+      <li><a href="#"> ... </a></li>
+    </ul>
+  </nav>
+</div>

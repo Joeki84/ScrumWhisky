@@ -1,8 +1,5 @@
 <?php
 
-/**
- * An entityManager from bootstrap.php is available
- */
 use Doctrine\Common\ClassLoader;
 use scrum\ScotchLodge\Service\Output;
 use scrum\ScotchLodge\Controllers\CountryController;
@@ -20,6 +17,7 @@ try {
   include 'config/routes/Test/countries.php';
   include 'config/routes/Test/form.php';
   include 'config/routes/User/Registration/register.php';
+  include 'config/routes/main.php';
   
   $app->run();
     
