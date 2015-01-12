@@ -16,7 +16,8 @@ try {
   include 'config/routes/Test/test.php';
   include 'config/routes/Test/countries.php';
   include 'config/routes/Test/form.php';
-  include 'config/routes/User/Registration/register.php';
+  include 'config/routes/register.php';
+  include 'config/routes/profile.php';
   include 'config/routes/main.php';
   
   $app->run();

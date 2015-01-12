@@ -4,29 +4,6 @@
   Registreer
 {% endblock title %}
 
-{% block messages %}
-
-  {% block error_messages %}
-    {% if errors is defined %}
-      <div class="container">
-        <div class="errors">
-          <ul>
-            {% for errorGroup in errors %}
-              {% for error in errorGroup %}
-                <li>{{ error }}</li>
-                {% endfor %}
-              {% endfor %}
-          </ul>
-        </div>
-      </div>
-    {% endif %}
-  {% endblock error_messages %}
-
-  {% block info_messages %}
-  {% endblock info_messages %}
-
-{% endblock messages %}
-
 {% block content %}
   <div class="container">
     <h2>Registratiegegevens</h2>

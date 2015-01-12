@@ -23,13 +23,22 @@
 }
 
 
-/*topmenu*/
+/*menus*/
+#reg-menu {
+  font-size: 0.9em;  
+}
 #topmenu {}
+#topmenu ul li {
 
+}
 
 
 /*messages*/
 /*errors*/
+.errors, .info {
+  padding-left: 6px;
+  padding-right: 6px;
+}
 .errors {
   border-radius: 3px;
   background-color: #FFE1E2;

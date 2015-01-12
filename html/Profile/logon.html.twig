@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Aanmelden
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <h1>Aanmelden</h1>
+    
+    <form action="{{ app.urlFor('user_logon_process') }}" method="post">
+      <div class="form-group">
+        <label for="gebruikersnaam">Gebruikersnaam</label>
+        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" />
+      </div>
+      <div class="form-group">
+        <label for="wachtwoord">Wachtwoord</label>
+        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
+      </div>
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="verzend" value="Login" />
+    </form>
+      
+  </div>
+{% endblock content %}
