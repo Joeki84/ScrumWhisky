@@ -30,4 +30,8 @@ class ProfileController extends Controller {
       $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens'] ));
     }
   }
+  
+  public function logOff() {
+    session_unset();
+  }
 }

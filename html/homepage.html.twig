@@ -4,7 +4,17 @@
 
 {% block content %}
   <div class="container test">
-    <h1>ROEKOEEEE</h1>    
+    {% if globals.user is defined and globals.user is not null %}
+      {% set user = globals.user %}
+      <h1>ROEKOEEEE, {{ globals.user.username }}</h1>
+      {% if user.isAdmin() %}
+        <span>Aangemeld als admin</span>
+      {% else %}
+        <span>Aangemeld als gebruiker</span>
+      {% endif %}
+    {% else %}
+      <h1>Welkom anonieme gebruiker</h1>
+    {% endif %}
   </div>
 {% endblock content %}
 

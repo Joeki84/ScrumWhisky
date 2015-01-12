@@ -40,7 +40,7 @@ class User {
   }
 
   function getEnabled() {
-    return $this->enabled;
+    return $this->enabled == 1;
   }
 
   function getPassword() {
@@ -68,19 +68,19 @@ class User {
   }
 
   function getCanReview() {
-    return $this->can_review;
+    return $this->can_review == 1;
   }
 
   function canCreateCategory() {
-    return $this->can_create_category;
+    return $this->can_create_category == 1;
   }
 
   function canCreateEvent() {
-    return $this->can_create_event;
+    return $this->can_create_event == 1;
   }
 
   function isAdmin() {
-    return $this->is_admin;
+    return $this->is_admin == 1;
   }
 
   function setId($id) {
