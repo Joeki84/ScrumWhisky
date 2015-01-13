@@ -44,6 +44,8 @@ class ProfileService {
       return false;
     }
   }
+  
+  
 
   function getUser() {
     return $this->user;

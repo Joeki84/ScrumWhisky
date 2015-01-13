@@ -48,10 +48,18 @@ abstract class Controller {
   }
 
   public function getUser() {
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
       return $_SESSION['user'];
     }
     return null;
+  }
+  
+  public function isUserAnonymous() {
+    return !$this->isLoggedIn();
+  }
+  
+  public function isUserLoggedIn() {
+    return $this->getUser() != null;
   }
 
   public function isUserAdmin() {

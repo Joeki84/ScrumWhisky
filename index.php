@@ -2,7 +2,6 @@
 
 use Doctrine\Common\ClassLoader;
 use scrum\ScotchLodge\Service\Output;
-use scrum\ScotchLodge\Controllers\CountryController;
 
 require_once 'bootstrap.php';
 

@@ -31,6 +31,16 @@ class ProfileController extends Controller {
     }
   }
   
+  public function showProfile() {
+    $app = $this->getApp();
+    if ($this->isUserLoggedIn()) {
+      $app->render('Profile\profile_show.html.twig', array('globals' => $this->getGlobals(), 'user' => $this->getUser()));
+    } else {
+      $app->flash('errors');
+      $app->redirect('user_logon');
+    }
+  }
+  
   public function logOff() {
     session_unset();
   }
