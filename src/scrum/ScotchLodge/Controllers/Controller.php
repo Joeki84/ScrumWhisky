@@ -40,9 +40,10 @@ abstract class Controller {
    */
   public function getGlobals() {
     $globals = array(
-      'app' => $this->app,
-      'user' => $this->getUser(),
-      'session' => $this->getSession()
+      'app' => $this->app,  // http://docs.slimframework.com/
+      'user' => $this->getUser(), // User
+      'session' => $this->getSession(), // session var array
+      'path' => $_SERVER['REQUEST_URI'] // current path
     );
     return $globals;
   }
