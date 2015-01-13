@@ -24,3 +24,8 @@ $app->get('/profiel', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->showProfile();
 })->name('profile_show');
+
+$app->post('/profiel/wijzig', function() use ($em, $app) {
+  $contr = new ProfileController($em, $app);
+  $contr->editProfile();
+})->name('profile_edit');

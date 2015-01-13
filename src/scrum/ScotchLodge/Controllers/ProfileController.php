@@ -44,6 +44,11 @@ class ProfileController extends Controller {
     }
   }
   
+  public function editProfile() {
+    $app = $this->getApp();
+    $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals()));
+  }
+  
   public function logOff() {
     session_unset();
   }

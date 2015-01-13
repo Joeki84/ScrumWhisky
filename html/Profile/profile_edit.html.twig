@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Toon Profiel
+{% endblock title %}
+
+{% block content %}
+  {% if globals.user is defined and globals.user is not null %}
+    {% set user = globals.user %}
+  {% endif %}
+  <div class="container">
+    <h1>Mijn Profiel</h1>
+    <form action="{{ globals.app.urlFor('profile_edit') }}" method="post">
+      <div class="form-group">
+        <label for="gebruikersnaam">Gebruikersnaam</label>
+        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{{ user.username }}" />
+        <label for="email">E-mail</label> 
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" />
+      </div>
+      
+      <div class="form-group">
+        <label for="wachtwoord">Wachwoord</label>
+        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
+        <label for="herhaal_wachtwoord">Herhaal wachtwoord</label>
+        <input class="form-control" type="password" id="herhaal_password" name="herhaal_wachtwoord" />
+      </div>
+
+      <div class="form-group">
+        <label for="voornaam">Voornaam</label>
+        <input class="form-control" type="text" id="voornaam" name="voornaam" value="{{ user.firstName }}"  />
+        <label for="achternaam">Achternaam</label>
+        <input class="form-control" type="text" id="achternaam" name="achternaam" value="{{ user.surname }}" />
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}"  />
+        <label for="adres">Adres</label>
+        <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}"  />
+      </div>
+
+      <input class="form-control" type="submit" id="wijzig" name="wijzig" value="Wijzig gegevens" />
+    </form>      
+  </div>
+{% endblock content %}
