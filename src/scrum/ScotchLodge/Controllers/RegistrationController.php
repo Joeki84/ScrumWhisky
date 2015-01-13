@@ -19,16 +19,6 @@ class RegistrationController extends Controller {
     parent::__construct($em, $app);
     $this->srv = new RegistrationService($em, $app);
   }
-  
-  private function processErrors($errors) {
-    $err = array();
-    foreach ($errors as $errorGroup) {
-      foreach ($errorGroup as $error) {
-        $err[] = $error;
-      }
-    }
-    return $err;
-  }
 
   public function processRegistration() {
     try {
@@ -37,7 +27,7 @@ class RegistrationController extends Controller {
         $url = $this->getApp()->urlFor('user_register_ok');
         $this->getApp()->redirect(  $this->getApp()->urlFor('user_register_ok'));
       } else {        
-        $errors = $this->processErrors($this->srv->getErrors());        
+        $errors = $this->srv->getErrors();
         $postcodes = $this->srv->getPostcodes();
         $this->getApp()->render('Registration\register.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors, 'postcodes' => $postcodes));
       }

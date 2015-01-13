@@ -1,4 +1,5 @@
 <?php
+
 namespace scrum\ScotchLodge\Controllers;
 
 use scrum\ScotchLodge\Controllers\Controller;
@@ -11,31 +12,32 @@ use scrum\ScotchLodge\Service\Registration\RegistrationService;
  * @author jan van biervliet
  */
 class ProfileController extends Controller {
+  /* var $srv ProfileService */
 
   private $srv;
-  
+
   public function __construct($em, $app) {
     parent::__construct($em, $app);
-    $this->srv = new ProfileService($em);    
+    $this->srv = new ProfileService($em, $app);
   }
-  
+
   public function verifyUserCredentials() {
     $app = $this->getApp();
     $username = $app->request->post('gebruikersnaam');
-    $password = $app->request->post('wachtwoord'); 
+    $password = $app->request->post('wachtwoord');
     $verified = $this->srv->confirmPassword($username, $password);
     if ($verified) {
-      $_SESSION['user'] =  $this->srv->getUser()->getUserName();
+      $_SESSION['user'] = $this->srv->getUser()->getUserName();
       $app->redirect($app->urlFor('main_page'));
     } else {
-      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens'] ));
+      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens']));
     }
   }
-  
+
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
-      $globals = $this->getGlobals();          
+      $globals = $this->getGlobals();
       $u = $this->getUser();
       $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $u));
     } else {
@@ -43,13 +45,29 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('user_logon'));
     }
   }
-  
+
   public function editProfile() {
     $app = $this->getApp();
-    $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals()));
+    $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
+    $postcodes = $reg_srv->getPostcodes();
+    $g = $this->getGlobals();
+    $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
-  
+
+  public function storeChanges() {
+    $app = $this->getApp();
+    if ($this->srv->dataIsValid()) {
+      $this->srv->updateUser($this->getUser());
+      $app->redirect($app->urlFor('profile_show'));
+    } else {
+      $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
+      $pc = $reg_srv->getPostcodes();
+      $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'postcodes' => $pc));
+    }
+  }
+
   public function logOff() {
     session_unset();
   }
+
 }

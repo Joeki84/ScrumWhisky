@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Service\Profile;
 
 use Doctrine\ORM\EntityManager;
 use scrum\ScotchLodge\Entities\User;
+use scrum\ScotchLodge\Service\Validation\ProfileValidation as Val;
 
 /**
  * ProfileService
@@ -13,12 +14,12 @@ use scrum\ScotchLodge\Entities\User;
 class ProfileService {
 
   private $em;
+  private $app;
+  private $errors;
 
-  /* var $user User */
-  private $user;
-
-  public function __construct($em) {
+  public function __construct($em, $app) {
     $this->em = $em;
+    $this->app = $app;
   }
 
   public function retrieveUserByUsername($username) {
@@ -36,19 +37,62 @@ class ProfileService {
       $hash = $user->getPassword();
 
       if (password_verify($password, $hash)) {
-        return true;
+        return $user;
       } else {
-        return false;
+        return null;
       }
     } else {
       return false;
     }
   }
   
+   
+  public function dataIsValid() {
+    $val = new Val($this->app, $this->em);
+    $validated = $val->validate();
+    $this->errors = $val->getErrors();
+    return $validated;
+  }
   
-
-  function getUser() {
+  public function updateUser(User $user) {
+    $app = $this->app;
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');    
+    
+    $password = $app->request->post('wachtwoord');    
+    if ( isset($password) && trim($password) != '') {
+      $hash = password_hash($password, CRYPT_BLOWFISH);
+      $user->setPassword($hash);
+    }
+    
+    $first_name = $app->request->post('voornaam');
+    if ($user->getFirstName() !=  $first_name) {
+      $user->setFirstName($first_name);
+    }
+    
+    $surname = $app->request->post('achternaam');
+    if ($user->getSurname() != $surname) {
+      $user->setSurname($surname);
+    }
+    
+    $address = $app->request->post('adres');
+    if ($user->getAddress() != $address) {
+      $user->setAddress($address);
+    }
+    
+    $em->persist($user);
+    $em->flush();
+    
+  }
+  
+  public function getErrors() {
+    return $this->errors;
+  }
+  
+  public function getUser() {
     return $this->user;
   }
+  
+  
 
 }

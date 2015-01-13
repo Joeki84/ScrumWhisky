@@ -24,8 +24,6 @@ class RegistrationValidation extends Validation {
     }, 'bestaat al');
     
     parent::__construct($app, $em);
-    $app = $this->getApp();
-    $em = $this->getEm();
     // custom rule
   }
   

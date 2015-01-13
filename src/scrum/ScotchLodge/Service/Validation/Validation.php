@@ -28,7 +28,14 @@ abstract class Validation {
   }
 
   function getErrors() {
-    return $this->val->errors();
+    $errors = $this->val->errors();
+    $err = array();
+    foreach ($errors as $errorGroup) {
+      foreach ($errorGroup as $error) {
+        $err[] = $error;
+      }
+    }
+    return $err;
   }
 
   function getVal() {

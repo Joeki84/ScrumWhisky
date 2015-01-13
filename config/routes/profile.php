@@ -29,3 +29,8 @@ $app->post('/profiel/wijzig', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->editProfile();
 })->name('profile_edit');
+
+$app->post('/profiel/bewaar', function() use ($em, $app){
+  $contr = new ProfileController($em, $app);
+  $contr->storeChanges();
+})->name('profile_edit_save');

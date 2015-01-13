@@ -11,7 +11,8 @@ use Slim\Slim;
  * @author jan van biervliet
  */
 abstract class Controller {
-  /* @var $em EntityManager */
+  
+  /* @var $em EntityManager() */
   private $em;
 
   /* @var $app  Slim */
@@ -33,6 +34,10 @@ abstract class Controller {
     return $this->app;
   }
   
+  /**
+   * Gets Slim $app, current user and session vars for use in Twig 
+   * @return 1 dimensional array of global vars
+   */
   public function getGlobals() {
     $globals = array(
       'app' => $this->app,
@@ -46,7 +51,7 @@ abstract class Controller {
     return $_SESSION;
   }
   
-  private function queryUserByUserName($username) {
+  private function queryUserByUserName($username) {    
     $em = $this->getEntityManager();
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
     $user = $repo->findBy(array('username' => $username));
