@@ -15,7 +15,7 @@ scrum\ScotchLodge\Entities\User:
       joinColumn:
         name: postcode_id
         referencedColumnName: id
-        
+
   fields:
     username:
       type: string

@@ -41,12 +41,18 @@ class RegistrationService {
     $hash = password_hash($password, CRYPT_BLOWFISH);
     $first_name = $app->request->post('voornaam');
     $surname = $app->request->post('achternaam');
-    
+    $postcode = $app->request->post('postcode');
+    $address = $app->request->post('address');
+        
     $user->setUsername($username);
     $user->setEmail($email);    
     $user->setPassword($hash);
     $user->setFirstName($first_name);
-    $user->setSurname($surname);
+    $user->setSurname($surname);        
+    $user->setAddress($address);
+    
+    $postcode_object = $this->getPostcodeObject($postcode);
+    $user->setPostcode($postcode_object);
 
     $val = new Val($app, $em);
     if ($val->validate()) {
@@ -63,6 +69,13 @@ class RegistrationService {
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
     $postcodes = $repo->findAll();
     return $postcodes;
+  }
+  
+  public function getPostcodeObject($postcode) {
+    $em = $this->getEm();
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
+    $pc_obj = $repo->findBy(array('postcode' => $postcode));
+    return $pc_obj;
   }
   
   public function getErrors() {
