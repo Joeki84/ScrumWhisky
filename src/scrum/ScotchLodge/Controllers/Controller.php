@@ -12,7 +12,6 @@ use Slim\Slim;
  */
 abstract class Controller {
   /* @var $em EntityManager */
-
   private $em;
 
   /* @var $app  Slim */
@@ -46,10 +45,18 @@ abstract class Controller {
   public function getSession() {
     return $_SESSION;
   }
+  
+  private function queryUserByUserName($username) {
+    $em = $this->getEntityManager();
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->findBy(array('username' => $username));
+    return $user;
+  }
 
   public function getUser() {
     if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
-      return $_SESSION['user'];
+      $user = $this->queryUserByUserName($_SESSION['user']);
+      return $user[0];
     }
     return null;
   }
@@ -64,7 +71,7 @@ abstract class Controller {
 
   public function isUserAdmin() {
     if (isset($_SESSION['user'])) {
-      $user = $_SESSION['user'];
+      $user = unserialize($_SESSION['user']);
       return $user->isAdmin() == 1 ? true : false;
     }
     return false;

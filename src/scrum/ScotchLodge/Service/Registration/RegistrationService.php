@@ -42,7 +42,7 @@ class RegistrationService {
     $first_name = $app->request->post('voornaam');
     $surname = $app->request->post('achternaam');
     $postcode = $app->request->post('postcode');
-    $address = $app->request->post('address');
+    $address = $app->request->post('adres');
         
     $user->setUsername($username);
     $user->setEmail($email);    
@@ -50,6 +50,7 @@ class RegistrationService {
     $user->setFirstName($first_name);
     $user->setSurname($surname);        
     $user->setAddress($address);
+    $user->setEnabled(1);
     
     $postcode_object = $this->getPostcodeObject($postcode);
     $user->setPostcode($postcode_object);
@@ -71,10 +72,10 @@ class RegistrationService {
     return $postcodes;
   }
   
-  public function getPostcodeObject($postcode) {
+  public function getPostcodeObject($postcode_id) {
     $em = $this->getEm();
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
-    $pc_obj = $repo->findBy(array('postcode' => $postcode));
+    $pc_obj = $repo->find($postcode_id);
     return $pc_obj;
   }
   

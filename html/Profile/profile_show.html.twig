@@ -6,8 +6,6 @@
 
 {% block content %}
   {% if globals.user is defined and globals.user is not null %}
-    {% set user = globals.user %}
-    {% set app = globals.a %}
   {% endif %}
   <div class="container">
     <h1>Mijn Profiel</h1>
@@ -27,10 +25,9 @@
 
     <div class="form-group">
       <label for="postcode">Postcode</label>
-      <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.getPostcode().getPostcode() }}"  />
+      <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}" readonly />
       <label for="adres">Adres</label>
-      <input class="form-control" type="text" id="adres" name="adres" value="{% if app.request.isPost() %}{{app.request.post('adres')}}{% endif %}" />
-
+      <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}" readonly />
     </div>
   </div>
 {% endblock content %}

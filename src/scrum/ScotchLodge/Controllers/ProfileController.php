@@ -25,7 +25,7 @@ class ProfileController extends Controller {
     $password = $app->request->post('wachtwoord'); 
     $verified = $this->srv->confirmPassword($username, $password);
     if ($verified) {
-      $_SESSION['user'] = $this->srv->getUser();
+      $_SESSION['user'] =  $this->srv->getUser()->getUserName();
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens'] ));
@@ -35,8 +35,9 @@ class ProfileController extends Controller {
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
-      $globals = $this->getGlobals();            
-      $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $this->getUser()));
+      $globals = $this->getGlobals();          
+      $u = $this->getUser();
+      $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $u));
     } else {
       $app->flash('error', 'U moet aangemeld zijn om uw profiel te bekijken.');
       $app->redirect($app->urlFor('user_logon'));
