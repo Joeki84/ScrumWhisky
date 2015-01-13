@@ -8,7 +8,6 @@
   <div class="container">
     <h2>Registratiegegevens</h2>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
-
       <div class="form-group">
         <label for="gebruikersnaam">Gebruikersnaam</label>
         <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{% if app.request.isPost() %}{{app.request.post('gebruikersnaam')}}{% endif %}" />

@@ -3,6 +3,7 @@ namespace scrum\ScotchLodge\Controllers;
 
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
+use scrum\ScotchLodge\Service\Registration\RegistrationService;
 
 /**
  * ProfileController User logon, profile related actions
@@ -34,7 +35,8 @@ class ProfileController extends Controller {
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
-      $app->render('Profile\profile_show.html.twig', array('globals' => $this->getGlobals(), 'user' => $this->getUser()));
+      $globals = $this->getGlobals();            
+      $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $this->getUser()));
     } else {
       $app->flash('error', 'U moet aangemeld zijn om uw profiel te bekijken.');
       $app->redirect($app->urlFor('user_logon'));

@@ -47,11 +47,11 @@ class User {
     return $this->password;
   }
 
-  function getLast_login() {
+  function getLastLogin() {
     return $this->last_login;
   }
 
-  function getFirst_name() {
+  function getFirstName() {
     return $this->first_name;
   }
 
@@ -115,7 +115,7 @@ class User {
     $this->surname = $surname;
   }
 
-  function setPostcode($postcode) {
+  function setPostcode(Postcode $postcode) {
     $this->postcode = $postcode;
   }
 

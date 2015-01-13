@@ -16,7 +16,7 @@ scrum\ScotchLodge\Entities\Postcode:
       type: integer
       generator:
         strategy: AUTO
-        
+
   fields:
     postcode:
       type: string
