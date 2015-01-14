@@ -17,7 +17,3 @@ $app->post('/register', function() use ($app, $contr) {
 $app->get('/register/ok', function() use ($app, $contr) {
   $contr->registrationConfirm();
 })->name('user_register_ok');
-
-$app->get('/whisky/:short_url', function ($short_url) use ($app, $contr) {
-  
-});
