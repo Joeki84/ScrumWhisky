@@ -5,6 +5,7 @@ namespace scrum\ScotchLodge\Service\Profile;
 use Doctrine\ORM\EntityManager;
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\Validation\ProfileValidation as Val;
+use \scrum\ScotchLodge\Service\Registration\RegistrationService;
 
 /**
  * ProfileService
@@ -73,6 +74,13 @@ class ProfileService {
     $surname = $app->request->post('achternaam');
     if ($user->getSurname() != $surname) {
       $user->setSurname($surname);
+    }
+    
+    $postcode_id = $app->request->post('postcodes');
+    if ($user->getPostcode()->getId() != $postcode_id ) {
+      $reg_srv = new RegistrationService($em, $app);
+      $postcode = $reg_srv->getPostcodeObject($postcode_id);      
+      $user->setPostcode($postcode);
     }
     
     $address = $app->request->post('adres');

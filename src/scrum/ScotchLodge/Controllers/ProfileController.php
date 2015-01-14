@@ -74,6 +74,7 @@ class ProfileController extends Controller {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {
       $this->srv->updateUser($this->getUser());
+      $app->flash('info', 'De wijzigingen zijn opgeslagen.');
       $app->redirect($app->urlFor('profile_show'));
     }
     else {

@@ -36,7 +36,7 @@
         <label for="postcode">Postcode</label>
         <select class="form-control" id="postcodes" name="postcodes">
           {% for pc in postcodes %}
-            <option {% if pc.postcode == user.postcode.postcode %} selected {% endif %}  value="pc.id">{{ pc.postcode }} -- {{ pc.town }}</option>
+            <option {% if pc.postcode == user.postcode.postcode %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
           {% endfor %}
         </select>
         <label for="adres">Adres</label>
