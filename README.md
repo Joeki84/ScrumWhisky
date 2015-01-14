@@ -4,7 +4,8 @@ INSTALLEER COMPOSER
 
 1.	Zie https://getcomposer.org/doc/00-intro.md#installation-windows
 
-2.	Belangrijk is de volgende lijn (C:\xampp\php;C:\ProgramData\ComposerSetup\bin) toe te voegen aan de Windows path systeemvariabele, en vervolgens de pc te heropstarten, zodat het nieuwe path bij het starten van windows ingelezen wordt.
+2.	Indien composer geïnstalleerd is, maar niet uitvoerd vanuit de command line:
+ moet de lijn (;C:\ProgramData\ComposerSetup\bin;) toegevoegd worden aan de Windows path systeemvariabele, en nadien de pc heropgestart worden.
 
 INSTALLATIE DB + SOURCE FILES
 1.	Gebruik PHP 5.5 (XAMPP ) ps je kan perfect meerdere versies tegelijk van Apache en Mysql geïnstalleerd hebben (http://netcologne.dl.sourceforge.net/project/xampp/XAMPP%20Windows/5.5.19/xampp-win32-5.5.19-0-VC11-installer.exe)
@@ -42,3 +43,11 @@ VOEG VIA COMPOSER DE BENODIGDE LIBRARIES IN.
 1.	Open met CMD de hierboven aangemaakte folder
 
 2.	Geef commando: "C:\ProgramData\ComposerSetup\bin\composer.bat" "--ansi" "--no-interaction" "update" "--no-dev" (indien composer.bat zich in de installatie default map bevindt)
+
+!!! documentatie externe libs:
+
+// Validatie library
+Valitron : http://vancelucas.com/blog/valitron-the-simple-validation-library-that-doesnt-suck/
+
+// Routing framework
+Slim: http://docs.slimframework.com/
