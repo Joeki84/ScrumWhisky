@@ -9,26 +9,26 @@
   {% set app = globals.app %}
   
   <div class="container">
-    <h2>Registratiegegevens</h2>
+    <h2>Register</h2>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
       <div class="form-group">
-        <label for="gebruikersnaam">Gebruikersnaam</label>
+        <label for="gebruikersnaam">User name</label>
         <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{% if app.request.isPost() %}{{app.request.post('gebruikersnaam')}}{% endif %}" />
         <label for="email">E-mail</label> 
         <input class="form-control" type="email" id="email" name="email" value="{% if app.request.isPost() %}{{app.request.post('email')}}{% endif %}"/>
       </div>
       
       <div class="form-group">
-        <label for="wachtwoord">Wachtwoord</label>
+        <label for="wachtwoord">Password</label>
         <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
-        <label for="herhaal_wachtwoord">Herhaal wachtwoord</label>
+        <label for="herhaal_wachtwoord">Repeat password</label>
         <input class="form-control" type="password" id="herhaal_password" name="herhaal_wachtwoord" />
       </div>
       
       <div class="form-group">
-        <label for="voornaam">Voornaam</label>
+        <label for="voornaam">First name</label>
         <input class="form-control" type="text" id="voornaam" name="voornaam" value="{% if app.request.isPost() %}{{app.request.post('voornaam')}}{% endif %}" />
-        <label for="achternaam">Achternaam</label>
+        <label for="achternaam">Surname</label>
         <input class="form-control" type="text" id="achternaam" name="achternaam" value="{% if app.request.isPost() %}{{app.request.post('achternaam')}}{% endif %}"/>
       </div>
       
@@ -39,12 +39,12 @@
             <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
           {% endfor %}
         </select>
-        <label for="adres">Adres</label>
+        <label for="adres">Address</label>
         <input class="form-control" type="text" id="adres" name="adres" value="{% if app.request.isPost() %}{{app.request.post('adres')}}{% endif %}" />
         
       </div>
 
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="verzend" value="Verzend" />
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="verzend" value="Register" />
 
     </form>
   </div>
