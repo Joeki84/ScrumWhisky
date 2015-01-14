@@ -13,7 +13,7 @@ class RegistrationValidation extends Validation {
       $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
       $result = $repo->findBy(array('email' => $email));
       return count($result) < 1;
-    }, 'bestaat al');
+    }, 'already exists');
     
     // custom rule unique username
     Validator::addRule('unique_username', function($field, $value, array $params) use ($em, $app) {
@@ -21,7 +21,7 @@ class RegistrationValidation extends Validation {
       $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
       $result = $repo->findBy(array('username' => $username));
       return count($result) < 1;      
-    }, 'bestaat al');
+    }, 'already exists');
     
     parent::__construct($app, $em);
     // custom rule

@@ -26,6 +26,7 @@ class User {
   private $can_create_category;
   private $can_create_event;
   private $is_admin;
+  private $password_token;
 
   function getId() {
     return $this->id;
@@ -65,6 +66,10 @@ class User {
 
   function getAddress() {
     return $this->address;
+  }
+
+  function getPasswordToken() {
+    return $this->password_token;
   }
 
   function canReview() {
@@ -137,6 +142,14 @@ class User {
 
   function setAdmin($is_admin) {
     $this->is_admin = $is_admin;
+  }
+
+  function resetPasswordToken() {
+    $this->password_token = null;
+  }
+
+  function setPasswordToken() {
+    $this->password_token = uniqid(mt_rand(), true);
   }
 
 }

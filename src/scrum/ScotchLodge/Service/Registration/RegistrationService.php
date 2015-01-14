@@ -77,7 +77,7 @@ class RegistrationService {
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\Postcode');
     $pc_obj = $repo->find($postcode_id);
     return $pc_obj;
-  }
+  }    
   
   public function getErrors() {
     return $this->errors;

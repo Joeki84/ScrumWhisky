@@ -15,6 +15,6 @@ class ProfileValidation extends Validation {
     $val->rule('required', 'voornaam');
     $val->rule('required', 'achternaam');
     $val->rule('equals', 'wachtwoord', 'herhaal_wachtwoord')->message('Wachtwoorden komen niet overeen.');
-    $val->rule('required', 'adres');
+    $val->rule('required', 'adres')->message(' address in a bottle');
   }
 }

@@ -66,3 +66,6 @@ scrum\ScotchLodge\Entities\User:
       options:
         default: 0
         unsigned: true
+    password_token:
+      type: string
+      length: 64

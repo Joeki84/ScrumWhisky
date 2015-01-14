@@ -10,6 +10,7 @@ use Valitron\Validator;
  */
 abstract class Validation {
   
+  /* @var $val Slim() */
   private $app;  
   /* @var $val Validator */
   private $val;

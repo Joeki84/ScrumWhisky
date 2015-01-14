@@ -34,3 +34,13 @@ $app->post('/profiel/bewaar', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->storeChanges();
 })->name('profile_edit_save');
+
+$app->get('/wachtwoord/reset', function() use ($em, $app) {
+  $contr = new ProfileController($em, $app);
+  $contr->passwordResetRequest();  
+})->name('password_reset_request');
+
+$app->post('/wachtwoord/reset', function() use ($em, $app) {
+  $contr = new ProfileController($em, $app);
+  $contr->passwordResetProcess();
+});

@@ -25,8 +25,8 @@ class RegistrationController extends Controller {
       $user = $this->srv->processRegistration();
       if ($user) {
         $url = $this->getApp()->urlFor('user_register_ok');
-        $this->getApp()->redirect(  $this->getApp()->urlFor('user_register_ok'));
-      } else {        
+        $this->getApp()->redirect($url);
+      } else {
         $errors = $this->srv->getErrors();
         $postcodes = $this->srv->getPostcodes();
         $this->getApp()->render('Registration\register.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors, 'postcodes' => $postcodes));

@@ -6,7 +6,7 @@
     <nav id="reg-menu">
       <ul class="nav nav-pills floatright">
         <li><a href="{{ app.urlFor('user_register') }}">Registreer</a></li>
-        <li><a href="#">Wachtwoord vergeten</a></li>
+        <li><a href="{{ app.urlFor('password_reset_request') }}">Wachtwoord vergeten</a></li>
         <li><a href="{{ app.urlFor('user_logon_process') }}">Aanmelden</a></li>
       </ul>
     </nav>

@@ -28,6 +28,12 @@ class ProfileService {
     $user = $repo->findBy(array('username' => $username));
     return count($user) > 0 ? $user[0] : null;
   }
+  
+  public function retrieveUserByEmail($email) {
+    $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->findBy(array('email' => $email));
+    return count($user) > 0 ? $user[0] : null;
+  }
 
   public function confirmPassword($username, $password) {
     /* var $user User */
@@ -45,8 +51,7 @@ class ProfileService {
     } else {
       return false;
     }
-  }
-  
+  }  
    
   public function dataIsValid() {
     $val = new Val($this->app, $this->em);
@@ -91,6 +96,17 @@ class ProfileService {
     $em->persist($user);
     $em->flush();
     
+  }
+  
+  public function createPasswordToken() {
+    $email = $this->app->request->post('email');
+    $user = $this->retrieveUserByEmail($email);
+    if ($user != null) {
+      $token = uniqid(mt_rand(), true);
+      $user->setPasswordToken($token);
+      $this->em->persist($user);
+      $this->em->flush();
+    }
   }
   
   public function getErrors() {

@@ -12,8 +12,8 @@ use scrum\ScotchLodge\Service\Registration\RegistrationService;
  * @author jan van biervliet
  */
 class ProfileController extends Controller {
-  /* var $srv ProfileService */
 
+  /* var $srv ProfileService */
   private $srv;
 
   public function __construct($em, $app) {
@@ -82,6 +82,18 @@ class ProfileController extends Controller {
       $pc = $reg_srv->getPostcodes();
       $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'postcodes' => $pc));
     }
+  }
+  
+  public function PasswordResetRequest() {
+    $app = $this->getApp();
+    $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+  }
+  
+  public function passwordResetProcess() {
+    $app = $this->getApp();
+    $this->srv->createPasswordToken();
+    $app->flash('info', 'Een mailtje werd gestuurd, indien het e-mailadres geldig is.');
+    $app->redirect($app->urlFor('user_logon'));
   }
 
   public function logOff() {
