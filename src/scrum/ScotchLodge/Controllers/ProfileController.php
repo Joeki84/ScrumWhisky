@@ -27,10 +27,25 @@ class ProfileController extends Controller {
     $password = $app->request->post('wachtwoord');
     $verified = $this->srv->confirmPassword($username, $password);
     if ($verified) {
-      $_SESSION['user'] = $this->srv->getUser()->getUserName();
-      $app->redirect($app->urlFor('main_page'));
+      $this->logonIfEnabled();
     } else {
       $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens']));
+    }
+  }
+
+  public function logonIfEnabled() {
+    $app = $this->getApp();
+    $username = $app->request->post('gebruikersnaam');
+    $user = $this->srv->retrieveUserByUsername($username);
+
+    if ($user->isEnabled()) {
+      // logon
+      $_SESSION['user'] = $user->getUsername();
+      $app->redirect($app->urlFor('main_page'));
+    }
+    else {
+      $app->flash('error', 'Gebruiker heeft geen toegang.');
+      $app->redirect($app->urlFor('user_logon'));
     }
   }
 
@@ -40,7 +55,8 @@ class ProfileController extends Controller {
       $globals = $this->getGlobals();
       $u = $this->getUser();
       $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $u));
-    } else {
+    }
+    else {
       $app->flash('error', 'U moet aangemeld zijn om uw profiel te bekijken.');
       $app->redirect($app->urlFor('user_logon'));
     }
@@ -59,7 +75,8 @@ class ProfileController extends Controller {
     if ($this->srv->dataIsValid()) {
       $this->srv->updateUser($this->getUser());
       $app->redirect($app->urlFor('profile_show'));
-    } else {
+    }
+    else {
       $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
       $pc = $reg_srv->getPostcodes();
       $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'postcodes' => $pc));

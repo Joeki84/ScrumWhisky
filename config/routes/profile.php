@@ -10,7 +10,7 @@ $app->get('/aanmelden', function() use ($em, $app) {
 
 $app->post('/aanmelden', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
-  $contr->verifyUserCredentials();
+  $contr->verifyUserCredentials();  
 })->name('user_logon_process');
 
 $app->get('/afmelden', function() use ($em, $app){

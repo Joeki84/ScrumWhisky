@@ -5,6 +5,9 @@
 {% endblock title %}
 
 {% block content %}
+  
+  {% set app = globals.app %}
+  
   <div class="container">
     <h2>Registratiegegevens</h2>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>

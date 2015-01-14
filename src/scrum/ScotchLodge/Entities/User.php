@@ -39,7 +39,7 @@ class User {
     return $this->email;
   }
 
-  function getEnabled() {
+  function isEnabled() {
     return $this->enabled == 1;
   }
 
@@ -67,7 +67,7 @@ class User {
     return $this->address;
   }
 
-  function getCanReview() {
+  function canReview() {
     return $this->can_review == 1;
   }
 

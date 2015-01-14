@@ -34,8 +34,7 @@ class RegistrationValidation extends Validation {
     $val->rule('email', 'email');
     $val->rule('unique_email', 'email');    
     $val->rule('required', 'email');
-    $val->rule('required', 'wachtwoord');
-    $val->rule('required', 'herhaal_wachtwoord');
+    $val->rule('required', 'wachtwoord');    
     $val->rule('required', 'voornaam');
     $val->rule('required', 'achternaam');
     $val->rule('equals', 'wachtwoord', 'herhaal_wachtwoord')->message('Wachtwoorden komen niet overeen.');
