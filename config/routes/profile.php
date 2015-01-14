@@ -2,45 +2,45 @@
 
 use scrum\ScotchLodge\Controllers\ProfileController;
 
-$app->get('/aanmelden', function() use ($em, $app) {
+$app->get('/logon', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $globals = $contr->getGlobals();
   $app->render('Profile\logon.html.twig', array('globals' => $globals));
 })->name('user_logon');
 
-$app->post('/aanmelden', function() use ($em, $app) {
+$app->post('/logon', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->verifyUserCredentials();  
 })->name('user_logon_process');
 
-$app->get('/afmelden', function() use ($em, $app){
+$app->get('/logout', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->logOff();
   $globals = $contr->getGlobals();
   $app->render('homepage.html.twig', array('globals' => $globals));
 })->name('user_logoff');
 
-$app->get('/profiel', function() use ($em, $app){
+$app->get('/profile', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->showProfile();
 })->name('profile_show');
 
-$app->post('/profiel/wijzig', function() use ($em, $app) {
+$app->post('/profile/edit', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->editProfile();
 })->name('profile_edit');
 
-$app->post('/profiel/bewaar', function() use ($em, $app){
+$app->post('/profile/store', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->storeChanges();
 })->name('profile_edit_save');
 
-$app->get('/wachtwoord/reset', function() use ($em, $app) {
+$app->get('/password/reset', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->passwordResetRequest();  
 })->name('password_reset_request');
 
-$app->post('/wachtwoord/reset', function() use ($em, $app) {
+$app->post('/password/reset', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->passwordResetProcess();
 });
