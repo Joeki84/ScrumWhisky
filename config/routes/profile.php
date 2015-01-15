@@ -20,6 +20,7 @@ $app->get('/logout', function() use ($em, $app){
   $app->render('homepage.html.twig', array('globals' => $globals));
 })->name('user_logoff');
 
+
 $app->get('/profile', function() use ($em, $app){
   $contr = new ProfileController($em, $app);
   $contr->showProfile();
@@ -35,6 +36,7 @@ $app->post('/profile/store', function() use ($em, $app){
   $contr->storeChanges();
 })->name('profile_edit_save');
 
+
 $app->get('/password/reset', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->passwordResetRequest();  
@@ -45,3 +47,7 @@ $app->post('/password/reset', function() use ($em, $app) {
   $contr->passwordResetProcess();
 });
 
+$app->get('/verify/:id', function($id) use ($em, $app) {
+  $contr = new ProfileController($em, $app);
+  
+});
