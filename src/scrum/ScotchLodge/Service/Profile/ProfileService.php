@@ -101,12 +101,19 @@ class ProfileService {
   public function createPasswordToken() {
     $email = $this->app->request->post('email');
     $user = $this->retrieveUserByEmail($email);
-    if ($user != null) {
+    if (isset($user) && $user != null) {
       $token = uniqid(mt_rand(), true);
       $user->setPasswordToken($token);
       $this->em->persist($user);
       $this->em->flush();
+      return $user;
     }
+    
+    return false;
+  }
+  
+  public function mailUser($user) {
+    $msg = "Click "
   }
   
   public function getErrors() {

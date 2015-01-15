@@ -44,3 +44,4 @@ $app->post('/password/reset', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->passwordResetProcess();
 });
+

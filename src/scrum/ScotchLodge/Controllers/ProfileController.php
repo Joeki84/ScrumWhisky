@@ -91,7 +91,10 @@ class ProfileController extends Controller {
   
   public function passwordResetProcess() {
     $app = $this->getApp();
-    $this->srv->createPasswordToken();
+    $user = $this->srv->createPasswordToken();
+    if ($user) {
+      $this->srv->mailUser($user);
+    }
     $app->flash('info', 'Een mailtje werd gestuurd, indien het e-mailadres geldig is.');
     $app->redirect($app->urlFor('user_logon'));
   }
