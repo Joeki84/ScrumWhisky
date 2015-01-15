@@ -5,6 +5,7 @@ namespace scrum\ScotchLodge\Controllers;
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
+use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
 
 /**
  * ProfileController User logon, profile related actions
@@ -12,8 +13,8 @@ use scrum\ScotchLodge\Service\Registration\RegistrationService;
  * @author jan van biervliet
  */
 class ProfileController extends Controller {
-
   /* var $srv ProfileService */
+
   private $srv;
 
   public function __construct($em, $app) {
@@ -42,8 +43,7 @@ class ProfileController extends Controller {
       // logon
       $_SESSION['user'] = $user->getUsername();
       $app->redirect($app->urlFor('main_page'));
-    }
-    else {
+    } else {
       $app->flash('error', 'Access denied.');
       $app->redirect($app->urlFor('user_logon'));
     }
@@ -55,8 +55,7 @@ class ProfileController extends Controller {
       $globals = $this->getGlobals();
       $u = $this->getUser();
       $app->render('Profile\profile_show.html.twig', array('globals' => $globals, 'user' => $u));
-    }
-    else {
+    } else {
       $app->flash('error', 'U moet aangemeld zijn om uw profiel te bekijken.');
       $app->redirect($app->urlFor('user_logon'));
     }
@@ -76,27 +75,34 @@ class ProfileController extends Controller {
       $this->srv->updateUser($this->getUser());
       $app->flash('info', 'User profile updated.');
       $app->redirect($app->urlFor('profile_show'));
-    }
-    else {
+    } else {
       $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
       $pc = $reg_srv->getPostcodes();
       $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'errors' => $this->srv->getErrors(), 'postcodes' => $pc));
     }
   }
-  
+
   public function PasswordResetRequest() {
     $app = $this->getApp();
     $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
   }
-  
+
   public function passwordResetProcess() {
     $app = $this->getApp();
-    $user = $this->srv->createPasswordToken();
-    if ($user != null) {
-      $this->srv->mailUser($user);
+    $em = $this->getEntityManager();
+    $val = new EmailVal($app, $em);
+
+    if ($val->validate()) {
+      $user = $this->srv->createPasswordToken();
+      if ($user != null) {
+        $this->srv->mailUser($user);
+      }
+      $app->flash('info', 'A mail will be sent shortly if the email address provided is valid.');
+      $app->redirect($app->urlFor('user_logon'));
+    } else {
+      $app->flash('error', 'E-mail address is not valid.');
+      $app->redirect($app->urlFor('password_reset_request'));
     }
-    $app->flash('info', 'Een mailtje werd gestuurd, indien het e-mailadres geldig is.');
-    $app->redirect($app->urlFor('user_logon'));
   }
 
   public function logOff() {

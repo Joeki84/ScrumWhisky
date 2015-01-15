@@ -45,9 +45,9 @@ $app->get('/password/reset', function() use ($em, $app) {
 $app->post('/password/reset', function() use ($em, $app) {
   $contr = new ProfileController($em, $app);
   $contr->passwordResetProcess();
-});
+})->name('password_reset_process');
 
 $app->get('/verify/:id', function($id) use ($em, $app) {
   $contr = new ProfileController($em, $app);
   
-});
+})->name('token_verify');

@@ -28,7 +28,7 @@ class ProfileService {
     $user = $repo->findBy(array('username' => $username));
     return count($user) > 0 ? $user[0] : null;
   }
-  
+
   public function retrieveUserByEmail($email) {
     $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
     $user = $repo->findBy(array('email' => $email));
@@ -51,58 +51,58 @@ class ProfileService {
     } else {
       return false;
     }
-  }  
-   
+  }
+
   public function dataIsValid() {
     $val = new Val($this->app, $this->em);
     $validated = $val->validate();
     $this->errors = $val->getErrors();
     return $validated;
   }
-  
+
   public function updateUser(User $user) {
     $app = $this->app;
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');    
-    
-    $password = $app->request->post('password');    
-    if ( isset($password) && trim($password) != '') {
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+
+    $password = $app->request->post('password');
+    if (isset($password) && trim($password) != '') {
       $hash = password_hash($password, CRYPT_BLOWFISH);
       $user->setPassword($hash);
     }
-    
+
     $first_name = $app->request->post('first_name');
-    if ($user->getFirstName() !=  $first_name) {
+    if ($user->getFirstName() != $first_name) {
       $user->setFirstName($first_name);
     }
-    
+
     $surname = $app->request->post('surname');
     if ($user->getSurname() != $surname) {
       $user->setSurname($surname);
     }
-    
+
     $postcode_id = $app->request->post('postcode');
-    if ($user->getPostcode()->getId() != $postcode_id ) {
+    if ($user->getPostcode()->getId() != $postcode_id) {
       $reg_srv = new RegistrationService($em, $app);
-      $postcode = $reg_srv->getPostcodeObject($postcode_id);      
+      $postcode = $reg_srv->getPostcodeObject($postcode_id);
       $user->setPostcode($postcode);
     }
-    
+
     $address = $app->request->post('address');
     if ($user->getAddress() != $address) {
       $user->setAddress($address);
     }
-    
+
     $em->persist($user);
     $em->flush();
-    
   }
-  
+
   /**
-   * 
+   * Returns the user containing the generated token, 
+   * if email provided exists in DB, or null if it doesnt
    * @return User
    */
-  public function createPasswordToken() {
+  public function createPasswordToken() {    
     $email = $this->app->request->post('email');
     $user = $this->retrieveUserByEmail($email);
     if (isset($user) && $user != null) {
@@ -112,22 +112,19 @@ class ProfileService {
       $this->em->flush();
       return $user;
     }
-    
     return null;
   }
-  
+
   public function mailUser($user) {
     $msg = "Click ";
   }
-  
+
   public function getErrors() {
     return $this->errors;
   }
-  
+
   public function getUser() {
     return $this->user;
   }
-  
-  
 
 }
