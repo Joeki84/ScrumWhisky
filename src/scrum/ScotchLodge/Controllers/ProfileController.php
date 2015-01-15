@@ -23,19 +23,19 @@ class ProfileController extends Controller {
 
   public function verifyUserCredentials() {
     $app = $this->getApp();
-    $username = $app->request->post('gebruikersnaam');
-    $password = $app->request->post('wachtwoord');
+    $username = $app->request->post('username');
+    $password = $app->request->post('password');
     $verified = $this->srv->confirmPassword($username, $password);
     if ($verified) {
       $this->logonIfEnabled();
     } else {
-      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Ongeldige inloggegevens']));
+      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
     }
   }
 
   public function logonIfEnabled() {
     $app = $this->getApp();
-    $username = $app->request->post('gebruikersnaam');
+    $username = $app->request->post('username');
     $user = $this->srv->retrieveUserByUsername($username);
 
     if ($user->isEnabled()) {
@@ -44,7 +44,7 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
     else {
-      $app->flash('error', 'Gebruiker heeft geen toegang.');
+      $app->flash('error', 'Access denied.');
       $app->redirect($app->urlFor('user_logon'));
     }
   }
@@ -74,7 +74,7 @@ class ProfileController extends Controller {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {
       $this->srv->updateUser($this->getUser());
-      $app->flash('info', 'De wijzigingen zijn opgeslagen.');
+      $app->flash('info', 'User profile updated.');
       $app->redirect($app->urlFor('profile_show'));
     }
     else {

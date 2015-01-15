@@ -6,18 +6,18 @@
 
 {% block content %}
   <div class="container">
-    <h1>Aanmelden</h1>
+    <h1>Logon</h1>
     
     <form action="{{ app.urlFor('user_logon_process') }}" method="post">
       <div class="form-group">
-        <label for="gebruikersnaam">Gebruikersnaam</label>
-        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" />
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" />
       </div>
       <div class="form-group">
-        <label for="wachtwoord">Wachtwoord</label>
-        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
       </div>
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="verzend" value="Login" />
+      <input class="form-control btn btn-default" type="submit" id="login" name="login" value="Login" />
     </form>
       
   </div>

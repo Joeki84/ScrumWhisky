@@ -9,41 +9,41 @@
     {% set user = globals.user %}
   {% endif %}
   <div class="container">
-    <h1>Mijn Profiel</h1>
+    <h1>My Profile</h1>
     <form action="{{ globals.app.urlFor('profile_edit_save') }}" method="post">
       <div class="form-group">
-        <label for="gebruikersnaam">Gebruikersnaam</label>
-        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{{ user.username }}" readonly />
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
         <label for="email">E-mail</label> 
         <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly />
       </div>
       
       <div class="form-group">
-        <label for="wachtwoord">Wachwoord</label>
-        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
-        <label for="herhaal_wachtwoord">Herhaal wachtwoord</label>
-        <input class="form-control" type="password" id="herhaal_password" name="herhaal_wachtwoord" />
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
       </div>
 
       <div class="form-group">
-        <label for="voornaam">Voornaam</label>
-        <input class="form-control" type="text" id="voornaam" name="voornaam" value="{{ user.firstName }}"  />
-        <label for="achternaam">Achternaam</label>
-        <input class="form-control" type="text" id="achternaam" name="achternaam" value="{{ user.surname }}" />
+        <label for="first_name">First Name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
+        <label for="surname"></label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
       </div>
 
       <div class="form-group">
         <label for="postcode">Postcode</label>
-        <select class="form-control" id="postcodes" name="postcodes">
+        <select class="form-control" id="postcode" name="postcode">
           {% for pc in postcodes %}
-            <option {% if pc.postcode == user.postcode.postcode %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
+            <option {% if pc.id == user.postcode.id %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
           {% endfor %}
         </select>
         <label for="adres">Adres</label>
-        <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}"  />
+        <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
       </div>
 
-      <input class="form-control" type="submit" id="wijzig" name="wijzig" value="Wijzig" />
+      <input class="form-control" type="submit" id="wijzig" name="save" value="Save" />
     </form>      
   </div>
 {% endblock content %}

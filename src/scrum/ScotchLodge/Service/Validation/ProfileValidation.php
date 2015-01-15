@@ -11,10 +11,11 @@ class ProfileValidation extends Validation {
   }
   
   public function addRules() {
-    $val = $this->getVal();
-    $val->rule('required', 'voornaam');
-    $val->rule('required', 'achternaam');
-    $val->rule('equals', 'wachtwoord', 'herhaal_wachtwoord')->message('Wachtwoorden komen niet overeen.');
-    $val->rule('required', 'adres')->message(' address in a bottle');
+    $val = $this->getVal();    
+    //$val->rule('required', 'password');
+    $val->rule('required', 'first_name')->message('First name is required');
+    $val->rule('required', 'surname');
+    $val->rule('equals', 'password', 'password_repeat')->message('Passwords do not match');
+    $val->rule('required', 'address');
   }
 }

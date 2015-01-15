@@ -8,30 +8,30 @@
   {% if globals.user is defined and globals.user is not null %}
   {% endif %}
   <div class="container">
-    <h1>Mijn Profiel</h1>
+    <h1>My Profile</h1>
     <form action="{{ globals.app.urlFor('profile_edit') }}" method="post">
       <div class="form-group">
-        <label for="gebruikersnaam">Gebruikersnaam</label>
-        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{{ user.username }}" readonly />
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
         <label for="email">E-mail</label> 
         <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly/>
       </div>
 
       <div class="form-group">
-        <label for="voornaam">Voornaam</label>
-        <input class="form-control" type="text" id="voornaam" name="voornaam" value="{{ user.firstName }}" readonly />
-        <label for="achternaam">Achternaam</label>
-        <input class="form-control" type="text" id="achternaam" name="achternaam" value="{{ user.surname }}" readonly/>
+        <label for="first_name">First name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}" readonly />
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" readonly/>
       </div>
 
       <div class="form-group">
         <label for="postcode">Postcode</label>
         <input class="form-control" type="text" id="postcode" name="postcode" value="{{ user.postcode.postcode }}" readonly />
-        <label for="adres">Adres</label>
+        <label for="adres">address</label>
         <input class="form-control" type="text" id="adres" name="adres" value="{{ user.address }}" readonly />
       </div>
 
-      <input class="form-control" type="submit" id="wijzig" name="wijzig" value="Wijzig gegevens" />
+      <input class="form-control" type="submit" id="wijzig" name="edit" value="Edit profile" />
     </form>      
   </div>
 {% endblock content %}

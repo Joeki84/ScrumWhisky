@@ -65,30 +65,30 @@ class ProfileService {
     $em = $this->em;
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');    
     
-    $password = $app->request->post('wachtwoord');    
+    $password = $app->request->post('password');    
     if ( isset($password) && trim($password) != '') {
       $hash = password_hash($password, CRYPT_BLOWFISH);
       $user->setPassword($hash);
     }
     
-    $first_name = $app->request->post('voornaam');
+    $first_name = $app->request->post('first_name');
     if ($user->getFirstName() !=  $first_name) {
       $user->setFirstName($first_name);
     }
     
-    $surname = $app->request->post('achternaam');
+    $surname = $app->request->post('surname');
     if ($user->getSurname() != $surname) {
       $user->setSurname($surname);
     }
     
-    $postcode_id = $app->request->post('postcodes');
+    $postcode_id = $app->request->post('postcode');
     if ($user->getPostcode()->getId() != $postcode_id ) {
       $reg_srv = new RegistrationService($em, $app);
       $postcode = $reg_srv->getPostcodeObject($postcode_id);      
       $user->setPostcode($postcode);
     }
     
-    $address = $app->request->post('adres');
+    $address = $app->request->post('address');
     if ($user->getAddress() != $address) {
       $user->setAddress($address);
     }

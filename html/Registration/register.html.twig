@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Registreer
+  Register
 {% endblock title %}
 
 {% block content %}
@@ -9,27 +9,27 @@
   {% set app = globals.app %}
   
   <div class="container">
-    <h2>Register</h2>
+    <h1>Register</h1>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
       <div class="form-group">
-        <label for="gebruikersnaam">User name</label>
-        <input class="form-control" type="text" id="gebruikersnaam" name="gebruikersnaam" value="{% if app.request.isPost() %}{{app.request.post('gebruikersnaam')}}{% endif %}" />
+        <label for="username">User name</label>
+        <input class="form-control" type="text" id="username" name="username" value="{% if app.request.isPost() %}{{app.request.post('username')}}{% endif %}" />
         <label for="email">E-mail</label> 
         <input class="form-control" type="email" id="email" name="email" value="{% if app.request.isPost() %}{{app.request.post('email')}}{% endif %}"/>
       </div>
       
       <div class="form-group">
-        <label for="wachtwoord">Password</label>
-        <input class="form-control" type="password" id="wachtwoord" name="wachtwoord" />
-        <label for="herhaal_wachtwoord">Repeat password</label>
-        <input class="form-control" type="password" id="herhaal_password" name="herhaal_wachtwoord" />
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="wachtwoord" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
       </div>
       
       <div class="form-group">
-        <label for="voornaam">First name</label>
-        <input class="form-control" type="text" id="voornaam" name="voornaam" value="{% if app.request.isPost() %}{{app.request.post('voornaam')}}{% endif %}" />
-        <label for="achternaam">Surname</label>
-        <input class="form-control" type="text" id="achternaam" name="achternaam" value="{% if app.request.isPost() %}{{app.request.post('achternaam')}}{% endif %}"/>
+        <label for="first_name">First name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{% if app.request.isPost() %}{{app.request.post('first_name')}}{% endif %}" />
+        <label for="surname">Surname</label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{% if app.request.isPost() %}{{app.request.post('surname')}}{% endif %}"/>
       </div>
       
       <div class="form-group">
@@ -39,12 +39,12 @@
             <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
           {% endfor %}
         </select>
-        <label for="adres">Address</label>
-        <input class="form-control" type="text" id="adres" name="adres" value="{% if app.request.isPost() %}{{app.request.post('adres')}}{% endif %}" />
+        <label for="address">Address</label>
+        <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
         
       </div>
 
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="verzend" value="Register" />
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register" />
 
     </form>
   </div>
