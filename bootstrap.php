@@ -36,5 +36,5 @@ $app->config($config['slim']);
 //$twig_env = $view->getEnvironment();
 //$twig_env->addGlobal(array('slim' => $app));
 
-Validator::langDir($config['validator']['langdir']);
-Validator::lang($config['validator']['lang']);
+//Validator::langDir($config['validator']['langdir']);
+//Validator::lang($config['validator']['lang']);
