@@ -98,6 +98,10 @@ class ProfileService {
     
   }
   
+  /**
+   * 
+   * @return User
+   */
   public function createPasswordToken() {
     $email = $this->app->request->post('email');
     $user = $this->retrieveUserByEmail($email);
@@ -109,11 +113,11 @@ class ProfileService {
       return $user;
     }
     
-    return false;
+    return null;
   }
   
   public function mailUser($user) {
-    $msg = "Click "
+    $msg = "Click ";
   }
   
   public function getErrors() {
