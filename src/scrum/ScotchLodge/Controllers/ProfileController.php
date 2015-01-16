@@ -90,8 +90,8 @@ class ProfileController extends Controller {
   public function passwordResetProcess() {
     $app = $this->getApp();
     $em = $this->getEntityManager();
+    
     $val = new EmailVal($app, $em);
-
     if ($val->validate()) {
       $user = $this->srv->createPasswordToken();
       if ($user != null) {

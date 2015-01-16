@@ -31,10 +31,3 @@ $view->twigExtensions = $config['slim_ext'];
 
 $app = new Slim(array( 'view' => $view ));
 $app->config($config['slim']);
-
-//$view->set('globals', array('slim' => $app));
-//$twig_env = $view->getEnvironment();
-//$twig_env->addGlobal(array('slim' => $app));
-
-//Validator::langDir($config['validator']['langdir']);
-//Validator::lang($config['validator']['lang']);

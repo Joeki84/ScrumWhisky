@@ -116,7 +116,15 @@ class ProfileService {
   }
 
   public function mailUser($user) {
-    $msg = "Click ";
+    $root_path = getenv('HTTP_HOST');
+    $app = $this->app;
+    $rel_path_raw = trim($app->urlFor('token_verify'), '\x3A');
+    $rel_path = str_replace(":", "", $rel_path_raw);
+    $url = "http://$root_path" . $rel_path . $user->getPasswordToken();    
+    $message = wordwrap("Password reset link requested: " . $user->getUsername() .
+      ". Click " . $url . " to complete.");
+    $headers = 'From: webmaster@thescotchlodge.com';
+    mail($user->getEmail(), 'The Scotch Lodge password reset', $message, $headers);
   }
 
   public function getErrors() {
