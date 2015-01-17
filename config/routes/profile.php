@@ -2,57 +2,47 @@
 
 use scrum\ScotchLodge\Controllers\ProfileController;
 
-$app->get('/logon', function() use ($em, $app) {
-  $contr = new ProfileController($em, $app);
-  $globals = $contr->getGlobals();
-  $app->render('Profile\logon.html.twig', array('globals' => $globals));
+$contr = new ProfileController($em, $app);
+
+$app->get('/logon', function() use ($contr) {
+  
+  $contr->logon();
 })->name('user_logon');
 
-$app->post('/logon', function() use ($em, $app) {
-  $contr = new ProfileController($em, $app);
+$app->post('/logon', function() use ($contr) {
   $contr->verifyUserCredentials();  
 })->name('user_logon_process');
 
-$app->get('/logout', function() use ($em, $app){
-  $contr = new ProfileController($em, $app);
+$app->get('/logout', function() use ($contr){
   $contr->logOff();
-  $globals = $contr->getGlobals();
-  $app->render('homepage.html.twig', array('globals' => $globals));
 })->name('user_logoff');
 
 
-$app->get('/profile', function() use ($em, $app){
-  $contr = new ProfileController($em, $app);
+$app->get('/profile', function() use ($contr){
   $contr->showProfile();
 })->name('profile_show');
 
-$app->post('/profile/edit', function() use ($em, $app) {
-  $contr = new ProfileController($em, $app);
+$app->post('/profile/edit', function() use ($contr) {
   $contr->editProfile();
 })->name('profile_edit');
 
-$app->post('/profile/store', function() use ($em, $app){
-  $contr = new ProfileController($em, $app);
+$app->post('/profile/store', function() use ($contr){
   $contr->storeChanges();
 })->name('profile_edit_save');
 
 
-$app->get('/password/reset', function() use ($em, $app) {
-  $contr = new ProfileController($em, $app);
+$app->get('/password/reset', function() use ($contr) {
   $contr->passwordResetRequest();  
 })->name('password_reset_request');
 
-$app->post('/password/reset', function() use ($em, $app) {
-  $contr = new ProfileController($em, $app);
+$app->post('/password/reset', function() use ($contr) {
   $contr->passwordResetProcess();
 })->name('password_reset_process');
 
-$app->get('/verify/:id', function($id) use ($em, $app) {
-  $contr = new ProfileController($em, $app);
+$app->get('/verify/:id', function($id) use ($contr) {
   $contr->processToken($id);
 })->name('token_verify');
 
-$app->post('/password/store', function() use ($em, $app) {  
-  $contr = new ProfileController($em, $app);
+$app->post('/password/store', function() use ($contr) {  
   $contr->processNewPassword();
 })->name('verify_new_password');

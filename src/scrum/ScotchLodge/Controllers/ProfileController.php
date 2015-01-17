@@ -23,6 +23,12 @@ class ProfileController extends Controller {
   }
 
   /* logon */
+
+  public function logon() {
+    $globals = $this->getGlobals();
+    $this->getApp()->render('Profile\logon.html.twig', array('globals' => $globals));
+  }
+
   public function verifyUserCredentials() {
     $app = $this->getApp();
     $username = $app->request->post('username');
@@ -34,10 +40,12 @@ class ProfileController extends Controller {
       $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
     }
   }
-  
+
   public function logOff() {
     unset($_SESSION['user']);
     session_unset();
+    $globals = $this->getGlobals();
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals));
   }
 
   public function logonIfEnabled() {
@@ -57,6 +65,7 @@ class ProfileController extends Controller {
   }
 
   /* profile */
+
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -91,6 +100,7 @@ class ProfileController extends Controller {
   }
 
   /* password reset */
+
   public function PasswordResetRequest() {
     $app = $this->getApp();
     $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
@@ -99,7 +109,7 @@ class ProfileController extends Controller {
   public function passwordResetProcess() {
     $app = $this->getApp();
     $em = $this->getEntityManager();
-    
+
     $val = new EmailVal($app, $em);
     if ($val->validate()) {
       $user = $this->srv->createPasswordToken();
@@ -113,8 +123,9 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('password_reset_request'));
     }
   }
-  
+
   /* password reset */
+
   public function processToken($id) {
     $app = $this->getApp();
     $srv = $this->srv;
@@ -127,7 +138,7 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
-  
+
   public function processNewPassword() {
     $srv = $this->srv;
     $app = $this->getApp();

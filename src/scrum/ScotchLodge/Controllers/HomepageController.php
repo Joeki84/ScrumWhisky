@@ -10,5 +10,10 @@ use scrum\ScotchLodge\Controllers\Controller;
  * @author jan van biervliet
  */
 class HomepageController extends Controller {
-  
+
+  public function homepage() {
+    $globals = $this->getGlobals();
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals));
+  }
+
 }

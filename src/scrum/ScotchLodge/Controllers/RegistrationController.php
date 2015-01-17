@@ -13,11 +13,18 @@ use scrum\ScotchLodge\Entities\User;
  */
 class RegistrationController extends Controller {
   /* @var $srv RegistrationService */
+
   private $srv;
 
   public function __construct($em, $app) {
     parent::__construct($em, $app);
     $this->srv = new RegistrationService($em, $app);
+  }
+
+  public function register() {
+    $postcodes = $this->srv->getPostcodes();
+    $globals = $this->getGlobals();
+    $this->getApp()->render('Registration/register.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
   }
 
   public function processRegistration() {
@@ -31,18 +38,13 @@ class RegistrationController extends Controller {
         $postcodes = $this->srv->getPostcodes();
         $this->getApp()->render('Registration\register.html.twig', array('globals' => $this->getGlobals(), 'errors' => $errors, 'postcodes' => $postcodes));
       }
-      
     } catch (Exception $e) {
       $this->getApp()->render('probleem.html.twig');
     }
   }
-  
+
   public function registrationConfirm() {
     $this->getApp()->render('Profile/logon.html.twig', array('app' => $this->getApp(), 'info' => 'Registratie voltooid'));
-  }
-  
-  public function getPostcodes() {    
-    return $this->srv->getPostcodes();
   }
 
 }

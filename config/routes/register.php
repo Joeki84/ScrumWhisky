@@ -4,16 +4,14 @@ use scrum\ScotchLodge\Controllers\RegistrationController;
 
 $contr = new RegistrationController($em, $app);
 
-$app->get('/register', function() use ($app, $contr) {
-  $postcodes = $contr->getPostcodes();
-  $globals = $contr->getGlobals();
-  $app->render('Registration/register.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
+$app->get('/register', function() use ($contr) {
+  $contr->register();
 })->name('user_register');
 
-$app->post('/register', function() use ($app, $contr) {
+$app->post('/register', function() use ($contr) {
   $contr->processRegistration();
 })->name('user_register_process');
 
-$app->get('/register/ok', function() use ($app, $contr) {
+$app->get('/register/ok', function() use ($contr) {
   $contr->registrationConfirm();
 })->name('user_register_ok');
