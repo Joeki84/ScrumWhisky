@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  ROUTE LIST
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <h1>Route List</h1>
+    <table id="route-tbl" class="table-bordered table-striped table-responsive">
+      <thead>
+        <tr>
+          <th>Route name</th>
+          <th>Route pattern</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for name, route in routes %}
+          <tr>
+            <td>{{ name }}</td>
+            <td>{{ route }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
