@@ -49,5 +49,10 @@ $app->post('/password/reset', function() use ($em, $app) {
 
 $app->get('/verify/:id', function($id) use ($em, $app) {
   $contr = new ProfileController($em, $app);
-  
+  $contr->processToken($id);
 })->name('token_verify');
+
+$app->post('/password/store', function() use ($em, $app) {  
+  $contr = new ProfileController($em, $app);
+  $contr->processNewPassword();
+})->name('verify_new_password');

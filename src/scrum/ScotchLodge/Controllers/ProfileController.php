@@ -22,6 +22,7 @@ class ProfileController extends Controller {
     $this->srv = new ProfileService($em, $app);
   }
 
+  /* logon */
   public function verifyUserCredentials() {
     $app = $this->getApp();
     $username = $app->request->post('username');
@@ -32,6 +33,10 @@ class ProfileController extends Controller {
     } else {
       $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
     }
+  }
+  
+  public function logOff() {
+    session_unset();
   }
 
   public function logonIfEnabled() {
@@ -49,6 +54,7 @@ class ProfileController extends Controller {
     }
   }
 
+  /* profile */
   public function showProfile() {
     $app = $this->getApp();
     if ($this->isUserLoggedIn()) {
@@ -82,6 +88,7 @@ class ProfileController extends Controller {
     }
   }
 
+  /* password reset */
   public function PasswordResetRequest() {
     $app = $this->getApp();
     $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
@@ -104,9 +111,34 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('password_reset_request'));
     }
   }
-
-  public function logOff() {
-    session_unset();
+  
+  /* password reset */
+  public function processToken($id) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserByToken($id);
+    if ($user != null) {
+      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+    } else {
+      $srv->clearAllTokens(); // safety measure
+      $app->flash('error', 'Invalid or expired token. Please try to request a new password');
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
+  
+  public function processNewPassword() {
+    $srv = $this->srv;
+    $app = $this->getApp();
+    if ($srv->isPasswordValid()) {
+      $srv->changePassword();
+      $srv->clearToken();
+      $app->flash('info', 'Password has been changed');
+      $app->redirect($app->urlFor('user_logon'));
+    } else {
+      $id = $app->request->post('id');
+      $errors = $srv->getErrors();
+      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $id, 'errors' => $errors));
+    }
   }
 
 }

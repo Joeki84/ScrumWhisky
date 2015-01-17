@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\Validation\ProfileValidation as Val;
 use \scrum\ScotchLodge\Service\Registration\RegistrationService;
+use scrum\ScotchLodge\Service\Validation\PasswordValidation;
 
 /**
  * ProfileService
@@ -119,7 +120,7 @@ class ProfileService {
     $root_path = getenv('HTTP_HOST');
     $app = $this->app;
     $rel_path_raw = trim($app->urlFor('token_verify'), '\x3A');
-    $rel_path = str_replace(":", "", $rel_path_raw);
+    $rel_path = str_replace(":id", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();    
     $message = wordwrap("Password reset link requested: " . $user->getUsername() .
       ". Click " . $url . " to complete.");
@@ -133,6 +134,51 @@ class ProfileService {
 
   public function getUser() {
     return $this->user;
+  }
+  
+  public function searchUserByToken($token) {
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->findBy(array('password_token' => $token));
+    return count($user) == 0 ? null : $user[0];
+  }
+  
+  public function isPasswordValid() {
+    $val = new PasswordValidation($this->app, $this->em);
+    $validate = $val->validate();
+    $this->errors = $val->getErrors();
+    return $validate;
+  }
+  
+  public function changePassword() {    
+    $app = $this->app;
+    $user_id = $app->request->post('id');
+    $password = $app->request->post('password');
+    $hash = password_hash($password, CRYPT_BLOWFISH);
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->find($user_id);
+    $user->setPassword($hash);    
+    $em->persist($user);
+    $em->flush();
+  }
+  
+  public function clearToken() {
+    $app = $this->app;
+    $user_id = $app->request->post('id');
+    
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->find($user_id);
+    $user->resetPasswordToken();
+    $em->merge($user);
+    $em->flush();
+  }
+  
+  public function clearAllTokens() {
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $repo->clearTokens();
   }
 
 }
