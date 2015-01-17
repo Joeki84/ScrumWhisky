@@ -180,5 +180,13 @@ class ProfileService {
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
     $repo->clearTokens();
   }
+  
+  public function storeLoginTime($user) {
+    $em = $this->em;
+    $date = new \DateTime();
+    $user->setLastLogin($date);
+    $em->persist($user);
+    $em->flush();
+  }
 
 }

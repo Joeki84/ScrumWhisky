@@ -36,6 +36,7 @@ class ProfileController extends Controller {
   }
   
   public function logOff() {
+    unset($_SESSION['user']);
     session_unset();
   }
 
@@ -47,6 +48,7 @@ class ProfileController extends Controller {
     if ($user->isEnabled()) {
       // logon
       $_SESSION['user'] = $user->getUsername();
+      $this->srv->storeLoginTime($user);
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'Access denied.');
