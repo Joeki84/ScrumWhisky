@@ -1,0 +1,25 @@
+scrum\ScotchLodge\Entities\Whisky:
+  type: entity
+  repositoryClass: scrum\ScotchLodge\Entities\Repo\WhiskyRepo
+  table: whisky
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    name:
+      type: string
+      length: 60    
+    image_path:
+      type: string
+      length: 255
+    price:
+      type: integer
+    age:
+      type: integer
+    alcohol:
+      type: integer
+    short_desc:
+      type: text

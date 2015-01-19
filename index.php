@@ -16,5 +16,5 @@ try {
   $app->run();
     
 } catch (Exception $ex) {
-  $output->render('probleem.html.twig', array('probleem' => $ex->getMessage()));
+  $app->render('probleem.html.twig', array('probleem' => $ex->getMessage()));
 }
