@@ -10,7 +10,7 @@ scrum\ScotchLodge\Entities\User:
 
   manyToOne:
     postcode:
-      targetEntity: scrum\ScotchLodge\Entities\Postcode
+      targetEntity: Postcode
       inversedBy: users
       joinColumn:
         name: postcode_id

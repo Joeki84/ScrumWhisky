@@ -15,12 +15,23 @@ class Postcode {
   private $postcode;
   private $town;
   private $users;
+  private $distilleries;
+  private $events;
 
   function __construct($users) {
     $this->users = new ArrayCollection();
+    $this->distilleries = new ArrayCollection();
+    $this->events = new ArrayCollection();
   }
 
-  
+  function getDistilleries() {
+    return $this->distilleries;
+  }
+
+  function setDistilleries($distilleries) {
+    $this->distilleries = $distilleries;
+  }
+
   function getId() {
     return $this->id;
   }
@@ -51,6 +62,14 @@ class Postcode {
 
   function setUsers($users) {
     $this->users = $users;
+  }
+
+  function getEvents() {
+    return $this->events;
+  }
+
+  function setEvents($events) {
+    $this->events = $events;
   }
 
 }

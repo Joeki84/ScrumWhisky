@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    New event
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    
+    <div class="container">
+      <h1>New event</h1>
+      <form action="{{ app.urlFor('new_event_process') }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="title" value="{% if app.request.isPost() %}{{app.request.post('title')}}{% endif %}" />
+          <label for="address">Address</label>
+          <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
+          <label for="postcode">Postcode</label>
+          <select class="form-control" id="postcode" name="postcode">
+            {% for pc in postcodes %}
+              <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Event Date</label>
+          <input class="form-control" type="date" min="{{"now"|date('d/m/Y')}}" id="event_date" name="event_date" value="{% if app.request.isPost() %}{{app.request.post('event_date')}}{% endif %}" />
+        </div>
+
+        <input class="form-control btn btn-default" type="submit" id="verzend" name="event" value="Add event" />
+
+      </form>
+    </div>
+{% endblock content %}

@@ -12,6 +12,7 @@ try {
   include 'config/routes/register.php';
   include 'config/routes/profile.php';
   include 'config/routes/main.php';
+  include 'config/routes/event.php';
   
   $app->run();
     

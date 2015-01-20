@@ -8,7 +8,15 @@ scrum\ScotchLodge\Entities\Postcode:
 
   oneToMany:
     users:
-      targetEntity: scrum\ScotchLodge\Entities\User
+      targetEntity: User
+      mappedBy: postcode
+    
+    distilleries:
+      targetEntity: Distillery
+      mappedBy: postcode
+      
+    events:
+      targetEntity: Event
       mappedBy: postcode
 
   id:

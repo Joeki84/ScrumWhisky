@@ -22,6 +22,7 @@ class ProfileService {
   public function __construct($em, $app) {
     $this->em = $em;
     $this->app = $app;
+    $this->errors = null;
   }
 
   public function retrieveUserByUsername($username) {
@@ -189,4 +190,13 @@ class ProfileService {
     $em->flush();
   }
 
+  
+  
+    public function showalluser() {
+    $userRepository = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $members = $userRepository->findAll();
+    return $members;
+    }
+    
+  
 }

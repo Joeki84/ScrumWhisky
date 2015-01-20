@@ -12,6 +12,11 @@ scrum\ScotchLodge\Entities\Country:
       type: integer
       generator:
         strategy: AUTO
+
+  oneToMany:
+    regions:
+      targetEntity: Region
+      mappedBy: country
         
   fields:
     country_code:
