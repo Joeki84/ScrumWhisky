@@ -3,6 +3,7 @@
 namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Postcode;
+use Doctrine\Common\Collections\ArrayCollection;
 //use scrum\ScotchLodge\Entities\Region;
 
 /**
@@ -19,7 +20,30 @@ class Distillery {
     private $postcode;
     /* @var $region Region */
     private $region;
+    private $dist_whiskys;
+    private $bottl_whiskys;
     
+    function __construct() {
+        $this->dist_whiskys = new ArrayCollection();
+        $this->bottl_whiskys = new ArrayCollection();
+    }
+    function getBottl_whiskys() {
+        return $this->bottl_whiskys;
+    }
+
+    function setBottl_whiskys($bottl_whiskys) {
+        $this->bottl_whiskys = $bottl_whiskys;
+    }
+
+    function getDist_whiskys() {
+        return $this->dist_whiskys;
+    }
+
+    function setDist_whiskys($dist_whiskys) {
+        $this->dist_whiskys = $dist_whiskys;
+    }
+
+        
     function getId(){
         return $this->id;
     }

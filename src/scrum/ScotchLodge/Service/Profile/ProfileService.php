@@ -22,6 +22,7 @@ class ProfileService {
   public function __construct($em, $app) {
     $this->em = $em;
     $this->app = $app;
+    $this->errors = null;
   }
 
   public function retrieveUserByUsername($username) {

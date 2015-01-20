@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Distillery;
 use scrum\ScotchLodge\Entities\Barrel;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Whisky entity
@@ -22,9 +23,51 @@ class Whisky {
     private $alcohol;
     /* @var $barrel Barrel */
     private $barrel;
-    private $short_discription;
+    private $short_description;
     /* @var $bottlery Distillery */
     private $bottlery;
+    private $scores;
+    private $comments;
+    private $event_whisky;
+    private $events;
+    
+    function __construct() {
+        $this->scores = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->events = new ArrayCollection();
+    }
+
+    function getEvents() {
+        return $this->events;
+    }
+
+    function setEvents($events) {
+        $this->events = $events;
+    }
+    
+    function getEventWhisky() {
+        return $this->event_whisky;
+    }
+
+    function setEventWhisky($event_whisky) {
+        $this->event_whisky = $event_whisky;
+    }
+    
+    function getComments() {
+        return $this->comments;
+    }
+
+    function setComments($comments) {
+        $this->comments = $comments;
+    }
+
+    function getScores() {
+        return $this->scores;
+    }
+
+    function setScores($scores) {
+        $this->scores = $scores;
+    }
     
     function getId(){
         return $this->id;
@@ -58,8 +101,8 @@ class Whisky {
         return $this->barrel;
     }
     
-    function getShortDiscription(){
-        return $this->short_discription;
+    function getShortDescription(){
+        return $this->short_description;
     }
     
     function getBottlery(){
@@ -98,8 +141,8 @@ class Whisky {
         $this->barrel = $barrel;
     }
     
-    function setShortDiscription($short_discription){
-        $this->short_discription = $short_discription;
+    function setShortDescription($short_description){
+        $this->short_description = $short_description;
     }
     
     function setBottlery(Bottllery $bottlery){

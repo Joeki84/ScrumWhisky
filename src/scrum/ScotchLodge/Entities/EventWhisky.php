@@ -6,11 +6,11 @@ use scrum\ScotchLodge\Entities\Whisky;
 use scrum\ScotchLodge\Entities\Event;
 
 /**
- * CommentReview entity
+ * EventWhisky entity
  *
  * @author joeri broos
  */
-class CommentReview {
+class EventWhisky {
 
     private $id;
     /* @var $event Event */
