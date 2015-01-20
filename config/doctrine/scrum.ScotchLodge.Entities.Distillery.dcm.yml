@@ -17,6 +17,21 @@ scrum\ScotchLodge\Entities\Distillery:
       targetEntity: Whisky
       mappedBy: bottlery
   
+  manyToOne:
+    region:
+      targetEntity: Region
+      inversedBy: distilleries
+      joinColumn:
+        name: region_id
+        referencedColumnName: id
+    
+    postcode:
+      targetEntity: Postcode
+      inversedBy: distilleries
+      joinColumn:
+        name: postcode_id
+        referencedColumnName: id
+  
   fields:
     name:
       type: string

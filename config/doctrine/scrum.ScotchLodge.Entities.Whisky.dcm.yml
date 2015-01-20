@@ -22,6 +22,34 @@ scrum\ScotchLodge\Entities\Whisky:
       joinColumn:
         name: bottlery_id
         referencedColumnName: id
+        
+    barrel:
+      targetEntity: Barrel
+      inversedBy: barrel_whiskys
+      joinColumn:
+        name: barrel_id
+        referencedColumnName: id
+        
+    event_whisky:
+      targetEntity: EventWhisky
+      
+  manyToMany:
+    events:
+      targetEntity: Event
+      inversedBy: event_whiskys
+      joinTable:         
+        name: event_whiskys
+        joinColumns:
+          whisky_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          event_id:
+            referencedColumnName: id
+
+  oneToMany:
+    scores:
+      targetEntity: WhiskyScore
+      mappedBy: whisky
 
   fields:
     name:
@@ -36,6 +64,6 @@ scrum\ScotchLodge\Entities\Whisky:
       type: integer
     alcohol:
       type: integer
-    short_desc:
+    short_description:
       type: text
   

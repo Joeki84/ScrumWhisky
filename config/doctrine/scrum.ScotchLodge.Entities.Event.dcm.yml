@@ -1,0 +1,26 @@
+scrum\ScotchLodge\Entities\Event:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\ ...
+  table: event
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  manyToMany:
+    whiskys:
+      targetEntity: Whisky
+      mappedBy: events
+      
+  fields:
+    title:
+      type: string
+      length: 45
+    address:
+      type: string
+      length:
+    event_date:
+      type: datetime
+    event_stop:
+      type: datetime
