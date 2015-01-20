@@ -190,4 +190,13 @@ class ProfileService {
     $em->flush();
   }
 
+  
+  
+    public function showalluser() {
+    $userRepository = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $members = $userRepository->findAll();
+    return $members;
+    }
+    
+  
 }
