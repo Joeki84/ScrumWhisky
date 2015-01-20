@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author joeri broos
  */
-class Event { 
+class Event {
 
   private $id;
   private $title;
@@ -79,6 +79,14 @@ class Event {
 
   function setWhiskys($whiskys) {
     $this->whiskys = $whiskys;
+  }
+
+  function getEventStop() {
+    return $this->event_stop;
+  }
+
+  function setEventStop($event_stop) {
+    $this->event_stop = $event_stop;
   }
 
   function getEvent_stop() {

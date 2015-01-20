@@ -14,6 +14,10 @@ scrum\ScotchLodge\Entities\Postcode:
     distilleries:
       targetEntity: Distillery
       mappedBy: postcode
+      
+    events:
+      targetEntity: Event
+      mappedBy: postcode
 
   id:
     id:
