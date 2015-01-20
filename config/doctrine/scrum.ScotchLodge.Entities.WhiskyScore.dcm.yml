@@ -22,4 +22,7 @@ scrum\ScotchLodge\Entities\WhiskyScore:
       joinColumn:
         name: category_id
         referencedColumnName: id
-
+        
+  fields:
+    score:
+      type: integer

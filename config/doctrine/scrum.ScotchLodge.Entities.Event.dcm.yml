@@ -2,6 +2,13 @@ scrum\ScotchLodge\Entities\Event:
   type: entity
   #repositoryClass: scrum\ScotchLodge\Entities\Repo\ ...
   table: event
+  
+  indexes:
+    title_idx:
+      columns: [ title ]
+    event_postcode_idx:
+      columns: [ postcode_id ]
+  
   id:
     id:
       type: integer
