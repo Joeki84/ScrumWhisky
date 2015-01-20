@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author joeri broos
  */
-class Event {
+class Event { 
 
   private $id;
   private $title;
