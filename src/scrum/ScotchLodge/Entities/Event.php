@@ -20,9 +20,11 @@ class Event {
   private $event_date;
   private $event_stop;
   private $whiskys;
+  private $event_comments;
 
   function __construct() {
     $this->whiskys = new ArrayCollection();
+    $this->event_comments = new ArrayCollection();
   }
 
   function getId() {
@@ -95,6 +97,14 @@ class Event {
 
   function setEvent_stop($event_stop) {
     $this->event_stop = $event_stop;
+  }
+
+  function getEvent_comments() {
+    return $this->event_comments;
+  }
+
+  function setEvent_comments($event_comments) {
+    $this->event_comments = $event_comments;
   }
 
 }
