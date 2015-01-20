@@ -14,12 +14,25 @@ scrum\ScotchLodge\Entities\Event:
       type: integer
       generator:
         strategy: AUTO
-
+        
   manyToMany:
     whiskys:
       targetEntity: Whisky
       mappedBy: events
       
+  manyToOne:
+    postcode:
+      targetEntity: Postcode
+      inversedBy: events
+      joinColumn:
+        name: postcode_id
+        referencedColumnName: id;
+   
+  oneToMany:
+    event_comments:
+      targetEntity: CommentEvent
+      mappedBy: event
+   
   fields:
     title:
       type: string

@@ -37,7 +37,7 @@ class ProfileController extends Controller {
     if ($verified) {
       $this->logonIfEnabled();
     } else {
-      $app->render('Profile\logon.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
+      $app->render('homepage.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
     }
   }
 

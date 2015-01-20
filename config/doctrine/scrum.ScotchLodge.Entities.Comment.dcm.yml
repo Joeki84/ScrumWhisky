@@ -13,11 +13,15 @@ scrum\ScotchLodge\Entities\Comment:
       targetEntity: CommentReview
       mappedBy: comment
       
+    event_comment:
+      targetEntity: CommentEvent
+      mappedBy: comment
+      
     parent_comment:
       targetEntity: Comment
       joinColumn:
         name: comment_id
-        referencedColumnName: id
+        referencedColumnName: id              
         
   fields:
     comment_date:

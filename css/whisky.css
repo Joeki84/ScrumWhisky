@@ -1,4 +1,7 @@
 /*misc*/
+
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville);
+
 .margin-top-50 {
   margin-top: 50px;
 }
@@ -15,26 +18,167 @@
 #route-tbl tbody tr td {
   padding: 5px;
 }
+#wrapper>.container {
+  margin-top: -15px;
+  background-color: #eee;
+  border: solid 1px darkgray;
+  font-family: 'Libre Baskerville', serif;
+}
+div.welcome {
+  margin: 10px 0px 20px 0px;
+}
+
+/*clearfix hack*/
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}
+/*end clearfix*/
+
+#sidebar-wrapper {
+  background-color: gray;
+  color: white;
+}
 
 /*header*/
 #head {
-  height: 100px;
-  border: 1px solid #e2e2e2;
-  margin-top: 10px;
+  background-image: url(../img/title_bar_wood.png);
+  height: 165px;
+  border: 1px solid rgba(124,91,33,1);
+  margin-top: 50px;
   margin-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  position: relative;
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  z-index:10;
+  }
+#head h1 {
+  margin-top: 30px;
+  margin-left: 30px; 
+}
+#head h2 {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  height: 20%;
+}
+#head img {
+  height: 100%;
+  width: auto;
+}
+
+/*sidebar*/
+#sidebar-wrapper {
+  min-height: 620px;
+  margin-top: -15px;
+  background:gray;
+  background-size: cover;
+  color: white;
+  padding-top: 15px;
+  -webkit-box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
+}
+#sidebar-wrapper a {
+  color: white;
 }
 
 
 /*menus*/
+/*nav menu*/
+div#bookmark {
+  position: absolute;
+  border: 24px solid #e7cc59;
+  border-left: 24px solid transparent;
+  height: 0px;
+  width: 50px;
+  left: -28px;
+  top: 0px;
+  z-index: 0;
+}
+div#bookmark div {
+  position: absolute;
+  border: 20px solid rgba(80,33,0, 1);
+  border-left: 20px solid transparent;
+  height: 0;
+  width: 50px;
+  top: -20px;
+  left: -14px;
+}
+#topmenu {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.5em;
+  position: relative;
+  width: 120%;
+  margin-left: -15px;
+}
+#topmenu a {
+  color: white;
+  border: none;
+  padding: 7px 20px;
+}
+#topmenu li {
+  height: 40px;
+}
+#topmenu ul {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  background: -webkit-gradient(radial, center center, 0, center center, 460, from(rgba(156, 47, 0, 1)), to(rgba(80, 33, 0, 1)));
+  background: -webkit-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
+  background: -moz-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
+  background: -o-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
+  background: -ms-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
+  background: radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
+  background-color: rgba(156, 47, 0, 1);
+  border-top: solid #e7cc59 4px;
+  border-bottom: solid #e7cc59 4px;
+  height: 40px;
+}
+#topmenu a:hover {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  height: 40px;
+  background-color: #9c2f00;
+}
+/*user menu*/
 #reg-menu {
-  font-size: 0.9em;  
+  display: inline-block;
+  font-size: 0.9em;
+  margin-top: 20px;  
 }
-#topmenu {}
-#topmenu ul li {
+#reg-menu ul {
+  display: inline-block;
+}
+#reg-menu .nav > li {
+  float: none;
+}
+#reg-menu li a:hover {
+  background-color: black;
+}
+#reg-menu .btn {
+  background-image: url(../img/wood_pattern_150.jpg);
+  border: 1px solid black;
+  color: white;
+}
+#reg-menu .form-group {
+  margin-bottom: 5px;
+}
+#reg-menu .form-control {
+    border: 1px solid black;
+}
 
-}
 
 
 /*messages*/

@@ -1,22 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_with_right_sidebar.html.twig' %}
 
 {% block title %}The Scotch Lodge{% endblock title %}
 
-{% block content %}
-  <div class="container test">
-    {% if globals.user is defined and globals.user is not null %}
+
+  {% block main_column %}
+
+    <div class="container welcome">
+      {% if globals.user is defined and globals.user is not null %}
       {% set user = globals.user %}
-      <h1>ROEKOEEEE, {{ globals.user.username }}</h1>
+        <h1>Have a drink, {{ globals.user.username }}</h1>
       {% if user.isAdmin() %}
-        <span>Aangemeld als admin</span>
+        <span>Logged in as admin</span>
       {% else %}
-        <span>Aangemeld als gebruiker</span>
+        <span>Logged in as user</span>
       {% endif %}
-    {% else %}
-      <h1>Welkom anonieme gebruiker</h1>
-    {% endif %}
-  </div>
-{% endblock content %}
+      {% else %}
+        <h1>Welcome stranger </h1>
+      {% endif %}
+    </div>
+
+    <nav id="topmenu" class="clearboth">
+      <div id="bookmark">
+        <div>
+        </div>
+      </div>
+      <ul class="nav nav-tabs">
+        <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
+        <li><a href="#"> Tab 2 </a></li>
+        <li><a href="#"> Tab 3 </a></li>
+        <li><a href="#"> Tab 4 </a></li>
+      </ul>
+    </nav>
+
+  {% endblock main_column %}
+
+  {% block sidebar %}    
+      {% include 'menu.html.twig' %}
+  {% endblock sidebar %}
+
 
 {% block extrajs %}
   <script src="js/main.js"></script>
