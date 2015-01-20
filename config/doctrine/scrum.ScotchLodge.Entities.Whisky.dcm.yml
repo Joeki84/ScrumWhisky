@@ -8,6 +8,21 @@ scrum\ScotchLodge\Entities\Whisky:
       generator:
         strategy: AUTO
 
+  manyToOne:
+    distillery:
+      targetEntity: Distillery
+      inversedBy: dist_whiskys
+      joinColumn:
+        name: distillery_id
+        referencedColumnName: id
+    
+    bottlery:
+      targetEntity: Distillery
+      inversedBy: bottl_whiskys
+      joinColumn:
+        name: bottlery_id
+        referencedColumnName: id
+
   fields:
     name:
       type: string
@@ -23,3 +38,4 @@ scrum\ScotchLodge\Entities\Whisky:
       type: integer
     short_desc:
       type: text
+  
