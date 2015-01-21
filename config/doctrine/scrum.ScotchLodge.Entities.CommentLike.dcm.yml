@@ -21,4 +21,4 @@ scrum\ScotchLodge\Entities\CommentLike:
       inversedBy: comment_likes
       joinColumn: 
         name: comment_id
-        referencedColumnName: id      
+        referencedColumnName: id
