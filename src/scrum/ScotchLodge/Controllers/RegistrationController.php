@@ -44,7 +44,9 @@ class RegistrationController extends Controller {
   }
 
   public function registrationConfirm() {
-    $this->getApp()->render('Profile/logon.html.twig', array('app' => $this->getApp(), 'info' => 'Registratie voltooid'));
+    $app = $this->getApp();
+    $app->flash('info', 'Registration complete.');
+    $app->redirect($app->urlFor('main_page'));
   }
 
 }

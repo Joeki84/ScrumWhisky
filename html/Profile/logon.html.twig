@@ -1,5 +1,5 @@
 
-
+{% block login %}
     <form action="{{ app.urlFor('user_logon_process') }}" method="post">
       <div class="form-group">
         <input class="form-control" type="text" id="username" name="username" placeholder="username"/>
@@ -9,3 +9,4 @@
       </div>
       <input class="form-control btn" type="submit" id="login" name="login" value="Login" />
     </form>
+{% endblock login %}

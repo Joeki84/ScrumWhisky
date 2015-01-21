@@ -8,13 +8,15 @@
   
   {% set app = globals.app %}
   
-  <div class="container">
+  <div class="container" id="register">
     <h1>Register</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+    <p>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
       <div class="form-group">
         <label for="username">User name</label>
         <input class="form-control" type="text" id="username" name="username" value="{% if app.request.isPost() %}{{app.request.post('username')}}{% endif %}" />
-        <label for="email">E-mail</label> 
+        <label for="email">E-mail</label>
         <input class="form-control" type="email" id="email" name="email" value="{% if app.request.isPost() %}{{app.request.post('email')}}{% endif %}"/>
       </div>
       
@@ -41,10 +43,20 @@
         </select>
         <label for="address">Address</label>
         <input class="form-control" type="text" id="adres" name="address" value="{% if app.request.isPost() %}{{app.request.post('address')}}{% endif %}" />
-        
       </div>
 
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register" />
+      <!--Honeypot-->
+      <div class="form-group">
+        <label for="city">City</label>
+        <input class="form-control" type="text" id="city" name="city">
+      </div>
+      <br>
+
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register now" />
+
+      <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn btn-default">
+        Return to main menu
+      </a>
 
     </form>
   </div>
