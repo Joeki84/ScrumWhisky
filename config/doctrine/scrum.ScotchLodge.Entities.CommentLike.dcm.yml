@@ -1,0 +1,24 @@
+scrum\ScotchLodge\Entities\CommentLike:
+  type: entity
+  #repositoryClass: scrum\ScotchLodge\Data\ ..
+  table: comment_like
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  
+  manyToOne:
+    user:
+      targetEntity: WhiskyUser
+      inversedBy: user_likes
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        
+    comment:
+      targetEntity: Comment
+      inversedBy: comment_likes
+      joinColumn: 
+        name: comment_id
+        referencedColumnName: id      
