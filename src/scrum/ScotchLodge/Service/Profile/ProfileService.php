@@ -144,6 +144,24 @@ class ProfileService {
     return count($user) == 0 ? null : $user[0];
   }
   
+  /* Olivier */
+  
+  public function searchUserById($id) {
+  
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    $user = $repo->find($id);
+    if (isset($user) && $user != null) 
+        return $user;
+    else 
+        return null;
+      
+  }
+  
+  /* Olivier */
+  
+  
+  
   public function isPasswordValid() {
     $val = new PasswordValidation($this->app, $this->em);
     $validate = $val->validate();
