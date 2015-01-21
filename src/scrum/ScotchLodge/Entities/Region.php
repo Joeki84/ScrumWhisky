@@ -3,6 +3,7 @@
 namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Country;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Region entity
@@ -15,6 +16,11 @@ class Region {
     private $name;
     /* @var $country Country */
     private $country;
+    private $distilleries;
+
+    function __construct($distilleries) {
+        $this->distilleries = new ArrayCollection();
+    }
     
     function getId(){
         return $this->id;
@@ -26,6 +32,14 @@ class Region {
     
     function getCountry(){
         return $this->country;
+    }
+    
+    function getDistilleries() {
+        return $this->distilleries;
+    }
+
+    function setDistilleries($distilleries) {
+        $this->distilleries = $distilleries;
     }
     
     function setId($id){
