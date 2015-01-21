@@ -43,13 +43,15 @@ class EventService {
 
         /* @var $event Event */
         $event = new Event();
+        $event->setId(0);
         $event->setTitle($title);
         /* @var $postcode Postcode */
         $regsrv = new RegistrationService($this->em, $this->app);
         $postcode_object = $regsrv->getPostcodeObject($postcode);
         $event->setPostcode($postcode_object);
         $event->setAddress($address);
-        $event_date = new DateTime('Y-m-d H:i:s',$date);
+        $time = strtotime($date);
+        $event_date = date('Y-m-d H:i:s',$time);
         $event->setEventDate($event_date);
 
         $val = new Val($this->app, $this->em);

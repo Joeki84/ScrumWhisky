@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Register
+{% endblock title %}
+
+{% block content %}
+  
+  {% set app = globals.app %}
+  
+  <div class="container">
+    <h1>Register</h1>
+    <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
+      <div class="form-group">
+        <label for="Region">Region</label>
+        <select class="form-control"  id="region" name="region" >
+         {% for region in regions %}
+            <option value="{{ region.id }}">{{ region.getName }}</option>
+          {% endfor %}
+        </select>
+        <label for="distillery">Distillery</label>
+        <select class="form-control"  id="distillery" name="distillery" >
+        {% for distillery in distilleries %}
+            <option   value="{{ distillery.id }}">{{ distillery.getName }}</option>
+        {% endfor %}
+        </select>
+        <label for="bottler">Bottler</label> 
+        <select class="form-control"  id="bottler" name="bottler" >
+        <option value=""></option>
+        {% for bottler in bottlers %}
+            <option   value="{{ bottler.id }}">{{ bottler.getName }}</option>
+        {% endfor %}
+        </select>
+        
+        <label for="password">Age</label>
+        <input id="age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+        <span id="ageCurrentSliderValLabel">Current age selected: <span id="abvSliderVal"></span></span>
+        
+        <label for="password_repeat">ABV</label>
+        <input id="abv" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+        <span id="abvCurrentSliderValLabel">Current value selected: <span id="abvSliderVal"></span> %</span>
+
+        <label for="first_name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" value="" />        
+      </div>
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register" />
+
+    </form>
+  </div>
+{% endblock content %}
+
+{% block extrajs %}   
+    {# Slider for bootstrap http://seiyria.github.io/bootstrap-slider/ #}
+   <script type="text/javascript" src="/js/bootstrap/js/bootstrap-slider.js"></script>     
+   <script>         
+   $("#age").slider();
+   $("#age").on("slide", function(slideEvt) {
+   $("#ageSliderVal").text(slideEvt.value);
+   });
+   
+   $("#abv").slider();
+   $("#abv").on("slide", function(slideEvt) {
+   $("#abvSliderVal").text(slideEvt.value);
+   });
+   
+   </script>
+{% endblock extrajs %}
