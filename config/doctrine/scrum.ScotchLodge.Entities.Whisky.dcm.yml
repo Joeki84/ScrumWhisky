@@ -37,11 +37,11 @@ scrum\ScotchLodge\Entities\Whisky:
       joinTable:         
         name: event_whiskys
         joinColumns:
-          name: whisky_id
-          referencedColumnName: id
+          whisky_id:
+            referencedColumnName: id
         inverseJoinColumns:
-          name: event_id
-          referencedColumnName: id
+          event_id:
+            referencedColumnName: id
 
   oneToMany:
     scores:
