@@ -10,4 +10,4 @@ $app->get('/', function() use ($contr) {
 
 $app->get('/print_routes', function() use ($contr) {
   $contr->showRoutes();
-})->name('show_routes');
+})->name('print_routes');

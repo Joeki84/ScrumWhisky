@@ -2,6 +2,8 @@
 
 namespace scrum\ScotchLodge\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Country entity
  *
@@ -12,7 +14,20 @@ class Country {
   private $id;
   private $country_code;
   private $country_name;
+  private $regions;
+  
+  function __construct() {
+      $this->regions = new ArrayCollection();
+  }
 
+  function getRegions() {
+      return $this->regions;
+  }
+
+  function setRegions($regions) {
+      $this->regions = $regions;
+  }
+  
   function getId() {
     return $this->id;
   }

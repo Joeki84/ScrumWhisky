@@ -26,11 +26,15 @@ scrum\ScotchLodge\Entities\Event:
       inversedBy: events
       joinColumn:
         name: postcode_id
-        referencedColumnName: id;
+        referencedColumnName: id
    
   oneToMany:
     event_comments:
       targetEntity: CommentEvent
+      mappedBy: event
+      
+    event_presences:
+      targetEntity: EventPresence
       mappedBy: event
    
   fields:

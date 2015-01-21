@@ -170,5 +170,22 @@ class ProfileController extends Controller {
       $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $id, 'errors' => $errors));
     }
   }
+  
+  public function showProfileOfUserWithId($id) {     
+      
+    $app = $this->getApp();
+    $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
+    $postcodes = $reg_srv->getPostcodes();
+    
+    $srv = $this->srv;
+    $usertoview = $srv->searchUserById($id);
+    if ($usertoview != null) {
+      $app->render('Profile/profile_show_by_id.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoview' => $usertoview));
+    } else {
+      $app->flash('error', 'Invalid user. Please try again');
+      $app->redirect($app->urlFor('main_page'));
+    }
+    
+  }
 
 }

@@ -51,3 +51,6 @@ Valitron : http://vancelucas.com/blog/valitron-the-simple-validation-library-tha
 
 // Routing framework
 Slim: http://docs.slimframework.com/
+
+EXTRAS:
+ zie extra.md

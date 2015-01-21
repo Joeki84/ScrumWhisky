@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace scrum\ScotchLodge\Entities; 
 
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Entities\Comment;

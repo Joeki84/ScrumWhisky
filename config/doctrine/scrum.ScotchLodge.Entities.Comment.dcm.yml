@@ -23,6 +23,19 @@ scrum\ScotchLodge\Entities\Comment:
         name: comment_id
         referencedColumnName: id              
         
+  oneToMany:
+    comment_likes:
+      targetEntity: CommentLike
+      mappedBy: comment
+        
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: comments
+      joinColumn: 
+        name: user_id
+        referencedColumnName: id  
+        
   fields:
     comment_date:
       type: datetime

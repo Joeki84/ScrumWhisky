@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Distillery;
 use scrum\ScotchLodge\Entities\Barrel;
+use scrum\ScotchLodge\Entities\Region;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -26,6 +27,7 @@ class Whisky {
     private $short_description;
     /* @var $bottlery Distillery */
     private $bottlery;
+    private $region;
     private $scores;
     private $comments;
     private $event_whisky;
@@ -109,6 +111,10 @@ class Whisky {
         return $this->bottlery;
     }
     
+    function getRegion(){
+        return $this->region;
+    }
+    
     function setId($id){
         $this->id = $id;
     }
@@ -147,5 +153,9 @@ class Whisky {
     
     function setBottlery(Bottllery $bottlery){
         $this->bottlery = $bottlery;
+    }
+    
+    function setRegion(Region $region){
+        $this->region = $region;
     }
 }
