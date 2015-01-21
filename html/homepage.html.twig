@@ -33,7 +33,7 @@
     </div>
 
     <h2>List of users:</h2>
-      <ul>
+      <ul> 
       {% for member in members %}
         <li>{{ member.getFirstName() }} {{ member.getSurname() }}
             {% if globals.user is defined and globals.user is not null %}
