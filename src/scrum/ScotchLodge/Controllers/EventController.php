@@ -38,6 +38,9 @@ class EventController extends Controller{
         $this->getApp()->render('Events/new_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
     }
     
+    /**
+     * Render the page to insert a event.
+     */
     public function insertEvent(){
         try{
             $event = $this->eventsrv->addEvent();
