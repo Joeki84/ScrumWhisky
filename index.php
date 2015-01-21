@@ -13,6 +13,7 @@ try {
   include 'config/routes/profile.php';
   include 'config/routes/main.php';
   include 'config/routes/event.php';
+  include 'config/routes/whisky.php';
   
   $app->run();
     

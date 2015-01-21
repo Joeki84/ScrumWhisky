@@ -7,6 +7,7 @@ use Slim\Slim;
 use scrum\ScotchLodge\Entities\Event;
 use scrum\ScotchLodge\Service\Validation\EventValidation as Val;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
+use DateTime;
 
 /**
  * EventService
@@ -39,20 +40,23 @@ class EventService {
         $title = $this->app->request->post('title');
         $postcode = $this->app->request->post('postcode');
         $address = $this->app->request->post('address');
-        $date = $this->app->request->post('event_date');      
+        $date = $this->app->request->post('event_date');
+        $date = str_replace('/', '-', $date);
+        $date_stop = $this->app->request->post('event_stop');
+        $date_stop = str_replace('/', '-', $date_stop);
 
         /* @var $event Event */
         $event = new Event();
-        $event->setId(0);
         $event->setTitle($title);
         /* @var $postcode Postcode */
         $regsrv = new RegistrationService($this->em, $this->app);
         $postcode_object = $regsrv->getPostcodeObject($postcode);
         $event->setPostcode($postcode_object);
         $event->setAddress($address);
-        $time = strtotime($date);
-        $event_date = date('Y-m-d H:i:s',$time);
+        $event_date = new \DateTime($date);
         $event->setEventDate($event_date);
+        $event_stop = new \DateTime($date_stop);
+        $event->setEventStop($event_stop);
 
         $val = new Val($this->app, $this->em);
         if($val->validate()){

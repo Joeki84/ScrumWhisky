@@ -17,6 +17,8 @@ class EventValidation extends Validation {
     $val->rule('required', 'address');
     $val->rule('required', 'event_date');
     $val->rule('date', 'event_date');
+    $val->rule('required', 'event_stop');
+    $val->rule('date', 'event_stop');
   }
   
 }
