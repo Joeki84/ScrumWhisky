@@ -50,14 +50,16 @@
         <label for="city">City</label>
         <input class="form-control" type="text" id="city" name="city">
       </div>
-      <br>
 
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register now" />
-
-      <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn btn-default">
-        Return to main menu
-      </a>
-
+      <ul>
+        <li>
+          <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register now" />
+        </li>
+        <li>
+          <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn btn-default">
+          Return to main menu</a>
+        </li>
+      </ul>
     </form>
   </div>
 {% endblock content %}

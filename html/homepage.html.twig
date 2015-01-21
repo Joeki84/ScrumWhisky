@@ -17,10 +17,24 @@
         <li><a href="#"> Tab 4 </a></li>
       </ul>
     </nav>
+    
+    <div class="container welcome">
+      {% if globals.user is defined and globals.user is not null %}
+      {% set user = globals.user %}
+        <h1>Have a drink, {{ globals.user.username }}</h1>
+      {% if user.isAdmin() %}
+        <span class="status">Logged in as admin</span>
+      {% else %}
+        <span class="status">Logged in as user</span>
+      {% endif %}
+      {% else %}
+        <h1>Welcome stranger </h1>
+      {% endif %}
+    </div>
 
     <h2>List of users:</h2>
-    <ul>
-    {% for member in members %}
+      <ul> 
+      {% for member in members %}
         <li>{{ member.getFirstName() }} {{ member.getSurname() }}
             {% if globals.user is defined and globals.user is not null %}
             {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
