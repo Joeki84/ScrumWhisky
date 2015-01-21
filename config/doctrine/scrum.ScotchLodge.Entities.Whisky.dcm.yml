@@ -28,10 +28,7 @@ scrum\ScotchLodge\Entities\Whisky:
       inversedBy: barrel_whiskys
       joinColumn:
         name: barrel_id
-        referencedColumnName: id
-        
-    event_whisky:
-      targetEntity: EventWhisky
+        referencedColumnName: id            
       
   manyToMany:
     events:
@@ -40,11 +37,11 @@ scrum\ScotchLodge\Entities\Whisky:
       joinTable:         
         name: event_whiskys
         joinColumns:
-          whisky_id:
-            referencedColumnName: id
+          name: whisky_id
+          referencedColumnName: id
         inverseJoinColumns:
-          event_id:
-            referencedColumnName: id
+          name: event_id
+          referencedColumnName: id
 
   oneToMany:
     scores:

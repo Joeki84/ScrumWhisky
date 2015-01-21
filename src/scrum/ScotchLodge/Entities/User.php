@@ -3,6 +3,7 @@
 namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Postcode;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User entity
@@ -27,6 +28,15 @@ class User {
   private $can_create_event;
   private $is_admin;
   private $password_token;
+  private $user_likes;
+  private $comments;
+  private $present_in_events;
+
+  function __construct() {
+    $this->user_likes = new ArrayCollection();
+    $this->comments = new ArrayCollection();
+    $this->present_in_events = new ArrayCollection();
+  }
 
   function getId() {
     return $this->id;
@@ -150,6 +160,30 @@ class User {
 
   function setPasswordToken() {
     $this->password_token = uniqid(mt_rand(), true);
+  }
+
+  function getUser_likes() {
+    return $this->user_likes;
+  }
+
+  function setUser_likes($user_likes) {
+    $this->user_likes = $user_likes;
+  }
+
+  function getComments() {
+    return $this->comments;
+  }
+
+  function setComments($comments) {
+    $this->comments = $comments;
+  }
+
+  function getPresent_in_events() {
+    return $this->present_in_events;
+  }
+
+  function setPresent_in_events($present_in_events) {
+    $this->present_in_events = $present_in_events;
   }
 
 }
