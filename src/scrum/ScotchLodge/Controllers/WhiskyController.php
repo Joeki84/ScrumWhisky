@@ -44,6 +44,9 @@ class WhiskyController extends Controller{
         $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
     }
 
+    /**
+     * Render the page to insert a whisky.
+     */
     public function insertWhisky(){
         try{
             $whisky = $this->whiskysrv->addWhisky();
@@ -60,6 +63,48 @@ class WhiskyController extends Controller{
                 $barrels = $barsrv->getBarrels();
                 $globals = $this->getGlobals();
                 $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+            }
+        } catch (Exception $ex) {
+            $this->getApp()->render('probleem.twig.html');
+        }
+    }
+    
+    /**
+     * Render the page to add a new whisky.
+     */
+    public function editWhisky($id){
+        $whisky = $this->whiskysrv->retrieveWhiskyById($id);        
+        $regsrv = new RegionService($this->em, $this->app);
+        $regions = $regsrv->getRegions();
+        $distsrv = new DistilleryService($this->em, $this->app);
+        $distillerys = $distsrv->getDistillerys();
+        $barsrv = new BarrelService($this->em, $this->app);
+        $barrels = $barsrv->getBarrels();
+        $globals = $this->getGlobals();
+        $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+    }
+    
+    /**
+     * Render the page to insert a whisky.
+     * @param int $id 
+     */
+    public function updateWhisky($id){
+        try{
+            $whisky_old = $this->whiskysrv->retrieveWhiskyById($id);
+            $whisky = $this->whiskysrv->updateWhisky($whisky_old);
+            if($whisky){
+                $url = $this->getApp()->urlFor('edited_whisky_ok');
+                $this->getApp()->redirect($url);
+            }else{
+                $errors = $this->whiskysrv->getErrors();
+                $regsrv = new RegionService($this->em, $this->app);
+                $regions = $regsrv->getRegions();
+                $distsrv = new DistilleryService($this->em, $this->app);
+                $distillerys = $distsrv->getDistillerys();
+                $barsrv = new BarrelService($this->em, $this->app);
+                $barrels = $barsrv->getBarrels();
+                $globals = $this->getGlobals();
+                $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky_old, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

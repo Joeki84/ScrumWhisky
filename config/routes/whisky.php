@@ -15,3 +15,11 @@ $app->post('/newwhisky', function() use ($contr){
 $app->get('/newwhisky/ok', function() use ($contr){
     echo("todo new whisky stored");
 })->name('new_whisky_ok');
+
+$app->get('/editwhisky/:id', function($id) use ($contr){
+    $contr->editWhisky($id);
+})->name('edit_whisky');
+
+$app->post('/editwhisky/:id', function($id) use ($contr){
+    $contr->updateWhisky($id);
+})->name('edit_whisky_process');
