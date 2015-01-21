@@ -5,20 +5,6 @@
 
   {% block main_column %}
 
-    <div class="container welcome">
-      {% if globals.user is defined and globals.user is not null %}
-      {% set user = globals.user %}
-        <h1>Have a drink, {{ globals.user.username }}</h1>
-      {% if user.isAdmin() %}
-        <span>Logged in as admin</span>
-      {% else %}
-        <span>Logged in as user</span>
-      {% endif %}
-      {% else %}
-        <h1>Welcome stranger </h1>
-      {% endif %}
-    </div>
-
     <nav id="topmenu" class="clearboth">
       <div id="bookmark">
         <div>
@@ -31,6 +17,20 @@
         <li><a href="#"> Tab 4 </a></li>
       </ul>
     </nav>
+    
+    <div class="container welcome">
+      {% if globals.user is defined and globals.user is not null %}
+      {% set user = globals.user %}
+        <h1>Have a drink, {{ globals.user.username }}</h1>
+      {% if user.isAdmin() %}
+        <span class="status">Logged in as admin</span>
+      {% else %}
+        <span class="status">Logged in as user</span>
+      {% endif %}
+      {% else %}
+        <h1>Welcome stranger </h1>
+      {% endif %}
+    </div>
 
         <h2>List of users:</h2>
     <ul>
@@ -41,18 +41,19 @@
             {% endif %}
         </li>        
     {% endfor %}  
-    </ul>
     
-       <h2>Future events:</h2>
-    <ul>
-    {% for event in events %}
-        <li>{{ event.getFirstName() }} {{ event.getSurname() }}</li>        
-    {% endfor %}  
-    </ul>
   {% endblock main_column %}
 
   {% block sidebar %}    
       {% include 'menu.html.twig' %}
+      <div id="events">
+        <h3>Upcoming events:</h3>
+        <ul>
+        {% for event in events %}
+          <li>{{ event.getFirstName() }} {{ event.getSurname() }}</li>        
+        {% endfor %}  
+        </ul>
+      </div>
   {% endblock sidebar %}
 
 

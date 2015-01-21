@@ -3,7 +3,7 @@
   <head>
     <title>{% block title %}The Scotch Lodge{% endblock title %}</title>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans' rel='stylesheet' type='text/css'>
     <link href="/css/whisky.css" rel="stylesheet" type="text/css" />
     <link href="/js/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="/js/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
@@ -48,19 +48,19 @@
           {% block info_messages %}
 
             {% if flash['info'] is defined %}
-              <div class="container">
+              
                 <div class="info">
                   {{ flash['info'] }}
                 </div>
-              </div>
+              
             {% endif %}
 
             {% if  info is defined %}
-              <div class="container">
+              
                 <div class="info">
                   {{ info }}
                 </div>
-              </div>
+            
             {% endif %}
           {% endblock info_messages %}
 
