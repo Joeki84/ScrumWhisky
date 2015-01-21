@@ -19,13 +19,15 @@
           <label for="postcode">Postcode</label>
           <select class="form-control" id="postcode" name="postcode">
             {% for pc in postcodes %}
-              <option value="{{ pc.id }}">{{ pc.postcode }} - {{ pc.town }}</option>
+                <option value="{{ pc.id }}" {% if pc.id == app.request.post('postcode') %} selected="selected" {% endif %}>{{ pc.postcode }} - {{ pc.town }}</option>
             {% endfor %}
           </select>
         </div>
         <div class="form-group">
           <label for="date">Event Date</label>
           <input class="form-control" type="date" min="{{"now"|date('d/m/Y')}}" id="event_date" name="event_date" value="{% if app.request.isPost() %}{{app.request.post('event_date')}}{% endif %}" />
+          <label for="date">Event Date Stop</label>
+          <input class="form-control" type="date" min="{{"now"|date('d/m/Y')}}" id="event_stop" name="event_stop" value="{% if app.request.isPost() %}{{app.request.post('event_stop')}}{% endif %}" />
         </div>
 
         <input class="form-control btn btn-default" type="submit" id="verzend" name="event" value="Add event" />
