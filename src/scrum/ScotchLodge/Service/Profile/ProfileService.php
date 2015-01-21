@@ -190,13 +190,15 @@ class ProfileService {
     $em->flush();
   }
 
-  
+  /* Olivier */
   
     public function showalluser() {
-    $userRepository = $this->em->getRepository('scrum\ScotchLodge\Entities\User');
+    $em = $this->getEntityManager();
+    $userRepository = $em->getRepository('scrum\ScotchLodge\Entities\User');
     $members = $userRepository->findAll();
+    
     return $members;
     }
     
-  
+  /* End  Olivier */
 }
