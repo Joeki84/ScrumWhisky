@@ -32,6 +32,23 @@
       </ul>
     </nav>
 
+        <h2>List of users:</h2>
+    <ul>
+    {% for member in members %}
+        <li>{{ member.getFirstName() }} {{ member.getSurname() }}
+            {% if globals.user is defined and globals.user is not null %}
+            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
+            {% endif %}
+        </li>        
+    {% endfor %}  
+    </ul>
+    
+       <h2>Future events:</h2>
+    <ul>
+    {% for event in events %}
+        <li>{{ event.getFirstName() }} {{ event.getSurname() }}</li>        
+    {% endfor %}  
+    </ul>
   {% endblock main_column %}
 
   {% block sidebar %}    

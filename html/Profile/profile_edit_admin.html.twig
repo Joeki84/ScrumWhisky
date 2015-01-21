@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Show Profile
+{% endblock title %}
+
+{% block content %}
+  {% if globals.user is defined and globals.user is not null %}
+    {% set user = usertoedit %}
+  {% endif %}
+  <div class="container">
+    <h1>Edit Profile</h1>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
+        <label for="email">E-mail</label> 
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" readonly />
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" />
+        <label for="password_repeat">Repeat password</label>
+        <input class="form-control" type="password" id="password_repeat" name="password_repeat" />
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
+        <label for="surname"></label>
+        <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Postcode</label>
+        <select class="form-control" id="postcode" name="postcode">
+          {% for pc in postcodes %}
+            <option {% if pc.id == user.postcode.id %} selected {% endif %}  value="{{ pc.id }}">{{ pc.postcode }} -- {{ pc.town }}</option>
+          {% endfor %}
+        </select>
+        <label for="adres">Adres</label>
+        <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
+      </div>
+
+      <div class="form-group">
+        <label for="is_admin">Admin</label>
+        <input  type="checkbox" id="is_admin" name="is_admin" value="1"  {% if user.isAdmin %} checked {% endif %} />
+        
+      </div>
+
+      
+      
+      <input class="form-control" type="submit" id="wijzig" name="save" value="Save" />
+    </form>      
+  </div>
+{% endblock content %}

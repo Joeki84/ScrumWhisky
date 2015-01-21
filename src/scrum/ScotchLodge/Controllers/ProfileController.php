@@ -77,15 +77,32 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('user_logon'));
     }
   }
-
+  
   public function editProfile() {
     $app = $this->getApp();
     $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
     $postcodes = $reg_srv->getPostcodes();
-    $g = $this->getGlobals();
+    $g = $this->getGlobals();    
     $app->render('Profile\profile_edit.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes));
   }
-
+  
+  
+/* olivier */
+  public function editProfileAdmin($username) {
+    $app = $this->getApp();
+    $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
+    $postcodes = $reg_srv->getPostcodes();
+    $g = $this->getGlobals();
+  
+    $usertoedit = $this->srv->retrieveUserByUsername($username);
+    
+    
+    $app->render('Profile\profile_edit_admin.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoedit' => $usertoedit));
+  }
+  /* olivier */
+  
+  
+  
   public function storeChanges() {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {

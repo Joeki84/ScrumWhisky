@@ -2,7 +2,14 @@
 
 namespace scrum\ScotchLodge\Controllers;
 
+
+//use scrum\ScotchLodge\Controllers\Controller;
+use scrum\ScotchLodge\Service\Profile\ProfileService;
+use scrum\ScotchLodge\Service\Event\EventService;
+
+
 use scrum\ScotchLodge\Controllers\Controller;
+
 
 /**
  * HomepageController
@@ -13,7 +20,12 @@ class HomepageController extends Controller {
 
   public function homepage() {
     $globals = $this->getGlobals();
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals));
+     
+    
+    $members=ProfileService::showalluser();
+    $events=EventService::LatestEvents();
+   
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events));
   }
   
   public function simplifydRoutes($routes) {
