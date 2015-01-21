@@ -10,11 +10,11 @@ scrum\ScotchLodge\Entities\EventPresence:
      
   manyToOne:
     answer:
-    targetEntity: EventAnswer
-    inversedBy: users_present
-    joinColumn:
-      name: event_answer_id
-      referencedColumnName: id 
+      targetEntity: EventAnswer
+      inversedBy: users_present
+      joinColumn:
+        name: event_answer_id
+        referencedColumnName: id 
       
     user:
       targetEntity: User

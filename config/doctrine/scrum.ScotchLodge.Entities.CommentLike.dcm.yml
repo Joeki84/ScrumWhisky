@@ -10,7 +10,7 @@ scrum\ScotchLodge\Entities\CommentLike:
   
   manyToOne:
     user:
-      targetEntity: WhiskyUser
+      targetEntity: User
       inversedBy: user_likes
       joinColumn:
         name: user_id

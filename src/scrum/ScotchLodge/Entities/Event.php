@@ -21,10 +21,12 @@ class Event {
   private $event_stop;
   private $whiskys;
   private $event_comments;
+  private $event_presences;
 
   function __construct() {
     $this->whiskys = new ArrayCollection();
     $this->event_comments = new ArrayCollection();
+    $this->event_presences = new ArrayCollection();
   }
 
   function getId() {
@@ -105,6 +107,14 @@ class Event {
 
   function setEvent_comments($event_comments) {
     $this->event_comments = $event_comments;
+  }
+
+  function getEvent_presences() {
+    return $this->event_presences;
+  }
+
+  function setEvent_presences($event_presences) {
+    $this->event_presences = $event_presences;
   }
 
 }
