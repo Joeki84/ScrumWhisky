@@ -1,6 +1,6 @@
 /*misc*/
 
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans&subset=latin,latin-ext);
 
 .margin-top-50 {
   margin-top: 50px;
@@ -19,6 +19,9 @@ ul, li {
   padding: 0;
   margin: 0;
 }
+.nav-pills > li + li {
+  margin-left: 0px;
+}
 #route-tbl thead tr th,
 #route-tbl tbody tr td {
   padding: 5px;
@@ -29,12 +32,16 @@ ul, li {
 #wrapper>.container {
   margin-top: -15px;
   padding-top: 15px;
+  padding-bottom: 15px;
   background-color: #eee;
   border: solid 1px darkgray;
   font-family: 'Open Sans', sans-serif;
 }
-h1, h2, h3, li a, input.btn {
+input.btn, #return_to_main {
   font-family: 'Libre Baskerville', serif;
+}
+input.btn:hover, #return_to_main:hover {
+  color: white;
 }
 div.welcome {
   margin: 10px 0px;
@@ -177,24 +184,28 @@ div#bookmark div {
 /*user menu*/
 #reg-menu {
   display: inline-block;
+  width: 80%;
   font-size: 0.9em;
   margin: 20px 0px; 
 }
 #reg-menu ul {
   display: inline-block;
+  width: 100%;
 }
 #reg-menu .nav > li {
   float: none;
+  width: 100%;
 }
 #reg-menu li a:hover {
-  background-color: black;
+  background-color: #696969;
 }
 input.btn, a.btn {
   background-image: url(../img/wood_pattern_150.jpg);
   border: 1px solid black;
   color: white;
+  text-shadow:2px 2px 0 black;
 }
-#reg-menu .form-group {
+#reg-menu, #reg-menu li, .form-group {
   margin-bottom: 5px;
 }
 #reg-menu .form-control {
@@ -209,33 +220,31 @@ input.btn, a.btn {
 #events h3 {
   margin-top: 0;
 }
-
-/*register*/
-#register {
-  padding:0 20% 20px 20%;
+/*forms*/
+div.form {
+  padding-left:10%;
 }
-#register label {
+div.form label {
   float: left;
   width: 30%;
   margin-top: 10px;
-  border-bottom: 1px solid transparent;
 }
-#register .form-group input, #register select {
+div.form .form-group input, div.form select {
   margin-top: 5px;
   width: 50%;
   min-width: 300px;
   float: left;
 }
-#register .form-group {
+div.form .form-group {
   clear: both;
 }
-#register #verzend, #return_to_main {
+div.form .submit {
   margin-top: 20px;
   width: 200px;
   float: left;
   clear: both;
 }
-#register .form-group:last-of-type {
+div.form #city {
   display: none;
 }
 

@@ -4,7 +4,7 @@
 
   {% if globals.user is not defined or globals.user is null %}
     <nav id="reg-menu">
-      <ul class="nav nav-pills floatright">
+      <ul class="nav nav-pills">
         <li>
           {% block login %}
             {% include 'Profile/logon.html.twig' %}
@@ -16,9 +16,9 @@
     </nav>
   {% else %}
     <nav id="reg-menu">
-      <ul class="nav nav-pills floatright">
-        <li><a href="{{ app.urlFor('profile_show') }}" class="btn">Profile</a></li>       
-        <li><a href="{{ app.urlFor('user_logoff') }}" class="btn">Logoff</a></li>
+      <ul class="nav nav-pills">
+        <li><a href="{{ app.urlFor('profile_show') }}">Profile</a></li>       
+        <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>
       </ul>
     </nav>
   {% endif %}

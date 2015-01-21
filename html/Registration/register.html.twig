@@ -8,7 +8,7 @@
   
   {% set app = globals.app %}
   
-  <div class="container" id="register">
+  <div class="container form">
     <h1>Register</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
     <p>
@@ -46,17 +46,17 @@
       </div>
 
       <!--Honeypot-->
-      <div class="form-group">
+      <div class="form-group" id="city">
         <label for="city">City</label>
         <input class="form-control" type="text" id="city" name="city">
       </div>
 
       <ul>
         <li>
-          <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register now" />
+          <input class="form-control btn btn-default submit" type="submit" id="verzend" name="register" value="Register now" />
         </li>
         <li>
-          <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn btn-default">
+          <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn submit btn-default">
           Return to main menu</a>
         </li>
       </ul>

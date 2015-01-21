@@ -8,7 +8,7 @@
   {% if globals.user is defined and globals.user is not null %}
     {% set user = usertoedit %}
   {% endif %}
-  <div class="container">
+  <div class="container form">
     <h1>Edit Profile</h1>
     <form action="#" method="post">
       <div class="form-group">
@@ -50,8 +50,10 @@
 
       
       
-      <input class="form-control" type="submit" id="wijzig" name="save" value="Save" />
-    </form>      
+      <input class="btn form-control submit" type="submit" id="wijzig" name="save" value="Save" />
+    </form>
+    <a href="{{ globals.app.urlFor('main_page') }}" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>   
   </div>
 {% endblock content %}
 
