@@ -35,7 +35,8 @@
     <h2>List of users:</h2>
       <ul> 
       {% for member in members %}
-        <li>{{ member.getFirstName() }} {{ member.getSurname() }}
+        <li><a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}"> {{ member.username }} </a>
+          {{ member.getFirstName() }} {{ member.getSurname() }}
             {% if globals.user is defined and globals.user is not null %}
             {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
             {% endif %}

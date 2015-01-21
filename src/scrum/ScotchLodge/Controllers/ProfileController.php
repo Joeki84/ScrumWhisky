@@ -170,5 +170,9 @@ class ProfileController extends Controller {
       $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $id, 'errors' => $errors));
     }
   }
+  
+  public function showProfileOfUserWithId($id) {
+    
+  }
 
 }
