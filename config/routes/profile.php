@@ -26,6 +26,16 @@ $app->post('/profile/edit', function() use ($contr) {
   $contr->editProfile();
 })->name('profile_edit');
 
+/* olivier */
+$app->get('/editadmin/:username', function($username) use ($contr) {
+  $contr->editProfileAdmin($username);
+})->name('profile_editadmin');
+
+
+/*olivier */
+
+
+
 $app->post('/profile/store', function() use ($contr){
   $contr->storeChanges();
 })->name('profile_edit_save');

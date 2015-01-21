@@ -6,11 +6,11 @@
 
 {% block content %}
   {% if globals.user is defined and globals.user is not null %}
-    {% set user = globals.user %}
+    {% set user = usertoedit %}
   {% endif %}
   <div class="container">
-    <h1>My Profile</h1>
-    <form action="{{ globals.app.urlFor('profile_edit_save') }}" method="post">
+    <h1>Edit Profile</h1>
+    <form action="#" method="post">
       <div class="form-group">
         <label for="username">Username</label>
         <input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" readonly />
@@ -43,6 +43,14 @@
         <input class="form-control" type="text" id="adres" name="address" value="{{ user.address }}"  />
       </div>
 
+      <div class="form-group">
+        <label for="is_admin">Admin</label>
+        <input  type="checkbox" id="is_admin" name="is_admin" value="1"  {% if user.isAdmin %} checked {% endif %} />
+        
+      </div>
+
+      
+      
       <input class="form-control" type="submit" id="wijzig" name="save" value="Save" />
     </form>      
   </div>
