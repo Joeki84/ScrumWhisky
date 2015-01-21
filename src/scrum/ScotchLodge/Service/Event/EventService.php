@@ -7,7 +7,6 @@ use Slim\Slim;
 use scrum\ScotchLodge\Entities\Event;
 use scrum\ScotchLodge\Service\Validation\EventValidation as Val;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
-use DateTime;
 
 /**
  * EventService
@@ -44,6 +43,7 @@ class EventService {
 
         /* @var $event Event */
         $event = new Event();
+        $event->setId(0);
         $event->setTitle($title);
         /* @var $postcode Postcode */
         $regsrv = new RegistrationService($this->em, $this->app);
