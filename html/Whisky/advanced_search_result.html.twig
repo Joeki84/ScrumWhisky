@@ -13,7 +13,7 @@
     
     <ul> 
       {% for whisky in whiskys %}
-        <li>{{ whisky.getName }} </li>        
+        <li><img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50"> {{ whisky.getName }}</li>        
       {% endfor %} 
     </ul>
         <a href="/" id="return_to_main" class="btn submit btn-default">
