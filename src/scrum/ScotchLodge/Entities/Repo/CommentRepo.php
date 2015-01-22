@@ -38,12 +38,14 @@ class CommentRepo extends EntityRepository {
     if ($limit == null) {
       $qb->select('c, count(c.user) as likes')
           ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
+          ->orderBy('likes', 'DESC')
           ->groupBy('c.comment');
     }
     else {
       $qb->select('c, count(c.user) as likes')
           ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
           ->groupBy('c.comment')
+          ->orderBy('likes', 'DESC')
           ->setMaxResults($limit);
     }
     $query = $qb->getQuery();

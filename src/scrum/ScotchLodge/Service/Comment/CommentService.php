@@ -34,9 +34,9 @@ class CommentService {
   }
   
   
-  public function retrieveComments() {
-    $comments['latest'] = $this->latestComments(3);
-    $comments['popular'] = $this->popularComments(3);
+  public function retrieveComments($limit) {
+    $comments['latest'] = $this->latestComments($limit);
+    $comments['popular'] = $this->popularComments($limit);
     return $comments;
   }
 

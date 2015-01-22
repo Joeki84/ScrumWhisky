@@ -13,160 +13,169 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author joeri broos
  */
 class Whisky {
-    
-    private $id;
-    private $name;
-    private $image_path;
-    /* @var $distillery Distillery */    
-    private $distillery;
-    private $price;
-    private $age;
-    private $alcohol;
-    /* @var $barrel Barrel */
-    private $barrel;
-    private $short_description;
-    /* @var $bottlery Distillery */
-    private $bottlery;
-    private $region;
-    private $scores;
-    private $comments;
-    private $event_whisky;
-    private $events;
-    private $likes;
-    
-    function __construct() {
-        $this->scores = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-        $this->events = new ArrayCollection();
-        $this->likes = new ArrayCollection();
-    }
 
-    function getEvents() {
-        return $this->events;
-    }
+  private $id;
+  private $name;
+  private $image_path;
+  /* @var $distillery Distillery */
+  private $distillery;
+  private $price;
+  private $age;
+  private $alcohol;
+  /* @var $barrel Barrel */
+  private $barrel;
+  private $short_description;
+  /* @var $bottlery Distillery */
+  private $bottlery;
+  private $region;
+  private $scores;
+  private $comments;
+  private $event_whisky;
+  private $events;
+  private $likes;
+  private $view_count;
 
-    function setEvents($events) {
-        $this->events = $events;
-    }
-    
-    function getEventWhisky() {
-        return $this->event_whisky;
-    }
+  function __construct() {
+    $this->scores = new ArrayCollection();
+    $this->comments = new ArrayCollection();
+    $this->events = new ArrayCollection();
+    $this->likes = new ArrayCollection();
+  }
 
-    function setEventWhisky($event_whisky) {
-        $this->event_whisky = $event_whisky;
-    }
-    
-    function getComments() {
-        return $this->comments;
-    }
+  function getEvents() {
+    return $this->events;
+  }
 
-    function setComments($comments) {
-        $this->comments = $comments;
-    }
+  function setEvents($events) {
+    $this->events = $events;
+  }
 
-    function getScores() {
-        return $this->scores;
-    }
+  function getEventWhisky() {
+    return $this->event_whisky;
+  }
 
-    function setScores($scores) {
-        $this->scores = $scores;
-    }
-    
-    function getId(){
-        return $this->id;
-    }
-    
-    function getName(){
-        return $this->name;
-    }
-    
-    function getImagePath(){
-        return $this->image_path;
-    }
-    
-    function getDistillery(){
-        return $this->distillery;
-    }
-    
-    function getPrice(){
-        return $this->price;
-    }
-    
-    function getAge(){
-        return $this->age;
-    }
-    
-    function getAlcohol(){
-        return $this->alcohol;
-    }
-    
-    function getBarrel(){
-        return $this->barrel;
-    }
-    
-    function getShortDescription(){
-        return $this->short_description;
-    }
-    
-    function getBottlery(){
-        return $this->bottlery;
-    }
-    
-    function getRegion(){
-        return $this->region;
-    }
-    
-    function setId($id){
-        $this->id = $id;
-    }
-    
-    function setName($name){
-        $this->name = $name;
-    }
-    
-    function setImagePath($image_path){
-        $this->image_path = $image_path;
-    }
-    
-    function setDistillery(Distillery $distillery){
-        $this->distillery = $distillery;
-    }
-    
-    function setPrice($price){
-        $this->price = $price;
-    }
-    
-    function setAge($age){
-        $this->age = $age;
-    }
-    
-    function setAlcohol($alcohol){
-        $this->alcohol = $alcohol;
-    }
-    
-    function setBarrel(Barrel $barrel){
-        $this->barrel = $barrel;
-    }
-    
-    function setShortDescription($short_description){
-        $this->short_description = $short_description;
-    }
-    
-    function setBottlery(Distillery $bottlery){
-        $this->bottlery = $bottlery;
-    }
-    
-    function setRegion(Region $region){
-        $this->region = $region;
-    }
-    
-    function getLikes() {
-      return $this->likes;
-    }
+  function setEventWhisky($event_whisky) {
+    $this->event_whisky = $event_whisky;
+  }
 
-    function setLikes($likes) {
-      $this->likes = $likes;
-    }
+  function getComments() {
+    return $this->comments;
+  }
+
+  function setComments($comments) {
+    $this->comments = $comments;
+  }
+
+  function getScores() {
+    return $this->scores;
+  }
+
+  function setScores($scores) {
+    $this->scores = $scores;
+  }
+
+  function getId() {
+    return $this->id;
+  }
+
+  function getName() {
+    return $this->name;
+  }
+
+  function getImagePath() {
+    return $this->image_path;
+  }
+
+  function getDistillery() {
+    return $this->distillery;
+  }
+
+  function getPrice() {
+    return $this->price;
+  }
+
+  function getAge() {
+    return $this->age;
+  }
+
+  function getAlcohol() {
+    return $this->alcohol;
+  }
+
+  function getBarrel() {
+    return $this->barrel;
+  }
+
+  function getShortDescription() {
+    return $this->short_description;
+  }
+
+  function getBottlery() {
+    return $this->bottlery;
+  }
+
+  function getRegion() {
+    return $this->region;
+  }
+
+  function setId($id) {
+    $this->id = $id;
+  }
+
+  function setName($name) {
+    $this->name = $name;
+  }
+
+  function setImagePath($image_path) {
+    $this->image_path = $image_path;
+  }
+
+  function setDistillery(Distillery $distillery) {
+    $this->distillery = $distillery;
+  }
+
+  function setPrice($price) {
+    $this->price = $price;
+  }
+
+  function setAge($age) {
+    $this->age = $age;
+  }
+
+  function setAlcohol($alcohol) {
+    $this->alcohol = $alcohol;
+  }
+
+  function setBarrel(Barrel $barrel) {
+    $this->barrel = $barrel;
+  }
+
+  function setShortDescription($short_description) {
+    $this->short_description = $short_description;
+  }
+
+  function setBottlery(Distillery $bottlery) {
+    $this->bottlery = $bottlery;
+  }
+
+  function setRegion(Region $region) {
+    $this->region = $region;
+  }
+
+  function getLikes() {
+    return $this->likes;
+  }
+
+  function setLikes($likes) {
+    $this->likes = $likes;
+  }
+
+  function getView_count() {
+    return $this->view_count;
+  }
+
+  function setView_count($view_count) {
+    $this->view_count = $view_count;
+  }
 
 }
