@@ -45,8 +45,9 @@ class EventController extends Controller{
         try{
             $event = $this->eventsrv->addEvent();
             if($event){
-                $url = $this->getApp()->urlFor('new_event_ok');
-                $this->getApp()->redirect($url);
+                $app = $this->getApp();
+                $app->flash('info', 'Event added.');
+                $app->redirect($app->urlFor('main_page'));
             }else{
                 $errors = $this->eventsrv->getErrors();
                 $regsrv = new RegistrationService($this->em, $this->app);

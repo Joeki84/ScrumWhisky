@@ -29,6 +29,9 @@ ul, li {
 body {
   background-image: url(../img/brickwall.png);
 }
+h3 {
+  margin: 10px;
+}
 #wrapper {}
 #main-wrapper {
   position: relative;
@@ -48,11 +51,6 @@ input.btn, #return_to_main {
 input.btn:hover, #return_to_main:hover {
   color: white;
 }
-div.welcome {
-  margin: 10px 0px;
-  width: 100%;
-  border-bottom: 1px solid black;
-}
 span.status {
   position: absolute;
   right: 10px;
@@ -60,6 +58,9 @@ span.status {
 }
 div.container {
   position: relative;
+}
+div.welcome {
+  width: 100%;
 }
 
 /*clearfix hack*/
@@ -221,6 +222,10 @@ input.btn, a.btn {
 }
 
 /*events*/
+#event_1 {
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
 #event_5 {
   padding: 20px 0px;
   border-top: solid 2px white;

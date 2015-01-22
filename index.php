@@ -14,6 +14,7 @@ try {
   include 'config/routes/main.php';
   include 'config/routes/event.php';
   include 'config/routes/whisky.php';
+  include 'config/routes/members.php';
   
   $app->run();
     

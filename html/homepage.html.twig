@@ -30,43 +30,29 @@
         <span class="status">Logged in as user</span>
       {% endif %}
       {% else %}
-        <h1>Welcome stranger </h1>
+        <h1>Welcome</h1>
       {% endif %}
     </div>
-    <div id="event_5">
-        <h3>Upcoming events:</h3>
-        <ul>
-        {% for event in events_five %}
-          <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
-        {% endfor %}  
-        </ul>
+    <div id="event_1">
+      <div class="container">
+    {% for event in events_one %}
+        <h3>Be sure to check out our next event on {{ event.EventDate|date('d-m') }} @ {{ event.postcode.town }}</h3>
+    {% endfor %}
       </div>
+    </div>
 
      <a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky advanced search </a>
     
-    {% if globals.user is defined and globals.user is not null %}
-    <h2>List of users:</h2>
-      <ul> 
-      {% for member in members %}
-        <li>
-          <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}">
-          {{ member.getFirstName() }} {{ member.getSurname() }}
-          </a>
-            {% if globals.user is defined and globals.user is not null %}
-            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
-            {% endif %}
-        </li>        
-      {% endfor %} 
-    {% endif %}
   {% endblock main_column %}
 
   {% block sidebar %}    
       {% include 'menu.html.twig' %}
       <div id="event_5">
         <h3>Upcoming events:</h3>
-        <ul>
+        <dl>
         {% for event in events_five %}
-          <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
+          <dt>{{ event.Title }}</dt> 
+          <dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
         {% endfor %}  
         </ul>
       </div>

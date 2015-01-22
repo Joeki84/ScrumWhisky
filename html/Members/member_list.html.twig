@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+{% if globals.user is defined and globals.user is not null %}
+	<div class="container form">
+	    <h2>List of users:</h2>
+	    <ul> 
+	    	{% for member in members %}
+	        <li>
+	          <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}">
+	          {{ member.getFirstName() }} {{ member.getSurname() }}
+	          </a>
+	            {% if globals.user is defined and globals.user is not null %}
+	            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
+	            {% endif %}
+	        </li>        
+	      	{% endfor %}
+	    </ul>
+	</div>
+{% endif %}
+
+{% endblock content %}
