@@ -27,10 +27,10 @@ class CommentService {
   
   public function popularComments($limit = null) {
     $em = $this->em;
-    $repo = $em->getRepository('scrum\ScotchLodge\Entities\Comment');
-    $latest_comments = $repo->getPopularComments($limit);
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\CommentLike');
+    $popular_comments = $repo->getPopularComments($limit);
     
-    return $latest_comments;
+    return $popular_comments;
   }
   
   

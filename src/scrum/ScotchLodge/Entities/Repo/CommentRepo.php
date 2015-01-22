@@ -22,13 +22,30 @@ class CommentRepo extends EntityRepository {
     }
     else {
       $qb->select('c')
-      ->from('scrum\ScotchLodge\Entities\Comment', 'c')
-      ->orderBy('c.comment_date', 'DESC')
-      ->setMaxResults($limit);
+          ->from('scrum\ScotchLodge\Entities\Comment', 'c')
+          ->orderBy('c.comment_date', 'DESC')
+          ->setMaxResults($limit);
     }
 
-    /*$recent_query = $this->getEntityManager()
-        ->createQuery("SELECT c FROM scrum\ScotchLodge\Entities\Comment c ORDER BY c.comment_date DESC");*/
+    $query = $qb->getQuery();
+    $result = $query->execute();
+    return $result;
+  }
+
+  public function getPopularComments($limit = null) {
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    if ($limit == null) {
+      $qb->select('c, count(c.user) as likes')
+          ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
+          ->groupBy('c.comment');
+    }
+    else {
+      $qb->select('c, count(c.user) as likes')
+          ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
+          ->groupBy('c.comment')
+          ->setMaxResults($limit);
+    }
     $query = $qb->getQuery();
     $result = $query->execute();
     return $result;
