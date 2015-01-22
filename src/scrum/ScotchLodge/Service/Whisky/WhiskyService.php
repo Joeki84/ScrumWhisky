@@ -195,7 +195,7 @@ public function advanced_search_whisky_result(){
             if($this->app->request->post('name')!=null)  
             $req["name"] = $this->app->request->post('name');
             
-            if(is_array($req))
+            if(isset($req))
             {
               $whisky = $this->em->getRepository($this->entity)->findBy($req);
               return $whisky;
