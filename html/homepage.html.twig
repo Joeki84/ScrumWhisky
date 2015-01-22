@@ -33,6 +33,14 @@
         <h1>Welcome stranger </h1>
       {% endif %}
     </div>
+    <div id="event_5">
+        <h3>Upcoming events:</h3>
+        <ul>
+        {% for event in events_five %}
+          <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
+        {% endfor %}  
+        </ul>
+      </div>
 
      <a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky advanced search </a>
     
@@ -54,7 +62,7 @@
 
   {% block sidebar %}    
       {% include 'menu.html.twig' %}
-      <div id="events">
+      <div id="event_5">
         <h3>Upcoming events:</h3>
         <ul>
         {% for event in events_five %}
