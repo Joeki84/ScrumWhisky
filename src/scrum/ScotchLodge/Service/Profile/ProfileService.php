@@ -95,6 +95,30 @@ class ProfileService {
       $user->setAddress($address);
     }
 
+    /* Olivier */
+    $isAdmin = $app->request->post('is_admin');
+    if ($user->isAdmin() != $isAdmin) {
+      $user->setAdmin($isAdmin);
+    }
+
+    $can_review = $app->request->post('can_review');
+    if ($user->canReview() != $can_review) {
+      $user->setCanReview($can_review);
+    }
+    
+    
+    $can_create_event = $app->request->post('can_create_event');
+    if ($user->canCreateEvent() != $can_create_event) {
+      $user->setCanCreateEvent($can_create_event);
+    }
+    
+    $can_create_category = $app->request->post('can_create_category');
+    if ($user->canCreateCategory() != $can_create_category) {
+      $user->setCanCreateCategory($can_create_category);
+    }
+    
+    /* Olivier */
+    
     $em->persist($user);
     $em->flush();
   }

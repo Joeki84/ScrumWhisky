@@ -35,7 +35,9 @@ $app->get('/editadmin/:username', function($username) use ($contr) {
   $contr->editProfileAdmin($username);
 })->name('profile_editadmin');
 
-
+$app->post('/profile/storeadmin', function() use ($contr){
+  $contr->storeChangesAdmin();
+})->name('profile_edit_save_admin');
 
 /*olivier */
 
