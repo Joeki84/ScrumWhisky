@@ -51,7 +51,7 @@
         <h3>Upcoming events:</h3>
         <ul>
         {% for event in events %}
-          <li>{{ event.Title() }} {{ event.EventDate() }}</li>        
+          <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
         {% endfor %}  
         </ul>
       </div>
