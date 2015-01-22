@@ -30,6 +30,13 @@ scrum\ScotchLodge\Entities\Whisky:
         name: barrel_id
         referencedColumnName: id            
       
+    region:
+      targetEntity: Region
+      inversedBy: region_whiskys
+      joinColumn:
+        name: region_id
+        referencedColumnName: id            
+
   manyToMany:
     events:
       targetEntity: Event
@@ -69,4 +76,6 @@ scrum\ScotchLodge\Entities\Whisky:
       type: integer
     short_description:
       type: text
-  
+    view_count:
+      type: integer
+ 
