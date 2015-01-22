@@ -17,9 +17,11 @@ class Region {
     /* @var $country Country */
     private $country;
     private $distilleries;
+    private $whiskys;
 
     function __construct($distilleries) {
         $this->distilleries = new ArrayCollection();
+        $this->whiskys = new ArrayCollection();
     }
     
     function getId(){
@@ -54,4 +56,12 @@ class Region {
         $this->country = $country;
     }
     
+    function getWhiskys() {
+      return $this->whiskys;
+    }
+
+    function setWhiskys($whiskys) {
+      $this->whiskys = $whiskys;
+    }
+
 }
