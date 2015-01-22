@@ -4,7 +4,7 @@ namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Postcode;
 use Doctrine\Common\Collections\ArrayCollection;
-//use scrum\ScotchLodge\Entities\Region;
+use scrum\ScotchLodge\Entities\Country;
 
 /**
  * Distillery entity
@@ -19,7 +19,7 @@ class Distillery {
     /* @var $postcode Postcode */
     private $postcode;
     /* @var $region Region */
-    private $region;
+    private $country;
     private $dist_whiskys;
     private $bottl_whiskys;
     
@@ -60,8 +60,8 @@ class Distillery {
         return $this->postcode;
     }
     
-    function getRegion(){
-        return $this->region;
+    function getCountry(){
+        return $this->country;
     }
     
     function setId($id){
@@ -80,8 +80,8 @@ class Distillery {
         $this->postcode = $postcode;
     }
     
-    function setRegion(Region $region){
-        $this->region = $region;
+    function setCountry(Country $country){
+        $this->country = $country;
     }    
     
 }
