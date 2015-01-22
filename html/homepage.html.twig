@@ -34,17 +34,20 @@
       {% endif %}
     </div>
 
+    {% if globals.user is defined and globals.user is not null %}
     <h2>List of users:</h2>
       <ul> 
       {% for member in members %}
-        <li><a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}"> {{ member.username }} </a>
+        <li>
+          <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': member.id } ) }}">
           {{ member.getFirstName() }} {{ member.getSurname() }}
+          </a>
             {% if globals.user is defined and globals.user is not null %}
             {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
             {% endif %}
         </li>        
-    {% endfor %}  
-    
+      {% endfor %} 
+    {% endif %}
   {% endblock main_column %}
 
   {% block sidebar %}    
@@ -52,7 +55,7 @@
       <div id="events">
         <h3>Upcoming events:</h3>
         <ul>
-        {% for event in events %}
+        {% for event in events_five %}
           <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
         {% endfor %}  
         </ul>

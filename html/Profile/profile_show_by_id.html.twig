@@ -1,10 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-  Show Profile
-{% endblock title %}
-
-{% block content %}
   {% if globals.user is defined and globals.user is not null %}
       {% set user = usertoview %}
   {% endif %}
@@ -23,4 +18,3 @@
     </dl>
     <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>
   </div>
-{% endblock content %}

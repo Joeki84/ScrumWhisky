@@ -1,6 +1,6 @@
 /*misc*/
 
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Nunito);
 
 .margin-top-50 {
   margin-top: 50px;
@@ -30,7 +30,6 @@ body {
   background-image: url(../img/brickwall.png);
 }
 #wrapper {}
-}
 #main-wrapper {
   position: relative;
 }
@@ -38,7 +37,7 @@ body {
   margin-top: -15px;
   padding-top: 15px;
   padding-bottom: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 /*
@@ -112,7 +111,7 @@ div.container {
 #sidebar-wrapper {
   min-height: 620px;
   margin-top: -15px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.3);
   background-size: cover;
   color: white;
   padding-top: 15px;

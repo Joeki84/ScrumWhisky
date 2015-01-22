@@ -23,6 +23,8 @@ class HomepageController extends Controller {
     
     $members=ProfileService::showalluser();
     $events=EventService::LatestEvents();
+    $events_five=EventService::LatestFiveEvents();
+    $events_one=EventService::LatestEvent();
     
     $commentSrvc = new CommentService($this->getEntityManager(), $this->getApp());    
     
@@ -30,7 +32,7 @@ class HomepageController extends Controller {
     
     
     
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'comments' => $comments));
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'events_five' => $events_five, 'events_one' => $events_one, 'comments' => $comments));
   }
   
   public function simplifydRoutes($routes) {
