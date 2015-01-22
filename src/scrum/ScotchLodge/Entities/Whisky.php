@@ -17,24 +17,25 @@ class Whisky {
   private $id;
   private $name;
   private $image_path;
+  /* @var $region Region */
+  private $region;
   /* @var $distillery Distillery */
   private $distillery;
+  /* @var $bottlery Distillery */
+  private $bottlery;
   private $price;
   private $age;
   private $alcohol;
   /* @var $barrel Barrel */
   private $barrel;
+  private $view_count;
   private $short_description;
-  /* @var $bottlery Distillery */
-  private $bottlery;
-  private $region;
+  private $review_date;
   private $scores;
   private $comments;
   private $event_whisky;
   private $events;
   private $likes;
-  private $view_count;
-  private $review_date;
 
   function __construct() {
     $this->scores = new ArrayCollection();
@@ -87,8 +88,16 @@ class Whisky {
     return $this->image_path;
   }
 
+  function getRegion() {
+    return $this->region;
+  }
+
   function getDistillery() {
     return $this->distillery;
+  }
+
+  function getBottlery() {
+    return $this->bottlery;
   }
 
   function getPrice() {
@@ -107,16 +116,24 @@ class Whisky {
     return $this->barrel;
   }
 
+  function getViewCount(){
+      return $this->view_count;
+  }
+  
+  function getView_count() {
+    return $this->view_count;
+  }
+
   function getShortDescription() {
     return $this->short_description;
   }
 
-  function getBottlery() {
-    return $this->bottlery;
+  function getReviewDate(){
+      return $this->review_date;
   }
-
-  function getRegion() {
-    return $this->region;
+  
+  function getReview_date() {
+    return $this->review_date;
   }
 
   function setId($id) {
@@ -131,8 +148,16 @@ class Whisky {
     $this->image_path = $image_path;
   }
 
+  function setRegion(Region $region) {
+    $this->region = $region;
+  }
+
   function setDistillery(Distillery $distillery) {
     $this->distillery = $distillery;
+  }
+
+  function setBottlery(Distillery $bottlery) {
+    $this->bottlery = $bottlery;
   }
 
   function setPrice($price) {
@@ -151,16 +176,28 @@ class Whisky {
     $this->barrel = $barrel;
   }
 
+  function setViewCount($view_count){
+    $this->view_count = $view_count;
+  }
+          
+  function setView_count($view_count) {
+    $this->view_count = $view_count;
+  }
+
   function setShortDescription($short_description) {
     $this->short_description = $short_description;
   }
-
-  function setBottlery(Distillery $bottlery) {
-    $this->bottlery = $bottlery;
+  
+  function setShort_Description($short_description){
+    $this->short_description = $short_description;
   }
 
-  function setRegion(Region $region) {
-    $this->region = $region;
+  function setReviewDate($review_date){
+      $this->review_date = $review_date;
+  }
+  
+  function setReview_date($review_date) {
+    $this->review_date = $review_date;
   }
 
   function getLikes() {
@@ -169,22 +206,6 @@ class Whisky {
 
   function setLikes($likes) {
     $this->likes = $likes;
-  }
-
-  function getView_count() {
-    return $this->view_count;
-  }
-
-  function setView_count($view_count) {
-    $this->view_count = $view_count;
-  }
-
-  function getReview_date() {
-    return $this->review_date;
-  }
-
-  function setReview_date($review_date) {
-    $this->review_date = $review_date;
   }
 
 }
