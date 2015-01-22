@@ -10,7 +10,7 @@
     
     <div class="container">
       <h1>Edit Whisky</h1>
-      <form action="{{ app.urlFor('edit_whisky_process') }}{#/{{whisky.id}}#}" method="POST" novalidate>
+      <form action="{{ app.urlFor('edit_whisky_process',{'id':whisky.id}) }}{#/{{whisky.id}}#}" method="POST" novalidate>
         <div class="form-group">
           <input type="hidden" name="id" value="{{whisky.id}}">
           <label for="name">Name</label>
