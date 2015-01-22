@@ -19,7 +19,6 @@ class CommentService {
   
   public function latestComments() {
     $em = $this->em;
-    
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\Comment');
     
   }

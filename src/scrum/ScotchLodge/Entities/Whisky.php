@@ -32,11 +32,13 @@ class Whisky {
     private $comments;
     private $event_whisky;
     private $events;
+    private $likes;
     
     function __construct() {
         $this->scores = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     function getEvents() {
@@ -158,4 +160,13 @@ class Whisky {
     function setRegion(Region $region){
         $this->region = $region;
     }
+    
+    function getLikes() {
+      return $this->likes;
+    }
+
+    function setLikes($likes) {
+      $this->likes = $likes;
+    }
+
 }
