@@ -48,6 +48,38 @@ class Comment {
     return $this->comment;
   }
 
+  function getReviewComment() {
+    return $this->review_comment;
+  }
+
+  function getReview_comment() {
+    return $this->review_comment;
+  }
+  
+  function getEventComment(){
+    return $this->event_comment;
+  }
+
+  function getEvent_comment() {
+    return $this->event_comment;
+  }
+
+  function getParentComment(){
+    return $this->parent_comment;
+  }
+          
+  function getParent_comment() {
+    return $this->parent_comment;
+  }
+
+  function getCommentLikes() {
+    return $this->comment_likes;
+  }
+
+  function getComment_likes() {
+    return $this->comment_likes;
+  }
+
   function setId($id) {
     $this->id = $id;
   }
@@ -68,40 +100,32 @@ class Comment {
     $this->comment = $comment;
   }
 
-  function getReview() {
-    return $this->review;
-  }
-
-  function setReview($review) {
-    $this->review = $review;
-  }
-
-  function getReview_comment() {
-    return $this->review_comment;
+  function setReviewComment($review_comment) {
+    $this->review_comment = $review_comment;
   }
 
   function setReview_comment($review_comment) {
     $this->review_comment = $review_comment;
   }
 
-  function getEvent_comment() {
-    return $this->event_comment;
+  function setEventComment($event_comment){
+    $this->event_comment = $event_comment;
   }
-
+  
   function setEvent_comment($event_comment) {
     $this->event_comment = $event_comment;
   }
 
-  function getParent_comment() {
-    return $this->parent_comment;
+  function setParentComment($parent_comment) {
+    $this->parent_comment = $parent_comment;
   }
 
   function setParent_comment($parent_comment) {
     $this->parent_comment = $parent_comment;
   }
 
-  function getComment_likes() {
-    return $this->comment_likes;
+  function setCommentLikes($comment_likes) {
+    $this->comment_likes = $comment_likes;
   }
 
   function setComment_likes($comment_likes) {
