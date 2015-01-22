@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Register
+{% endblock title %}
+
+{% block content %}
+  
+  {% set app = globals.app %}
+  
+  <div class="container">
+    <h1>Whisky advanced search result</h1>
+    
+    <ul> 
+      {% for whisky in whiskys %}
+        <li><img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50"> {{ whisky.getName }}</li>        
+      {% endfor %} 
+    </ul>
+        <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a> 
+  </div>
+{% endblock content %}
+

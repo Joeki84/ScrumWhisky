@@ -115,10 +115,10 @@ class WhiskyController extends Controller{
     /* Olivier */
     
     public function advanced_search_whisky(){
-        /*$regsrv = new RegionService($this->em, $this->app);
+        $regsrv = new RegionService($this->em, $this->app);
         $regions = $regsrv->getRegions();
         $distsrv = new DistilleryService($this->em, $this->app);
-        $distillerys = $distsrv->getDistillerys();*/
+        $distillerys = $distsrv->getDistillerys();
         $barsrv = new BarrelService($this->em, $this->app);
         $barrels = $barsrv->getBarrels();
         $globals = $this->getGlobals();
@@ -126,14 +126,10 @@ class WhiskyController extends Controller{
     }
     
     public function advanced_search_whisky_result(){
-        $regsrv = new RegionService($this->em, $this->app);
-        $regions = $regsrv->getRegions();
-        $distsrv = new DistilleryService($this->em, $this->app);
-        /*$distillerys = $distsrv->getDistillerys();*/
-        $barsrv = new BarrelService($this->em, $this->app);
-        $barrels = $barsrv->getBarrels();
-        $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/advanced_search.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+
+        $globals = $this->getGlobals();        
+        $whisky=$this->whiskysrv->advanced_search_whisky_result();        
+        $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'whiskys'  => $whisky));
     }
     
     

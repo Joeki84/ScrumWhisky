@@ -6,6 +6,7 @@ namespace scrum\ScotchLodge\Controllers;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Service\Event\EventService;
 use scrum\ScotchLodge\Service\Comment\CommentService;
+use scrum\ScotchLodge\Service\Whisky\WhiskyService;
 use scrum\ScotchLodge\Controllers\Controller;
 
 /**
@@ -16,6 +17,9 @@ use scrum\ScotchLodge\Controllers\Controller;
 class HomepageController extends Controller {
 
   public function homepage() {
+    $em = $this->getEntityManager();
+    $app = $this->getApp();
+    
     $globals = $this->getGlobals();
 
     $members = ProfileService::showalluser();
@@ -23,12 +27,13 @@ class HomepageController extends Controller {
     $events_five = EventService::LatestFiveEvents();
     $events_one = EventService::LatestEvent();
 
-    $commentSrvc = new CommentService($this->getEntityManager(), $this->getApp());
-
+    $commentSrvc = new CommentService($em, $app);
     $comments = $commentSrvc->retrieveComments(3);
-
-
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'events_five' => $events_five, 'events_one' => $events_one, 'comments' => $comments));
+    
+    $reviewSrvc = new WhiskyService($em, $app);
+    $reviews = $reviewSrvc->retrieveReviews(3);
+    
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'events_five' => $events_five, 'events_one' => $events_one, 'comments' => $comments, 'reviews' => $reviews));
   }
 
   public function simplifydRoutes($routes) {

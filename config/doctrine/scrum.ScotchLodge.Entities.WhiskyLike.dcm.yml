@@ -1,4 +1,4 @@
-scrum\ScotchLodge\Entities\Whisky:
+scrum\ScotchLodge\Entities\WhiskyLike:
   type: entity
   #repositoryClass: scrum\ScotchLodge\Entities\Repo\WhiskyRepo
   table: whisky_like
@@ -14,7 +14,7 @@ scrum\ScotchLodge\Entities\Whisky:
       
   manyToOne:
     user:
-      targetEntity: WhiskyUser
+      targetEntity: User
       inversedBy: whisky_likes
       joinColumn:
         name: user_id

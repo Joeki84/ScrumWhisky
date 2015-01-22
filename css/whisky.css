@@ -124,6 +124,15 @@ div.welcome {
   color: white;
 }
 
+/*comments*/
+#comments .comment {
+  padding-bottom: 12px;
+}
+
+#reviews .review {
+  padding-bottom: 12px;
+}
+
 
 /*menus*/
 /*nav menu*/

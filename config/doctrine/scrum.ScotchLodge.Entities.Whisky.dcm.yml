@@ -78,4 +78,6 @@ scrum\ScotchLodge\Entities\Whisky:
       type: text
     view_count:
       type: integer
+    review_date:
+      type: datetime
  

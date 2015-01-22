@@ -41,4 +41,5 @@ class CommentReview {
     function setComment(Comment $comment){
         $this->comment = $comment;
     }
+    
 }

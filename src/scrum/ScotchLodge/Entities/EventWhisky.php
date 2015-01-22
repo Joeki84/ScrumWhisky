@@ -41,4 +41,5 @@ class EventWhisky {
     function setWhisky(Whisky $whisky){
         $this->whisky = $whisky;
     }
+    
 }

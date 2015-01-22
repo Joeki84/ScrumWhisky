@@ -1,0 +1,10 @@
+<div id="comments">
+  <h3>Latest Comments:</h3>
+  {% set latest = comments.latest %}
+  <div>
+    {% for comm in latest %}
+      <div class="username">{{ comm.user.username }}</div>
+      <div class="comment">{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}</div>
+    {% endfor %}
+  </div>
+</div>

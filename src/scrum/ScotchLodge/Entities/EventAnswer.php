@@ -1,12 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace scrum\ScotchLodge\Entities;
+
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Description of EventAnswer
@@ -17,13 +13,26 @@ class EventAnswer {
 
   private $id;
   private $answer;
+  private $users_present;
 
+  function __construct() {
+    $this->users_present = new ArrayCollection();
+  }
+  
   function getId() {
     return $this->id;
   }
 
   function getAnswer() {
     return $this->answer;
+  }
+  
+  function getUsersPresent(){
+    return $this->users_present;
+  }
+  
+  function getUsers_Present(){
+    return $this->users_present;
   }
 
   function setId($id) {
@@ -33,5 +42,13 @@ class EventAnswer {
   function setAnswer($answer) {
     $this->answer = $answer;
   }
+  
+  function setUsersPresent($users_present){
+    $this->users_present = $users_present;
+  }
 
+  function setUsers_Present($users_present){
+    $this->users_present = $users_present;
+  }
+  
 }

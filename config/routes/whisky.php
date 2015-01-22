@@ -30,4 +30,9 @@ $app->get('/advanced_search_whisky', function() use ($contr){
     $contr->advanced_search_whisky();
 })->name('advanced_search_whisky');
 
+
+$app->post('/advanced_search_whisky_result', function() use ($contr){
+    $contr->advanced_search_whisky_result();
+})->name('advanced_search_whisky_result');
+
 /* Olivier */

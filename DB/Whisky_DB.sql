@@ -200,8 +200,11 @@ CREATE TABLE `distillery` (
   `name` varchar(80) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `distillery_name_idx` (`name`)
+  KEY `distillery_name_idx` (`name`),
+  KEY `fk_distillery_country_idx` (`country_id`),
+  CONSTRAINT `fk_distillery_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,7 +214,7 @@ CREATE TABLE `distillery` (
 
 LOCK TABLES `distillery` WRITE;
 /*!40000 ALTER TABLE `distillery` DISABLE KEYS */;
-INSERT INTO `distillery` VALUES (1,'Aberlour','Aberlour-on-Spey, Banffshire','AB38 9PJ'),(2,'Château du Breuil ','14 130 LE BREUIL EN AUGE','0000');
+INSERT INTO `distillery` VALUES (1,'Aberlour','Aberlour-on-Spey, Banffshire','AB38 9PJ',NULL),(2,'Château du Breuil ','14 130 LE BREUIL EN AUGE','0000',NULL);
 /*!40000 ALTER TABLE `distillery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,15 +426,20 @@ CREATE TABLE `whisky` (
   `barrel_id` int(11) DEFAULT NULL,
   `view_count` int(11) DEFAULT NULL,
   `short_description` text,
+  `review_date` datetime DEFAULT NULL,
+  `bottlery_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_whisky_barrel_idx` (`barrel_id`),
   KEY `fk_whisky_distillery_idx` (`distillery_id`),
   KEY `fk_whisky_region_idx` (`region_id`),
   KEY `whisky_name_idx` (`name`),
+  KEY `fk_whisky_bottlery_idx` (`bottlery_id`),
   CONSTRAINT `fk_whisky_barrel` FOREIGN KEY (`barrel_id`) REFERENCES `barrel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +448,7 @@ CREATE TABLE `whisky` (
 
 LOCK TABLES `whisky` WRITE;
 /*!40000 ALTER TABLE `whisky` DISABLE KEYS */;
-INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,NULL);
+INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,'Among going manor who did. Do ye is celebrated it sympathize considered. May ecstatic did surprise elegance the ignorant age. Own her miss cold last. It so numerous if he outlived disposal. How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved resolution. Hence hopes noisy may china fully and. Am it regard stairs branch thirty length afford. ','1981-07-29 00:00:00',NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,'He difficult contented we determine ourselves me am earnestly. Hour no find it park. Eat welcomed any husbands moderate. Led was misery played waited almost cousin living. Of intention contained is by middleton am. Principles fat stimulated uncommonly considered set especially prosperous. Sons at park mr meet as fact like.','2011-11-11 00:00:00',NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,'I would be thrilled to come in for an interview at your earliest convenience.','2014-12-16 00:00:00',NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,'Am of mr friendly by strongly peculiar juvenile. Unpleasant it sufficient simplicity am by friendship no inhabiting. Goodness doubtful material has denoting suitable she two. Dear mean she way and poor bred they come. He otherwise me incommode explained so in remaining. Polite barton in it warmly do county length an. ','2008-06-07 00:00:00',NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,'Bed sincerity yet therefore forfeited his certainty neglected questions. Pursuit chamber as elderly amongst on. Distant however warrant farther to of. My justice wishing prudent waiting in be. Comparison age not pianoforte increasing delightful now. Insipidity sufficient dispatched any reasonably led ask. Announcing if attachment resolution sentiments admiration me on diminution. ','2014-08-05 00:00:00',NULL);
 /*!40000 ALTER TABLE `whisky` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,7 +469,7 @@ CREATE TABLE `whisky_like` (
   KEY `fk_whiskylike_user_idx` (`user_id`),
   CONSTRAINT `fk_whiskylike_user` FOREIGN KEY (`user_id`) REFERENCES `whisky_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whiskylike_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -470,6 +478,7 @@ CREATE TABLE `whisky_like` (
 
 LOCK TABLES `whisky_like` WRITE;
 /*!40000 ALTER TABLE `whisky_like` DISABLE KEYS */;
+INSERT INTO `whisky_like` VALUES (9,17,28),(10,18,29),(4,19,29),(5,19,30),(6,20,28),(7,20,30),(8,20,31),(11,21,30);
 /*!40000 ALTER TABLE `whisky_like` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,7 +510,7 @@ CREATE TABLE `whisky_user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_whisky_user_postcode_idx` (`postcode_id`),
   CONSTRAINT `fk_user_postcode` FOREIGN KEY (`postcode_id`) REFERENCES `postcode` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -510,7 +519,7 @@ CREATE TABLE `whisky_user` (
 
 LOCK TABLES `whisky_user` WRITE;
 /*!40000 ALTER TABLE `whisky_user` DISABLE KEYS */;
-INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-21 13:42:01','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-22 13:21:46','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `whisky_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -523,4 +532,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-22 12:30:33
+-- Dump completed on 2015-01-22 15:56:51

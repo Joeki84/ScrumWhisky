@@ -56,6 +56,11 @@
         {% endfor %}  
         </ul>
       </div>
+        
+      {% include 'Comments/latest_comments.html.twig' %}
+      {% include 'Comments/popular_comments.html.twig' %}
+      {% include 'Whisky/latest_reviews.html.twig' %}
+      {% include 'Whisky/popular_reviews.html.twig' %}
   {% endblock sidebar %}
 
 
