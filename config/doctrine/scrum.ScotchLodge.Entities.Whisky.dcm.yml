@@ -51,7 +51,7 @@ scrum\ScotchLodge\Entities\Whisky:
       targetEntity: CommentReview
       mappedBy: whisky
     likes:
-      targetEntity: WhiskyLikes
+      targetEntity: WhiskyLike
       mappedBy: whisky
 
   fields:
