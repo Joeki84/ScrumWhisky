@@ -1,6 +1,6 @@
 scrum\ScotchLodge\Entities\Comment:
   type: entity
-  #repositoryClass: scrum\ScotchLodge\Data\ ..
+  repositoryClass: scrum\ScotchLodge\Entities\Repo\CommentRepo
   table: comment  
   id:
     id:

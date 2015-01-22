@@ -50,6 +50,9 @@ scrum\ScotchLodge\Entities\Whisky:
     comments:
       targetEntity: CommentReview
       mappedBy: whisky
+    likes:
+      targetEntity: WhiskyLike
+      mappedBy: whisky
 
   fields:
     name:

@@ -28,6 +28,11 @@ scrum\ScotchLodge\Entities\User:
     present_in_events:
       targetEntity: EventPresence
       mappedBy: user
+      
+    whisky_likes:
+      targetEntity: Whisky
+      mappedBy: user
+     
 
   fields:
     username:

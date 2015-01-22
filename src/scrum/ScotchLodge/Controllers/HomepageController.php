@@ -6,7 +6,7 @@ namespace scrum\ScotchLodge\Controllers;
 //use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Service\Event\EventService;
-
+use scrum\ScotchLodge\Service\Comment\CommentService;
 
 use scrum\ScotchLodge\Controllers\Controller;
 
@@ -20,12 +20,14 @@ class HomepageController extends Controller {
 
   public function homepage() {
     $globals = $this->getGlobals();
-     
     
     $members=ProfileService::showalluser();
     $events=EventService::LatestEvents();
+    
+    $commentSrvc = new CommentService($this->getEntityManager(), $this->getApp());    
+    $comments = $commentSrvc->latestComments();
    
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events));
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'comments' => $comments));
   }
   
   public function simplifydRoutes($routes) {

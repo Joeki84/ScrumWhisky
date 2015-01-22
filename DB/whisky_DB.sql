@@ -59,7 +59,7 @@ CREATE TABLE `comment` (
   KEY `fk_comment_user_idx` (`user_id`),
   CONSTRAINT `fk_comment_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_user` FOREIGN KEY (`user_id`) REFERENCES `whisky_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +68,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,30,NULL,'2015-01-21 11:11:11'),(2,30,NULL,'2015-01-11 12:12:12'),(3,30,NULL,'2015-01-09 10:10:10'),(4,29,NULL,'2015-01-22 09:10:11'),(5,29,NULL,'2014-12-22 01:01:01');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,6 +126,35 @@ CREATE TABLE `comment_like` (
 LOCK TABLES `comment_like` WRITE;
 /*!40000 ALTER TABLE `comment_like` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comment_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comment_review`
+--
+
+DROP TABLE IF EXISTS `comment_review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comment_review` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `whisky_id` int(11) DEFAULT NULL,
+  `comment_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_commentreview_whisky_idx` (`whisky_id`),
+  KEY `fk_commentreview_comment_idx` (`comment_id`),
+  CONSTRAINT `fk_commentreview_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_commentreview_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment_review`
+--
+
+LOCK TABLES `comment_review` WRITE;
+/*!40000 ALTER TABLE `comment_review` DISABLE KEYS */;
+INSERT INTO `comment_review` VALUES (1,20,1),(2,21,2),(3,20,3),(4,21,4),(5,19,5);
+/*!40000 ALTER TABLE `comment_review` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -412,6 +442,35 @@ INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `whisky_like`
+--
+
+DROP TABLE IF EXISTS `whisky_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `whisky_like` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `whisky_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_whisky_user_UNIQUE` (`whisky_id`,`user_id`),
+  KEY `fk_whiskylike_whisky_idx` (`whisky_id`),
+  KEY `fk_whiskylike_user_idx` (`user_id`),
+  CONSTRAINT `fk_whiskylike_user` FOREIGN KEY (`user_id`) REFERENCES `whisky_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whiskylike_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `whisky_like`
+--
+
+LOCK TABLES `whisky_like` WRITE;
+/*!40000 ALTER TABLE `whisky_like` DISABLE KEYS */;
+/*!40000 ALTER TABLE `whisky_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `whisky_user`
 --
 
@@ -461,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-21 14:58:24
+-- Dump completed on 2015-01-22 10:14:26
