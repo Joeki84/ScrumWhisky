@@ -21,7 +21,23 @@ class CommentService {
     $em = $this->em;
     $repo = $em->getRepository('scrum\ScotchLodge\Entities\Comment');
     $latest_comments = $repo->getRecentComments($limit);
+    
     return $latest_comments;
+  }
+  
+  public function popularComments($limit = null) {
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\CommentLike');
+    $popular_comments = $repo->getPopularComments($limit);
+    
+    return $popular_comments;
+  }
+  
+  
+  public function retrieveComments() {
+    $comments['latest'] = $this->latestComments(3);
+    $comments['popular'] = $this->popularComments(3);
+    return $comments;
   }
 
 }

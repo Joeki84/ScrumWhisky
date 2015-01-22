@@ -23,3 +23,11 @@ $app->get('/editwhisky/:id', function($id) use ($contr){
 $app->post('/editwhisky/:id', function($id) use ($contr){
     $contr->updateWhisky($id);
 })->name('edit_whisky_process');
+
+/* Olivier */
+
+$app->get('/advanced_search_whisky', function() use ($contr){
+    $contr->advanced_search_whisky();
+})->name('advanced_search_whisky');
+
+/* Olivier */

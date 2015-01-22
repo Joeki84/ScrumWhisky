@@ -54,7 +54,7 @@ CREATE TABLE `comment` (
   `user_id` int(11) DEFAULT NULL,
   `comment_id` int(11) DEFAULT NULL,
   `comment_date` datetime DEFAULT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_commentid_id_idx` (`comment_id`),
   KEY `fk_comment_user_idx` (`user_id`),
@@ -197,8 +197,10 @@ CREATE TABLE `distillery` (
   `name` varchar(80) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `distillery_name_idx` (`name`)
+  KEY `distillery_name_idx` (`name`),
+  CONSTRAINT `fk_distillery_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -414,13 +416,13 @@ CREATE TABLE `whisky` (
   `image_path` varchar(255) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
   `distillery_id` int(11) DEFAULT NULL,
+  `bottlery_id` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `age` tinyint(4) DEFAULT NULL,
   `alcohol` int(11) DEFAULT NULL,
   `barrel_id` int(11) DEFAULT NULL,
   `view_count` int(11) DEFAULT NULL,
   `short_description` text,
-  `whiskycol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_whisky_barrel_idx` (`barrel_id`),
   KEY `fk_whisky_distillery_idx` (`distillery_id`),
@@ -428,6 +430,7 @@ CREATE TABLE `whisky` (
   KEY `whisky_name_idx` (`name`),
   CONSTRAINT `fk_whisky_barrel` FOREIGN KEY (`barrel_id`) REFERENCES `barrel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

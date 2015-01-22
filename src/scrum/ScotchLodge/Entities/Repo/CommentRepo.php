@@ -13,12 +13,42 @@ use Doctrine\ORM\Query;
 class CommentRepo extends EntityRepository {
 
   public function getRecentComments($limit = null) {
-    $recent = $this->getEntityManager()
-        ->createQuery("SELECT c FROM Comment c");
-    if ($limit != null) {
-      Query::setMaxResults($limit);
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    if ($limit == null) {
+      $qb->select('c')
+          ->from('scrum\ScotchLodge\Entities\Comment', 'c')
+          ->orderBy('c.comment_date', 'DESC');
     }
-    return $recent;
+    else {
+      $qb->select('c')
+          ->from('scrum\ScotchLodge\Entities\Comment', 'c')
+          ->orderBy('c.comment_date', 'DESC')
+          ->setMaxResults($limit);
+    }
+
+    $query = $qb->getQuery();
+    $result = $query->execute();
+    return $result;
+  }
+
+  public function getPopularComments($limit = null) {
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    if ($limit == null) {
+      $qb->select('c, count(c.user) as likes')
+          ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
+          ->groupBy('c.comment');
+    }
+    else {
+      $qb->select('c, count(c.user) as likes')
+          ->from('scrum\ScotchLodge\Entities\CommentLike', 'c')
+          ->groupBy('c.comment')
+          ->setMaxResults($limit);
+    }
+    $query = $qb->getQuery();
+    $result = $query->execute();
+    return $result;
   }
 
 }

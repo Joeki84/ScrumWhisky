@@ -9,8 +9,8 @@ scrum\ScotchLodge\Entities\Region:
         strategy: AUTO
   
   oneToMany:
-    distilleries:
-      targetEntity: Distillery
+    whiskys:
+      targetEntity: Whisky
       mappedBy: region
 
   manyToOne:

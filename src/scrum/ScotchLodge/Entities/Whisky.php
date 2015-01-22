@@ -153,7 +153,7 @@ class Whisky {
         $this->short_description = $short_description;
     }
     
-    function setBottlery(Bottllery $bottlery){
+    function setBottlery(Distillery $bottlery){
         $this->bottlery = $bottlery;
     }
     

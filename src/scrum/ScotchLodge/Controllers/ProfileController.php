@@ -99,6 +99,17 @@ class ProfileController extends Controller {
     
     $app->render('Profile\profile_edit_admin.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoedit' => $usertoedit));
   }
+  
+    
+    public function storeChangesAdmin() {
+    $app = $this->getApp();      
+    $usertoedit = $this->srv->retrieveUserByUsername($app->request->post('username'));       
+    $this->srv->updateUser($usertoedit);
+    $app->flash('info', 'User profile updated.');
+    $app->redirect($app->urlFor('profile_editadmin',array('username'=> $usertoedit->getUsername())));
+
+  }
+  
   /* olivier */
   
   
