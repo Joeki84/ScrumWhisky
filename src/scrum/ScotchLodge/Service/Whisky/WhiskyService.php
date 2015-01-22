@@ -171,4 +171,42 @@ class WhiskyService{
       return $reviews;
     }
 
+    
+        
+/* Olivier whisky service*/
+    
+public function advanced_search_whisky_result(){
+
+            if($this->app->request->post('region')!=null)  
+            $req["region"] = $this->app->request->post('region');
+            
+            if($this->app->request->post('distillery')!=null)  
+            $req["distillery"] = $this->app->request->post('distillery');
+            
+            if($this->app->request->post('bottler')!=null)  
+            $req["barrel"] = $this->app->request->post('bottler');
+            
+            if($this->app->request->post('age')!=null)  
+            $req["age"]= $this->app->request->post('age');
+            
+            if($this->app->request->post('abv')!=null)  
+            $req["alcohol"] = $this->app->request->post('abv');
+            
+            if($this->app->request->post('name')!=null)  
+            $req["name"] = $this->app->request->post('name');
+            
+            if(is_array($req))
+            {
+              $whisky = $this->em->getRepository($this->entity)->findBy($req);
+              return $whisky;
+            }
+            else
+             {
+              $whisky = $this->em->getRepository($this->entity)->findall();
+              return $whisky;
+            }
+}    
+    
+/* Olivier */  
+    
 }

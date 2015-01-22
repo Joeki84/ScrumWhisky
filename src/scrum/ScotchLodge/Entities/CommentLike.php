@@ -41,4 +41,5 @@ class CommentLike {
     function setComment(Comment $comment){
         $this->comment = $comment;
     }
+    
 }

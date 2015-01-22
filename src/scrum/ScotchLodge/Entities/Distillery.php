@@ -2,7 +2,6 @@
 
 namespace scrum\ScotchLodge\Entities;
 
-use scrum\ScotchLodge\Entities\Postcode;
 use Doctrine\Common\Collections\ArrayCollection;
 use scrum\ScotchLodge\Entities\Country;
 
@@ -16,9 +15,8 @@ class Distillery {
     private $id;
     private $name;
     private $address;
-    /* @var $postcode Postcode */
     private $postcode;
-    /* @var $region Region */
+    /* @var $country Country */
     private $country;
     private $dist_whiskys;
     private $bottl_whiskys;
@@ -27,22 +25,6 @@ class Distillery {
         $this->dist_whiskys = new ArrayCollection();
         $this->bottl_whiskys = new ArrayCollection();
     }
-    function getBottl_whiskys() {
-        return $this->bottl_whiskys;
-    }
-
-    function setBottl_whiskys($bottl_whiskys) {
-        $this->bottl_whiskys = $bottl_whiskys;
-    }
-
-    function getDist_whiskys() {
-        return $this->dist_whiskys;
-    }
-
-    function setDist_whiskys($dist_whiskys) {
-        $this->dist_whiskys = $dist_whiskys;
-    }
-
         
     function getId(){
         return $this->id;
@@ -64,6 +46,22 @@ class Distillery {
         return $this->country;
     }
     
+    function getDistWhiskys(){
+        return $this->dist_whiskys;
+    }
+    
+    function getDist_whiskys() {
+        return $this->dist_whiskys;
+    }
+
+    function getBottlWhiskys(){
+        return $this->bottl_whiskys;
+    }
+    
+    function getBottl_whiskys() {
+        return $this->bottl_whiskys;
+    }
+
     function setId($id){
         $this->id = $id;
     }
@@ -83,5 +81,21 @@ class Distillery {
     function setCountry(Country $country){
         $this->country = $country;
     }    
+
+    function setDistWhiskys($dist_whiskys){
+        $this->dist_whiskys = $dist_whiskys;
+    }
     
+    function setDist_whiskys($dist_whiskys) {
+        $this->dist_whiskys = $dist_whiskys;
+    }
+    
+    function setBottlWhiskys($bottl_whiskys){
+        $this->bottl_whiskys = $bottl_whiskys;
+    }
+            
+    function setBottl_whiskys($bottl_whiskys) {
+        $this->bottl_whiskys = $bottl_whiskys;
+    }
+
 }

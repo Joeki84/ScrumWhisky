@@ -41,4 +41,5 @@ class CommentEvent {
     function setEvent(Event $event){
         $this->event = $event;
     }
+    
 }

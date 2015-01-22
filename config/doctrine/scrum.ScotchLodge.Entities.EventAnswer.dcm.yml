@@ -8,8 +8,13 @@ scrum\ScotchLodge\Entities\EventAnswer:
       generator:
         strategy: AUTO
         
-oneToMany:
-  users_present:
-    targetEntity: EventPresence
-    mappedBy: answer
-      
+  oneToMany:
+    users_present:
+      targetEntity: EventPresence
+      mappedBy: answer
+
+  fields:
+    answer:
+      type: string
+      length: 40
+  

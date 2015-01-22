@@ -48,6 +48,38 @@ class Event {
   function getEventDate() {
     return $this->event_date;
   }
+  
+  function getEvent_date() {
+    return $this->event_date;
+  }
+
+  function getEventStop(){
+    return $this->event_stop;
+  }
+
+  function getEvent_stop() {
+    return $this->event_stop;
+  }
+  
+  function getEventComments(){
+    return $this->event_comments;
+  }
+
+  function getEvent_comments() {
+    return $this->event_comments;
+  }
+
+  function getEventPresences(){
+    return $this->event_presences;
+  }
+  
+  function getEvent_presences() {
+    return $this->event_presences;
+  }
+
+  function getWhiskys() {
+    return $this->whiskys;
+  }
 
   function setId($id) {
     $this->id = $id;
@@ -69,52 +101,36 @@ class Event {
     $this->event_date = $event_date;
   }
 
-  function getEvent_date() {
-    return $this->event_date;
-  }
-
-  function getWhiskys() {
-    return $this->whiskys;
-  }
-
   function setEvent_date($event_date) {
     $this->event_date = $event_date;
-  }
-
-  function setWhiskys($whiskys) {
-    $this->whiskys = $whiskys;
-  }
-
-  function getEventStop() {
-    return $this->event_stop;
   }
 
   function setEventStop($event_stop) {
     $this->event_stop = $event_stop;
   }
 
-  function getEvent_stop() {
-    return $this->event_stop;
-  }
-
   function setEvent_stop($event_stop) {
     $this->event_stop = $event_stop;
   }
-
-  function getEvent_comments() {
-    return $this->event_comments;
+  
+  function setEventComments($event_comments){
+    $this->event_comments = $event_comments;
   }
 
   function setEvent_comments($event_comments) {
     $this->event_comments = $event_comments;
   }
 
-  function getEvent_presences() {
-    return $this->event_presences;
+  function setEventPrecences($event_presences){
+    $this->event_presences = $event_presences;
   }
-
+  
   function setEvent_presences($event_presences) {
     $this->event_presences = $event_presences;
+  }
+
+  function setWhiskys($whiskys) {
+    $this->whiskys = $whiskys;
   }
 
 }
