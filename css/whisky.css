@@ -152,11 +152,13 @@ div#bookmark div {
   margin-left: -15px;
 }
 #topmenu a {
+  text-align: center;
   color: white;
   border: none;
   padding: 7px 20px;
 }
 #topmenu li {
+  width: 15%;
   height: 40px;
 }
 #topmenu ul {
@@ -174,7 +176,7 @@ div#bookmark div {
   border-bottom: solid #e7cc59 4px;
   height: 40px;
 }
-#topmenu a:hover {
+#topmenu li a:hover, #topmenu li a:focus {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
