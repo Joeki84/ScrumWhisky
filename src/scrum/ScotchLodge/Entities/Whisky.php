@@ -184,10 +184,6 @@ class Whisky {
     $this->bottlery = $bottlery;
   }
 
-  function setShort_Description($short_description) {
-    $this->short_description = $short_description;
-  }
-
   function setReviewDate($review_date) {
     $this->review_date = $review_date;
   }
