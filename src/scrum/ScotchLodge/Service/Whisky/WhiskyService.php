@@ -152,5 +152,17 @@ class WhiskyService{
             return null;
         }
     }
+    
+    public function latestReviews($limit = null) {
+      
+    }
+    
+    public function popularReviews($limit = null) {
+      
+    }
+    
+    public function retrieveReviews($limit) {
+      
+    }
 
 }

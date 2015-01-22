@@ -34,6 +34,7 @@ class Whisky {
   private $events;
   private $likes;
   private $view_count;
+  private $review_date;
 
   function __construct() {
     $this->scores = new ArrayCollection();
@@ -176,6 +177,14 @@ class Whisky {
 
   function setView_count($view_count) {
     $this->view_count = $view_count;
+  }
+
+  function getReview_date() {
+    return $this->review_date;
+  }
+
+  function setReview_date($review_date) {
+    $this->review_date = $review_date;
   }
 
 }

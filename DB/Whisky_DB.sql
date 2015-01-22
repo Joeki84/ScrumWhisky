@@ -423,6 +423,7 @@ CREATE TABLE `whisky` (
   `barrel_id` int(11) DEFAULT NULL,
   `view_count` int(11) DEFAULT NULL,
   `short_description` text,
+  `review_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_whisky_barrel_idx` (`barrel_id`),
   KEY `fk_whisky_distillery_idx` (`distillery_id`),
@@ -440,7 +441,7 @@ CREATE TABLE `whisky` (
 
 LOCK TABLES `whisky` WRITE;
 /*!40000 ALTER TABLE `whisky` DISABLE KEYS */;
-INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,NULL);
+INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,NULL,NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,NULL,NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,NULL,NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,NULL,NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `whisky` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,7 +502,7 @@ CREATE TABLE `whisky_user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_whisky_user_postcode_idx` (`postcode_id`),
   CONSTRAINT `fk_user_postcode` FOREIGN KEY (`postcode_id`) REFERENCES `postcode` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -510,7 +511,7 @@ CREATE TABLE `whisky_user` (
 
 LOCK TABLES `whisky_user` WRITE;
 /*!40000 ALTER TABLE `whisky_user` DISABLE KEYS */;
-INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-21 13:42:01','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-22 13:21:46','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `whisky_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -523,4 +524,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-22 12:30:33
+-- Dump completed on 2015-01-22 14:13:41
