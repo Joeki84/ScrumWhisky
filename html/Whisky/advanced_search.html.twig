@@ -9,7 +9,7 @@
   {% set app = globals.app %}
   
   <div class="container">
-    <h1>Register</h1>
+    <h1>Whisky advanced search</h1>
     <form action="{{ app.urlFor('user_register_process') }}" method="POST" novalidate>
       <div class="form-group">
         <label for="Region">Region</label>
@@ -20,32 +20,34 @@
         </select>
         <label for="distillery">Distillery</label>
         <select class="form-control"  id="distillery" name="distillery" >
-        {% for distillery in distilleries %}
+        {% for distillery in distillerys %}
             <option   value="{{ distillery.id }}">{{ distillery.getName }}</option>
         {% endfor %}
         </select>
         <label for="bottler">Bottler</label> 
         <select class="form-control"  id="bottler" name="bottler" >
         <option value=""></option>
-        {% for bottler in bottlers %}
-            <option   value="{{ bottler.id }}">{{ bottler.getName }}</option>
+        {% for barrel in barrels %}
+            <option   value="{{ barrel.id }}">{{ barrel.getCasktype }}</option>
         {% endfor %}
         </select>
         
-        <label for="password">Age</label>
+        <label for="age">Age: </label> 
         <input id="age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
-        <span id="ageCurrentSliderValLabel">Current age selected: <span id="abvSliderVal"></span></span>
-        
-        <label for="password_repeat">ABV</label>
+        <span id="ageCurrentSliderValLabel">Current age selected: <span id="ageSliderVal"></span> year</span>
+        <p>&nbsp;</p>
+        <label for="abv">ABV: </label> 
         <input id="abv" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
         <span id="abvCurrentSliderValLabel">Current value selected: <span id="abvSliderVal"></span> %</span>
-
-        <label for="first_name">Name</label>
+        <p>&nbsp;</p>
+        <label for="name">Name</label>
         <input class="form-control" type="text" id="name" name="name" value="" />        
       </div>
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="register" value="Register" />
+      <input class="form-control btn btn-default" type="submit" id="verzend" name="search" value="Search" />
 
     </form>
+        <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a> 
   </div>
 {% endblock content %}
 

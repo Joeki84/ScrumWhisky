@@ -6,10 +6,12 @@
   {% block main_column %}
 
     <nav id="topmenu" class="clearboth">
+    <!-- OLD BOOKMARK
       <div id="bookmark">
         <div>
         </div>
       </div>
+    -->
       <ul class="nav nav-tabs">
         <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
         <li><a href="#"> Tab 2 </a></li>
@@ -32,6 +34,8 @@
       {% endif %}
     </div>
 
+     <a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky advanced search </a>
+    
     <h2>List of users:</h2>
       <ul> 
       {% for member in members %}
