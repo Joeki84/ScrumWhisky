@@ -115,6 +115,17 @@ class WhiskyController extends Controller{
     /* Olivier */
     
     public function advanced_search_whisky(){
+        /*$regsrv = new RegionService($this->em, $this->app);
+        $regions = $regsrv->getRegions();
+        $distsrv = new DistilleryService($this->em, $this->app);
+        $distillerys = $distsrv->getDistillerys();*/
+        $barsrv = new BarrelService($this->em, $this->app);
+        $barrels = $barsrv->getBarrels();
+        $globals = $this->getGlobals();
+        $this->getApp()->render('Whisky/advanced_search.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+    }
+    
+    public function advanced_search_whisky_result(){
         $regsrv = new RegionService($this->em, $this->app);
         $regions = $regsrv->getRegions();
         $distsrv = new DistilleryService($this->em, $this->app);
@@ -124,6 +135,8 @@ class WhiskyController extends Controller{
         $globals = $this->getGlobals();
         $this->getApp()->render('Whisky/advanced_search.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
     }
+    
+    
     /* Olivier */
     
     
