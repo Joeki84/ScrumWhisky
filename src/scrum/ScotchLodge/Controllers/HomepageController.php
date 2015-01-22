@@ -28,7 +28,11 @@ class HomepageController extends Controller {
     
     $comments = $commentSrvc->retrieveComments(3);
     
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'comments' => $comments));
+    $this->getApp()->render('homepage.html.twig', 
+        array('globals' => $globals, 
+          'members' => $members, 
+          'events' => $events, 
+          'comments' => $comments));
   }
   
   public function simplifydRoutes($routes) {
