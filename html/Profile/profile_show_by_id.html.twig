@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
-  {% if globals.user is defined and globals.user is not null %}
-      {% set user = usertoview %}
-  {% endif %}
+{% set user = usertoview %}
 
+{% block title %}
+  Profile details for {{ user.username }}
+{% endblock title %}
+
+{% if globals.user is defined and globals.user is not null %}
+{% endif %}
+
+{% block content %}
   <div class="container form">
     <h1>{{ user.firstName }} {{ user.surname }}</h1>
     <div><img src="../img/nophoto.jpg"></div>
@@ -18,3 +24,4 @@
     </dl>
     <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>
   </div>
+{% endblock content %}
