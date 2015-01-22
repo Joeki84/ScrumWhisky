@@ -431,6 +431,7 @@ CREATE TABLE `whisky` (
   KEY `whisky_name_idx` (`name`),
   CONSTRAINT `fk_whisky_barrel` FOREIGN KEY (`barrel_id`) REFERENCES `barrel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
