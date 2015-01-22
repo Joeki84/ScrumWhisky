@@ -156,7 +156,30 @@ class EventService {
     return $events;
     
     }
-/* End Olivier */    
+/* End Olivier */
+
+/* Filip */ 
+    public function LatestFiveEvents(){
+    $em = $this->getEntityManager();
+    $eventRepository = $em->getRepository('scrum\ScotchLodge\Entities\Event');
+    $dql = "SELECT e FROM scrum\ScotchLodge\Entities\Event e where e.event_date >= CURRENT_DATE() ORDER BY e.event_date ASC";
+    $query = $em->createQuery($dql);
+    $query->setMaxResults(5);
+    $events = $query->getResult();
+    return $events;
+    
+    }  
+    public function LatestEvent(){
+    $em = $this->getEntityManager();
+    $eventRepository = $em->getRepository('scrum\ScotchLodge\Entities\Event');
+    $dql = "SELECT e FROM scrum\ScotchLodge\Entities\Event e where e.event_date >= CURRENT_DATE() ORDER BY e.event_date ASC";
+    $query = $em->createQuery($dql);
+    $query->setMaxResults(1);
+    $event = $query->getResult();
+    return $event;
+    
+    } 
+/*end Filip */
     
     /* End Search functions */
 

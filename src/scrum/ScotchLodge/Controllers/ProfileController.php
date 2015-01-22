@@ -44,8 +44,8 @@ class ProfileController extends Controller {
   public function logOff() {
     unset($_SESSION['user']);
     session_unset();
-    $globals = $this->getGlobals();
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals));
+    $app = $this->getApp();
+    $app->redirect($app->urlFor('main_page'));
   }
 
   public function logonIfEnabled() {
