@@ -13,12 +13,25 @@ use Doctrine\ORM\Query;
 class CommentRepo extends EntityRepository {
 
   public function getRecentComments($limit = null) {
-    $recent = $this->getEntityManager()
-        ->createQuery("SELECT c FROM Comment c");
-    if ($limit != null) {
-      Query::setMaxResults($limit);
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    if ($limit == null) {
+      $qb->select('c')
+          ->from('scrum\ScotchLodge\Entities\Comment', 'c')
+          ->orderBy('c.comment_date', 'DESC');
     }
-    return $recent;
+    else {
+      $qb->select('c')
+      ->from('scrum\ScotchLodge\Entities\Comment', 'c')
+      ->orderBy('c.comment_date', 'DESC')
+      ->setMaxResults($limit);
+    }
+
+    /*$recent_query = $this->getEntityManager()
+        ->createQuery("SELECT c FROM scrum\ScotchLodge\Entities\Comment c ORDER BY c.comment_date DESC");*/
+    $query = $qb->getQuery();
+    $result = $query->execute();
+    return $result;
   }
 
 }
