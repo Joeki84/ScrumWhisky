@@ -6,10 +6,12 @@
   {% block main_column %}
 
     <nav id="topmenu" class="clearboth">
+    <!-- OLD BOOKMARK
       <div id="bookmark">
         <div>
         </div>
       </div>
+    -->
       <ul class="nav nav-tabs">
         <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
         <li><a href="#"> Tab 2 </a></li>
@@ -51,7 +53,7 @@
         <h3>Upcoming events:</h3>
         <ul>
         {% for event in events %}
-          <li>{{ event.Title() }} {{ event.EventDate() }}</li>        
+          <li>{{ event.Title }} {{ event.EventDate|date('d-m-Y H:i:s') }}</li>        
         {% endfor %}  
         </ul>
       </div>

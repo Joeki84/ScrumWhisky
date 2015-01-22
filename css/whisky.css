@@ -26,6 +26,9 @@ ul, li {
 #route-tbl tbody tr td {
   padding: 5px;
 }
+#wrapper {
+  background-image: url(../img/gray.png);
+}
 #main-wrapper {
   position: relative;
 }
@@ -33,8 +36,6 @@ ul, li {
   margin-top: -15px;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #eee;
-  border: solid 1px darkgray;
   font-family: 'Open Sans', sans-serif;
 }
 input.btn, #return_to_main {
@@ -79,9 +80,9 @@ div.container {
 /*header*/
 #head {
   background-image: url(../img/title_bar_wood.png);
-  height: 165px;
+  height: 120px;
   border: 1px solid rgba(124,91,33,1);
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -92,7 +93,7 @@ div.container {
   z-index:10;
   }
 #head h1 {
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 30px; 
 }
 #head h2 {
@@ -102,7 +103,7 @@ div.container {
   height: 20%;
 }
 #head img {
-  height: 100%;
+  height: 100px;
   width: auto;
 }
 
@@ -125,10 +126,12 @@ div.container {
 
 /*menus*/
 /*nav menu*/
+
+/* OLD BOOKMARK
 div#bookmark {
   position: absolute;
   border: 24px solid #e7cc59;
-  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
   height: 0px;
   width: 50px;
   left: -28px;
@@ -143,45 +146,48 @@ div#bookmark div {
   width: 50px;
   top: -20px;
   left: -14px;
-}
+} **/
+
+
 #topmenu {
-  font-family: 'Libre Baskerville', serif;
   font-size: 1.5em;
   position: relative;
   width: 120%;
-  margin-left: -15px;
+  height: 60px;
 }
 #topmenu a {
   text-align: center;
+  background-color: rgba(0,0,0,0.2);
   color: white;
   border: none;
-  padding: 7px 20px;
+  padding: 30px 20px 7px 20px;
+  -webkit-border-radius: 0px 0px 4px 4px;
+  -moz-border-radius: 0px 0px 4px 4px;
+  border-radius: 0px 0px 4px 4px;
 }
 #topmenu li {
+  float: left;
   width: 15%;
-  height: 40px;
+  margin-right: 10px;
+  margin-top: -30px;
+}
+#topmenu li:hover {
+  margin-top: -15px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 #topmenu ul {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  background: -webkit-gradient(radial, center center, 0, center center, 460, from(rgba(156, 47, 0, 1)), to(rgba(80, 33, 0, 1)));
-  background: -webkit-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
-  background: -moz-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
-  background: -o-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
-  background: -ms-radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
-  background: radial-gradient(circle, rgba(156, 47, 0, 1), rgba(80, 33, 0, 1));
-  background-color: rgba(156, 47, 0, 1);
-  border-top: solid #e7cc59 4px;
-  border-bottom: solid #e7cc59 4px;
-  height: 40px;
 }
 #topmenu li a:hover, #topmenu li a:focus {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  height: 40px;
-  background-color: #9c2f00;
+  background-color: rgba(156,47,0, 1);
+}
+.nav-tabs {
+  border-bottom: none;
 }
 /*user menu*/
 #reg-menu {
