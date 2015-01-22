@@ -1,1 +1,13 @@
-<h1>LATEST REVIEWS</h1>
+<div id="reviews">
+  <h3>Latest Reviews:</h3>
+  {% set latest = reviews.latest %}
+  <div>
+    {% for rev in latest %}
+      {% set des = rev.short_description %}
+      <div class="review_date">{{ rev.review_date|date('Y-m-d') }}</div>
+      <div class="whisky_name"><b>{{ rev.name }}</b></div>
+      <div class="review">{{ des|length > 50 ? des|slice(0, 50) ~ '...' : des }}</div>
+    {% endfor %}
+  </div>
+</div>
+  

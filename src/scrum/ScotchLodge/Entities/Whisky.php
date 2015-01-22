@@ -110,6 +110,10 @@ class Whisky {
   function getShortDescription() {
     return $this->short_description;
   }
+  
+  function getShort_description() {
+    return $this->short_description;
+  }
 
   function getBottlery() {
     return $this->bottlery;
@@ -155,6 +159,10 @@ class Whisky {
     $this->short_description = $short_description;
   }
 
+  function setShort_description($short_description) {
+    $this->short_description = $short_description;
+  }
+
   function setBottlery(Distillery $bottlery) {
     $this->bottlery = $bottlery;
   }
@@ -184,6 +192,14 @@ class Whisky {
   }
 
   function setReview_date($review_date) {
+    $this->review_date = $review_date;
+  }
+
+  function getReviewDate() {
+    return $this->review_date;
+  }
+
+  function setReviewDate($review_date) {
     $this->review_date = $review_date;
   }
 

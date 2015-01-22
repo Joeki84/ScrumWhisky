@@ -22,7 +22,13 @@ class WhiskyRepo extends EntityRepository {
   }
   
   public function getPopularReviews($limit = null) {
-    
+    $dql = "SELECT wl as whisky, count(wl.user) as likes FROM scrum\ScotchLodge\Entities\WhiskyLike wl GROUP BY wl.whisky ORDER BY likes DESC";
+    $query = $this->getEntityManager()->createQuery($dql);
+    if ($limit != null) {
+      $query->setMaxResults($limit);
+    }
+    $results = $query->execute();
+    return $results;
   }
 
 }

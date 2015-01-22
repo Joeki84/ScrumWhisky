@@ -1,1 +1,13 @@
-<h1>POPULAR REVIEWS</h1>
+<div id="reviews">
+  <h3>Popular Reviews:</h3>
+  {% set popular = reviews.popular %}
+  <div>
+    {% for rev in popular %}
+      {% set whisky = rev.whisky.whisky %}
+      <div class="review_date">{{ whisky.review_date|date('Y-m-d') }}</div>
+      <div class="whisky_name"><b>{{ whisky.name }}</b></div>
+      <div class="review_likes">Likes: {{ rev.likes }}</div>      
+      <div class="review">{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}</div>
+    {% endfor %}
+  </div>
+</div>
