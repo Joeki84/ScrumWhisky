@@ -123,6 +123,11 @@ div.container {
   color: white;
 }
 
+/*comments*/
+#comments .comment {
+  padding-bottom: 12px;
+}
+
 
 /*menus*/
 /*nav menu*/
