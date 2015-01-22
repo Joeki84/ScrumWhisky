@@ -200,8 +200,11 @@ CREATE TABLE `distillery` (
   `name` varchar(80) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `distillery_name_idx` (`name`)
+  KEY `distillery_name_idx` (`name`),
+  KEY `fk_distillery_country_idx` (`country_id`),
+  CONSTRAINT `fk_distillery_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,7 +214,7 @@ CREATE TABLE `distillery` (
 
 LOCK TABLES `distillery` WRITE;
 /*!40000 ALTER TABLE `distillery` DISABLE KEYS */;
-INSERT INTO `distillery` VALUES (1,'Aberlour','Aberlour-on-Spey, Banffshire','AB38 9PJ'),(2,'Château du Breuil ','14 130 LE BREUIL EN AUGE','0000');
+INSERT INTO `distillery` VALUES (1,'Aberlour','Aberlour-on-Spey, Banffshire','AB38 9PJ',NULL),(2,'Château du Breuil ','14 130 LE BREUIL EN AUGE','0000',NULL);
 /*!40000 ALTER TABLE `distillery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,12 +427,15 @@ CREATE TABLE `whisky` (
   `view_count` int(11) DEFAULT NULL,
   `short_description` text,
   `review_date` datetime DEFAULT NULL,
+  `bottlery_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_whisky_barrel_idx` (`barrel_id`),
   KEY `fk_whisky_distillery_idx` (`distillery_id`),
   KEY `fk_whisky_region_idx` (`region_id`),
   KEY `whisky_name_idx` (`name`),
+  KEY `fk_whisky_bottlery_idx` (`bottlery_id`),
   CONSTRAINT `fk_whisky_barrel` FOREIGN KEY (`barrel_id`) REFERENCES `barrel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -442,7 +448,7 @@ CREATE TABLE `whisky` (
 
 LOCK TABLES `whisky` WRITE;
 /*!40000 ALTER TABLE `whisky` DISABLE KEYS */;
-INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,NULL,NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,NULL,NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,NULL,NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,NULL,NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,NULL,NULL);
+INSERT INTO `whisky` VALUES (17,'Aberlour 15 years','aberlour-15-y.jpg',1,1,40,15,43,1,NULL,NULL,NULL,NULL),(18,'Aberlour A Bunadh Batch 47','aberlour-a-bunadh-batch-47.jpg',1,1,60,47,60,1,NULL,NULL,NULL,NULL),(19,'Aberlour 12 years double cask','aberlour-12-y-double-cask.jpg',1,1,3999,12,40,1,NULL,NULL,NULL,NULL),(20,'Aberlour 18 years','aberlour-18-y.jpg',1,1,6499,18,43,1,NULL,NULL,NULL,NULL),(21,'Calvados ch.breuil fine 3 jr','calvados-ch-breuil-fine-3-jr.jpg',2,2,1749,3,40,2,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `whisky` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,4 +531,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-22 14:13:41
+-- Dump completed on 2015-01-22 15:02:11

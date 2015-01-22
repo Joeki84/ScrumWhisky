@@ -154,15 +154,21 @@ class WhiskyService{
     }
     
     public function latestReviews($limit = null) {
-      
+      $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\Whisky');
+      $latest = $repo->getLatestReviews($limit);
+      return $latest;
     }
     
     public function popularReviews($limit = null) {
-      
+      $repo = $this->em->getRepository('scrum\ScotchLodge\Entities\Whisky');
+      $popular = $repo->getPopularReviews($limit);
+      return $popular;
     }
     
     public function retrieveReviews($limit) {
-      
+      $reviews['latest'] = $this->latestReviews($limit);
+      $reviews['popular'] = $this->popularReviews($limit);
+      return $reviews;
     }
 
 }
