@@ -8,12 +8,19 @@
   {% if globals.user is defined and globals.user is not null %}
       {% set user = usertoview %}
   {% endif %}
+
   <div class="container form">
     <h1>{{ user.firstName }} {{ user.surname }}</h1>
     <div><img src="../img/nophoto.jpg"></div>
-    <div>{{ user.email }}</div>
-    <div>{{ user.address }}</div>
-    <div>{{ user.postcode.postcode }}</div>
+
+    <dl>
+      <dt>Mail</dt>
+      <dd>{{ user.email }}</dd>
+      <dt>Adres</dt>
+      <dd>{{ user.address }}</dd>
+      <dt>Postcode</dt>
+      <dd>{{ user.postcode.postcode }}</dd>
+    </dl>
     <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>
   </div>
 {% endblock content %}

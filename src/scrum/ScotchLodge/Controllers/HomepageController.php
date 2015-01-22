@@ -25,8 +25,11 @@ class HomepageController extends Controller {
     $events=EventService::LatestEvents();
     
     $commentSrvc = new CommentService($this->getEntityManager(), $this->getApp());    
-    $comments = $commentSrvc->latestComments();
-   
+    
+    $comments = $commentSrvc->latestComments(3);
+    
+    
+    
     $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'comments' => $comments));
   }
   
