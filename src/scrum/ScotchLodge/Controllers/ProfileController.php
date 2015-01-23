@@ -13,8 +13,8 @@ use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
  * @author jan van biervliet
  */
 class ProfileController extends Controller {
-  /* var $srv ProfileService */
-
+  
+  /* @var $srv ProfileService */
   private $srv;
 
   public function __construct($em, $app) {
@@ -182,13 +182,13 @@ class ProfileController extends Controller {
     }
   }
   
-  public function showProfileOfUserWithId($id) {     
-      
+  public function showProfileOfUserWithId($id) {           
     $app = $this->getApp();
     $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
     $postcodes = $reg_srv->getPostcodes();
     
-    $srv = $this->srv;
+    /* @var $srv ProfileService */
+    $srv = $this->srv;    
     $usertoview = $srv->searchUserById($id);
     if ($usertoview != null) {
       $app->render('Profile/profile_show_by_id.html.twig', array('globals' => $this->getGlobals(), 'postcodes' => $postcodes, 'usertoview' => $usertoview));

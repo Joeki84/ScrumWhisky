@@ -375,6 +375,7 @@ CREATE TABLE `whisky` (
   `short_description` text,
   `review_date` datetime DEFAULT NULL,
   `bottlery_id` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_whisky_barrel_idx` (`barrel_id`),
   KEY `fk_whisky_distillery_idx` (`distillery_id`),

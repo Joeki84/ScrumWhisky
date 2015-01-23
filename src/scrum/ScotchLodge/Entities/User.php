@@ -32,12 +32,16 @@ class User {
   private $comments;
   private $present_in_events;
   private $whisky_likes;
+  private $whiskys_created;
+  
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
     $this->comments = new ArrayCollection();
     $this->present_in_events = new ArrayCollection();
     $this->whisky_likes = new ArrayCollection();
+    $this->whiskys_created = new ArrayCollection();
+    
   }
 
   function getId() {
@@ -194,6 +198,14 @@ class User {
 
   function setWhiskyLikes($whisky_likes) {
     $this->whisky_likes = $whisky_likes;
+  }
+  
+  function getWhiskysCreated() {
+    return $this->whiskys_created;
+  }
+
+  function setWhiskysCreated($whiskys_created) {
+    $this->whiskys_created = $whiskys_created;
   }
 
 }

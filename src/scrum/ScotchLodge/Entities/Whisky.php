@@ -5,6 +5,7 @@ namespace scrum\ScotchLodge\Entities;
 use scrum\ScotchLodge\Entities\Distillery;
 use scrum\ScotchLodge\Entities\Barrel;
 use scrum\ScotchLodge\Entities\Region;
+use scrum\ScotchLodge\Entities\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -36,6 +37,7 @@ class Whisky {
   private $event_whisky;
   private $events;
   private $likes;
+  private $created_by;
 
   function __construct() {
     $this->scores = new ArrayCollection();
@@ -211,5 +213,15 @@ class Whisky {
   function getReviewDate() {
     return $this->review_date;
   }
+  
+  /* @return User */
+  function getCreatedBy() {
+    return $this->created_by;
+  }
+
+  function setCreatedBy(User $created_by) {
+    $this->created_by = $created_by;
+  }
+
 
 }

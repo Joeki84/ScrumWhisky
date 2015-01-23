@@ -35,7 +35,14 @@ scrum\ScotchLodge\Entities\Whisky:
       inversedBy: region_whiskys
       joinColumn:
         name: region_id
-        referencedColumnName: id            
+        referencedColumnName: id
+        
+    created_by:
+      targetEntity: User
+      inversedBy: whiskys_created
+      joinColumn:
+        name: created_by
+        referencedColumnName: id
 
   manyToMany:
     events:
