@@ -12,7 +12,6 @@
       <h1>Edit Whisky</h1>
       <form action="{{ app.urlFor('edit_whisky_process',{'id':whisky.id}) }}{#/{{whisky.id}}#}" method="POST" novalidate>
         <div class="form-group">
-          <input type="hidden" name="id" value="{{whisky.id}}">
           <label for="name">Name</label>
           <input class="form-control" type="text" id="name" name="name" value="{{ whisky.name }}" />
           {#<label for="image">Image</label>
