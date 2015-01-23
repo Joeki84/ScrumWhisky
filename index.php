@@ -13,8 +13,8 @@ try {
   include 'config/routes/profile.php';
   include 'config/routes/main.php';
   include 'config/routes/event.php';
-  include 'config/routes/whisky.php';
   include 'config/routes/members.php';
+  include 'config/routes/whisky.php';
   include 'config/routes/whiskylike.php';
   include 'config/routes/commentlike.php';
   

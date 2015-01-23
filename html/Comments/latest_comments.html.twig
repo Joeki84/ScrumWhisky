@@ -1,10 +1,10 @@
-<div id="comments">
-  <h3>Latest Comments:</h3>
+<div id="latest_comments" class="">
+  <h3>Latest Comments</h3>
   {% set latest = comments.latest %}
-  <div>
+  <dl>
     {% for comm in latest %}
-      <div class="username">{{ comm.user.username }}</div>
-      <div class="comment">{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}</div>
+      <dt class="username"><a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.user.id } ) }}">{{ comm.user.username }}</a></dt>
+      <dd class="comment">"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"</dd>
     {% endfor %}
-  </div>
+  </dl>
 </div>

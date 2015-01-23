@@ -1,0 +1,10 @@
+{% set app = globals.app %}
+
+  <nav id="topmenu" class="clearboth">
+      <ul class="nav nav-tabs">
+        <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
+        <li><a href="#"> Tab 2 </a></li>
+        <li><a href="#"> Events </a></li>
+        <li><a href="{{ app.urlFor('member_list') }}">Members</a></li>
+      </ul>
+    </nav>

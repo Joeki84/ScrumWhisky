@@ -22,7 +22,9 @@ class HomepageController extends Controller {
     
     $globals = $this->getGlobals();
 
-    $members = ProfileService::showalluser();
+    $prof_srv = new ProfileService($em, $app);
+    $members = $prof_srv->showalluser();
+    //$members = ProfileService::showalluser();
     $events = EventService::LatestEvents();
     $events_five = EventService::LatestFiveEvents();
     $events_one = EventService::LatestEvent();

@@ -8,7 +8,7 @@
   
     {% set app = globals.app %}
     
-    <div class="container">
+    <div class="container form">
       <h1>New Whisky</h1>
       <form action="{{ app.urlFor('new_whisky_process') }}" method="POST" novalidate>
         <div class="form-group">
@@ -42,7 +42,7 @@
           </select>          
         </div>
  
-        <input class="form-control btn btn-default" type="submit" id="verzend" name="whisky" value="Add whisky" />
+        <input class="form-control btn submit btn-default" type="submit" id="verzend" name="whisky" value="Add whisky" />
 
       </form>
     </div>

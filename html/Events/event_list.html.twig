@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Events
+{% endblock title %}
+
+{% block content %}
+  
+    {% set app = globals.app %}
+    <div class="container form"
+	    <h3>Upcoming events:</h3>
+	    <dl>
+	        {% for event in events_five %}
+	        <dt>{{ event.Title }}</dt> 
+	        	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
+	        {% endfor %}  
+	     </dl>
+	</div>
+    
+{% endblock content %}

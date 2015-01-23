@@ -235,7 +235,7 @@ class ProfileService {
   /* Olivier */
   
     public function showalluser() {
-    $em = $this->getEntityManager();
+    $em = $this->em;
     $userRepository = $em->getRepository('scrum\ScotchLodge\Entities\User');
     $members = $userRepository->findAll();
     

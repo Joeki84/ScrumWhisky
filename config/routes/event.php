@@ -15,3 +15,7 @@ $app->post('/newevent', function() use ($contr){
 $app->get('/newevent/ok', function() use ($contr){
     echo("todo new event stored");
 })->name('new_event_ok');
+
+$app->get('/events', function() use ($contr) {
+  $contr->getEvents();
+})->name('event_list');

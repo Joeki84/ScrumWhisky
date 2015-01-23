@@ -5,20 +5,7 @@
 
   {% block main_column %}
 
-    <nav id="topmenu" class="clearboth">
-    <!-- OLD BOOKMARK
-      <div id="bookmark">
-        <div>
-        </div>
-      </div>
-    -->
-      <ul class="nav nav-tabs">
-        <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
-        <li><a href="#"> Tab 2 </a></li>
-        <li><a href="#"> Tab 3 </a></li>
-        <li><a href="#"> Tab 4 </a></li>
-      </ul>
-    </nav>
+    {% include 'nav_top_menu.html.twig' %}
     
     <div class="container welcome">
       {% if globals.user is defined and globals.user is not null %}
@@ -34,32 +21,32 @@
       {% endif %}
     </div>
     <div id="event_1">
-      <div class="container">
+      <div class="container welcome">
     {% for event in events_one %}
         <h3>Be sure to check out our next event on {{ event.EventDate|date('d-m') }} @ {{ event.postcode.town }}</h3>
     {% endfor %}
       </div>
     </div>
-
-     <a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky advanced search </a>
+    <section id="latest_tabs" class="welcome cf">
+      <div class="latest_tab">
+        {% include 'Whisky/latest_reviews.html.twig' %}
+      </div>
+      <div class="latest_tab">
+        {% include 'Comments/latest_comments.html.twig' %}
+      </div>
+      <div class="latest_tab">
+        {% include 'Events/latest_events.html.twig'%}
+      </div>
+    </section>
+    <section id="advanced_search" class="container welcome cf">
+      <a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky advanced search </a>
+    </section>
     
   {% endblock main_column %}
 
   {% block sidebar %}    
-      {% include 'menu.html.twig' %}
-      <div id="event_5">
-        <h3>Upcoming events:</h3>
-        <dl>
-        {% for event in events_five %}
-          <dt>{{ event.Title }}</dt> 
-          <dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
-        {% endfor %}  
-        </ul>
-      </div>
-        
-      {% include 'Comments/latest_comments.html.twig' %}
+      {% include 'menu.html.twig' %}  
       {% include 'Comments/popular_comments.html.twig' %}
-      {% include 'Whisky/latest_reviews.html.twig' %}
       {% include 'Whisky/popular_reviews.html.twig' %}
   {% endblock sidebar %}
 

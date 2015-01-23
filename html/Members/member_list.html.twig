@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if globals.user is defined and globals.user is not null %}
 	<div class="container form">
 	    <h2>List of users:</h2>
 	    <ul> 
@@ -12,12 +11,11 @@
 	          {{ member.getFirstName() }} {{ member.getSurname() }}
 	          </a>
 	            {% if globals.user is defined and globals.user is not null %}
-	            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}">Edit</a>{% endif %}
+	            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('profile_editadmin', { 'username' : member.getUsername()} ) }}"><img src="../img/edit.png"></a>{% endif %}
 	            {% endif %}
 	        </li>        
 	      	{% endfor %}
 	    </ul>
 	</div>
-{% endif %}
 
 {% endblock content %}

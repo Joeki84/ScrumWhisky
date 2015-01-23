@@ -1,12 +1,12 @@
-<div id="comments">
-  <h3>Popular comments:</h3>
+<div id="pop_comments" class="sidebar_list">
+  <h3>Popular comments</h3>
   {% set popular = comments.popular %}
-  <div>
+  <dl>
     {% for comm in popular %}
       {% set c_out = comm.comment.comment.comment %}
-      <div class="username">{{ comm.comment.user.username }}</div>
-      <div class="comment-like">Like count: {{ comm.likes }}</div>
-      <div class="comment">{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}</div>
+      <dt class="username"><a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.comment.user.id } ) }}">{{ comm.comment.user.username }}</a></dt>
+      <dd class="comment-like"><span>Likes: {{ comm.likes }}</span></dd>
+      <dd class="comment">"{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}"</dd>
     {% endfor %}
-  </div>
+  </dl>
 </div>
