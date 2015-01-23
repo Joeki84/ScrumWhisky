@@ -13,10 +13,9 @@ class Category {
     
     private $id;
     private $category;
-    private $scores;
     
     function __construct() {
-        $this->scores = new ArrayCollection();
+        
     }
     
     function getId(){
@@ -27,10 +26,6 @@ class Category {
         return $this->category;
     }
     
-    function getScores(){
-        return $this->scores;
-    }
-    
     function setId($id){
         $this->id = $id;
     }
@@ -39,8 +34,5 @@ class Category {
         $this->category = $category;
     }
     
-    function setScores($scores){
-        $this->scores = $scores;
-    }
     
 }

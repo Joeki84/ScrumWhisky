@@ -11,11 +11,6 @@ scrum\ScotchLodge\Entities\Category:
   uniqueConstraints:
     idx_category_UNIQUE:
       columns: [ category ]
-
-  oneToMany:
-    scores:
-      targetEntity: WhiskyScores
-      mappedBy: category
     
   fields:
     category:
