@@ -15,3 +15,11 @@ $app->post('/newevent', function() use ($contr){
 $app->get('/newevent/ok', function() use ($contr){
     echo("todo new event stored");
 })->name('new_event_ok');
+
+$app->get('/editevent/:id', function($id) use ($contr){
+    $contr->editEvent($id);
+})->name('edit_event');
+
+$app->post('/editwhisky/:id', function($id) use ($contr){
+    $contr->updateEvent($id);
+})->name('edit_event_process');
