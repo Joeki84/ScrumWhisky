@@ -26,5 +26,19 @@
           Return to members menu</a>  
     <a href="/" id="return_to_main" class="btn submit btn-default">
           Return to main menu</a>
+    {# include expects 'reviews' objects #}
+    {% set reviews = user.whiskys_created %}
+    {% include 'Profile/user_reviews.html.twig' %}
+    
+    {# include expects 'comments' objects #}
+    {% set comments = user.comments %}
+    {% include 'Profile/user_comments.html.twig' %}
+    
+    {# include expects 'events' objects #}
+    {% set events = user.events_created %}
+    {% include 'Profile/user_events.html.twig' %}
+    
+    
+    <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>
   </div>
 {% endblock content %}

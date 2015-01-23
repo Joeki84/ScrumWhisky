@@ -195,5 +195,49 @@ class User {
   function setWhiskyLikes($whisky_likes) {
     $this->whisky_likes = $whisky_likes;
   }
+  
+  function getWhiskysCreated() {
+    return $this->whiskys_created;
+  }
 
+  function setWhiskysCreated($whiskys_created) {
+    $this->whiskys_created = $whiskys_created;
+  }
+  
+  function getWhiskys_created() {
+    return $this->whiskys_created;
+  }
+
+  function setWhiskys_created($whiskys_created) {
+    $this->whiskys_created = $whiskys_created;
+  }
+  
+  function getEventsCreated() {
+    return $this->events_created;
+  }
+
+  function setEventsCreated($events_created) {
+    $this->events_created = $events_created;
+  }
+  
+  function getEvents_created() {
+    return $this->events_created;
+  }
+
+  function setEvents_created($events_created) {
+    $this->events_created = $events_created;
+  }
+  
+  function hasCommentsCreated() {
+    return count($this->comments) > 0;
+  }
+
+  function hasEventsCreated() {
+    return count($this->events_created) > 0;
+  }
+  
+  function hasWhiskysCreated() {
+    return count($this->whiskys_created) > 0;
+  }
+  
 }
