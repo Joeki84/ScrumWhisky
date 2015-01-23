@@ -71,7 +71,7 @@ class WhiskyController extends Controller{
     }
     
     /**
-     * Render the page to add a new whisky.
+     * Render the page to edit a whisky.
      */
     public function editWhisky($id){
         $whisky = $this->whiskysrv->retrieveWhiskyById($id);        
