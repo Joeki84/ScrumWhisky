@@ -29,8 +29,11 @@
     
     {# include expects 'comments' objects #}
     {% set comments = user.comments %}
-    {% include 'Profile/user_reviews.html.twig' %}
+    {% include 'Profile/user_comments.html.twig' %}
     
+    {# include expects 'events' objects #}
+    {% set events = user.events_created %}
+    {% include 'Profile/user_events.html.twig' %}
     
     
     <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>

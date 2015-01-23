@@ -225,6 +225,14 @@ class User {
     $this->events_created = $events_created;
   }
   
+  function getEvents_created() {
+    return $this->events_created;
+  }
+
+  function setEvents_created($events_created) {
+    $this->events_created = $events_created;
+  }
+  
   function hasCommentsCreated() {
     return count($this->comments) > 0;
   }

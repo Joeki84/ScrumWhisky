@@ -1,0 +1,11 @@
+{# THIS TEMPLATE EXPECTS 'events' objects #}
+
+{% if events|length > 0 %}
+  <div id="events" class="topline">
+    <h3>User events</h3>
+    {% for event in events %}      
+      <div><b>{{ event.title }}</b></div>
+      <div class="margin-bottom-6">{{ event.event_date|date('Y-m-d') }}</div>
+    {% endfor %}
+  </div>
+{% endif %}

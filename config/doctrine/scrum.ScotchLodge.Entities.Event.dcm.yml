@@ -32,7 +32,7 @@ scrum\ScotchLodge\Entities\Event:
       targetEntity: User
       inversedBy: events_created
       joinColumn:
-        name: crteated_by
+        name: created_by
         referencedColumnName: id
    
   oneToMany:
