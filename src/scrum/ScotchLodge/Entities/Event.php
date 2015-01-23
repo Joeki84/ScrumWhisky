@@ -19,6 +19,7 @@ class Event {
   private $address;
   private $event_date;
   private $event_stop;
+  private $created_by;
   private $whiskys;
   private $event_comments;
   private $event_presences;
@@ -80,6 +81,10 @@ class Event {
   function getWhiskys() {
     return $this->whiskys;
   }
+  
+  function getCreated(){
+    return $this->created_by;
+  }
 
   function setId($id) {
     $this->id = $id;
@@ -131,6 +136,10 @@ class Event {
 
   function setWhiskys($whiskys) {
     $this->whiskys = $whiskys;
+  }
+  
+  function setCreated($created_by){
+      $this->created_by = $created_by;
   }
 
 }
