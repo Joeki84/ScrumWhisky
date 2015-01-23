@@ -1,6 +1,6 @@
 scrum\ScotchLodge\Entities\Category:
   type: entity
-  #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
+  #repositoryClass: scrum\ScotchLodge\Entities\Repo\CategoryRepo
   table: category  
   id:
     id:
@@ -8,12 +8,15 @@ scrum\ScotchLodge\Entities\Category:
       generator:
         strategy: AUTO
 
+  uniqueConstraints:
+    idx_category_UNIQUE:
+      columns: [ category ]
+
   oneToMany:
     scores:
       targetEntity: WhiskyScores
       mappedBy: category
     
-        
   fields:
     category:
       type: string

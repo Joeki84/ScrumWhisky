@@ -32,6 +32,14 @@ scrum\ScotchLodge\Entities\User:
     whisky_likes:
       targetEntity: Whisky
       mappedBy: user
+    
+    whiskys_created:
+      targetEntity: Whisky
+      mappedBy: created_by
+      
+    events_created:
+      targetEntity: Events
+      mappedBy: created_by
      
 
   fields:

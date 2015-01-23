@@ -29,15 +29,20 @@ class User {
   private $is_admin;
   private $password_token;
   private $user_likes;
-  private $comments;
   private $present_in_events;
   private $whisky_likes;
+  private $comments;
+  private $whiskys_created;
+  private $events_created;
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
     $this->comments = new ArrayCollection();
     $this->present_in_events = new ArrayCollection();
     $this->whisky_likes = new ArrayCollection();
+    $this->whiskys_created = new ArrayCollection();
+    $this->events_created = new ArrayCollection();
+    
   }
 
   function getId() {
@@ -240,4 +245,5 @@ class User {
     return count($this->whiskys_created) > 0;
   }
   
+
 }
