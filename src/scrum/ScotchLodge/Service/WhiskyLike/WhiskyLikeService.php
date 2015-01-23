@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use scrum\ScotchLodge\Entities\WhiskyLike;
 
+use \scrum\ScotchLodge\Service\Profile\ProfileService;
+use \scrum\ScotchLodge\Service\Whisky\WhiskyService;
+
 /**
  * WhyskiLikeService
  *
@@ -15,6 +18,8 @@ class WhiskyLikeService {
     
     private $em;
     private $app;
+    private $whiskysrv;
+    private $profilesrv;
 
     public function __construct($em, $app) {
       $this->em = $em;
@@ -22,14 +27,19 @@ class WhiskyLikeService {
     }
 
     
-public function addlike(){
+public function addlike($a,$b){
     
    $WhiskyLike= new WhiskyLike();
-   $Whisky=$this->app->request->get('whisky_id');
-   $user=$this->app->request->get('user_id');
+
+   $whiskysrv = new WhiskyService($this->em, $this->app);
+   $whisky_object = $whiskysrv->retrieveWhiskyById($a);
    
-   $WhiskyLike->setUser($user);
-   $WhiskyLike->setWhisky($Whisky); 
+   $usersrv = new ProfileService($this->em, $this->app);
+   $user_object = $usersrv->searchUserById($b);
+  
+   
+   $WhiskyLike->setUser($user_object);
+   $WhiskyLike->setWhisky($whisky_object); 
    $this->em->persist($WhiskyLike);
    $this->em->flush();
    return $WhiskyLike;  

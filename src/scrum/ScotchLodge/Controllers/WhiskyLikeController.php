@@ -29,9 +29,9 @@ class WhiskyLikeController extends Controller{
     /**
      * Render the page to add a new event.
      */
-    public function addLike(){  
+    public function addLike($a,$b){  
        
-        $this->Whiskylikesrv->addlike();
+        $this->Whiskylikesrv->addlike($a,$b);
         
     }
 
