@@ -43,6 +43,31 @@ INSERT INTO `barrel` VALUES (2,'Calvados'),(1,'Malt Whisky');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_category_UNIQUE` (`category`),
+  KEY `idx_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -148,7 +173,7 @@ CREATE TABLE `comment_review` (
   KEY `fk_commentreview_comment_idx` (`comment_id`),
   CONSTRAINT `fk_commentreview_comment` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_commentreview_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,84 +355,6 @@ INSERT INTO `region` VALUES (1,'Speyside',103),(2,'France',73);
 UNLOCK TABLES;
 
 --
--- Table structure for table `review`
---
-
-DROP TABLE IF EXISTS `review`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `review` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(1024) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `review_date` datetime DEFAULT NULL,
-  `review_count` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_reviewscore_user_idx_idx` (`user_id`),
-  CONSTRAINT `fk_reviewscore_user_idx` FOREIGN KEY (`user_id`) REFERENCES `whisky_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `review`
---
-
-LOCK TABLES `review` WRITE;
-/*!40000 ALTER TABLE `review` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `review_category`
---
-
-DROP TABLE IF EXISTS `review_category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `review_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `description_idx` (`description`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `review_category`
---
-
-LOCK TABLES `review_category` WRITE;
-/*!40000 ALTER TABLE `review_category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `review_score`
---
-
-DROP TABLE IF EXISTS `review_score`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `review_score` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `score` tinyint(4) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `review_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_reviewscore_userid_idx` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `review_score`
---
-
-LOCK TABLES `review_score` WRITE;
-/*!40000 ALTER TABLE `review_score` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review_score` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `whisky`
 --
 
@@ -438,7 +385,7 @@ CREATE TABLE `whisky` (
   CONSTRAINT `fk_whisky_bottlery` FOREIGN KEY (`bottlery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_distillery` FOREIGN KEY (`distillery_id`) REFERENCES `distillery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_whisky_region` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -482,6 +429,35 @@ INSERT INTO `whisky_like` VALUES (9,17,28),(10,18,29),(4,19,29),(5,19,30),(6,20,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `whisky_score`
+--
+
+DROP TABLE IF EXISTS `whisky_score`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `whisky_score` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `score` tinyint(4) DEFAULT NULL,
+  `whisky_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_whisky_category_UNIQUE` (`whisky_id`,`category_id`),
+  KEY `fk_whiskyscore_category_idx` (`category_id`),
+  CONSTRAINT `fk_whiskyscore_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_whiskyscore_whisky` FOREIGN KEY (`whisky_id`) REFERENCES `whisky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `whisky_score`
+--
+
+LOCK TABLES `whisky_score` WRITE;
+/*!40000 ALTER TABLE `whisky_score` DISABLE KEYS */;
+/*!40000 ALTER TABLE `whisky_score` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `whisky_user`
 --
 
@@ -518,7 +494,7 @@ CREATE TABLE `whisky_user` (
 
 LOCK TABLES `whisky_user` WRITE;
 /*!40000 ALTER TABLE `whisky_user` DISABLE KEYS */;
-INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-22 13:21:46','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `whisky_user` VALUES (28,'aaa','devel.janvb@gmail.com',1,'$2y$10$bBRMfdnm6wQ6Ziw8uLeI6uTcZeH4491Krecy5i3mbWRAUub3XBsJy','2015-01-23 08:38:34','aaa','aaa',938,'street',NULL,NULL,NULL,1,NULL),(29,'janvb','janvb@pandora.be',1,'$2y$10$122V33NlB5CX5FDsWtueWOiQKDYCHpPT88IFfmGIkDxvTKQfaLhba','2015-01-20 15:26:00','jan','van biervliet',273,'Palmbomenlaan 16',NULL,NULL,NULL,NULL,NULL),(30,'bbb','bbb@bb.be',1,'$2y$10$snVIgs973wa4zLTlm9MnSecS0Oz1Mpd3SBF/kCg9assILMkKQ7vwi',NULL,'bbb','bbb',25,'bbb',NULL,NULL,NULL,NULL,NULL),(31,'zzz','zzz@zzz.zz',1,'$2y$10$Th2OBH215Onhdvc1mqG5zOihbepm2gSSK3tVpFU2wKxhmmsL0OJQK','2015-01-22 13:21:22','zzz','zzz',1,'zzz',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `whisky_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -531,4 +507,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-22 15:56:51
+-- Dump completed on 2015-01-23  9:44:31

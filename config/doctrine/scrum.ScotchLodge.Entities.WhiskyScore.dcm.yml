@@ -7,7 +7,11 @@ scrum\ScotchLodge\Entities\WhiskyScore:
       type: integer
       generator:
         strategy: AUTO
-
+  
+  uniqueConstraints:
+    idx_whisky_category_UNIQUE:
+      columns: [ whisky_id, category_id ]
+      
   manyToOne:
     whisky:
       targetEntity: Whisky
