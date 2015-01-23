@@ -232,6 +232,7 @@ CREATE TABLE `event` (
   `address` varchar(80) DEFAULT NULL,
   `event_date` datetime DEFAULT NULL,
   `event_stop` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_event_postcode_idx` (`postcode_id`),
   KEY `title_idx` (`title`),
