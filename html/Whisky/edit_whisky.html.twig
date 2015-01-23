@@ -12,7 +12,6 @@
       <h1>Edit Whisky</h1>
       <form action="{{ app.urlFor('edit_whisky_process',{'id':whisky.id}) }}{#/{{whisky.id}}#}" method="POST" novalidate>
         <div class="form-group">
-          <input type="hidden" name="id" value="{{whisky.id}}">
           <label for="name">Name</label>
           <input class="form-control" type="text" id="name" name="name" value="{{ whisky.name }}" />
           {#<label for="image">Image</label>
@@ -29,8 +28,14 @@
                 <option value="{{ dist.id }}" {% if dist.id == whisky.distillery.id %} selected="selected" {% endif %}>{{ dist.name }}</option>
             {% endfor %}
           </select>
+          <label for="bottlery">Bottlery</label>
+          <select class="form-control" id="bottlery" name="bottlery">
+            {% for dist in distillerys %}
+                <option value="{{ dist.id }}" {% if dist.id == whisky.bottlery.id %} selected="selected" {% endif %}>{{ dist.name }}</option>
+            {% endfor %}
+          </select>
           <label for="price">Price</label>
-          <input class="form-control" type="text" id="price" name="price" value="{{ whisky.price }}" />
+          <input class="form-control" type="text" id="price" name="price" value="{{ (whisky.price/100)|number_format(2,',','.') }}" />
           <label for="age">Age</label>
           <input class="form-control" type="number" id="age" name="age" value="{{ whisky.age }}" />
           <label for="alcohol">Alcohol</label>
@@ -41,6 +46,8 @@
                 <option value="{{ bar.id }}" {% if bar.id == whisky.barrel.id %} selected="selected" {% endif %}>{{ bar.casktype }}</option>
             {% endfor %}
           </select>          
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{{ whisky.short_description }}</textarea>          
         </div>
  
         <input class="form-control btn btn-default" type="submit" id="verzend" name="whisky" value="Update whisky" />

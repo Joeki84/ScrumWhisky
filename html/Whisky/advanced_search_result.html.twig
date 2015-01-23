@@ -14,7 +14,7 @@
     
     <ul> 
       {% for whisky in whiskys %}
-          <li><img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50"> {{ whisky.getName }}  <a href="#" class="like-btn" id="item{{ whisky.getId }}" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}"><img src="../img/likepic.png" ></a>  </li>        
+          <li><img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50"> {{ whisky.getName }}  <span id="item{{ whisky.getId }}"><a href="#" class="like-btn"  data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}"><img src="../img/likepic.png" ></a></span>  </li>        
       {% endfor %} 
     </ul>
         <a href="/" id="return_to_main" class="btn submit btn-default">
