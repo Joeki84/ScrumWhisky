@@ -5,6 +5,7 @@ namespace scrum\ScotchLodge\Service\Whisky;
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use scrum\ScotchLodge\Entities\Whisky;
+use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\Validation\WhiskyValidation as Val;
 use scrum\ScotchLodge\Service\Region\RegionService;
 use scrum\ScotchLodge\Service\Distillery\DistilleryService;
@@ -40,17 +41,21 @@ class WhiskyService{
      * otherwhise it gives a false in return.
      * @return boolean|Whisky
      */
-    public function addWhisky(){
+    public function addWhisky(User $user){
         $val = new Val($this->app, $this->em);
         if($val->validate()){        
             $name = $this->app->request->post('name');
             $image_path = $this->app->request->post('image_path');
             $region = $this->app->request->post('region');
             $distillery = $this->app->request->post('distillery');
-            $price = $this->app->request->post('price');
+            $bottlery = $this->app->request->post('bottlery');
+            $insert_price = $this->app->request->post('price');
+            $price = $insert_price * 100;
             $age = $this->app->request->post('age');
             $alcohol = $this->app->request->post('alcohol');
             $barrel = $this->app->request->post('barrel');
+            $description = $this->app->request->post('description');
+            $review_date = new \DateTime('now');
 
             /* @var $whisky Whisky */
             $whisky = new Whisky();
@@ -64,6 +69,9 @@ class WhiskyService{
             $dissrv = new DistilleryService($this->em, $this->app);
             $distillery_object = $dissrv->getDistilleryObject($distillery);
             $whisky->setDistillery($distillery_object);
+            /* @var $bottlery Distillery */
+            $bottlery_object = $dissrv->getDistilleryObject($bottlery);
+            $whisky->setBottlery($bottlery_object);
             $whisky->setPrice($price);
             $whisky->setAge($age);
             $whisky->setAlcohol($alcohol);
@@ -71,6 +79,9 @@ class WhiskyService{
             $barsrv = new BarrelService($this->em, $this->app);
             $barrel_object = $barsrv->getBarrelObject($barrel);
             $whisky->setBarrel($barrel_object);
+            $whisky->setShortDescription($description);
+            $whisky->setReviewDate($review_date);
+            /*$whisky->setCreated($user);*/
 
             $this->em->persist($whisky);
             $this->em->flush();
@@ -96,36 +107,46 @@ class WhiskyService{
         if($whisky->getImagePath() != $image_path){
             $whisky->setImagePath($image_path);
         }
-        
+
         $region = $this->app->request->post('region');
         if($whisky->getRegion()->getId() != $region){
             $regsrv = new RegionService($this->em, $this->app);
             $region_object = $regsrv->getRegionObject($region);
             $whisky->setRegion($region_object);
         }
-        
+
         $distillery = $this->app->request->post('distillery');
         if($whisky->getDistillery()->getId() != $distillery){
             $distsrv = new DistilleryService($this->em, $this->app);
             $distillery_object = $distsrv->getDistilleryObject($distillery);
             $whisky->setDistillery($distillery_object);
         }
-        
-        $price = $this->app->request->post('price');
+
+        $bottlery = $this->app->request->post('bottlery');
+        if($whisky->getBottlery()->getId() != $bottlery){
+            $distsrv = new DistilleryService($this->em, $this->app);
+            $bottlery_object = $distsrv->getDistilleryObject($bottlery);
+            $whisky->setBottlery($bottlery_object);
+        }
+
+        $insert_price = $this->app->request->post('price');
+        $convert_price = str_replace(',', '.', $insert_price);
+        $convert_price = floatval($convert_price);
+        $price = $convert_price * 100;
         if($whisky->getPrice() != $price){
             $whisky->setPrice($price);
         }
-        
+
         $age = $this->app->request->post('age');
         if($whisky->getAge() != $age){
             $whisky->setAge($age);
         }
-        
+
         $alcohol = $this->app->request->post('alcohol');
         if($whisky->getAlcohol() != $alcohol){
             $whisky->setAlcohol($alcohol);
         }
-        
+
         $barrel = $this->app->request->post('barrel');
         if($whisky->getBarrel()->getId() != $barrel){
             $barsrv = new BarrelService($this->em, $this->app);
@@ -133,8 +154,14 @@ class WhiskyService{
             $whisky->setBarrel($barrel_object);
         }
 
+        $description = $this->app->request->post('description');
+        if($whisky->getShortDescription() != $description){
+            $whisky->setShortDescription($description);
+        }
+
         $this->em->persist($whisky);
         $this->em->flush();
+        return true;
     }
     /* End Update function */
 

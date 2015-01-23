@@ -28,6 +28,12 @@
                 <option value="{{ dist.id }}" {% if dist.id == app.request.post('distillery') %} selected="selected" {% endif %}>{{ dist.name }}</option>
             {% endfor %}
           </select>
+          <label for="bottlery">Bottlery</label>
+          <select class="form-control" id="bottlery" name="bottlery">
+            {% for dist in distillerys %}
+                <option value="{{ dist.id }}" {% if dist.id == app.request.post('bottlery') %} selected="selected" {% endif %}>{{ dist.name }}</option>
+            {% endfor %}
+          </select>
           <label for="price">Price</label>
           <input class="form-control" type="text" id="price" name="price" value="{% if app.request.isPost() %}{{app.request.post('price')}}{% endif %}" />
           <label for="age">Age</label>
@@ -39,7 +45,9 @@
             {% for bar in barrels %}
                 <option value="{{ bar.id }}" {% if bar.id == app.request.post('barrel') %} selected="selected" {% endif %}>{{ bar.casktype }}</option>
             {% endfor %}
-          </select>          
+          </select>   
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{% if app.request.isPost() %}{{app.request.post('description')}}{% endif %}</textarea>          
         </div>
  
         <input class="form-control btn btn-default" type="submit" id="verzend" name="whisky" value="Add whisky" />

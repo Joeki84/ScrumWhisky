@@ -49,7 +49,8 @@ class WhiskyController extends Controller{
      */
     public function insertWhisky(){
         try{
-            $whisky = $this->whiskysrv->addWhisky();
+            $user = $this->getUser();
+            $whisky = $this->whiskysrv->addWhisky($user);
             if($whisky){
                 $url = $this->getApp()->urlFor('new_whisky_ok');
                 $this->getApp()->redirect($url);
@@ -91,20 +92,10 @@ class WhiskyController extends Controller{
     public function updateWhisky($id){
         try{
             $whisky_old = $this->whiskysrv->retrieveWhiskyById($id);
-            $whisky = $this->whiskysrv->updateWhisky($whisky_old);
-            if($whisky){
-                $url = $this->getApp()->urlFor('edited_whisky_ok');
-                $this->getApp()->redirect($url);
-            }else{
-                $errors = $this->whiskysrv->getErrors();
-                $regsrv = new RegionService($this->em, $this->app);
-                $regions = $regsrv->getRegions();
-                $distsrv = new DistilleryService($this->em, $this->app);
-                $distillerys = $distsrv->getDistillerys();
-                $barsrv = new BarrelService($this->em, $this->app);
-                $barrels = $barsrv->getBarrels();
-                $globals = $this->getGlobals();
-                $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky_old, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+            $bool = $this->whiskysrv->updateWhisky($whisky_old);
+            if($bool){
+                $this->app->flash('info', 'Whisky updated.');
+                $this->app->redirect($this->app->urlFor('main_page'));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
