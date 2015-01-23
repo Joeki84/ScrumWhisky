@@ -3,6 +3,7 @@
 namespace scrum\ScotchLodge\Entities;
 
 use scrum\ScotchLodge\Entities\Postcode;
+use scrum\ScotchLodge\Entities\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -22,6 +23,7 @@ class Event {
   private $whiskys;
   private $event_comments;
   private $event_presences;
+  private $created_by;
 
   function __construct() {
     $this->whiskys = new ArrayCollection();
@@ -131,6 +133,14 @@ class Event {
 
   function setWhiskys($whiskys) {
     $this->whiskys = $whiskys;
+  }
+  
+  function getCreatedBy() {
+    return $this->created_by;
+  }
+
+  function setCreatedBy(User $created_by) {
+    $this->created_by = $created_by;
   }
 
 }

@@ -29,11 +29,11 @@ class User {
   private $is_admin;
   private $password_token;
   private $user_likes;
-  private $comments;
   private $present_in_events;
   private $whisky_likes;
+  private $comments;
   private $whiskys_created;
-  
+  private $events_created;
 
   function __construct() {
     $this->user_likes = new ArrayCollection();
@@ -41,6 +41,7 @@ class User {
     $this->present_in_events = new ArrayCollection();
     $this->whisky_likes = new ArrayCollection();
     $this->whiskys_created = new ArrayCollection();
+    $this->events_created = new ArrayCollection();
     
   }
 
@@ -207,5 +208,15 @@ class User {
   function setWhiskysCreated($whiskys_created) {
     $this->whiskys_created = $whiskys_created;
   }
+  
+  function getEventsCreated() {
+    return $this->events_created;
+  }
+
+  function setEventsCreated($events_created) {
+    $this->events_created = $events_created;
+  }
+
+
 
 }

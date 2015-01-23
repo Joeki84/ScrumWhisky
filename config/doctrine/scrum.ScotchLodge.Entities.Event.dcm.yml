@@ -27,6 +27,13 @@ scrum\ScotchLodge\Entities\Event:
       joinColumn:
         name: postcode_id
         referencedColumnName: id
+        
+    created_by:
+      targetEntity: User
+      inversedBy: events_created
+      joinColumn:
+        name: crteated_by
+        referencedColumnName: id
    
   oneToMany:
     event_comments:
