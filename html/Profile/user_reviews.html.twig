@@ -1,0 +1,11 @@
+{# THIS TEMPLATE EXPECTS 'reviews' objects #}
+
+{% if reviews|length > 0 %}
+  <div id="reviews" class="topline">
+    <h3>User reviews</h3>
+    {% for review in reviews %}      
+      <div><b>{{ review.name }}</b></div>
+      <div class="margin-bottom-6">{{ review.short_description }}</div>
+    {% endfor %}
+  </div>
+{% endif %}

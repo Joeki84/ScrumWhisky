@@ -209,6 +209,14 @@ class User {
     $this->whiskys_created = $whiskys_created;
   }
   
+  function getWhiskys_created() {
+    return $this->whiskys_created;
+  }
+
+  function setWhiskys_created($whiskys_created) {
+    $this->whiskys_created = $whiskys_created;
+  }
+  
   function getEventsCreated() {
     return $this->events_created;
   }
