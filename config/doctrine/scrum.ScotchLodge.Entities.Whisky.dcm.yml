@@ -41,7 +41,7 @@ scrum\ScotchLodge\Entities\Whisky:
       targetEntity: User
       inversedBy: whiskys_created
       joinColumn:
-        name: createdBy
+        name: created_by
 
   manyToMany:
     events:

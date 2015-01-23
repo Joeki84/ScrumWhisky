@@ -214,6 +214,14 @@ class Whisky {
     return $this->review_date;
   }
 
+  function getCreated_by() {
+      return $this->created_by;
+  }
+
+  function setCreated_by(User $created_by) {
+      $this->created_by = $created_by;
+  }
+  
   /* @return User*/
   function getCreatedBy() {
     return $this->created_by;

@@ -38,7 +38,7 @@ scrum\ScotchLodge\Entities\User:
       mappedBy: created_by
       
     events_created:
-      targetEntity: Events
+      targetEntity: Event
       mappedBy: created_by
      
 
