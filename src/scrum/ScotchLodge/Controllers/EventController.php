@@ -39,11 +39,24 @@ class EventController extends Controller{
     }
     
     /**
+     * Render the page to edit a event.
+     */
+    public function editEvent($id){
+        $event = $this->eventsrv->retrieveEventById($id);        
+        $regsrv = new RegistrationService($this->em, $this->app);
+        $postcodes = $regsrv->getPostcodes();
+        $globals = $this->getGlobals();
+        $this->getApp()->render('Events/edit_event.html.twig', array('globals' => $globals, 'event' => $event, 'postcodes' => $postcodes));
+    }
+    
+    
+    /**
      * Render the page to insert a event.
      */
     public function insertEvent(){
         try{
-            $event = $this->eventsrv->addEvent();
+            $user = $this->getUser();
+            $event = $this->eventsrv->addEvent($user);
             if($event){
                 $app = $this->getApp();
                 $app->flash('info', 'Event added.');
@@ -59,4 +72,22 @@ class EventController extends Controller{
             $this->getApp()->render('probleem.twig.html');
         }
     }
+    
+    /**
+     * Render the page to insert a whisky.
+     * @param int $id 
+     */
+    public function updateEvent($id){
+        try{
+            $event_old = $this->eventsrv->retrieveEventById($id);
+            $bool = $this->eventsrv->updateEvent($event_old);
+            if($bool){
+                $this->app->flash('info', 'Event updated.');
+                $this->app->redirect($this->app->urlFor('main_page'));
+            }
+        } catch (Exception $ex) {
+            $this->getApp()->render('probleem.twig.html');
+        }
+    }
+    
 }

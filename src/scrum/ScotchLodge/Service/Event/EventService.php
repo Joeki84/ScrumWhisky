@@ -5,6 +5,7 @@ namespace scrum\ScotchLodge\Service\Event;
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use scrum\ScotchLodge\Entities\Event;
+use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\Validation\EventValidation as Val;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
 use DateTime;
@@ -36,7 +37,7 @@ class EventService {
      * otherwhise it gives a false in return.
      * @return boolean|Event
      */
-    public function addEvent(){
+    public function addEvent(User $user){
         $title = $this->app->request->post('title');
         $postcode = $this->app->request->post('postcode');
         $address = $this->app->request->post('address');
@@ -57,6 +58,7 @@ class EventService {
         $event->setEventDate($event_date);
         $event_stop = new \DateTime($date_stop);
         $event->setEventStop($event_stop);
+        /*$event->setCreated($user);*/
 
         $val = new Val($this->app, $this->em);
         if($val->validate()){
@@ -76,7 +78,7 @@ class EventService {
      */
     public function updateEvent(Event $event){
         $title = $this->app->request->post('title');
-        if($event->getFirstName() != $title){
+        if($event->getTitle() != $title){
           $event->setTitle($title);
         }
 
@@ -92,13 +94,23 @@ class EventService {
             $event->setAddress($address);
         }
 
-        $event_date = $this->app->request->post('event_date');
+        $date = $this->app->request->post('event_date');
+        $event_date = str_replace('/', '-', $date);
+        $event_date = new \DateTime($date);        
         if($event->getEventDate() != $event_date){
             $event->setEventDate($event_date);
+        }
+        
+        $date = $this->app->request->post('event_stop');
+        $event_stop = str_replace('/', '-', $date);
+        $event_stop = new \DateTime($date);        
+        if($event->getEventStop() != $event_stop){
+            $event->setEventStop($event_stop);
         }
 
         $this->em->persist($event);
         $this->em->flush();
+        return true;
     }
     /* End Update function */
 
