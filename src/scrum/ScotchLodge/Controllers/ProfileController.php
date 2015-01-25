@@ -182,11 +182,8 @@ class ProfileController extends Controller {
     }
   }
   
-  public function showProfileOfUserWithId($id) {     
-      
-    $app = $this->getApp();
-    $reg_srv = new RegistrationService($this->getEntityManager(), $this->getApp());
-    
+  public function showProfileOfUserWithId($id) {           
+    $app = $this->getApp();    
     $srv = $this->srv;
     $usertoview = $srv->searchUserById($id);
     if ($usertoview != null) {
@@ -197,6 +194,17 @@ class ProfileController extends Controller {
     }
     
   }
+  
+  public function showProfileOfUserWithUsername($username) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $usertoview = $srv->searchUserByUsername($username);
+    if ($usertoview != null) {
+      $app->render('Profile/profile_show_by_id.html.twig', array('globals' => $this->getGlobals(), 'usertoview' => $usertoview));
+    } else {
+      $app->flash('error', 'Invalid user. Please try again');
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
  
-
 }

@@ -26,9 +26,13 @@ $app->post('/profile/edit', function() use ($contr) {
   $contr->editProfile();
 })->name('profile_edit');
 
-$app->get('/profile/:id', function($id) use ($contr) {
+$app->get('/profile/id/:id', function($id) use ($contr) {
   $contr->showProfileOfUserWithId($id);
 })->name('profile_show_by_id');
+
+$app->get('/profile/username/:username', function($username) use ($contr) {
+  $contr->showProfileOfUserWithUsername($username);
+})->name('/profile_show_by_username');
 
 /* olivier */
 $app->get('/editadmin/:username', function($username) use ($contr) {
