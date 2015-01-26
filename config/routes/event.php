@@ -3,10 +3,6 @@
 use scrum\ScotchLodge\Controllers\EventController;
 
 $contr = new EventController($em, $app);
-/* Olivier */
-$app->get('/event/:id', function($id) use ($contr){
-    $contr->show_event_by_id($id);
-})->name('show_event_by_id');
 
 $app->get('/event/new', function() use ($contr){
     $contr->addEvent();
@@ -33,6 +29,9 @@ $app->post('/event/edit/:id', function($id) use ($contr){
 })->name('edit_event_process');
 
 
-
+/* Olivier */
+$app->get('/event/:id', function($id) use ($contr){
+    $contr->show_event_by_id($id);
+})->name('show_event_by_id');
 
 /* Olivier */
