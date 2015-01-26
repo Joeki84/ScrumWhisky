@@ -183,6 +183,7 @@ class ProfileController extends Controller {
     $srv = $this->srv;
     $user = $srv->searchUserByToken($token);
     if ($user != null) {
+      $srv->enableUser($user);
       $app->flash('info', 'The token is verified. You are now granted access.');
       $app->redirect($app->urlFor('main_page'));
     } else {
