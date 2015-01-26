@@ -112,6 +112,9 @@ div.welcome {
 #main-wrapper {
   position: relative;
 }
+#latest_tabs {
+  border-top: solid 2px black;
+}
 .latest_tab {
   width: 31%;
   float: left;
