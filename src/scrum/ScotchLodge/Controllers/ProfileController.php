@@ -36,7 +36,8 @@ class ProfileController extends Controller {
     if ($verified) {
       $this->logonIfEnabled();
     } else {
-      $app->render('homepage.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
+      $app->flash('error', 'Invalid credentials');
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 
@@ -182,12 +183,13 @@ class ProfileController extends Controller {
     $srv = $this->srv;
     $user = $srv->searchUserByToken($token);
     if ($user != null) {
-      $app->flash('info', 'The token is verified. You are now granted access.');      
+      $app->flash('info', 'The token is verified. You are now granted access.');
       $app->redirect($app->urlFor('main_page'));
+    } else {
+      $app->redirect($app->urlFor('error_404'));
     }
   }
 
-  
   public function showProfileOfUserWithId($id) {           
     $app = $this->getApp();    
     $srv = $this->srv;
