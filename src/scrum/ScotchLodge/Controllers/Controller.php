@@ -44,7 +44,7 @@ abstract class Controller {
       'user' => $this->getUser(), // User
       'session' => $this->getSession(), // session var array
       'path' => $_SERVER['REQUEST_URI'], // current path,      
-      'root' => $_SERVER['HTTP_HOST']
+      'root' => 'http://' . $_SERVER['HTTP_HOST']
     );
     return $globals;
   }
