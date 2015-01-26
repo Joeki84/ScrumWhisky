@@ -155,6 +155,11 @@ class EventService {
     $query = $em->createQuery($dql);
     //$query->setMaxResults(30);
     $events = $query->getResult();
+    if(count($events)> 0){
+            return $events;
+        }else{
+            return null;
+        }
     return $events;
     
     }
