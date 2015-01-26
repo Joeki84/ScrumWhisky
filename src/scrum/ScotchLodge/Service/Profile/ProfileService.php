@@ -182,6 +182,12 @@ class ProfileService {
       
   }
   
+  public function searchUserByUsername($username) {
+    $em = $this->em;
+    $repo = $em->getRepository('scrum\ScotchLodge\Entities\User');
+    return $repo->findOneByUsername($username);
+  }
+  
   /* Olivier */
   
   
