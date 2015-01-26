@@ -8,6 +8,7 @@ use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Event\EventService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
 use scrum\ScotchLodge\Entities\Event;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * EventController controller
@@ -43,7 +44,8 @@ class EventController extends Controller{
      */
     public function insertEvent(){
         try{
-            $event = $this->eventsrv->addEvent();
+            $user = $this->getUser();
+            $event = $this->eventsrv->addEvent($user);
             if($event){
                 $app = $this->getApp();
                 $app->flash('info', 'Event added.');
