@@ -10,8 +10,12 @@
     <div class="container form"
 	    <h3>Upcoming events:</h3>
 	    <dl>
-	        {% for event in events_five %}
-	        <dt>{{ event.Title }}</dt> 
+	        {% for event in events %}
+	        <dt>{{ event.Title }} 
+	        	{% if globals.user is defined and globals.user is not null %}
+	            {% if user.isAdmin() %}<a href="{{ globals.app.urlFor('edit_event', { 'event' : member.getUsername()} ) }}"><img src="../img/edit.png"></a>{% endif %}
+	            {% endif %}
+	        </dt> 
 	        	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
 	        {% endfor %}  
 	     </dl>
