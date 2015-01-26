@@ -14,7 +14,6 @@ use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
  */
 class ProfileController extends Controller {
   /* var $srv ProfileService */
-
   private $srv;
 
   public function __construct($em, $app) {
@@ -111,9 +110,6 @@ class ProfileController extends Controller {
   }
   
   /* olivier */
-  
-  
-  
   public function storeChanges() {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {
@@ -127,7 +123,20 @@ class ProfileController extends Controller {
     }
   }
 
+   
   /* password reset */
+  public function processToken($token) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserByToken($token);
+    if ($user != null) {
+      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+    } else {
+      //$srv->clearAllTokens(); // safety measure
+      $app->flash('error', 'Invalid or expired token. Please try to request a new password');
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
 
   public function PasswordResetRequest() {
     $app = $this->getApp();
@@ -142,28 +151,13 @@ class ProfileController extends Controller {
     if ($val->validate()) {
       $user = $this->srv->createPasswordToken();
       if ($user != null) {
-        $this->srv->mailUser($user);
+        $this->srv->mailUserResetToken($user);
       }
       $app->flash('info', 'A mail will be sent shortly if the email address provided is valid.');
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'E-mail address is not valid.');
       $app->redirect($app->urlFor('password_reset_request'));
-    }
-  }
-
-  /* password reset */
-
-  public function processToken($id) {
-    $app = $this->getApp();
-    $srv = $this->srv;
-    $user = $srv->searchUserByToken($id);
-    if ($user != null) {
-      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
-    } else {
-      $srv->clearAllTokens(); // safety measure
-      $app->flash('error', 'Invalid or expired token. Please try to request a new password');
-      $app->redirect($app->urlFor('main_page'));
     }
   }
 
@@ -181,6 +175,18 @@ class ProfileController extends Controller {
       $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $id, 'errors' => $errors));
     }
   }
+  
+  /* registration */
+  public function processLogonToken($token) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserByToken($token);
+    if ($user != null) {
+      $app->flash('info', 'The token is verified. You are now granted access.');      
+      $app->redirect($app->urlFor('main_page'));
+    }
+  }
+
   
   public function showProfileOfUserWithId($id) {           
     $app = $this->getApp();    

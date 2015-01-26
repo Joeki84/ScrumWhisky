@@ -140,17 +140,46 @@ class ProfileService {
     }
     return null;
   }
+  
+  public function createFirstTimeToken($email) {    
+    $user = $this->retrieveUserByEmail($email);
+    if (isset($user) && $user != null) {
+      $token = uniqid(mt_rand(), true);
+      $user->setPasswordToken($token);
+      $this->em->persist($user);
+      $this->em->flush();
+      return $user;
+    }
+    return null;
+  }
 
-  public function mailUser($user) {
+  public function mailUserResetToken($user) {
     $root_path = getenv('HTTP_HOST');
     $app = $this->app;
-    $rel_path_raw = trim($app->urlFor('token_verify'), '\x3A');
-    $rel_path = str_replace(":id", "", $rel_path_raw);
+    $rel_path_raw = trim($app->urlFor('reset_token_verify'), '\x3A');
+    $rel_path = str_replace(":token", "", $rel_path_raw);
     $url = "http://$root_path" . $rel_path . $user->getPasswordToken();    
     $message = wordwrap("Password reset link requested: " . $user->getUsername() .
       ". Click " . $url . " to complete.");
     $headers = 'From: webmaster@thescotchlodge.com';
     mail($user->getEmail(), 'The Scotch Lodge password reset', $message, $headers);
+  }
+  
+  public function mailUserLogonToken($user) {
+    $root_path = getenv('HTTP_HOST');
+    $app = $this->app;
+    $rel_path_raw = trim($app->urlFor('logon_token_verify'), '\x3A');
+    $rel_path = str_replace(":token", "", $rel_path_raw);
+    $url = "http://$root_path" . $rel_path . $user->getPasswordToken();    
+    $message = wordwrap("Hello " . $user->getUsername() .
+      ". Click " . $url . " to complete the registration.");
+    $headers = 'From: webmaster@thescotchlodge.com';
+    mail($user->getEmail(), 'The Scotch Lodge profile verification.', $message, $headers);
+  }
+  
+  public function processRegistration($user) {
+    $user = $this->createFirstTimeToken($user->getEmail());
+    $this->mailUserLogonToken($user);
   }
 
   public function getErrors() {

@@ -60,9 +60,9 @@ $app->post('/password/reset', function() use ($contr) {
   $contr->passwordResetProcess();
 })->name('password_reset_process');
 
-$app->get('/verify/:id', function($id) use ($contr) {
-  $contr->processToken($id);
-})->name('token_verify');
+$app->get('/verify/:token', function($token) use ($contr) {
+  $contr->processToken($token);
+})->name('reset_token_verify');
 
 $app->post('/password/store', function() use ($contr) {  
   $contr->processNewPassword();

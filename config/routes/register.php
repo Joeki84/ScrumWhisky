@@ -15,3 +15,7 @@ $app->post('/register', function() use ($contr) {
 $app->get('/register/ok', function() use ($contr) {
   $contr->registrationConfirm();
 })->name('user_register_ok');
+
+$app->get('/enable/:token', function($token) use ($contr) {
+  $contr->processLogonToken($token);  
+})->name('logon_token_verify');

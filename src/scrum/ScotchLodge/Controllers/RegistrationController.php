@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Controllers;
 
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
+use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Entities\User;
 
 /**
@@ -31,6 +32,9 @@ class RegistrationController extends Controller {
     try {
       $user = $this->srv->processRegistration();
       if ($user) {
+        $profile_srv = new ProfileService($this->getEntityManager(), $this->getApp());
+        $profile_srv->processRegistration($user);
+        
         $url = $this->getApp()->urlFor('user_register_ok');
         $this->getApp()->redirect($url);
       } else {
@@ -45,7 +49,7 @@ class RegistrationController extends Controller {
 
   public function registrationConfirm() {
     $app = $this->getApp();
-    $app->flash('info', 'Registration complete.');
+    $app->flash('info', 'A mail has been sent. Please verify by following the email instructions.');
     $app->redirect($app->urlFor('main_page'));
   }
 
