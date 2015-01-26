@@ -61,4 +61,20 @@ class EventController extends Controller{
             $this->getApp()->render('probleem.twig.html');
         }
     }
+    
+/* Olivier */
+    
+        public function getEvents(){
+          
+          $regsrv = new RegistrationService($this->em, $this->app);
+          $postcodes = $regsrv->getPostcodes();
+          $globals = $this->getGlobals();  
+          $events = $this->eventsrv->ShowAllCurrentEvents($this->em, $this->app);
+          $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'events' => $events));
+        }
+        
+    
+/* End Olivier    */
+    
+    
 }

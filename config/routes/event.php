@@ -18,7 +18,7 @@ $app->get('/newevent/ok', function() use ($contr){
 
 $app->get('/events', function() use ($contr) {
   $contr->getEvents();
-})->name('event_list');
+})->name('current_event_list');
 
 $app->get('/editevent/:id', function($id) use ($contr){
     $contr->editEvent($id);
