@@ -92,16 +92,16 @@ class EventController extends Controller{
          try{
 
         $globals = $this->getGlobals();  
-        $whisky = $this->eventsrv->retrieveEventById($id);
+        $event = $this->eventsrv->retrieveEventById($id);
         
         if(whiskys){
-              $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
+              $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'event' => $event));
           }
           else{
                 $errors = $this->eventsrv->getErrors();
                  $app = $this->getApp();
                 $app->flash('error', 'No whiskys');
-                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky));
+                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'event' => $event));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
