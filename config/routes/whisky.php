@@ -4,29 +4,29 @@ use scrum\ScotchLodge\Controllers\WhiskyController;
 
 $contr = new WhiskyController($em, $app);
 
-$app->get('/newwhisky', function() use ($contr){
+$app->get('/whisky/new', function() use ($contr){
     $contr->addWhisky();
 })->name('new_whisky');
 
-$app->post('/newwhisky', function() use ($contr){
+$app->post('/whisky/new', function() use ($contr){
     $contr->insertWhisky();
 })->name('new_whisky_process');
 
-$app->get('/newwhisky/ok', function() use ($contr){
+$app->get('/whisky/new/ok', function() use ($contr){
     echo("todo new whisky stored");
 })->name('new_whisky_ok');
 
-$app->get('/editwhisky/:id', function($id) use ($contr){
+$app->get('/whisky/edit/:id', function($id) use ($contr){
     $contr->editWhisky($id);
 })->name('edit_whisky');
 
-$app->post('/editwhisky/:id', function($id) use ($contr){
+$app->post('/whisky/edit/:id', function($id) use ($contr){
     $contr->updateWhisky($id);
 })->name('edit_whisky_process');
 
 /* Olivier */
 
-$app->get('/advanced_search_whisky', function() use ($contr){
+$app->get('/whisky/search', function() use ($contr){
     $contr->advanced_search_whisky();
 })->name('advanced_search_whisky');
 
@@ -35,7 +35,7 @@ $app->post('/advanced_search_whisky_result', function() use ($contr){
     $contr->advanced_search_whisky_result();
 })->name('advanced_search_whisky_result');
 
-$app->get('/show_whisky_by_id/:id', function($id) use ($contr){
+$app->get('/whisky/:id', function($id) use ($contr){
     $contr->show_whisky_by_id($id);
 })->name('show_whisky_by_id');
 
