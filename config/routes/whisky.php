@@ -35,4 +35,9 @@ $app->post('/advanced_search_whisky_result', function() use ($contr){
     $contr->advanced_search_whisky_result();
 })->name('advanced_search_whisky_result');
 
+$app->get('/show_whisky_by_id/:id', function($id) use ($contr){
+    $contr->show_whisky_by_id($id);
+})->name('show_whisky_by_id');
+
+
 /* Olivier */
