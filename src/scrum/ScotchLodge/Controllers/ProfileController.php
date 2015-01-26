@@ -145,7 +145,7 @@ class ProfileController extends Controller {
         $this->srv->mailUser($user);
       }
       $app->flash('info', 'A mail will be sent shortly if the email address provided is valid.');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'E-mail address is not valid.');
       $app->redirect($app->urlFor('password_reset_request'));
