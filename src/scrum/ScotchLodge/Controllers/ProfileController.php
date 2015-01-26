@@ -6,6 +6,7 @@ use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
 use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * ProfileController User logon, profile related actions
@@ -51,10 +52,12 @@ class ProfileController extends Controller {
   public function logonIfEnabled() {
     $app = $this->getApp();
     $username = $app->request->post('username');
+    /* @var $user User */
     $user = $this->srv->retrieveUserByUsername($username);
-
+    $this->srv->clearToken($user);
     if ($user->isEnabled()) {
       // logon
+      
       $_SESSION['user'] = $user->getUsername();
       $this->srv->storeLoginTime($user);
       $app->redirect($app->urlFor('main_page'));
@@ -134,8 +137,8 @@ class ProfileController extends Controller {
       $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
     } else {
       //$srv->clearAllTokens(); // safety measure
-      $app->flash('error', 'Invalid or expired token. Please try to request a new password');
-      $app->redirect($app->urlFor('main_page'));
+      //$app->flash('error', 'Invalid or expired token. Please try to request a new password');
+      $app->redirect($app->urlFor('error_404'));
     }
   }
 
@@ -169,7 +172,7 @@ class ProfileController extends Controller {
       $srv->changePassword();
       $srv->clearToken();
       $app->flash('info', 'Password has been changed');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     } else {
       $id = $app->request->post('id');
       $errors = $srv->getErrors();
