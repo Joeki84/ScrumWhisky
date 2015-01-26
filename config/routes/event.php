@@ -27,3 +27,13 @@ $app->get('/editevent/:id', function($id) use ($contr){
 $app->post('/editevent/:id', function($id) use ($contr){
     $contr->updateEvent($id);
 })->name('edit_event_process');
+
+
+/* Olivier */
+
+$app->get('/show_event_by_id/:id', function($id) use ($contr){
+    $contr->show_event_by_id($id);
+})->name('show_event_by_id');
+
+
+/* Olivier */

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {{ event.getTitle }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container form">
+    <h1>{{ event.getTitle }}</h1>
+        <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>    
+  </div>
+{% endblock content %}

@@ -87,6 +87,29 @@ class EventController extends Controller{
         }
         
     
+        
+         public function show_event_by_id($id) {
+         try{
+
+        $globals = $this->getGlobals();  
+        $whisky = $this->eventsrv->retrieveEventById($id);
+        
+        if(whiskys){
+              $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
+          }
+          else{
+                $errors = $this->eventsrv->getErrors();
+                 $app = $this->getApp();
+                $app->flash('error', 'No whiskys');
+                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky));
+            }
+        } catch (Exception $ex) {
+            $this->getApp()->render('probleem.twig.html');
+        }
+          
+    }
+        
+    
 /* End Olivier    */
     
     
