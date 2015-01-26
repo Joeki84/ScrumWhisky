@@ -52,5 +52,10 @@ class HomepageController extends Controller {
     $simple = $this->simplifydRoutes($routes);
     $app->render('Test\routes.html.twig', array('globals' => $this->getGlobals(), 'routes' => $simple));
   }
+  
+  public function notFound() {
+    $app = $this->getApp();
+    $app->render('Error\error_404.html.twig', array('error' => 'Page not found'));
+  }
 
 }
