@@ -43,13 +43,14 @@ abstract class Controller {
       'app' => $this->app,  // http://docs.slimframework.com/
       'user' => $this->getUser(), // User
       'session' => $this->getSession(), // session var array
-      'path' => $_SERVER['REQUEST_URI'] // current path
+      'path' => $_SERVER['REQUEST_URI'], // current path,      
+      'root' => $_SERVER['HTTP_HOST']
     );
     return $globals;
   }
-  
   public function getSession() {
     return $_SESSION;
+  
   }
   
   private function queryUserByUserName($username) {    
