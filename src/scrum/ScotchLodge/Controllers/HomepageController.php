@@ -35,7 +35,7 @@ class HomepageController extends Controller {
     $reviewSrvc = new WhiskyService($em, $app);
     $reviews = $reviewSrvc->retrieveReviews(3);
     
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'events_five' => $events_five, 'events_one' => $events_one, 'comments' => $comments, 'reviews' => $reviews));
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events_five' => $events_five, 'comments' => $comments, 'reviews' => $reviews));
   }
 
   public function simplifydRoutes($routes) {

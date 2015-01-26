@@ -219,7 +219,7 @@ div#bookmark div {
   box-sizing: content-box;
 }
 #topmenu li a:hover, #topmenu li a:focus {
-  background-color: rgba(225,183,14, 0.7);
+  background-color: rgb(0,0,0);
 }
 .nav-tabs {
   border-bottom: none;
