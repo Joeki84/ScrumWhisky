@@ -5,7 +5,7 @@
     {% for rev in popular %}
       {% set whisky = rev.whisky.whisky %}
       <dt class="review_date">{{ whisky.review_date|date('Y-m-d') }}</dt>
-      <dd class="whisky_name"><span>{{ whisky.name }}</span></dd>
+      <dt class="whisky_name"><span>{{ whisky.name }}</span></dt>
       <div class="review_likes">Likes: {{ rev.likes }}</dd>      
       <dd class="review">{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}</dd>
     {% endfor %}
