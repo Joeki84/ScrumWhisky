@@ -59,7 +59,7 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'Access denied.');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 
