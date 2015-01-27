@@ -8,7 +8,7 @@
   <div class="container form">
     <h1>{{ event.getTitle }}</h1>
     
-    <div><strong>Event date:</strong></div><div></div>
+    <div><strong>Event date:</strong></div><div>{{ event.event_date | date('Y-m-d')  }}</div>
     <div><strong>Location:</strong></div><div>{{ event.getAddress }}</div>
         <a href="/" id="return_to_main" class="btn submit btn-default">
           Return to main menu</a>    
