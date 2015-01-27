@@ -226,7 +226,7 @@ class ProfileController extends Controller {
     if ($user == null) {
       $app->redirect('error_404');
     }
-    $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments()));
+    $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments(), 'user' => $user));
   }
  
 }
