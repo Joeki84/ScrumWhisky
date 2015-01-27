@@ -270,10 +270,6 @@ input.btn:hover, a.btn:hover {
 }
 
 /*events*/
-#event_1 {
-border-top: 1px solid black;
-border-bottom: 1px solid black;
-}
 #event_5 {
   padding: 20px 0px;
   border-top: solid 2px white;
@@ -281,6 +277,8 @@ border-bottom: 1px solid black;
 #event_5 h3 {
   margin-top: 0;
 }
+
+
 /*forms*/
 div.form {
   padding-left:10%;
@@ -291,6 +289,9 @@ div.form label {
   float: left;
   width: 30%;
   margin-top: 10px;
+}
+div.form .sliders input {
+  margin: 0 10px;
 }
 div.form .form-group input, div.form select {
   margin-top: 5px;
@@ -310,7 +311,15 @@ div.form .submit {
 div.form #city {
   display: none;
 }
-
+div.form .interval {
+  height: 1px;
+}
+div.sliders {
+  margin: 15px 0px;
+}
+div.sliders label {
+  margin-top: 0px;
+}
 
 
 

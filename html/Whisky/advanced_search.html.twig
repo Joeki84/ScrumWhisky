@@ -8,10 +8,10 @@
   
   {% set app = globals.app %}
   
-  <div class="container">
+  <div class="container form">
     <h1>Whisky advanced search</h1>
     <form action="{{ app.urlFor('advanced_search_whisky_result') }}" method="POST" novalidate>
-      <div class="form-group">
+      <div class="form-group cf">
         <label for="Region">Region</label>
         <select class="form-control"  id="region" name="region" >
             <option value="">All regions</option>
@@ -33,19 +33,21 @@
             <option   value="{{ barrel.id }}">{{ barrel.getCasktype }}</option>
         {% endfor %}
         </select>
-        
-        <label for="age">Age: </label> 
-        <input id="age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
-        <span id="ageCurrentSliderValLabel">Current age selected: <span id="ageSliderVal"></span> year</span>
-        <p>&nbsp;</p>
-        <label for="abv">ABV: </label> 
-        <input id="abv" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
-        <span id="abvCurrentSliderValLabel">Current value selected: <span id="abvSliderVal"></span> %</span>
-        <p>&nbsp;</p>
+      </div>
+      <div class="form-group cf">
+        <div class="sliders cf">
+          <label for="age">Age:</label> 
+          <input id="age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+          <span id="ageCurrentSliderValLabel">Current age selected: <span id="ageSliderVal"></span> year</span>
+          <p>&nbsp;</p>
+          <label for="abv">ABV: </label> 
+          <input id="abv" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" />
+          <span id="abvCurrentSliderValLabel">Current value selected: <span id="abvSliderVal"></span> %</span>
+        </div>
         <label for="name">Name</label>
         <input class="form-control" type="text" id="name" name="name" value="" />        
       </div>
-      <input class="form-control btn btn-default" type="submit" id="verzend" name="search" value="Search" />
+      <input class="form-control btn submit btn-default" type="submit" id="verzend" name="search" value="Search" />
 
     </form>
         <a href="/" id="return_to_main" class="btn submit btn-default">
