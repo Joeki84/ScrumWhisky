@@ -2,7 +2,7 @@
     <h3>Upcoming events</h3>
     <dl>
         {% for event in events_five %}
-            <dt><a href="{{ app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a></dt> 
+            <dt><a href="{{ globals.app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a></dt> 
         	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
         {% endfor %}  
      </dl>

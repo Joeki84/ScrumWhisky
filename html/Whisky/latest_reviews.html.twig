@@ -5,7 +5,7 @@
     {% for rev in latest %}
       {% set des = rev.short_description %}
       <dt class="review_date">{{ rev.review_date|date('Y-m-d') }}</dt>
-      <dd class="whisky_name"><span><a href="{{ app.urlFor('show_whisky_by_id', {"id" : whisky.getId } ) }}">{{ rev.name }}</a></span></dd>
+      <dd class="whisky_name"><span><a href="{{ globals.app.urlFor('show_whisky_by_id', {"id" : rev.getId } ) }}">{{ rev.name }}</a></span></dd>
       <dd class="review">{{ des|length > 50 ? des|slice(0, 50) ~ '...' : des }}</dd>
     {% endfor %}
   </dl>
