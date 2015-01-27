@@ -15,3 +15,4 @@ $app->post('/register', function() use ($contr) {
 $app->get('/register/ok', function() use ($contr) {
   $contr->registrationConfirm();
 })->name('user_register_ok');
+

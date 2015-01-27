@@ -6,6 +6,7 @@ use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Profile\ProfileService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
 use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * ProfileController User logon, profile related actions
@@ -14,7 +15,6 @@ use scrum\ScotchLodge\Service\Validation\EmailNotBlankValidation as EmailVal;
  */
 class ProfileController extends Controller {
   /* var $srv ProfileService */
-
   private $srv;
 
   public function __construct($em, $app) {
@@ -37,7 +37,8 @@ class ProfileController extends Controller {
     if ($verified) {
       $this->logonIfEnabled();
     } else {
-      $app->render('homepage.html.twig', array('globals' => $this->getGlobals(), 'errors' => ['Invalid credentials']));
+      $app->flash('error', 'Invalid credentials');
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 
@@ -51,16 +52,18 @@ class ProfileController extends Controller {
   public function logonIfEnabled() {
     $app = $this->getApp();
     $username = $app->request->post('username');
+    /* @var $user User */
     $user = $this->srv->retrieveUserByUsername($username);
-
+    $this->srv->clearToken($user);
     if ($user->isEnabled()) {
       // logon
+      
       $_SESSION['user'] = $user->getUsername();
       $this->srv->storeLoginTime($user);
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'Access denied.');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     }
   }
 
@@ -111,9 +114,6 @@ class ProfileController extends Controller {
   }
   
   /* olivier */
-  
-  
-  
   public function storeChanges() {
     $app = $this->getApp();
     if ($this->srv->dataIsValid()) {
@@ -127,11 +127,24 @@ class ProfileController extends Controller {
     }
   }
 
+   
   /* password reset */
+  public function processToken($token) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserByToken($token);
+    if ($user != null) {
+      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
+    } else {
+      //$srv->clearAllTokens(); // safety measure
+      //$app->flash('error', 'Invalid or expired token. Please try to request a new password');
+      $app->redirect($app->urlFor('error_404'));
+    }
+  }
 
   public function PasswordResetRequest() {
     $app = $this->getApp();
-    $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('Profile/password_reset_request.html.twig', array('globals' => $this->getGlobals()));
   }
 
   public function passwordResetProcess() {
@@ -142,28 +155,13 @@ class ProfileController extends Controller {
     if ($val->validate()) {
       $user = $this->srv->createPasswordToken();
       if ($user != null) {
-        $this->srv->mailUser($user);
+        $this->srv->mailUserResetToken($user);
       }
       $app->flash('info', 'A mail will be sent shortly if the email address provided is valid.');
       $app->redirect($app->urlFor('main_page'));
     } else {
       $app->flash('error', 'E-mail address is not valid.');
       $app->redirect($app->urlFor('password_reset_request'));
-    }
-  }
-
-  /* password reset */
-
-  public function processToken($id) {
-    $app = $this->getApp();
-    $srv = $this->srv;
-    $user = $srv->searchUserByToken($id);
-    if ($user != null) {
-      $app->render('Profile/password_reset.html.twig', array('globals' => $this->getGlobals(), 'user_id' => $user->getId()));
-    } else {
-      $srv->clearAllTokens(); // safety measure
-      $app->flash('error', 'Invalid or expired token. Please try to request a new password');
-      $app->redirect($app->urlFor('main_page'));
     }
   }
 
@@ -174,7 +172,7 @@ class ProfileController extends Controller {
       $srv->changePassword();
       $srv->clearToken();
       $app->flash('info', 'Password has been changed');
-      $app->redirect($app->urlFor('user_logon'));
+      $app->redirect($app->urlFor('main_page'));
     } else {
       $id = $app->request->post('id');
       $errors = $srv->getErrors();
@@ -182,6 +180,20 @@ class ProfileController extends Controller {
     }
   }
   
+  /* registration */
+  public function processLogonToken($token) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserByToken($token);
+    if ($user != null) {
+      $srv->enableUser($user);
+      $app->flash('info', 'The token is verified. You are now granted access.');
+      $app->redirect($app->urlFor('main_page'));
+    } else {
+      $app->redirect($app->urlFor('error_404'));
+    }
+  }
+
   public function showProfileOfUserWithId($id) {           
     $app = $this->getApp();    
     $srv = $this->srv;

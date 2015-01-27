@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {{ whisky.getName }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container form">
+    <h1>{{ whisky.getName }}</h1>
+    <img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50">
+    <div><strong>Name:</strong></div><div>{{ whisky.getName }}</div>
+    <div><strong>Region:</strong></div><div>{{ whisky.region.getName }}</div>
+    <div><strong>Distillery:</strong></div><div>{{ whisky.distillery.getName }}</div>
+    <div><strong>Bottler:</strong></div><div>{{ whisky.barrel.getCasktype }}</div>
+    <div><strong>Age:</strong></div><div>{{ whisky.getAge }} year</div>
+    <div><strong>ABV:</strong></div><div>{{ whisky.getAlcohol }} %</div>
+    <a href="/" id="return_to_main" class="btn submit btn-default">
+          Return to main menu</a>    
+  </div>
+{% endblock content %}

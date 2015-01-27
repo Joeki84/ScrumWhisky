@@ -4,11 +4,6 @@ use scrum\ScotchLodge\Controllers\ProfileController;
 
 $contr = new ProfileController($em, $app);
 
-$app->get('/logon', function() use ($contr) {
-  
-  $contr->logon();
-})->name('user_logon');
-
 $app->post('/logon', function() use ($contr) {
   $contr->verifyUserCredentials();  
 })->name('user_logon_process');
@@ -44,9 +39,6 @@ $app->post('/profile/storeadmin', function() use ($contr){
 })->name('profile_edit_save_admin');
 
 /*olivier */
-
-
-
 $app->post('/profile/store', function() use ($contr){
   $contr->storeChanges();
 })->name('profile_edit_save');
@@ -60,9 +52,13 @@ $app->post('/password/reset', function() use ($contr) {
   $contr->passwordResetProcess();
 })->name('password_reset_process');
 
-$app->get('/verify/:id', function($id) use ($contr) {
-  $contr->processToken($id);
-})->name('token_verify');
+$app->get('/verify/:token', function($token) use ($contr) {
+  $contr->processToken($token);
+})->name('reset_token_verify');
+
+$app->get('/enable/:token', function($token) use ($contr) {
+  $contr->processLogonToken($token);  
+})->name('logon_token_verify');
 
 $app->post('/password/store', function() use ($contr) {  
   $contr->processNewPassword();

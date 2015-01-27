@@ -42,7 +42,7 @@ h3 {
 #wrapper>.container {
   margin-top: -15px;
   padding-top: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -51,8 +51,6 @@ input.btn, #return_to_main {
   font-family: 'Libre Baskerville', serif;
 }
 */
-input.btn:hover, #return_to_main:hover {
-  color: white;
 }
 span.status {
   position: absolute;
@@ -83,7 +81,10 @@ div.welcome {
 
 /*header*/
 #head {
-  background-image: url(../img/title_bar_wood.png);
+  background-color: white;
+  background-image: url(../img/Whisky.jpg);
+  background-repeat: no-repeat;
+  background-position: right center; 
   height: 120px;
   border: 1px solid rgba(124,91,33,1);
   margin-top: 30px;
@@ -94,17 +95,11 @@ div.welcome {
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-  z-index:10;
+  z-index:20;
   }
 #head h1 {
   margin-top: 10px;
   margin-left: 30px; 
-}
-#head h2 {
-  position: absolute;
-  bottom: 10px;
-  right: 30px;
-  height: 20%;
 }
 #head img {
   height: 100px;
@@ -114,6 +109,9 @@ div.welcome {
 /*mainbar*/
 #main-wrapper {
   position: relative;
+}
+#latest_tabs {
+  border-top: solid 2px black;
 }
 .latest_tab {
   width: 31%;
@@ -128,7 +126,7 @@ div.welcome {
 /*sidebar*/
 #sidebar-wrapper {
   min-height: 620px;
-  margin-top: -15px;
+  margin-top: -80px;px;
   background: rgba(0,0,0,0.3);
   background-size: cover;
   color: white;
@@ -136,6 +134,7 @@ div.welcome {
   -webkit-box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
   box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 #sidebar-wrapper a {
   color: white;
@@ -186,13 +185,17 @@ div#bookmark div {
   font-size: 1.5em;
   position: relative;
   width: 120%;
-  height: 60px;
+  height: 60px;}
+#topmenu ul {
+  position: absolute;
+  width: 100%;
+  z-index: 5;
 }
 #topmenu a {
   text-align: center;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
   color: white;
-  border: none;
+  border: 1px solid transparent;
   padding: 30px 20px 7px 20px;
   -webkit-border-radius: 0px 0px 4px 4px;
   -moz-border-radius: 0px 0px 4px 4px;
@@ -206,10 +209,10 @@ div#bookmark div {
 }
 #topmenu li:hover {
   margin-top: -15px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 #topmenu ul {
   -webkit-box-sizing: content-box;
@@ -217,7 +220,12 @@ div#bookmark div {
   box-sizing: content-box;
 }
 #topmenu li a:hover, #topmenu li a:focus {
-  background-color: rgba(156,47,0, 1);
+  color: black;
+  border: 1px solid black;
+  background-color: rgb(245,245,245);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 .nav-tabs {
   border-bottom: none;
@@ -237,14 +245,22 @@ div#bookmark div {
   float: none;
   width: 100%;
 }
+#reg-menu .nav a {
+  border: solid 1px transparent;
+}
 #reg-menu li a:hover {
-  background-color: #696969;
+  color: black;
 }
 input.btn, a.btn {
-  background-image: url(../img/wood_pattern_150.jpg);
+  background-image: none;
+  background-color: #696969;
   border: 1px solid black;
   color: white;
-  text-shadow:2px 2px 0 black;
+  text-shadow:none;
+  border: 1px solid black;
+}
+input.btn:hover, a.btn:hover {
+  border: solid 1px black;
 }
 #reg-menu, #reg-menu li, .form-group {
   margin-bottom: 5px;

@@ -25,7 +25,7 @@ class HomepageController extends Controller {
     $prof_srv = new ProfileService($em, $app);
     $members = $prof_srv->showalluser();
     //$members = ProfileService::showalluser();
-    $events = EventService::LatestEvents();
+    //$events = EventService::LatestEvents();
     $events_five = EventService::LatestFiveEvents();
     $events_one = EventService::LatestEvent();
 
@@ -35,7 +35,7 @@ class HomepageController extends Controller {
     $reviewSrvc = new WhiskyService($em, $app);
     $reviews = $reviewSrvc->retrieveReviews(3);
     
-    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events' => $events, 'events_five' => $events_five, 'events_one' => $events_one, 'comments' => $comments, 'reviews' => $reviews));
+    $this->getApp()->render('homepage.html.twig', array('globals' => $globals, 'members' => $members, 'events_five' => $events_five, 'comments' => $comments, 'reviews' => $reviews));
   }
 
   public function simplifydRoutes($routes) {
@@ -51,6 +51,11 @@ class HomepageController extends Controller {
     $routes = $app->router->getNamedRoutes();
     $simple = $this->simplifydRoutes($routes);
     $app->render('Test\routes.html.twig', array('globals' => $this->getGlobals(), 'routes' => $simple));
+  }
+  
+  public function notFound() {
+    $app = $this->getApp();
+    $app->render('Error\error_404.html.twig', array('error' => 'Page not found'));
   }
 
 }

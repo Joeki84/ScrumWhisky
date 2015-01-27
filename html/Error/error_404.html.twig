@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404{% endblock title %}
+
+{% block nav_menu %}{% endblock nav_menu %}
+
+{% block header %}{% endblock header %}
+
+{% block content %}
+  <div class="container">
+    <h1 style="font-size:6em;" class="err_nr">404</h1>
+    <p style="font-size:3em;" class="err_msg">{{ error }}</p>
+  </div>
+{% endblock content %}

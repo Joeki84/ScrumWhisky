@@ -154,6 +154,27 @@ class WhiskyController extends Controller{
         $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals,  'whiskys'  => $whisky));
     }
     
+    public function show_whisky_by_id($id) {
+         try{
+
+        $globals = $this->getGlobals();  
+        $whisky = $this->whiskysrv->retrieveWhiskyById($id);
+        
+        if(whiskys){
+              $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
+          }
+          else{
+                $errors = $this->whiskysrv->getErrors();
+                 $app = $this->getApp();
+                $app->flash('error', 'No whiskys');
+                $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky));
+            }
+        } catch (Exception $ex) {
+            $this->getApp()->render('probleem.twig.html');
+        }
+          
+    }
+    
     
     /* Olivier */
     

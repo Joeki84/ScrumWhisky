@@ -20,6 +20,9 @@
       {% block header %}
         {% include 'header.html.twig' %}
       {% endblock header %}
+      {% block nav_menu %}
+        {% include 'nav_top_menu.html.twig' %}
+      {% endblock nav_menu%}
 
       {% block messages %}
         {% block error_messages %}
@@ -65,7 +68,7 @@
 
         {% endblock messages %}
 
-        {% block content %}        
+        {% block content %}       
         {% endblock content %}
 
         {% block footer %}
