@@ -100,18 +100,16 @@ class EventController extends Controller{
     
         public function getEvents(){
           try{
-          $regsrv = new RegistrationService($this->em, $this->app);
-          $postcodes = $regsrv->getPostcodes();
           $globals = $this->getGlobals();  
           $events = $this->eventsrv->ShowAllCurrentEvents($this->em, $this->app);
           if($events){
-              $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'events' => $events));
+              $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'events' => $events));
           }
           else{
                 $errors = $this->eventsrv->getErrors();
                  $app = $this->getApp();
                 $app->flash('error', 'No events');
-                $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'postcodes' => $postcodes,'errors' => $errors, 'events' => $events));
+                $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals,'errors' => $errors, 'events' => $events));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

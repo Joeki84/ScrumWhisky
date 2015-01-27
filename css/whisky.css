@@ -155,32 +155,7 @@ div.welcome {
   font-style: italic;
 }
 
-
 /*menus*/
-/*nav menu*/
-
-/* OLD BOOKMARK
-div#bookmark {
-  position: absolute;
-  border: 24px solid #e7cc59;
-  border-right: 24px solid transparent;
-  height: 0px;
-  width: 50px;
-  left: -28px;
-  top: 0px;
-  z-index: 0;
-}
-div#bookmark div {
-  position: absolute;
-  border: 20px solid rgba(80,33,0, 1);
-  border-left: 20px solid transparent;
-  height: 0;
-  width: 50px;
-  top: -20px;
-  left: -14px;
-} **/
-
-
 #topmenu {
   font-size: 1.5em;
   position: relative;
@@ -224,8 +199,8 @@ div#bookmark div {
   border: 1px solid black;
   background-color: rgb(245,245,245);
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
--moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 .nav-tabs {
   border-bottom: none;
@@ -279,7 +254,7 @@ input.btn:hover, a.btn:hover {
 }
 
 
-/*forms*/
+/*pages*/
 div.form {
   padding-left:10%;
   border: 1px solid black;
@@ -321,6 +296,22 @@ div.sliders label {
   margin-top: 0px;
 }
 
+/*search results */
+#adv_search li {
+  display: inline-block;
+  float: left;
+  width: 20%;
+  margin: 0 5%;
+  height: 150px;
+  border: 1px solid black;
+}
+#adv_search li .w_bottle {
+  display: inline-block;
+  margin: 0 auto;
+}
+#adv_search li img {
+  text-align: center;
+}
 
 
 /*messages*/
