@@ -28,6 +28,7 @@ class User {
   private $can_create_event;
   private $is_admin;
   private $password_token;
+  private $is_deleted;
   private $user_likes;
   private $present_in_events;
   private $whisky_likes;
@@ -104,6 +105,10 @@ class User {
   function isAdmin() {
     return $this->is_admin == 1;
   }
+  
+  function isDeleted(){
+    return $this->is_deleted == 1;
+  }
 
   function setId($id) {
     $this->id = $id;
@@ -167,6 +172,10 @@ class User {
 
   function setPasswordToken() {
     $this->password_token = uniqid(mt_rand(), true);
+  }
+  
+  function setDeleted($is_deleted){
+    $this->is_deleted = $is_deleted;
   }
 
   function getUser_likes() {

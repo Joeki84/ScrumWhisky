@@ -57,6 +57,7 @@ class RegistrationService {
     $user->setSurname($surname);
     $user->setAddress($address);
     $user->setEnabled(0);
+    $user->setDeleted(0);
 
     $postcode_object = $this->getPostcodeObject($postcode);
     $user->setPostcode($postcode_object);
