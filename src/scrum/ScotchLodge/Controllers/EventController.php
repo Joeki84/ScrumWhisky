@@ -94,7 +94,7 @@ class EventController extends Controller{
         $globals = $this->getGlobals();  
         $event = $this->eventsrv->retrieveEventById($id);
         
-        if(whiskys){
+        if($event){
               $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'event' => $event));
           }
           else{
