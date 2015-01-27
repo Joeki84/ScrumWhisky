@@ -223,6 +223,9 @@ class ProfileController extends Controller {
     $app = $this->getApp();
     $srv = $this->srv;
     $user = $srv->searchUserById($id);
+    if ($user == null) {
+      $app->redirect('error_404');
+    }
     $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments()));
   }
  
