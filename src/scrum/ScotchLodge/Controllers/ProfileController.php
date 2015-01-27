@@ -144,7 +144,7 @@ class ProfileController extends Controller {
 
   public function PasswordResetRequest() {
     $app = $this->getApp();
-    $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('Profile/password_reset_request.html.twig', array('globals' => $this->getGlobals()));
   }
 
   public function passwordResetProcess() {
