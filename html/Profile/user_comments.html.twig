@@ -5,6 +5,13 @@
     <h3>User comments</h3>
     {% for comment in comments|slice(0, 5) %}
       <div><b>{{ comment.comment_date|date('Y-m-d') }}</b></div>
+      
+      {% if comment.review_comment is not null %}
+        <div><a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comment.review_comment.whisky.id } ) }}"><i>comment on {{ comment.review_comment.whisky.name }}</i></a></div>
+      {% endif %}
+      
+
+      
       <div class="margin-bottom-6">{{ comment.comment }}</div>
     {% endfor %}
   </div>

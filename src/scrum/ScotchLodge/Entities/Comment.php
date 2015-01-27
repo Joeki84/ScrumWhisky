@@ -26,6 +26,7 @@ class Comment {
 
   function __construct() {
     $this->comment_likes = new ArrayCollection();
+    $this->parent_comment = null;
   }
 
   function getId() {
