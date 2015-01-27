@@ -3,14 +3,14 @@
 {% block title %}
   List of events
 {% endblock title %}
-
+{% set app = globals.app %}
 {% block content %}
   <div class="container form">
     <h1>List of events</h1>
     <div>
 	    <dl>
 	        {% for event in events %}
-	        <dt>{{ event.Title }}</dt> 
+                    <dt><a href="{{ app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a></dt> 
 	        	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
 	        {% endfor %}  
 	     </dl>
