@@ -43,7 +43,10 @@ class Comment {
   function getCommentDate() {
     return $this->comment_date;
   }
-
+  function getComment_date() {
+    return $this->comment_date;
+  }
+  
   function getComment() {
     return $this->comment;
   }
@@ -93,6 +96,10 @@ class Comment {
   }
 
   function setCommentDate($comment_date) {
+    $this->comment_date = $comment_date;
+  }
+
+  function setComment_date($comment_date) {
     $this->comment_date = $comment_date;
   }
 
