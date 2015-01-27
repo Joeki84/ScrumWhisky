@@ -43,6 +43,20 @@ scrum\ScotchLodge\Entities\Whisky:
       joinColumn:
         name: created_by
 
+    blend:
+      targetEntity: Blend
+      inversedBy: blend_whiskys
+      joinColumn:
+        name: blend_id
+        referencedColumnName: id            
+
+    country:
+      targetEntity: Country
+      inversedBy: country_whiskys
+      joinColumn:
+        name: country_id
+        referencedColumnName: id
+        
   manyToMany:
     events:
       targetEntity: Event
@@ -86,4 +100,10 @@ scrum\ScotchLodge\Entities\Whisky:
       type: integer
     review_date:
       type: datetime
+    date_distilled:
+      type: datetime
+    date_bottled:
+      type: datetime
+    capacity:
+      type: integer
  
