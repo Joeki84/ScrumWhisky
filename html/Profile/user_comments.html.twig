@@ -1,7 +1,7 @@
 {# THIS TEMPLATE EXPECTS 'comments' objects #}
 
 {% if comments|length > 0 %}
-  <div id="comments" class="topline">
+  <div id="comments">
     <h3>User comments</h3>
     {% for comment in comments %}      
       <div><b>{{ comment.comment_date|date('Y-m-d') }}</b></div>
