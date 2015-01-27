@@ -116,6 +116,21 @@ class ProfileService {
     if ($user->canCreateCategory() != $can_create_category) {
       $user->setCanCreateCategory($can_create_category);
     }
+    
+    $isEnabled = $app->request->post('enabled');
+    if(isset($isEnabled)&& $user->isEnabled() != $isEnabled){
+        $user->setEnabled($isEnabled);
+    }
+    
+    $isDeleted = $app->request->post('deleted');
+    if($user->isDeleted() != $isDeleted){
+        if(!isset($isDeleted)){
+            $user->setDeleted(0);
+        }
+        if($isDeleted){
+            $user->setEnabled(0);
+        }
+    }
 
     /* Olivier */
 
@@ -283,7 +298,7 @@ class ProfileService {
   public function showalluser() {
     $em = $this->em;
     $userRepository = $em->getRepository('scrum\ScotchLodge\Entities\User');
-    $members = $userRepository->findAll();
+    $members = $userRepository->findBy(array('is_deleted' => 0));
 
     return $members;
   }
