@@ -218,5 +218,12 @@ class ProfileController extends Controller {
       $app->redirect($app->urlFor('main_page'));
     }
   }
+  
+  public function showAllUserComments($id) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserById($id);
+    $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments()));
+  }
  
 }

@@ -63,3 +63,8 @@ $app->get('/enable/:token', function($token) use ($contr) {
 $app->post('/password/store', function() use ($contr) {  
   $contr->processNewPassword();
 })->name('verify_new_password');
+
+
+$app->get('/profile/:id/comments', function($id) use ($contr) {
+  $contr->showAllUserComments($id);
+})->name('profile_comments');

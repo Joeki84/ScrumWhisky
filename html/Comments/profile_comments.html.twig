@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  User comments
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container">
+    <h2>User comments</h2>
+    {% for comment in comments %}
+      <dl>        
+        <dt>{{ comment.comment_date | date('Y-m-d') }}</dt>
+        <dd>{{ comment.comment }}</dd>
+      </dl>
+    {% endfor %}
+  </div>
+    
+{% endblock content %}

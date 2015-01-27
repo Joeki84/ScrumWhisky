@@ -2,6 +2,10 @@
 
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,700&subset=latin,latin-ext);
 
+.header_comment {
+  font-size: 0.8em;
+}
+
 .margin-bottom-6 {
   margin-bottom: 6px;
 }
@@ -51,7 +55,7 @@ input.btn, #return_to_main {
   font-family: 'Libre Baskerville', serif;
 }
 */
-}
+
 span.status {
   position: absolute;
   right: 10px;
@@ -126,7 +130,7 @@ div.welcome {
 /*sidebar*/
 #sidebar-wrapper {
   min-height: 620px;
-  margin-top: -80px;px;
+  margin-top: -80px;
   background: rgba(0,0,0,0.3);
   background-size: cover;
   color: white;

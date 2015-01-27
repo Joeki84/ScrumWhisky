@@ -1,8 +1,13 @@
 {# THIS TEMPLATE EXPECTS 'comments' objects #}
 
 {% if comments|length > 0 %}
-  <div id="comments">
-    <h3>User comments</h3>
+  <div id="comments" class="topline">
+    
+    <h3>User comments 
+      <span class="header_comment">
+        ( <a href="{{ globals.app.urlFor('profile_comments', {'id': user.id}) }}">{{ comments|length }}</a> )
+      </span> 
+    </h3>
     {% for comment in comments|slice(0, 3) %}
       <div><b>{{ comment.comment_date|date('Y-m-d') }}</b></div>
       
