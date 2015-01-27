@@ -16,10 +16,12 @@ class Country {
   private $country_name;
   private $regions;
   private $distilleries;
+  private $whiskies;
   
   function __construct() {
       $this->regions = new ArrayCollection();
       $this->distilleries = new ArrayCollection();
+      $this->whiskies = new ArrayCollection();
   }
 
   function getId() {
@@ -49,6 +51,10 @@ class Country {
   function getDistilleries(){
     return $this->distilleries;
   }
+  
+  function getWhiskies(){
+    return $this->whiskies;
+  }
 
   function setId($id) {
     $this->id = $id;
@@ -76,6 +82,10 @@ class Country {
   
   function setDistilleries($distilleries){
     $this->distilleries = $distilleries;
+  }
+  
+  function setWhiskies($whiskies){
+    $this->whiskies = $whiskies;
   }
   
 }

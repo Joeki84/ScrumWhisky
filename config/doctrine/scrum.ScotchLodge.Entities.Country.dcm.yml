@@ -22,6 +22,10 @@ scrum\ScotchLodge\Entities\Country:
       targetEntity: Distillery
       mappedBy: distillery
 
+    whiskies:
+      targetEntity: Whisky
+      mappedBy: country
+
   fields:
     country_code:
       type: string
