@@ -95,3 +95,9 @@ scrum\ScotchLodge\Entities\User:
     password_token:
       type: string
       length: 64
+    is_deleted:
+      type: integer
+      options:
+        default: 0
+        unsigned: true
+      

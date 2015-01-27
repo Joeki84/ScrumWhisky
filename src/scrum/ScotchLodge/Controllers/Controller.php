@@ -63,7 +63,7 @@ abstract class Controller {
   public function getUser() {
     if (isset($_SESSION['user']) && $_SESSION['user'] != null ) {
       $user = $this->queryUserByUserName($_SESSION['user']);
-      return $user[0];
+      return isset($user[0]) ? $user[0] : null;
     }
     return null;
   }

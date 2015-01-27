@@ -6,6 +6,8 @@ use scrum\ScotchLodge\Entities\Distillery;
 use scrum\ScotchLodge\Entities\Barrel;
 use scrum\ScotchLodge\Entities\Region;
 use scrum\ScotchLodge\Entities\User;
+use scrum\ScotchLodge\Entities\Blend;
+use scrum\ScotchLodge\Entities\Country;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -32,6 +34,13 @@ class Whisky {
   private $view_count;
   private $short_description;
   private $review_date;
+  /* @var $blend Blend */
+  private $blend;
+  private $date_distilled;
+  private $date_bottled;
+  /* @var $country Country */
+  private $country;
+  private $capacity;
   private $scores;
   private $comments;
   private $event_whisky;
@@ -44,6 +53,61 @@ class Whisky {
     $this->comments = new ArrayCollection();
     $this->events = new ArrayCollection();
     $this->likes = new ArrayCollection();
+  }
+
+  function getBlend() {
+      return $this->blend;
+  }
+  
+  function getDateDistilled(){
+      return $this->date_distilled;
+  }
+
+  function getDate_distilled() {
+      return $this->date_distilled;
+  }
+
+  function getDateBottled(){
+      return $this->date_bottled;
+  }
+  function getDate_bottled() {
+      return $this->date_bottled;
+  }
+
+  function getCountry() {
+      return $this->country;
+  }
+
+  function getCapacity() {
+      return $this->capacity;
+  }
+
+  function setBlend($blend) {
+      $this->blend = $blend;
+  }
+  
+  function setDateDistilled($date_distilled){
+    $this->date_distilled = $date_distilled;
+  }
+
+  function setDate_distilled($date_distilled) {
+      $this->date_distilled = $date_distilled;
+  }
+  
+  function setDateBottled($date_bottled){
+      $this->date_bottled = $date_bottled;
+  }
+
+  function setDate_bottled($date_bottled) {
+      $this->date_bottled = $date_bottled;
+  }
+
+  function setCountry($country) {
+      $this->country = $country;
+  }
+
+  function setCapacity($capacity) {
+      $this->capacity = $capacity;
   }
 
   function getEvents() {
@@ -230,6 +294,5 @@ class Whisky {
   function setCreatedBy(User $created_by) {
     $this->created_by = $created_by;
   }
-
 
 }

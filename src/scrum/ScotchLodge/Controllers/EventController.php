@@ -40,7 +40,7 @@ class EventController extends Controller{
     }
     
     /**
-     * Render the page to insert a event.
+     * Insert a event.
      */
     public function insertEvent(){
         try{
@@ -62,22 +62,54 @@ class EventController extends Controller{
         }
     }
     
+    /**
+     * Render the page to update a event.
+     */
+    public function editEvent($id){
+        $event = $this->eventsrv->retrieveEventById($id);
+        $regsrv = new RegistrationService($this->em, $this->app);
+        $postcodes = $regsrv->getPostcodes();
+        $globals = $this->getGlobals();
+        $this->getApp()->render('Events/edit_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'event' => $event));        
+    }
+    
+    /**
+     * Update a event.
+     */
+    public function updateEvent($id){
+        try{
+            $event_old = $this->eventsrv->retrieveEventById($id);
+            $event = $this->eventsrv->updateEvent($event_old);
+            if($event){
+                $app = $this->getApp();
+                $app->flash('info', 'Event ' . $event->getTitle() . ' updated.');
+                $app->redirect($app->urlFor('main_page'));
+            }else{
+                $errors = $this->eventsrv->getErrors();
+                $regsrv = new RegistrationService($this->em, $this->app);
+                $postcodes = $regsrv->getPostcodes();
+                $globals = $this->getGlobals();
+                $this->getApp()->render('Events/edit_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'errors' => $errors, 'event' => $event_old));
+            }
+        } catch (Exception $ex) {
+            $this->getApp()->render('probleem.twig.html');
+        }
+    }
+    
 /* Olivier */
     
         public function getEvents(){
           try{
-          $regsrv = new RegistrationService($this->em, $this->app);
-          $postcodes = $regsrv->getPostcodes();
           $globals = $this->getGlobals();  
           $events = $this->eventsrv->ShowAllCurrentEvents($this->em, $this->app);
           if($events){
-              $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'events' => $events));
+              $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'events' => $events));
           }
           else{
                 $errors = $this->eventsrv->getErrors();
                  $app = $this->getApp();
                 $app->flash('error', 'No events');
-                $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'postcodes' => $postcodes,'errors' => $errors, 'events' => $events));
+                $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals,'errors' => $errors, 'events' => $events));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
@@ -92,16 +124,16 @@ class EventController extends Controller{
          try{
 
         $globals = $this->getGlobals();  
-        $whisky = $this->eventsrv->retrieveEventById($id);
+        $event = $this->eventsrv->retrieveEventById($id);
         
-        if(whiskys){
-              $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
+        if($event){
+              $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'event' => $event));
           }
           else{
                 $errors = $this->eventsrv->getErrors();
                  $app = $this->getApp();
                 $app->flash('error', 'No whiskys');
-                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky));
+                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'event' => $event));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

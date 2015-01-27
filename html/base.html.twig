@@ -27,7 +27,7 @@
       {% block messages %}
         {% block error_messages %}
           {% if flash['error'] is defined %}
-              <div class="errors">
+              <div class="errors flash">
                 <ul>                  
                   <li>{{ flash['error'] }}</li>
                 </ul>
@@ -36,7 +36,7 @@
 
             {% if errors is defined %}
               <div class="container">
-                <div class="errors">
+                <div class="errors flash">
                   <ul>                  
                     {% for error in errors %}
                       <li>{{ error }}</li>
@@ -50,7 +50,7 @@
 
             {% if flash['info'] is defined %}
               
-                <div class="info">
+                <div class="info flash">
                   {{ flash['info'] }}
                 </div>
               
@@ -58,7 +58,7 @@
 
             {% if  info is defined %}
               
-                <div class="info">
+                <div class="info flash">
                   {{ info }}
                 </div>
             

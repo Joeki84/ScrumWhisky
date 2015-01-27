@@ -28,7 +28,7 @@
       <div class="form-group">
         <label for="first_name">First Name</label>
         <input class="form-control" type="text" id="first_name" name="first_name" value="{{ user.firstName }}"  />
-        <label for="surname"></label>
+        <label for="surname">Surname</label>
         <input class="form-control" type="text" id="surname" name="surname" value="{{ user.surname }}" />
       </div>
 
@@ -61,6 +61,14 @@
       <div class="form-group">
         <label for="is_admin">Category</label>
         <input  type="checkbox" id="can_create_category" name="can_create_category" value="1"  {% if user.canCreateCategory %} checked {% endif %} />            
+      </div>
+      <div class="form-group">
+        <label for="is_enabled">Active user</label>
+        <input  type="checkbox" id="enabled" name="enabled" value="1"  {% if user.isEnabled %} checked {% endif %} />            
+      </div>
+      <div class="form-group">
+        <label for="is_deleted">Delete user</label>
+        <input  type="checkbox" id="deleted" name="deleted" value="1"  {% if user.isDeleted %} checked {% endif %} />            
       </div>
       <input class="form-control" type="hidden" id="username" name="username" value="{{ user.username }}" />
       <input class="btn form-control submit" type="submit" id="wijzig" name="save" value="Save" />

@@ -38,30 +38,30 @@ class EventService {
      * @return boolean|Event
      */
     public function addEvent(User $user){
-        $title = $this->app->request->post('title');
-        $postcode = $this->app->request->post('postcode');
-        $address = $this->app->request->post('address');
-        $date = $this->app->request->post('event_date');
-        $date = str_replace('/', '-', $date);
-        $date_stop = $this->app->request->post('event_stop');
-        $date_stop = str_replace('/', '-', $date_stop);
-
-        /* @var $event Event */
-        $event = new Event();
-        $event->setTitle($title);
-        /* @var $postcode Postcode */
-        $regsrv = new RegistrationService($this->em, $this->app);
-        $postcode_object = $regsrv->getPostcodeObject($postcode);
-        $event->setPostcode($postcode_object);
-        $event->setAddress($address);
-        $event_date = new \DateTime($date);
-        $event->setEventDate($event_date);
-        $event_stop = new \DateTime($date_stop);
-        $event->setEventStop($event_stop);
-        $event->setCreatedBy($user);
-
         $val = new Val($this->app, $this->em);
         if($val->validate()){
+            $title = $this->app->request->post('title');
+            $postcode = $this->app->request->post('postcode');
+            $address = $this->app->request->post('address');
+            $date = $this->app->request->post('event_date');
+            $date = str_replace('/', '-', $date);
+            $date_stop = $this->app->request->post('event_stop');
+            $date_stop = str_replace('/', '-', $date_stop);
+
+            /* @var $event Event */
+            $event = new Event();
+            $event->setTitle($title);
+            /* @var $postcode Postcode */
+            $regsrv = new RegistrationService($this->em, $this->app);
+            $postcode_object = $regsrv->getPostcodeObject($postcode);
+            $event->setPostcode($postcode_object);
+            $event->setAddress($address);
+            $event_date = new \DateTime($date);
+            $event->setEventDate($event_date);
+            $event_stop = new \DateTime($date_stop);
+            $event->setEventStop($event_stop);
+            $event->setCreatedBy($user);
+
             $this->em->persist($event);
             $this->em->flush();
             return $event;
@@ -78,7 +78,7 @@ class EventService {
      */
     public function updateEvent(Event $event){
         $title = $this->app->request->post('title');
-        if($event->getFirstName() != $title){
+        if($event->getTitle() != $title){
           $event->setTitle($title);
         }
 
@@ -94,13 +94,21 @@ class EventService {
             $event->setAddress($address);
         }
 
-        $event_date = $this->app->request->post('event_date');
-        if($event->getEventDate() != $event_date){
+        $event_date_input = $this->app->request->post('event_date');
+        if($event_date_input != null && $event->getEventDate() != $event_date_input){
+            $event_date = new DateTime($event_date_input);            
             $event->setEventDate($event_date);
+        }
+
+        $event_stop_input = $this->app->request->post('event_stop');
+        if($event_stop_input != null && $event->getEventStop() != $event_stop_input){
+            $event_stop = new DateTime($event_stop_input);
+            $event->setEventStop($event_stop);
         }
 
         $this->em->persist($event);
         $this->em->flush();
+        return $event;
     }
     /* End Update function */
 

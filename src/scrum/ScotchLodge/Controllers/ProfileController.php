@@ -144,7 +144,7 @@ class ProfileController extends Controller {
 
   public function PasswordResetRequest() {
     $app = $this->getApp();
-    $app->render('Profile\password_reset_request.html.twig', array('globals' => $this->getGlobals()));
+    $app->render('Profile/password_reset_request.html.twig', array('globals' => $this->getGlobals()));
   }
 
   public function passwordResetProcess() {
@@ -217,6 +217,16 @@ class ProfileController extends Controller {
       $app->flash('error', 'Invalid user. Please try again');
       $app->redirect($app->urlFor('main_page'));
     }
+  }
+  
+  public function showAllUserComments($id) {
+    $app = $this->getApp();
+    $srv = $this->srv;
+    $user = $srv->searchUserById($id);
+    if ($user == null) {
+      $app->redirect('error_404');
+    }
+    $app->render('Comments/profile_comments.html.twig', array('globals' => $this->getGlobals(), 'comments' => $user->getComments()));
   }
  
 }

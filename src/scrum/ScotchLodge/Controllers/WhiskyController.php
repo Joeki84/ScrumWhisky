@@ -9,7 +9,10 @@ use scrum\ScotchLodge\Service\Whisky\WhiskyService;
 use scrum\ScotchLodge\Service\Region\RegionService;
 use scrum\ScotchLodge\Service\Distillery\DistilleryService;
 use scrum\ScotchLodge\Service\Barrel\BarrelService;
+use scrum\ScotchLodge\Service\Blend\BlendService;
+use scrum\ScotchLodge\Service\Country\CountryService;
 use scrum\ScotchLodge\Entities\Whisky;
+use scrum\ScotchLodge\Entities\User;
 
 /**
  * WhiskyController controller
@@ -40,8 +43,12 @@ class WhiskyController extends Controller{
         $distillerys = $distsrv->getDistillerys();
         $barsrv = new BarrelService($this->em, $this->app);
         $barrels = $barsrv->getBarrels();
+        $blendsrv = new BlendService($this->em, $this->app);
+        $blends = $blendsrv->getBlends();
+        $countrysrv = new CountryService($this->em, $this->app);
+        $countries = $countrysrv->getCountries();
         $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
     }
 
     /**
@@ -49,10 +56,12 @@ class WhiskyController extends Controller{
      */
     public function insertWhisky(){
         try{
-            $whisky = $this->whiskysrv->addWhisky();
+            $user = $this->getUser();
+            $whisky = $this->whiskysrv->addWhisky($user);
             if($whisky){
-                $url = $this->getApp()->urlFor('new_whisky_ok');
-                $this->getApp()->redirect($url);
+                $app = $this->app;
+                $app->flash('info','Successful added whisky ' . $whisky->getName() .' .');
+                $app->redirect($app->urlFor('main_page'));
             }else{
                 $errors = $this->whiskysrv->getErrors();
                 $regsrv = new RegionService($this->em, $this->app);
@@ -61,8 +70,12 @@ class WhiskyController extends Controller{
                 $distillerys = $distsrv->getDistillerys();
                 $barsrv = new BarrelService($this->em, $this->app);
                 $barrels = $barsrv->getBarrels();
+                $blendsrv = new BlendService($this->em, $this->app);
+                $blends = $blendsrv->getBlends();
+                $countrysrv = new CountryService($this->em, $this->app);
+                $countries = $countrysrv->getCountries();                
                 $globals = $this->getGlobals();
-                $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+                $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
@@ -80,8 +93,12 @@ class WhiskyController extends Controller{
         $distillerys = $distsrv->getDistillerys();
         $barsrv = new BarrelService($this->em, $this->app);
         $barrels = $barsrv->getBarrels();
+        $blendsrv = new BlendService($this->em, $this->app);
+        $blends = $blendsrv->getBlends();
+        $countrysrv = new CountryService($this->em, $this->app);
+        $countries = $countrysrv->getCountries();        
         $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+        $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
     }
     
     /**
@@ -93,8 +110,9 @@ class WhiskyController extends Controller{
             $whisky_old = $this->whiskysrv->retrieveWhiskyById($id);
             $whisky = $this->whiskysrv->updateWhisky($whisky_old);
             if($whisky){
-                $url = $this->getApp()->urlFor('edited_whisky_ok');
-                $this->getApp()->redirect($url);
+                $app = $this->app;
+                $app->flash('info','Successful update whisky ' . $whisky->getName() .' .');
+                $app->redirect($app->urlFor('main_page'));
             }else{
                 $errors = $this->whiskysrv->getErrors();
                 $regsrv = new RegionService($this->em, $this->app);
@@ -103,8 +121,12 @@ class WhiskyController extends Controller{
                 $distillerys = $distsrv->getDistillerys();
                 $barsrv = new BarrelService($this->em, $this->app);
                 $barrels = $barsrv->getBarrels();
+                $blendsrv = new BlendService($this->em, $this->app);
+                $blends = $blendsrv->getBlends();
+                $countrysrv = new CountryService($this->em, $this->app);
+                $countries = $countrysrv->getCountries();                
                 $globals = $this->getGlobals();
-                $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky_old, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+                $this->getApp()->render('Whisky/edit_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky_old, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
@@ -138,7 +160,7 @@ class WhiskyController extends Controller{
         $globals = $this->getGlobals();  
         $whisky = $this->whiskysrv->retrieveWhiskyById($id);
         
-        if(whiskys){
+        if($whisky){
               $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
           }
           else{
@@ -153,8 +175,7 @@ class WhiskyController extends Controller{
           
     }
     
-    
-    /* Olivier */
+    /**** Olivier */
     
     
 }

@@ -9,12 +9,24 @@
   
   {% set app = globals.app %}
   
-  <div class="container">
+  <div id="adv_search" class="container form">
     <h1>Whisky advanced search result</h1>
     
     <ul> 
       {% for whisky in whiskys %}
-          <li><img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50"> {{ whisky.getName }}  <span id="item{{ whisky.getId }}"><a href="#" class="like-btn"  data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}"><img src="../img/likepic.png" ></a></span>  </li>        
+          <li>
+              <a href="{{ app.urlFor('show_whisky_by_id', {"id" : whisky.getId } ) }}">
+                <div class="w_bottle">
+                  <img src="../img/whisky/{{ whisky.
+                  getImagePath }}" height="80" width="50">
+                </div>{{ whisky.getName }}
+              </a>
+              <span id="item{{ whisky.getId }}">
+                <a href="#" class="like-btn"  data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}">
+                  <img src="../img/likepic.png" >
+                </a>
+              </span>  
+          </li>        
       {% endfor %} 
     </ul>
         <a href="/" id="return_to_main" class="btn submit btn-default">
