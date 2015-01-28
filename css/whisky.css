@@ -9,6 +9,19 @@
 .margin-bottom-6 {
   margin-bottom: 6px;
 }
+.margin-bottom-12 {
+  margin-bottom: 12px;
+}
+.margin-bottom-24 {
+  margin-bottom: 24px;
+}
+.padding-top-12 {
+  padding-top: 12px;
+}
+.margin-left-12 {
+  margin-left: 12px;
+}
+
 .topline {
   border-top: 1px #e3e3e3 solid;
 }
@@ -145,8 +158,20 @@ div.welcome {
 }
 
 /*comments*/
+.comment {
+  margin-bottom: 12px;
+  border-bottom: 1px #e3e3e3 solid;
+}
 #comments .comment {
   padding-bottom: 12px;
+}
+.comment-date {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 12px;
+}
+.comment-head {
+  margin-bottom: 12px;
 }
 
 #reviews .review {
