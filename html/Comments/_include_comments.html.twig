@@ -1,10 +1,11 @@
 <div id="comments" class="topline clearboth">
   <h1>Comments</h1>
 
-  {% set whisky_comments = whisky.comments %}
+  
 
-  {% for wc in whisky_comments %}
-    {% set c = wc.comment %}
+  {% for comment in comments %}
+    
+    {% set c = comment.comment %}
 
     {% if c.parent_comment is not null %}
       {% set parent = c.parent_comment %}
