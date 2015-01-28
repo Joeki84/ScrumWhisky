@@ -181,12 +181,12 @@ class EventService {
 /* End Olivier */
 
 /* Filip */ 
-    public function LatestFiveEvents(){
+    public function LatestEvents($limit){
     $em = $this->getEntityManager();
     $eventRepository = $em->getRepository('scrum\ScotchLodge\Entities\Event');
     $dql = "SELECT e FROM scrum\ScotchLodge\Entities\Event e where e.event_date >= CURRENT_DATE() ORDER BY e.event_date ASC";
     $query = $em->createQuery($dql);
-    $query->setMaxResults(5);
+    $query->setMaxResults($limit);
     $events = $query->getResult();
     return $events;
     

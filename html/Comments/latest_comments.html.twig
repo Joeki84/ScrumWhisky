@@ -4,7 +4,7 @@
   <dl>
     {% for comm in latest %}
       <dt>{{ whisky.review_date|date('Y-m-d') }} - <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.user.id } ) }}">{{ comm.user.username }} said:</a></dt>
-      <dd>"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"</dd>
+      <dd class="review">"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"</dd>
     {% endfor %}
   </dl>
 </div>

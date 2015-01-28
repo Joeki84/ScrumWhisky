@@ -161,7 +161,7 @@ div.welcome {
 }
 
 /*comments*/
-.comment {
+.comment, .review, .event {
   margin-bottom: 12px;
   border-bottom: 1px #e3e3e3 solid;
 }
@@ -180,6 +180,13 @@ div.welcome {
 #reviews .review {
   padding-bottom: 12px;
 }
+#latest_reviews .review-txt,
+#latest_comments .comment-txt,
+#latest_events .event-txt {
+  border-bottom: 3px #e3e3e3 solid;
+  padding-bottom: 6px;
+}
+
 .sidebar_list {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 }

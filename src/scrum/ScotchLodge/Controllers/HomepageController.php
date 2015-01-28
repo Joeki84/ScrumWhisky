@@ -26,7 +26,7 @@ class HomepageController extends Controller {
     $members = $prof_srv->showalluser();
     //$members = ProfileService::showalluser();
     //$events = EventService::LatestEvents();
-    $events_five = EventService::LatestFiveEvents();
+    $events_five = EventService::LatestEvents(3);
     $events_one = EventService::LatestEvent();
 
     $commentSrvc = new CommentService($em, $app);

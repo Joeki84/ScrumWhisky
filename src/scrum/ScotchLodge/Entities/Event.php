@@ -83,6 +83,10 @@ class Event {
   function getEvent_presences() {
     return $this->event_presences;
   }
+  
+  function getComments() {
+    return $this->event_comments;
+  }
 
   function getWhiskys() {
     return $this->whiskys;
