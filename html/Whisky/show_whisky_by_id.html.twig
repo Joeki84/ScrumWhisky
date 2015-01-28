@@ -13,7 +13,8 @@
     <div><strong>Distillery:</strong></div><div>{{ whisky.distillery.getName }}</div>
     <div><strong>Bottler:</strong></div><div>{{ whisky.barrel.getCasktype }}</div>
     <div><strong>Age:</strong></div><div>{{ whisky.getAge }} year</div>
-    <div><strong>ABV:</strong></div><div>{{ (whisky.getAlcohol / 100)|number_format(1) }} %</div>
+    <div><strong>ABV:</strong></div><div>{{ (whisky.getAlcohol/100)|number_format(1) }} %</div>
+    <div><strong>Price:</strong></div><div>&euro; {{ (whisky.getPrice/100)|number_format(2) }} </div>
     <div><strong>Review:</strong></div><div>{{ whisky.short_description }} </div>
     <a href="/" id="return_to_main" class="btn submit btn-defaul margin-bottom-24">
           Return to main menu</a>
