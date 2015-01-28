@@ -178,10 +178,17 @@ div.welcome {
   padding-bottom: 12px;
 }
 .sidebar_list {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+.sidebar_list:first-of-type {
   border-top: 2px solid white;
 }
 .sidebar_list dd {
   font-style: italic;
+  margin-left: 5px;
+}
+.sidebar_list h3 {
+  font-size: 2em;
 }
 
 /*menus*/
