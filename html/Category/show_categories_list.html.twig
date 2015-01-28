@@ -10,9 +10,10 @@
     <div>
 	    <dl>
 	        {% for category in categories %}
-                    <dt><span class="cat">{{ category.getCategory }}</span>
+                    <dt><span class="cat">
+                        <strong class="catname">{{ category.getCategory }}</strong>
                     {% if globals.user.isAdmin() %}
-                    <img class="editcat" src="../img/edit.png">
+                    <img class="editcat" src="../img/edit.png"></span>
                 {% endif %}</dt> 
 	        	<dd></dd>        
 	        {% endfor %}  
