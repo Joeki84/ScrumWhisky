@@ -72,3 +72,7 @@ $app->get('/profile/:id/comments', function($id) use ($contr) {
 $app->get('/profile/:id/whiskies', function($id) use ($contr){
   $contr->showAllUserWhiskies($id);
 })->name('profile_whiskies');
+
+$app->get('/profile/:id/events', function($id) use ($contr){
+  $contr->showAllUserEvents($id);
+})->name('profile_events');

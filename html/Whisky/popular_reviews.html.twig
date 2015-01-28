@@ -5,9 +5,13 @@
     {% for rev in popular %}
       {% set whisky = rev.whisky.whisky %}
       <dt class="review_date">{{ whisky.review_date|date('Y-m-d') }}</dt>
-      <dt class="whisky_name"><span>{{ whisky.name }}</span></dt>
+      <dt class="whisky_name">
+      <span>
+        <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': whisky.id}) }}">{{ whisky.name }}</a>
+      </span>
+      </dt>
       <div class="review_likes">Likes: {{ rev.likes }}</dd>      
-      <dd class="review">{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}</dd>
-    {% endfor %}
+        <dd class="review">{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}</dd>
+      {% endfor %}
   </dl>
 </div>

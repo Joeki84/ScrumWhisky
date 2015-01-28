@@ -238,4 +238,13 @@ class ProfileController extends Controller {
     $app->render('Whiskies/profile_whiskies.html.twig', array('globals' => $this->getGlobals(), 'whiskies' => $user->getWhiskysCreated(), 'user' => $user));
   }
 
+  public function showAllUserEvents($id) {
+    $app = $this->getApp();
+    $user = $this->srv->searchUserById($id);
+    if ($user == null) {
+      $app->redirect('error_404');
+    }
+    $app->render('Events/profile_events.html.twig', array('globals' => $this->getGlobals(), 'events' => $user->getEventsCreated(), 'user' => $user));
+  }
+  
 }

@@ -15,7 +15,13 @@
     <div><strong>Age:</strong></div><div>{{ whisky.getAge }} year</div>
     <div><strong>ABV:</strong></div><div>{{ whisky.getAlcohol/100 }} %</div>
     <div><strong>Price:</strong></div><div>{{ whisky.getPrice }} </div>
-    <a href="/" id="return_to_main" class="btn submit btn-default">
-          Return to main menu</a>    
+
+    <div><strong>Review:</strong></div><div>{{ whisky.short_description }} </div>
+    <a href="/" id="return_to_main" class="btn submit btn-defaul margin-bottom-24">
+          Return to main menu</a>
+  
+    {% include 'Comments/_include_comments.html.twig' %}
+    
   </div>
+    
 {% endblock content %}
