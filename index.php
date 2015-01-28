@@ -17,6 +17,7 @@ try {
   include 'config/routes/whisky.php';
   include 'config/routes/whiskylike.php';
   include 'config/routes/commentlike.php';
+  include 'config/routes/category.php';
   
   $app->run();
     

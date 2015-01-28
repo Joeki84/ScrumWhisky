@@ -31,7 +31,7 @@ $app->get('/whisky/search', function() use ($contr){
 })->name('advanced_search_whisky');
 
 
-$app->post('/advanced_search_whisky_result', function() use ($contr){
+$app->post('/whisky/search', function() use ($contr){
     $contr->advanced_search_whisky_result();
 })->name('advanced_search_whisky_result');
 
