@@ -16,12 +16,27 @@
     <div><strong>ABV:</strong></div><div>{{ (whisky.getAlcohol/100)|number_format(1) }} %</div>
     <div><strong>Price:</strong></div><div>&euro; {{ (whisky.getPrice/100)|number_format(2) }} </div>
     <div><strong>Review:</strong></div><div>{{ whisky.short_description }} </div>
-    <a href="/" id="return_to_main" class="btn submit btn-defaul margin-bottom-24">
-          Return to main menu</a>
-  
+    <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">
+      Return to main menu</a>
+
+
+    {# comments #}
     {% set comments = whisky.comments %}
     {% include 'Comments/_include_comments.html.twig' %}
-    
+
+    <form action="#">
+      <div class="comment-post">
+        <div class="form-group">
+        <label for="comment">Leave a comment</label>
+        <textarea data-whiskyid="{{ whisky.id }}" class="form-control" id="comment-box"></textarea>
+        </div>
+        <input id="add-comment" class="form-control btn btn-default" type="submit" id="submit" name="submit" value="Send" />
+      </div>
+    </form>
   </div>
-    
+
 {% endblock content %}
+
+{% block extrajs %}
+  <script type="text/javascript" src="/js/comments.js"></script>
+{% endblock extrajs %}

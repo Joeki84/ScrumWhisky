@@ -24,6 +24,10 @@ $app->post('/whisky/edit/:id', function($id) use ($contr){
     $contr->updateWhisky($id);
 })->name('edit_whisky_process');
 
+$app->post('/whisky/addcomment/:whisky_id', function($whisky_id) use ($contr) {
+  $contr->ajax_addComment($whisky_id);
+})->name('ajax_add_comment');
+
 /* Olivier */
 
 $app->get('/whisky/search', function() use ($contr){

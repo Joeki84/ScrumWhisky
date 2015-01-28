@@ -177,5 +177,20 @@ class WhiskyController extends Controller{
     
     /**** Olivier */
     
+    public function ajax_addComment($whisky_id) {
+      /* @var  $app Slim */
+      $app = $this->app;
+      if ($app->request()->isAjax()) {
+        $message = $app->request->post('text');
+        
+        if (trim($message) != '') {
+          $srv = $this->whiskysrv;
+          $srv->addWhiskyComment($whisky_id, $this->getUser(), $message);
+        }
+        
+      } else {
+        $app->redirectTo('error_404');
+      }
+    }
     
 }

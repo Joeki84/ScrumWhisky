@@ -1,5 +1,4 @@
  var strtxt;
-console.log('roekoe'); 
 
 $(function() {
          
