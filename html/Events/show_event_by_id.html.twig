@@ -11,7 +11,7 @@
     <div><strong>Event date:</strong></div><div>{{ event.event_date | date('Y-m-d')  }}</div>
     <div><strong>Location:</strong></div><div>{{ event.getAddress }} {{ event.postcode.town }}</div>
     <div><strong>Description:</strong></div><div> {{ event.description }}</div>
-    <div><strong>Map:</strong></div><div><iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={{ event.address }}{{ event.postcode.town }}&key=AIzaSyB_sBxeACYNeQcH7_Oui_lYihEd3hdckg4"></iframe></div>
+    <div><strong>Map:</strong></div><div><iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={{ event.address }}{{ event.postcode.town ~', BELGIE' }} &key=AIzaSyB_sBxeACYNeQcH7_Oui_lYihEd3hdckg4"></iframe></div>
         <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">
           Return to main menu</a>    
         
