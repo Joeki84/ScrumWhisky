@@ -14,7 +14,7 @@ scrum\ScotchLodge\Entities\Category:
 
   oneToMany:
     scores:
-      targetEntity: WhiskyScores
+      targetEntity: WhiskyScore
       mappedBy: category
     
   fields:
