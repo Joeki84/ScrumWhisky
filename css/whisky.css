@@ -42,6 +42,9 @@ ul, li {
   padding: 0;
   margin: 0;
 }
+a {
+  color: inherit;
+}
 .nav-pills > li + li {
   margin-left: 0px;
 }
@@ -190,12 +193,19 @@ div.welcome {
 .sidebar_list:first-of-type {
   border-top: 2px solid white;
 }
-.sidebar_list dd {
-  font-style: italic;
+ dl, dd {
   margin-left: 5px;
+}
+dd {
+  font-style: italic;
 }
 .sidebar_list h3 {
   font-size: 2em;
+}
+.thumb {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px;
 }
 
 /*menus*/
@@ -287,15 +297,6 @@ input.btn:hover, a.btn:hover {
     border: 1px solid black;
 }
 
-/*events*/
-#event_5 {
-  padding: 20px 0px;
-  border-top: solid 2px white;
-}
-#event_5 h3 {
-  margin-top: 0;
-}
-
 
 /*pages*/
 div.form {
@@ -338,12 +339,17 @@ div.sliders {
 div.sliders label {
   margin-top: 0px;
 }
-
-/*search results */
-#adv_search.form {
-  padding-left: 5%;
+.thumb img {
+  display: block;
+  margin: 5px auto;
+  height: 100%;
 }
-#adv_search li {
+
+/*lists*/
+.list.form {
+  padding: 0% 5%;
+}
+.container.list li {
   display: inline-block;
   float: left;
   width: 200px;
@@ -353,22 +359,18 @@ div.sliders label {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-#adv_search li .w_bottle {
-  display: block;
-  margin: 0 auto;
+#prof_pic,#w_bottle {
   height: 100px;
-  margin-bottom: 5px;
 }
-#adv_search li a {
+.list.form li a {
   text-decoration: none;
   color: inherit;
 }
-#adv_search li img {
-  display: block;
-  margin: 5px auto;
-  height: 100%
+.list.form p img {
+  margin: 0px;
+  margin-left: 5px;
 }
-#adv_search li p {
+.list.form li p {
   padding: 10px 0px;
   margin: 0;
   text-align: center;
@@ -384,8 +386,12 @@ div.sliders label {
   width: 50%;
   float: left;
   -webkit-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
--moz-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.like-btn img {
+  display: block;
+  margin: 0 auto;
 }
 .like-btn:nth-of-type(odd) {
   border-right: 1px solid #696969;
