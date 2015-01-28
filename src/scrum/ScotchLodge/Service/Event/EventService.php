@@ -47,6 +47,7 @@ class EventService {
             $date = str_replace('/', '-', $date);
             $date_stop = $this->app->request->post('event_stop');
             $date_stop = str_replace('/', '-', $date_stop);
+            $description = $this->app->request->post('description');
 
             /* @var $event Event */
             $event = new Event();
@@ -60,6 +61,7 @@ class EventService {
             $event->setEventDate($event_date);
             $event_stop = new \DateTime($date_stop);
             $event->setEventStop($event_stop);
+            $event->setDescription($description);
             $event->setCreatedBy($user);
 
             $this->em->persist($event);
@@ -104,6 +106,11 @@ class EventService {
         if($event_stop_input != null && $event->getEventStop() != $event_stop_input){
             $event_stop = new DateTime($event_stop_input);
             $event->setEventStop($event_stop);
+        }
+        
+        $description = $this->app->request->post('description');
+        if($event->getDescription() != $description){
+            $event->setDescription($description);
         }
 
         $this->em->persist($event);

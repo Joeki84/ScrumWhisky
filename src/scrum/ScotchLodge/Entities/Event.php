@@ -20,6 +20,7 @@ class Event {
   private $address;
   private $event_date;
   private $event_stop;
+  private $description;
   private $whiskys;
   private $event_comments;
   private $event_presences;
@@ -61,6 +62,10 @@ class Event {
 
   function getEvent_stop() {
     return $this->event_stop;
+  }
+  
+  function getDescription(){
+    return $this->description;
   }
   
   function getEventComments(){
@@ -113,6 +118,10 @@ class Event {
 
   function setEvent_stop($event_stop) {
     $this->event_stop = $event_stop;
+  }
+  
+  function setDescription($description){
+    $this->description = $description;
   }
   
   function setEventComments($event_comments){
