@@ -10,11 +10,11 @@
     <div>
 	    <dl>
 	        {% for event in events %}
-                    <dt><a href="{{ app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a>
-                    {% if globals.user.isAdmin() %}
+                    <dt>{{ event.EventDate|date('d-m-Y') }} - <a href="{{ app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a>
+                    {% if globals.user.isAdmin() or globals.user.canCreateEvent()  %}
                   <a href="{{ globals.app.urlFor('edit_event', { 'id' : event.getId()} ) }}"><img src="../img/edit.png"></a>
                 {% endif %}</dt> 
-	        	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
+	        	<dd>{{ event.getDescription() }}</dd>        
 	        {% endfor %}  
 	     </dl>
 	</div>
