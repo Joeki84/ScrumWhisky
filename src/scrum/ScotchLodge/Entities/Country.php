@@ -36,6 +36,10 @@ class Country {
     return $this->country_code;
   }
   
+  function getName(){
+    return $this->country_name;
+  }
+  
   function getCountryName(){
     return $this->country_name;
   }
