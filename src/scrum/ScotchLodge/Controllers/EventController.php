@@ -4,6 +4,7 @@ namespace scrum\ScotchLodge\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
+use \Slim\View;
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Event\EventService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
@@ -33,21 +34,32 @@ class EventController extends Controller{
      * Render the page to add a new event.
      */
     public function addEvent(){
+      /* @var $app Slim */
+        $app = $this->getApp();
+        /* @var $user User */
+        $user = $this->getUser();
+        
+        $admin = $user->isAdmin();
+        $can_create = $user->canCreateEvent();
+
+        if ($admin || $can_create) {
         $regsrv = new RegistrationService($this->em, $this->app);
         $postcodes = $regsrv->getPostcodes();
         $globals = $this->getGlobals();
         $this->getApp()->render('Events/new_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
+        } else {
+          $app->flash('error', 'Action not allowed');
+          $app->redirectTo('main_page');
+        }
     }
     
     /**
      * Insert a event.
      */
     public function insertEvent(){
-        try{
-            $user = $this->getUser();
+        try{            
             $event = $this->eventsrv->addEvent($user);
             if($event){
-                $app = $this->getApp();
                 $app->flash('info', 'Event added.');
                 $app->redirect($app->urlFor('main_page'));
             }else{
