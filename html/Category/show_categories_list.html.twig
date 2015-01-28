@@ -8,12 +8,13 @@
   <div class="container form">
     <h1>List of categories</h1>
     <div>
+        
 	    <dl>
 	        {% for category in categories %}
                     <dt><span class="cat">
                         <strong class="catname">{{ category.getCategory }}</strong>
                     {% if globals.user.isAdmin() %}
-                    <img class="editcat" src="../img/edit.png"></span>
+                    <img class="editcat" src="../img/edit.png" data-catid="{{ category.getId }}" onClick="editcat(this)"></span>
                 {% endif %}</dt> 
 	        	<dd></dd>        
 	        {% endfor %}  

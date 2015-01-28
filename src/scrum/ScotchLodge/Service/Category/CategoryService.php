@@ -30,7 +30,19 @@ class CategoryService {
 
     
 
-/* Olivier */    
+/* Olivier */ 
+    
+    
+        public function retrieveCategoryById($id){
+        $category = $this->em->getRepository('scrum\ScotchLodge\Entities\Category')->find($id);
+        if(count($category)> 0){
+            return $event;
+        }else{
+            return null;
+        }
+    }
+    
+    
     public function ShowAllCurrentCategories($em,$app){
     //$em = $this->getEntityManager();
     $categoryRepository = $em->getRepository('scrum\ScotchLodge\Entities\Category');
