@@ -1,13 +1,14 @@
 <div id="latest_reviews" class="">
   <h3>Latest Reviews</h3>
-  {% set latest = reviews.latest %}
+  {% set latest = reviews.latest %}  
   <dl>
     {% for rev in latest %}
-      {% set des = rev.short_description %}
-      <dt class="whisky_name"><span><a href="{{ globals.app.urlFor('show_whisky_by_id', {"id" : rev.getId } ) }}">{{ rev.name }}</a></span></dt>
-      <dd class="review_date">{{ rev.review_date|date('Y-m-d') }}</dd>
-      <dd class="review comment">{{ des|length > 50 ? des|slice(0, 50) ~ '...' : des }}</dd>
+      <div class="review">
+        {% set des = rev.short_description %}
+        <dt class="whisky_name"><span><a href="{{ globals.app.urlFor('show_whisky_by_id', {"id" : rev.getId } ) }}">{{ rev.name }}</a></span></dt>
+        <dd class="review_date">{{ rev.review_date|date('Y-m-d') }}</dd>
+        <dd class="review-txt">{{ des|length > 50 ? des|slice(0, 50) ~ '...' : des }}</dd>
+      </div>
     {% endfor %}
   </dl>
 </div>
-  

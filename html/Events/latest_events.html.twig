@@ -1,10 +1,12 @@
 <div id="latest_events" class="">
-    <h3>Upcoming events</h3>
-    <dl>
-        {% for event in events_five %}
-          <dt><a href="{{ globals.app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a></dt> 
-        	<dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
-          <dd class="comment">{{ event.description|length > 50 ? event.description|slice(0, 50) ~ '...' : event.description }} </dd>
-        {% endfor %}  
-     </dl>
+  <h3>Upcoming events</h3>
+  <dl>
+    {% for event in events_five %}
+      <div class="event">
+        <dt><a href="{{ globals.app.urlFor('show_event_by_id', {"id" : event.getId } ) }}">{{ event.Title }}</a></dt> 
+        <dd>{{ event.EventDate|date('d-m-Y') }}</dd>        
+        <dd class="event-txt">{{ event.description|length > 50 ? event.description|slice(0, 50) ~ '...' : event.description }} </dd>
+      </div>
+    {% endfor %}  
+  </dl>
 </div>
