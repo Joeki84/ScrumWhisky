@@ -29,6 +29,10 @@
           <label for="date">Event Date End</label>
           <input class="form-control" type="date" min="{{"now"|date('d-m-Y')}}" id="event_stop" name="event_stop" value="{% if app.request.isPost() %}{{app.request.post('event_stop')}}{% endif %}" />
         </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description">{% if app.request.isPost() %}{{app.request.post('description')}}{% endif %}</textarea>
+        </div>
 
         <input class="form-control submit btn btn-default" type="submit" id="verzend" name="event" value="Add event" />
 
