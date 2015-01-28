@@ -33,6 +33,14 @@ class CategoryController extends Controller{
     
 /* Olivier */
     
+    
+   public function editCategory($id){
+        $category = $this->catsrv->retrieveCategoryById($id);
+        $globals = $this->getGlobals();        
+    }
+    
+    
+    
         public function getCategories(){
           try{
           $globals = $this->getGlobals();  
