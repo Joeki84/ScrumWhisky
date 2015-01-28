@@ -118,14 +118,20 @@ class ProfileService {
     }
     
     $isEnabled = $app->request->post('enabled');
-    if(isset($isEnabled)&& $user->isEnabled() != $isEnabled){
-        $user->setEnabled($isEnabled);
+    if($user->isEnabled() != $isEnabled){
+        if(!isset($isEnabled)){
+            $user->setEnabled(0);
+        }else{
+            $user->setEnabled($isEnabled);
+        }
     }
     
     $isDeleted = $app->request->post('deleted');
     if($user->isDeleted() != $isDeleted){
         if(!isset($isDeleted)){
             $user->setDeleted(0);
+        }else{
+            $user->setDeleted(1);
         }
         if($isDeleted){
             $user->setEnabled(0);
