@@ -2,7 +2,7 @@
 
 
  {% block title %}
-  Register
+ Search Whisky
 {% endblock title %}
 
 {% block content %}
@@ -14,18 +14,22 @@
     
     <ul> 
       {% for whisky in whiskys %}
-          <li>
+          <li class="cf">
               <a href="{{ app.urlFor('show_whisky_by_id', {"id" : whisky.getId } ) }}">
                 <div class="w_bottle">
                   <img src="../img/whisky/{{ whisky.
                   getImagePath }}" height="80" width="50">
-                </div>{{ whisky.getName }}
+                </div>
+                <p>{{ whisky.getName }}</p>
               </a>
-              <span id="item{{ whisky.getId }}">
-                <a href="#" class="like-btn"  data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}">
-                  <img src="../img/likepic.png" >
+              <div id="item{{ whisky.getId }}" class="like-selector">
+                <a href="#" class="like-btn" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}">
+                  <img src="../img/like_icon.png" >
                 </a>
-              </span>  
+                <a href="#" class="like-btn" data-whiskyid="{{ whisky.getId }}" data-userid="{{ globals.user.getId }}">
+                  <img src="../img/dislike_icon.png" >
+                </a>
+              </div>
           </li>        
       {% endfor %} 
     </ul>
