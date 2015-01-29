@@ -268,6 +268,27 @@ class WhiskyService {
   }
 
   /* End Update function */
+  
+  /* Begin View Whisky function */
+  
+  /**
+   * +1 to the view_count of Whisky. 
+   * @param int $id
+   */
+  public function ViewWhisky(Whisky $whisky){
+      $views = $whisky->getViewCount();
+      if(isset($views)){
+          $views++;
+      }else{
+          $views = 1;
+      }
+      $whisky->setViewCount($views);
+      $this->em->persist($whisky);
+      $this->em->flush();
+      return $whisky;
+  }
+  
+  /* End View Whisky function */
 
   /* Begin Search functions */
 
