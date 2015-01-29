@@ -159,7 +159,6 @@ div.welcome {
 /*comments*/
 .comment, .review, .event {
   margin-bottom: 12px;
-  border-bottom: 1px #e3e3e3 solid;
 }
 #comments .comment {
   padding-bottom: 12px;

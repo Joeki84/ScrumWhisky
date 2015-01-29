@@ -14,7 +14,7 @@
                     {% if globals.user.isAdmin() or globals.user.canCreateEvent()  %}
                   <a href="{{ globals.app.urlFor('edit_event', { 'id' : event.getId()} ) }}"><img src="../img/edit.png"></a>
                 {% endif %}</dt> 
-	        	<dd>{{ event.getDescription|length > 200 ? event.getDescription|slice(0, 200) ~ '...' : event.getDescription }}</dd>        
+	        	<dd class="review">{{ event.getDescription|length > 200 ? event.getDescription|slice(0, 200) ~ '...' : event.getDescription }}</dd>        
 	        {% endfor %}  
 	     </dl>
 	</div>
