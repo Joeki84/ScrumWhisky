@@ -234,3 +234,109 @@ $(function() {
                 
              
         };
+        
+        
+        
+        function addcatinform(el){  
+                console.log('test2'); 
+             var eDiv = document.createElement("div");   
+             var eTxtinput = document.createElement("input"); 
+             var eBtnSave   = document.createElement("button");
+             var eBtnCancel   = document.createElement("button");
+             
+             var eCategoryname="";
+             
+             eTxtinput.type="text";
+             eTxtinput.name="category";
+             eTxtinput.value="";
+             eBtnCancel.type="button";
+             eBtnSave.type="button";
+             eBtnCancel.innerHTML="Cancel";
+             eBtnSave.innerHTML="Save";
+             eBtnSave.dataset.catid="";
+             eBtnCancel.dataset.catname=$(el).prev().text();
+             eBtnCancel.dataset.catid="";
+             eBtnCancel.onclick = function(){ cancelcatinform(this) };
+             eBtnSave.onclick = function(){ savecatinform(this) };
+             
+             $(eDiv).addClass("cat");
+             $(eTxtinput).addClass("category");
+             $(eBtnSave).addClass("btn btn-default");
+             $(eBtnCancel).addClass("btn btn-default cancel");
+             
+             $(eDiv).append(eTxtinput,eBtnSave,eBtnCancel);                         
+             $("#score").append(eDiv);
+             //$(eCategoryname).remove();
+             //$(eEditimg).remove();
+                
+             /*strtxt='<form><input class="category" type="text" name="category" value="';
+             strtxt+=$(this).prev().text();  
+             strtxt+='"/>';             
+             strtxt+='<a class="btn btn-default" href="#" role="button">Save</a> <a class="btn btn-default cancel" href="#" role="button" data-catname="';
+             strtxt+=$(this).prev().text(); 
+             strtxt+='">Cancel</a></form>';
+             $(this).parent().html(strtxt);*/
+                
+             
+        };
+        
+        
+        function  cancelcatinform(el){
+            console.log('test');
+  
+              $(el).parents("div .cat").remove();     
+            
+        }; 
+        
+        
+         function  savecatinform(el){
+            console.log($(el).attr('data-catid'));
+            
+     
+            $.ajax({                                                
+                type:"POST",
+                url:"../addcategory",
+                data:'name='+$(el).prev().val(),
+                dataType: "json",
+                success: function(newname){
+                 console.log("success");
+                            strtxt='<label for="cat';
+           strtxt+=newname.id;
+           strtxt+=';">';
+           strtxt+=newname.name; 
+           strtxt+='</label> <input id="cat';
+           strtxt+=newname.id;
+           strtxt+='" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.5" data-slider-value="0" />';
+           strtxt+='<input id="catparam';
+           strtxt+=newname.id;
+           strtxt+='" name="catparam[]" type="hidden" value="" />';
+           strtxt+='<span id="cat';
+           strtxt+=newname.id;
+           strtxt+='CurrentSliderValLabel">Current value selected: <span id="cat';
+           strtxt+=newname.id;
+           strtxt+='SliderVal"></span> / 10</span><p>&nbsp;</p>';
+           $("#score").append(strtxt); 
+           $(el).parents("div .cat").remove();
+           st='#cat'+newname.id;
+           $(st).slider({ formatter: function(value) {
+		     return 'Current value: ' + value;
+	                                            }
+                    });
+            $(st).on("slide", function(slideEvt) {
+   $(newname.id+"SliderVal").text(slideEvt.value);
+   $("#catparam"+newname.id).val(newname.id+"|"+slideEvt.value);
+   })        
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt=' <strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
+                }
+            });
+            
+          
+     
+        }
+ 
+ 
