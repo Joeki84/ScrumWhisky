@@ -12,10 +12,6 @@ $app->post('/whisky/new', function() use ($contr){
     $contr->insertWhisky();
 })->name('new_whisky_process');
 
-$app->get('/whisky/new/ok', function() use ($contr){
-    echo("todo new whisky stored");
-})->name('new_whisky_ok');
-
 $app->get('/whisky/edit/:id', function($id) use ($contr){
     $contr->editWhisky($id);
 })->name('edit_whisky');

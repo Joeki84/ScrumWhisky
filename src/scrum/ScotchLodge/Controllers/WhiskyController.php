@@ -165,7 +165,7 @@ class WhiskyController extends Controller{
 
         $globals = $this->getGlobals();  
         $whisky = $this->whiskysrv->retrieveWhiskyById($id);
-        
+        $whisky = $this->whiskysrv->ViewWhisky($whisky);
         if($whisky){
               $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
           }
