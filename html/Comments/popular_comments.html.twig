@@ -5,9 +5,14 @@
     {% for comm in popular %}
       {% set c_out = comm.comment.comment.comment %}
       <dt>{{ whisky.review_date|date('Y-m-d') }} - 
-      <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.comment.user.id } ) }}">{{ comm.comment.user.username }}</a> said:</dt>
-      <dd>"{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}"</dd>
-      <dt class="comment comment-like"><span>Likes: {{ comm.likes }}</span></dt>
+        <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.comment.user.id } ) }}">{{ comm.comment.user.username }}</a> said:
+      </dt>
+      <dd>
+        <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comm.comment.user.id } ) }}">
+          "{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}
+        "</a>
+      </dd>
+      <dt class="comment comment-like">Likes: {{ comm.likes }}</dt>
     {% endfor %}
   </dl>
 </div>
