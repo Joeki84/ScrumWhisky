@@ -45,6 +45,9 @@ ul, li {
 a {
   color: inherit;
 }
+form textarea {
+  resize: none;
+}
 .nav-pills > li + li {
   margin-left: 0px;
 }
@@ -409,10 +412,12 @@ div.sliders label {
   height: 170px;
   width: auto;
 }
-form textarea {
-  resize: none;
+#event_id dl:nth-of-type(-n+2) {
+  width: 45%;
+  float: left;
+  min-width: 400px;
+  position: relative;
 }
-
 
 
 /*messages*/

@@ -17,10 +17,14 @@
       <dd>{{ whisky.region.getName }}</dd>
       <dt>Distillery:</dt>
       <dd>{{ whisky.distillery.getName }}</dd>
-      <dt>Bottler:</dt>
-      <dd>{{ whisky.barrel.getCasktype }}</dd>
+      {% if whisky.bottlery is defined and whisky.bottlery is not null %}
+      <dt>Bottlery:</dt>
+      <dd>{{ whisky.bottlery.getName }}</dd>
+      {% endif %}
     </dl>
     <dl>
+      <dt>Barrel:</dt>
+      <dd>{{ whisky.barrel.getCasktype }}</dd>
       <dt>Age:</dt>
       <dd>{{ whisky.getAge }} year</dd>
       <dt>ABV:</dt>

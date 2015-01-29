@@ -5,19 +5,27 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container form">
+  <div id="event_id" class="container form">
     <h1>{{ event.getTitle }}</h1>
-    
-    <div><strong>Event date:</strong></div><div>{{ event.event_date | date('Y-m-d')  }}</div>
-    <div><strong>Location:</strong></div><div>{{ event.getAddress }} {{ event.postcode.town }}</div>
-    <div><strong>Description:</strong></div><div> {{ event.description }}</div>
-    <div><strong>Map:</strong></div><div><iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={{ event.address }}{{ event.postcode.town ~', BELGIE' }} &key=AIzaSyB_sBxeACYNeQcH7_Oui_lYihEd3hdckg4"></iframe></div>
-        <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">
-          Return to main menu</a>    
+    <dl>
+      <dt>Event date:</dt>
+      <dd>{{ event.event_date | date('Y-m-d')  }}</dd>
+      <dt>Location:</dt>
+      <dd>{{ event.getAddress }}<br>
+      {{event.postcode.postcode}} {{ event.postcode.town }}</dd>
+      <dt>Description:</dt>
+      <dd>"{{ event.description }}"</dd>
+    </dl>
+    <dl>
+      <dt>Map:</dt>
+      <dd><iframe width="300" height="180" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={{ event.address }}{{ event.postcode.town ~', BELGIE' }} &key=AIzaSyB_sBxeACYNeQcH7_Oui_lYihEd3hdckg4"></iframe></dd>
+    </dl>
         
     
     {% set comments = event.comments %}    
     {% include 'Comments/_include_comments.html.twig' %}
+
+    <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">Return to main menu</a>
     
   </div>
 {% endblock content %}
