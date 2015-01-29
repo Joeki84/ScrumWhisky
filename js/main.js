@@ -22,31 +22,41 @@ $(function() {
              var eForm = document.createElement("form");
              var eTxtinput = document.createElement("input"); 
              var eBtnSave   = document.createElement("button");
+             var eBtnDelete   = document.createElement("button");
              var eBtnCancel   = document.createElement("button");
              
-             var eAlcname=$(el).prev();
+             var eCategoryname=$(el).prev();
              var eEditimg=$(el);
+             var eParent=$(el).parent();
              
              eTxtinput.type="text";
              eTxtinput.name="category";
              eTxtinput.value=$(el).prev().text();
              eBtnCancel.type="button";
              eBtnSave.type="button";
+             eBtnDelete.type="button";     
              eBtnCancel.innerHTML="Cancel";
+             eBtnDelete.innerHTML="Delete";
              eBtnSave.innerHTML="Save";
+             eBtnSave.dataset.catid=$(el).attr("data-catid");
              eBtnCancel.dataset.catname=$(el).prev().text();
              eBtnCancel.dataset.catid=$(el).attr("data-catid");
+             eBtnDelete.dataset.catname=$(el).prev().text();
+             eBtnDelete.dataset.catid=$(el).attr("data-catid");
              eBtnCancel.onclick = function(){ cancelcat(this) };
              eBtnSave.onclick = function(){ savecat(this) };
+             eBtnDelete.onclick = function(){ deletecat(this) };
              
              $(eTxtinput).addClass("category");
              $(eBtnSave).addClass("btn btn-default");
+             $(eBtnDelete).addClass("btn btn-default");
              $(eBtnCancel).addClass("btn btn-default cancel");
              
              $(eForm).append(eTxtinput,eBtnSave,eBtnCancel);
-             $(el).parent().append(eForm);
-             $(eAlcname).remove();
-             $(eEditimg).remove();
+             $(eParent).html("");
+             $(eParent).append(eForm);
+             //$(eCategoryname).remove();
+             //$(eEditimg).remove();
                 
              /*strtxt='<form><input class="category" type="text" name="category" value="';
              strtxt+=$(this).prev().text();  
@@ -61,24 +71,166 @@ $(function() {
         
         
             function  cancelcat(el){
-            console.log('test');             
+            console.log('test');
+            if($(el).attr('data-catid')=="")
+            {
+              $(el).parents("div .cat").remove();     
+            }   
+            else
+            {
              strtxt='<strong class="catname">';
              strtxt+=$(el).attr('data-catname');
              strtxt+='</strong><img class="editcat" src="../img/edit.png" data-catid="';
              strtxt+=$(el).attr('data-catid');
              strtxt+='" onClick="editcat(this)">';
-             $(el).parents("span").html(strtxt); 
-             $(el).parents("form").remove();                          
+             
+             strtxt+='<img class="deletecat" src="../img/delete.png" data-catid="';
+             strtxt+=$(el).attr('data-catid');
+             strtxt+='" onClick="deletecat(this)">';
+             
+             $(el).parents("div .cat").html(strtxt); 
+             $(el).parents("form").remove();
+            }
         }; 
         
         function  savecat(el){
-              $.ajax({
-                type:"GET",
-                url:"editcategories"+'/'+$(this).attr('data-catid')+'/'+$(el).prev().text(),
-                data:'',
-                success: function(){
+            console.log($(el).attr('data-catid'));
+            
+            
+            if($(el).attr('data-catid')=="")
+            {
+                      
+            $.ajax({                                                
+                type:"POST",
+                url:"addcategory",
+                data:'name='+$(el).prev().val(),
+                dataType: "json",
+                success: function(newname){
+                 console.log("success");
+                 strtxt='<strong class="catname">';
+                 strtxt+=newname.name;
+                 strtxt+='</strong><img class="editcat" src="../img/edit.png" data-catid="';
+                 strtxt+=newname.id;
+                 strtxt+='" onClick="editcat(this)">';
+                 strtxt+=' <img class="deletecat" src="../img/delete.png" data-catid="';
+                 strtxt+=newname.id;
+                 strtxt+='" onClick="deletecat(this)"> <strong style="color:green">category saved</strong>';
+                 $(el).parents("div .cat").html(strtxt); 
+                 $(el).parents("form").remove();    
                     
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt=' <strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
                 }
-            }); 
+            });
+            
+            
+            }   
+            else
+            {
+            
+              
+            $.ajax({                                                
+                type:"POST",
+                url:"editcategory"+'/'+$(el).attr('data-catid'),
+                data:'name='+$(el).prev().val()+"&id="+$(el).attr('data-catid'),
+                dataType: "json",
+                success: function(newname){
+                 console.log("success");
+                 strtxt='<strong class="catname">';
+                 strtxt+=newname.name;
+                 strtxt+='</strong><img class="editcat" src="../img/edit.png" data-catid="';
+                 strtxt+=$(el).attr('data-catid');
+                 strtxt+='" onClick="editcat(this)">';
+                 strtxt+=' <img class="deletecat" src="../img/delete.png" data-catid="';
+                 strtxt+=$(el).attr('data-catid');
+                 strtxt+='" onClick="deletecat(this)"> <strong style="color:green">category saved</strong>';
+                 $(el).parents("div .cat").html(strtxt); 
+                 $(el).parents("form").remove();    
+                    
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt='"<strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
+                }
+            });
+          }
         }
  
+
+
+ function  deletecat(el){
+            console.log($(el).attr('data-catid'));
+            if(confirm("Are you sure to delete?"))
+            {
+              $.ajax({
+                type:"POST",
+                url:"deletecategory"+'/'+$(el).attr('data-catid'),
+                data:"id="+$(el).attr('data-catid'),
+                dataType: "json",
+                success: function(){
+                 console.log("success");                  
+                 $(el).parents("div .cat").remove();    
+                    
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt='"<strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
+                }
+            });
+         }
+        }
+ 
+
+
+    function addcat(el){  
+                console.log('test2'); 
+             var eDiv = document.createElement("div");   
+             var eForm = document.createElement("form");
+             var eTxtinput = document.createElement("input"); 
+             var eBtnSave   = document.createElement("button");
+             var eBtnCancel   = document.createElement("button");
+             
+             var eCategoryname="";
+             
+             eTxtinput.type="text";
+             eTxtinput.name="category";
+             eTxtinput.value="";
+             eBtnCancel.type="button";
+             eBtnSave.type="button";
+             eBtnCancel.innerHTML="Cancel";
+             eBtnSave.innerHTML="Save";
+             eBtnSave.dataset.catid="";
+             eBtnCancel.dataset.catname=$(el).prev().text();
+             eBtnCancel.dataset.catid="";
+             eBtnCancel.onclick = function(){ cancelcat(this) };
+             eBtnSave.onclick = function(){ savecat(this) };
+             
+             $(eDiv).addClass("cat");
+             $(eTxtinput).addClass("category");
+             $(eBtnSave).addClass("btn btn-default");
+             $(eBtnCancel).addClass("btn btn-default cancel");
+             
+             $(eForm).append(eTxtinput,eBtnSave,eBtnCancel);             
+             $(eDiv).append(eForm);             
+             $("#categorylist").append(eDiv);
+             //$(eCategoryname).remove();
+             //$(eEditimg).remove();
+                
+             /*strtxt='<form><input class="category" type="text" name="category" value="';
+             strtxt+=$(this).prev().text();  
+             strtxt+='"/>';             
+             strtxt+='<a class="btn btn-default" href="#" role="button">Save</a> <a class="btn btn-default cancel" href="#" role="button" data-catname="';
+             strtxt+=$(this).prev().text(); 
+             strtxt+='">Cancel</a></form>';
+             $(this).parent().html(strtxt);*/
+                
+             
+        };

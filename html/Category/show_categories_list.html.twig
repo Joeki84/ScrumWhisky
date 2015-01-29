@@ -9,16 +9,19 @@
     <h1>List of categories</h1>
     <div>
         
-	    <dl>
+	    <div id="categorylist">
 	        {% for category in categories %}
-                    <dt><span class="cat">
+                    <div class="cat">
                         <strong class="catname">{{ category.getCategory }}</strong>
-                    {% if globals.user.isAdmin() %}
-                    <img class="editcat" src="../img/edit.png" data-catid="{{ category.getId }}" onClick="editcat(this)"></span>
-                {% endif %}</dt> 
-	        	<dd></dd>        
+                        {% if globals.user.isAdmin() %}
+                        <img class="editcat" src="../img/edit.png" data-catid="{{ category.getId }}" onClick="editcat(this)">
+                        <img class="deletecat" src="../img/delete.png" data-catid="{{ category.getId }}" onClick="deletecat(this)">
+                    </div>
+                {% endif %}        
 	        {% endfor %}  
-	     </dl>
+	     </div>
+             <button type="button" data-catid="2" class="btn btn-default" onClick="addcat()">Add a new category</button>
+             
 	</div>
 
     <a href="/" id="return_to_main" class="btn submit btn-default">

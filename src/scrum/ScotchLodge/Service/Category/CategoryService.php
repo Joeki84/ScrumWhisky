@@ -4,11 +4,11 @@ namespace scrum\ScotchLodge\Service\Category;
 
 use Doctrine\ORM\EntityManager;
 use Slim\Slim;
-use scrum\ScotchLodge\Entities\Event;
+use scrum\ScotchLodge\Entities\Category;
 use scrum\ScotchLodge\Entities\User;
 
 /**
- * EventService
+ * CategoryService
  *
  * @author joeri broos
  */
@@ -33,13 +33,50 @@ class CategoryService {
 /* Olivier */ 
     
     
+    public function addCategory(){
+                
+        $name = $this->app->request->post('name');        
+        if($name!="")
+        {
+        $category = new Category();
+        $category->setCategory($name);
+        $this->em->persist($category);
+        $this->em->flush();
+        return $category;
+        }
+        $this->errors = $val->getErrors();
+        return false;
+    }
+    
+    
+    public function updateCategory(Category $category){
+        $name = $this->app->request->post('name');
+        if($category->getCategory() != $name){
+          $category->setCategory($name);
+        }
+
+        $this->em->persist($category);
+        $this->em->flush();
+        return $category;
+    }
+    
+    
         public function retrieveCategoryById($id){
         $category = $this->em->getRepository('scrum\ScotchLodge\Entities\Category')->find($id);
         if(count($category)> 0){
-            return $event;
+            return $category;
         }else{
             return null;
         }
+    }
+    
+    
+    
+    
+    public function deleteCategory(Category $category){
+        $this->em->remove($category);
+        $this->em->flush();
+        return $category;
     }
     
     
