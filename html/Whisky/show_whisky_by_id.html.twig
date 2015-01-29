@@ -5,45 +5,54 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container form">
+  <div id="whisky_id" class="cf container form">
     <h1>{{ whisky.getName }}</h1>
-    <img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50">
-    <div><strong>Name:</strong></div><div>{{ whisky.getName }}</div>
-    <div><strong>Region:</strong></div><div>{{ whisky.region.getName }}</div>
-    <div><strong>Distillery:</strong></div><div>{{ whisky.distillery.getName }}</div>
-    <div><strong>Bottler:</strong></div><div>{{ whisky.barrel.getCasktype }}</div>
-    <div><strong>Age:</strong></div><div>{{ whisky.getAge }} year</div>
-    <div><strong>ABV:</strong></div><div>{{ (whisky.getAlcohol/100)|number_format(1) }} %</div>
-    <div><strong>Price:</strong></div><div>&euro; {{ (whisky.getPrice/100)|number_format(2) }} </div>
-    <div><strong>Review:</strong></div><div>{{ whisky.short_description }} </div>
+    <dl>
+      <img src="../img/whisky/{{ whisky.getImagePath }}" height="80" width="50">
+    </dl>
+    <dl>
+      <dt>Name:</dt>
+      <dd>{{ whisky.getName }}</dd>
+      <dt>Region:</dt>
+      <dd>{{ whisky.region.getName }}</dd>
+      <dt>Distillery:</dt>
+      <dd>{{ whisky.distillery.getName }}</dd>
+      <dt>Bottler:</dt>
+      <dd>{{ whisky.barrel.getCasktype }}</dd>
+    </dl>
+    <dl>
+      <dt>Age:</dt>
+      <dd>{{ whisky.getAge }} year</dd>
+      <dt>ABV:</dt>
+      <dd>{{ (whisky.getAlcohol/100)|number_format(1) }} %</dd>
+      <dt>Price:</dt>
+      <dd>&euro; {{ (whisky.getPrice/100)|number_format(2) }}</dd>
+    </dl>
+    <dl class="clearboth">
+      <dt>Review:</dt>
+      <dd>{{ whisky.short_description }}</dd>
+    </dl>
     
     
-    
-    
-        <p>&nbsp;</p>
-        <p>Score</p>
-        {% set scores =  whisky.getScores  %}
-        {% for score in scores %}         
-          <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</div>
-        {% endfor %}
-    
-    
-    <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">
-      Return to main menu</a>
+      <p>Score</p>
+      {% set scores =  whisky.getScores  %}
+      {% for score in scores %}         
+        <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</div>
+      {% endfor %}
 
+    <div class="comments"
+      {# comments #}
+      {% set comments = whisky.comments %}
+      {% include 'Comments/_include_comments.html.twig' %}
 
-    {# comments #}
-    {% set comments = whisky.comments %}
-    {% include 'Comments/_include_comments.html.twig' %}
-
-    <form action="#">
-      <div class="comment-post">
-        <div class="form-group">
-        <label for="comment">Leave a comment</label>
-        <textarea data-whiskyid="{{ whisky.id }}" class="form-control" id="comment-box"></textarea>
+      <form action="#">
+        <div class="comment-post">
+          <div class="form-group">
+            <label for="comment">Leave a comment</label>
+            <textarea data-whiskyid="{{ whisky.id }}" class="form-control" id="comment-box"></textarea>
+          </div>
+          <input id="add-comment" class="form-control submit btn btn-default" type="submit" id="submit" name="submit" value="Send" />
         </div>
-        <input id="add-comment" class="form-control btn btn-default" type="submit" id="submit" name="submit" value="Send" />
-      </div>
     </form>
   </div>
 

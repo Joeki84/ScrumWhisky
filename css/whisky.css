@@ -341,7 +341,7 @@ div.sliders label {
   height: 100%;
 }
 
-/*lists*/
+/*list pages*/
 .list.form {
   padding: 0% 5%;
 }
@@ -397,6 +397,21 @@ div.sliders label {
 }
 .like-btn.active {
   background-color: #696969;
+}
+
+/*ID pages*/
+#whisky_id dl:nth-of-type(-n+3) {
+  width: 30%;
+  min-width: 200px;
+  float: left;
+  position: relative;
+}
+#whisky_id img {
+  height: 170px;
+  width: auto;
+}
+form textarea {
+  resize: none;
 }
 
 
