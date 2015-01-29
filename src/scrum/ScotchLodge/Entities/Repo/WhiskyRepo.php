@@ -52,8 +52,17 @@ class WhiskyRepo extends EntityRepository {
     }
     
     if (isset($req['bottler'])) {
-      $bottler_repo = $em->getRepository('scrum\ScotchLodge\Entities\Distillery');
-      $bottler = $bottler_repo->find($req['bottler']);
+      $distilelry_repo = $em->getRepository('scrum\ScotchLodge\Entities\Distillery');
+      $bottler = $distilelry_repo->find($req['bottler']);
+      $qb->andWhere('w.bottlery = :bottler')
+          ->setParameter('bottler', $bottler);
+    }
+    
+    if (isset($req['barrel'])) {
+      $barrel_repo = $em->getRepository('scrum\ScotchLodge\Entities\Barrel');
+      $barrel = $barrel_repo->find($req['barrel']);
+      $qb->andWhere('w.barrel = :barrel')
+          ->setParameter('barrel', $barrel);
     }
     
     

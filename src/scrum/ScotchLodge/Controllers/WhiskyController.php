@@ -147,10 +147,11 @@ class WhiskyController extends Controller{
         $regions = $regsrv->getRegions();
         $distsrv = new DistilleryService($this->em, $this->app);
         $distillerys = $distsrv->getDistillerys();
+        $bottlers = $distsrv->getDistillerys();
         $barsrv = new BarrelService($this->em, $this->app);
         $barrels = $barsrv->getBarrels();
         $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/advanced_search.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels));
+        $this->getApp()->render('Whisky/advanced_search.html.twig', array('globals' => $globals,  'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'bottlers' => $bottlers));
     }
     
     public function advanced_search_whisky_result(){

@@ -12,6 +12,7 @@
     <h1>Whisky advanced search</h1>
     <form action="{{ app.urlFor('advanced_search_whisky_result') }}" method="POST" novalidate>
       <div class="form-group cf">
+        
         <label for="Region">Region</label>
         <select class="form-control"  id="region" name="region" >
             <option value="">All regions</option>
@@ -19,6 +20,7 @@
             <option value="{{ region.id }}">{{ region.getName }}</option>
           {% endfor %}
         </select>
+        
         <label for="distillery">Distillery</label>
         <select class="form-control"  id="distillery" name="distillery" >
             <option value="">All distilleries</option>
@@ -26,13 +28,25 @@
             <option   value="{{ distillery.id }}">{{ distillery.getName }}</option>
         {% endfor %}
         </select>
+        
         <label for="bottler">Bottler</label> 
         <select class="form-control"  id="bottler" name="bottler" >
          <option value="">All bottlers</option>
+        {% for bottler in bottlers %}
+            <option   value="{{ bottler.id }}">{{ bottler.name }}</option>
+        {% endfor %}
+        </select>
+        
+        <label for="barrel">Barrel</label> 
+        <select class="form-control"  id="barrel" name="barrel" >
+         <option value="">All barrels</option>
         {% for barrel in barrels %}
             <option   value="{{ barrel.id }}">{{ barrel.getCasktype }}</option>
         {% endfor %}
         </select>
+        
+        
+        
       </div>
       <div class="form-group cf">
         <div class="sliders cf">
