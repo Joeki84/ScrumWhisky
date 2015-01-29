@@ -40,4 +40,11 @@ $app->get('/whisky/:id', function($id) use ($contr){
 })->name('show_whisky_by_id');
 
 
+
+
+
+
+
+
+
 /* Olivier */

@@ -3,17 +3,7 @@
 $(function() {
          
               
- 
-        $('.like-btn').click(function(){
-            $.ajax({
-                type:"GET",
-                url:"whiskylike"+'/'+$(this).attr('data-whiskyid')+'/'+$(this).attr('data-userid'),
-                data:'',
-                success: function(){
-                    
-                }
-            });
-        });
+
 
     });
     
@@ -291,8 +281,7 @@ $(function() {
         
          function  savecatinform(el){
             console.log($(el).attr('data-catid'));
-            
-     
+                 
             $.ajax({                                                
                 type:"POST",
                 url:"../addcategory",
@@ -340,3 +329,62 @@ $(function() {
         }
  
  
+        
+        function  like(el){
+            eImg=$(el).children("img");
+            
+                       
+                
+                if($(el).attr('data-name')=="Like")
+                {
+                   if($(el).attr('data-status'))
+                   {
+                       newstatus=0;bgcolor="black";bgimg="none";
+                       newsrc="http://www.whisky.dev/img/like_icon.png";
+                   }
+                   else
+                   {
+                       newstatus=1;bgcolor="white";
+                       newsrc="http://www.whisky.dev/img/like_icon_active.png";
+                   }    
+                }
+                else
+                {
+                    if($(el).attr('data-status')==-1)                
+                   {
+                       newstatus=0;bgcolor="black";bgimg="none";
+                       newsrc="http://www.whisky.dev/img/dislike_icon.png";
+                   }
+                   else
+                   {
+                       newstatus=-1;bgcolor="white";
+                       newsrc="http://www.whisky.dev/img/dislike_icon_active.png";
+                   }    
+               }
+                
+                $.ajax({                                                
+                type:"POST",
+                url:"../whiskylike",
+                data:'whiskyid='+$(el).attr('data-whiskyid')+'&userid='+$(el).attr('data-userid')+'&likeid='+$(el).attr('data-id')+'&status='+newstatus,
+                dataType: "html",
+                success: function(id){
+                        console.log("success");
+                        $(eImg).attr({ src: newsrc });
+                        $(el).data('status', newstatus);
+                        $(el).css("background-color",bgcolor);
+                        $(el).css("background-image",bgimg);
+                         
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt=' <strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
+                }
+            });
+            
+          
+     
+        }
+                    
+  
