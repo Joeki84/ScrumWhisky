@@ -124,10 +124,9 @@ class CategoryController extends Controller{
               $this->getApp()->render('Category/show_category_by_id.html.twig', array('globals' => $globals,  'category' => $category));
           }
           else{
-                $errors = $this->catsrv->getErrors();
-                 $app = $this->getApp();
-                $app->flash('error', 'No whiskys');
-                $this->getApp()->render('Category/show_category_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'category' => $category));
+                $app = $this->getApp();
+                $app->flash('error', 'The requested category does not exist');
+                $app->redirectTo('error_404');
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
