@@ -26,3 +26,7 @@ scrum\ScotchLodge\Entities\WhiskyLike:
       joinColumn:
         name: whisky_id
         referencedColumnName: id
+        
+    fields:
+      state:
+        type: integer
