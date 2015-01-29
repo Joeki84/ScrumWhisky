@@ -3,8 +3,13 @@
   {% set latest = comments.latest %}
   <dl>
     {% for comm in latest %}
-      <dt>{{ whisky.review_date|date('Y-m-d') }} - <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.user.id } ) }}">{{ comm.user.username }}</a> said:</dt>
-      <dd class="review">"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"</dd>
+      	<dt>{{ whisky.review_date|date('Y-m-d') }} - <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.user.id } ) }}">{{ comm.user.username }}</a> said:
+      	</dt>
+      	<dd class="review">
+      		<a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comm.review_comment.whisky.id } ) }}">
+      			"{{ comm.comment|length > 50 ? comm.comment|slice(0, 50) ~ '...' : comm.comment }}"
+      		</a>
+      	</dd>
     {% endfor %}
   </dl>
 </div>
