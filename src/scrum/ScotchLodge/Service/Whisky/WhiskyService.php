@@ -16,6 +16,7 @@ use scrum\ScotchLodge\Service\Barrel\BarrelService;
 use scrum\ScotchLodge\Service\Blend\BlendService;
 use scrum\ScotchLodge\Service\Country\CountryService;
 use scrum\ScotchLodge\Service\Category\CategoryService;
+use scrum\ScotchLodge\Service\Validation\WhiskySearchValidation;
 
 use DateTime;
 
@@ -390,7 +391,13 @@ class WhiskyService {
     if ($this->app->request->post('name') != null)
       $req["name"] = $this->app->request->post('name');
     
-  
+    $val = new WhiskySearchValidation($this->app, $this->em);
+ 
+    if ($val->validate()) {
+      echo "OK";
+    } else {
+      echo "NOK";
+    }
 
     if (isset($req)) {
       $whisky_results = $this->em->getRepository($this->entity)->findFiltered($req);

@@ -163,7 +163,7 @@ class WhiskyController extends Controller{
     public function advanced_search_whisky_result(){
 
         $globals = $this->getGlobals();        
-        $whisky=$this->whiskysrv->advanced_search_whisky_result();        
+        $whisky=$this->whiskysrv->advanced_search_whisky_result();
         $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals,  'whiskys'  => $whisky));
     }
     
