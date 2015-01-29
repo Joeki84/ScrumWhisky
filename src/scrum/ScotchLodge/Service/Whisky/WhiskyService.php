@@ -264,6 +264,27 @@ class WhiskyService {
 
     $this->em->persist($whisky);
     $this->em->flush();
+    
+    
+    $tab = $this->app->request->post('catparam');
+      
+      for($i=0;$i<count($tab);$i++)
+      {                 
+  
+      $cat=explode("|",$tab[$i]);
+      
+      //$whiskyscore = new Whiskyscore;
+      $whiskyscore = $this->em->find('scrum\ScotchLodge\Entities\WhiskyScore',$cat[2] );     
+      $whiskyscore->setScore($cat[1]*100);
+      $categorysrv = new CategoryService($this->em, $this->app);
+      $category = $categorysrv->retrieveCategoryById($cat[0]);
+      $whiskyscore->setCategory($category);
+      $whiskyscore->setWhisky($whisky);
+      $this->em->persist($whiskyscore);
+      $this->em->flush();
+      }
+    
+    
     return $whisky;
   }
 
