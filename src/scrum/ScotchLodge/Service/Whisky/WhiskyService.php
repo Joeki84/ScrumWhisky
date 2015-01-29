@@ -17,7 +17,6 @@ use scrum\ScotchLodge\Service\Blend\BlendService;
 use scrum\ScotchLodge\Service\Country\CountryService;
 use scrum\ScotchLodge\Service\Category\CategoryService;
 use scrum\ScotchLodge\Service\Validation\WhiskySearchValidation;
-
 use DateTime;
 
 /**
@@ -72,10 +71,10 @@ class WhiskyService {
       $date_bot = str_replace('/', '-', $bottled);
       $country = $this->app->request->post('country');
       $cap = $this->app->request->post('capacity');
-      
-      
-      
-      
+
+
+
+
       $capacity = $cap * 100;
 
       /* @var $whisky Whisky */
@@ -125,22 +124,21 @@ class WhiskyService {
 
       $this->em->persist($whisky);
       $this->em->flush();
-      
+
       $tab = $this->app->request->post('catparam');
-      
-      for($i=0;$i<count($tab);$i++)
-      {
-      $categoryscore = new Whiskyscore();      
-      $cat=explode("|",$tab[$i]);
-      $categoryscore->setScore($cat[1]*100);
-      $categorysrv = new CategoryService($this->em, $this->app);
-      $category = $categorysrv->retrieveCategoryById($cat[0]);
-      $categoryscore->setCategory($category);
-      $categoryscore->setWhisky($whisky);
-      $this->em->persist($categoryscore);
-      $this->em->flush();
+
+      for ($i = 0; $i < count($tab); $i++) {
+        $categoryscore = new Whiskyscore();
+        $cat = explode("|", $tab[$i]);
+        $categoryscore->setScore($cat[1] * 100);
+        $categorysrv = new CategoryService($this->em, $this->app);
+        $category = $categorysrv->retrieveCategoryById($cat[0]);
+        $categoryscore->setCategory($category);
+        $categoryscore->setWhisky($whisky);
+        $this->em->persist($categoryscore);
+        $this->em->flush();
       }
-      
+
       return $whisky;
     }
     $this->errors = $val->getErrors();
@@ -265,51 +263,50 @@ class WhiskyService {
 
     $this->em->persist($whisky);
     $this->em->flush();
-    
-    
+
+
     $tab = $this->app->request->post('catparam');
-      
-      for($i=0;$i<count($tab);$i++)
-      {                 
-  
-      $cat=explode("|",$tab[$i]);
-      
+
+    for ($i = 0; $i < count($tab); $i++) {
+
+      $cat = explode("|", $tab[$i]);
+
       //$whiskyscore = new Whiskyscore;
-      $whiskyscore = $this->em->find('scrum\ScotchLodge\Entities\WhiskyScore',$cat[2] );     
-      $whiskyscore->setScore($cat[1]*100);
+      $whiskyscore = $this->em->find('scrum\ScotchLodge\Entities\WhiskyScore', $cat[2]);
+      $whiskyscore->setScore($cat[1] * 100);
       $categorysrv = new CategoryService($this->em, $this->app);
       $category = $categorysrv->retrieveCategoryById($cat[0]);
       $whiskyscore->setCategory($category);
       $whiskyscore->setWhisky($whisky);
       $this->em->persist($whiskyscore);
       $this->em->flush();
-      }
-    
-    
+    }
+
+
     return $whisky;
   }
 
   /* End Update function */
-  
+
   /* Begin View Whisky function */
-  
+
   /**
    * +1 to the view_count of Whisky. 
    * @param int $id
    */
-  public function ViewWhisky(Whisky $whisky){
-      $views = $whisky->getViewCount();
-      if(isset($views)){
-          $views++;
-      }else{
-          $views = 1;
-      }
-      $whisky->setViewCount($views);
-      $this->em->persist($whisky);
-      $this->em->flush();
-      return $whisky;
+  public function ViewWhisky(Whisky $whisky) {
+    $views = $whisky->getViewCount();
+    if (isset($views)) {
+      $views++;
+    } else {
+      $views = 1;
+    }
+    $whisky->setViewCount($views);
+    $this->em->persist($whisky);
+    $this->em->flush();
+    return $whisky;
   }
-  
+
   /* End View Whisky function */
 
   /* Begin Search functions */
@@ -345,24 +342,24 @@ class WhiskyService {
     $reviews['popular'] = $this->popularReviews($limit);
     return $reviews;
   }
-  
+
   public function addWhiskyComment($whisky_id, $user, $message) {
     /* @var $em EntityManager */
     $em = $this->em;
-        
+
     /* create comment */
-    $comment = new Comment();    
+    $comment = new Comment();
     $comment->setCommentDate(new \DateTime());
     $comment->setComment($message);
     $comment->setUser($user);
     $em->persist($comment);
     $em->flush();
-    
+
     /* fetch whisky */
     $whisky = $em->getRepository($this->entity)->find($whisky_id);
-    
+
     /* couple comment to whisky */
-    $whisky_comment = new CommentReview();    
+    $whisky_comment = new CommentReview();
     $whisky_comment->setWhisky($whisky);
     $whisky_comment->setComment($comment);
     $em->persist($whisky_comment);
@@ -381,30 +378,31 @@ class WhiskyService {
 
     if ($this->app->request->post('bottler') != null)
       $req["bottler"] = $this->app->request->post('bottler');
-    
+
     if ($this->app->request->post('barrel') != null)
       $req["barrel"] = $this->app->request->post('barrel');
-    
+
     if ($this->app->request->post('blend') != null)
-      $req["blend"] = $this->app->request->post('blend');            
+      $req["blend"] = $this->app->request->post('blend');
 
     if ($this->app->request->post('name') != null)
       $req["name"] = $this->app->request->post('name');
-    
-    $val = new WhiskySearchValidation($this->app, $this->em);
- 
-    if ($val->validate()) {
-      echo "OK";
-    } else {
-      echo "NOK";
-    }
 
-    if (isset($req)) {
-      $whisky_results = $this->em->getRepository($this->entity)->findFiltered($req);
-      return $whisky_results;
+    $val = new WhiskySearchValidation($this->app, $this->em);
+
+    if ($val->validate()) {
+      if (isset($req)) {
+        $whisky_results = $this->em->getRepository($this->entity)->findFiltered($req);
+        return $whisky_results;
+      } else {
+        $whisky = $this->em->getRepository($this->entity)->findall();
+        return $whisky;
+      }
     } else {
-      $whisky = $this->em->getRepository($this->entity)->findall();
-      return $whisky;
+      /* @var $app Slim */
+      $app = $this->app;
+      $app->flash('errors', $val->getErrors());
+      $app->redirectTo('advanced_search_whisky', $val->getErrors());      
     }
   }
 
