@@ -383,13 +383,9 @@ class WhiskyService {
     
     if ($this->app->request->post('barrel') != null)
       $req["barrel"] = $this->app->request->post('barrel');
-
     
-    /*if ($this->app->request->post('age') != null)
-      $req["age"] = $this->app->request->post('age');
-
-    if ($this->app->request->post('abv') != null)
-      $req["alcohol"] = $this->app->request->post('abv');*/
+    if ($this->app->request->post('blend') != null)
+      $req["blend"] = $this->app->request->post('blend');            
 
     if ($this->app->request->post('name') != null)
       $req["name"] = $this->app->request->post('name');

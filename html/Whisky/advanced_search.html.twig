@@ -41,10 +41,17 @@
         <select class="form-control"  id="barrel" name="barrel" >
          <option value="">All barrels</option>
         {% for barrel in barrels %}
-            <option   value="{{ barrel.id }}">{{ barrel.getCasktype }}</option>
+            <option   value="{{ barrel.id }}">{{ barrel.casktype }}</option>
         {% endfor %}
         </select>
         
+        <label for="blend">Blend</label> 
+        <select class="form-control"  id="blend" name="blend" >
+         <option value="">All blends</option>
+        {% for blend in blends %}
+            <option   value="{{ blend.id }}">{{ blend.blend }}</option>
+        {% endfor %}
+        </select>
         
         
       </div>

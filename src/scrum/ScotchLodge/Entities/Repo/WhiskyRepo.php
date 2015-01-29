@@ -65,7 +65,12 @@ class WhiskyRepo extends EntityRepository {
           ->setParameter('barrel', $barrel);
     }
     
-    
+    if (isset($req['blend'])) {
+      $blend_repo = $em->getRepository('scrum\ScotchLodge\Entities\Blend');
+      $blend = $blend_repo->find($req['blend']);
+      $qb->andWhere('w.blend = :blend')
+          ->setParameter('blend', $blend);
+    }
     
     $query = $qb->getQuery();
     return $query->execute();
