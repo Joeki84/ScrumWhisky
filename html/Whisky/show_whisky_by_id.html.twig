@@ -32,23 +32,30 @@
       <dt>Price:</dt>
       <dd>&euro; {{ (whisky.getPrice/100)|number_format(2) }}</dd>
     </dl>
-    <dl class="clearboth">
-      <dt>Review:</dt>
-      <dd>{{ whisky.short_description }}</dd>
+  
+    <dl>
+      <dt class="clearboth">Review:</dt>
+      <dd id="review_score">{{ whisky.short_description }}</dd>
     </dl>
-    
-    
-      <p>Score</p>
-      {% set scores =  whisky.getScores  %}
-      {% for score in scores %}         
-        <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</div>
-      {% endfor %}
 
-    <div class="comments"
+    {% set scores =  whisky.getScores  %}
+    <ul>
+      {% for score in scores %}     
+      <li><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</li>
+    {% endfor %}
+    </ul>
+
+    <dl>
+      <dt>Overall score</dt>
+      <dd>{{TO BE CALCULATED</dd>
+    </dl>
+
+    <div class="comments">
       {# comments #}
       {% set comments = whisky.comments %}
       {% include 'Comments/_include_comments.html.twig' %}
 
+      {% if globals.user is defined and globals.user is not null %}
       <form action="#">
         <div class="comment-post">
           <div class="form-group">
@@ -57,7 +64,9 @@
           </div>
           <input id="add-comment" class="form-control submit btn btn-default" type="submit" id="submit" name="submit" value="Send" />
         </div>
-    </form>
+      </form>
+      {% endif %}
+    </div>
   </div>
 
 {% endblock content %}

@@ -21,10 +21,6 @@
 .margin-left-12 {
   margin-left: 12px;
 }
-
-.topline {
-  border-top: 1px #e3e3e3 solid;
-}
 .margin-top-50 {
   margin-top: 50px;
 }
@@ -160,7 +156,7 @@ div.welcome {
 }
 
 /*comments*/
-.comment, .review, .event {
+.comment, .review, .event  {
   margin-bottom: 12px;
 }
 #comments .comment {
@@ -191,7 +187,7 @@ div.welcome {
 .sidebar_list:first-of-type {
   border-top: 2px solid white;
 }
- dl, dd {
+ dl, dd, li {
   margin-left: 5px;
 }
 dd {
@@ -297,6 +293,11 @@ input.btn:hover, a.btn:hover {
 
 
 /*pages*/
+.container.form h1 {
+  margin-bottom: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
 div.form {
   padding: 0 10%;
   border: 1px solid black;
@@ -402,7 +403,7 @@ div.sliders label {
 }
 
 /*ID pages*/
-#whisky_id dl:nth-of-type(-n+3) {
+#whisky_id dl:nth-of-type(-n+3), #whisky_id ul, #whisky_id dl:last-of-type {
   width: 30%;
   min-width: 200px;
   float: left;
@@ -417,6 +418,11 @@ div.sliders label {
   float: left;
   min-width: 400px;
   position: relative;
+}
+#event_id iframe {
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 
