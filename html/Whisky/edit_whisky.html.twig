@@ -77,7 +77,7 @@
           {% set catid =  score.getCategory.getId  %}
           <label for="cat{{ catid }}">{{ score.getCategory.getCategory }}</label>  
           <input id="cat{{ catid }}" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.5" data-slider-value="{{ (score.getScore/100)|number_format(1) }}" />
-          <input id="catparam{{ catid }}" name="catparam[]" type="hidden" value="" />
+          <input id="catparam{{ catid }}" name="catparam[]" type="hidden" value="{{ catid }}|{{ (score.getScore/100)|number_format(1) }}|{{ score.getId }}" />
           <span id="cat{{ catid }}CurrentSliderValLabel">Current value selected: <span id="cat{{ catid }}SliderVal">{{ (score.getScore/100)|number_format(1) }}</span> / 10</span>                
          <p>&nbsp;</p>
             {% endfor %}
@@ -105,7 +105,7 @@
    $("#cat{{ catid }}").slider();
    $("#cat{{ catid }}").on("slide", function(slideEvt) {
    $("#cat{{ catid }}SliderVal").text(slideEvt.value);
-   $("#catparam{{ catid }}").val("{{ catid }}|"+slideEvt.value);
+   $("#catparam{{ catid }}").val("{{ catid }}|"+slideEvt.value+"|"+{{ score.getId }});
    })
    {% endfor %}
    
