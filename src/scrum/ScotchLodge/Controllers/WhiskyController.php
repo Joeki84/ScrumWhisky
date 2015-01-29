@@ -11,6 +11,7 @@ use scrum\ScotchLodge\Service\Distillery\DistilleryService;
 use scrum\ScotchLodge\Service\Barrel\BarrelService;
 use scrum\ScotchLodge\Service\Blend\BlendService;
 use scrum\ScotchLodge\Service\Country\CountryService;
+use scrum\ScotchLodge\Service\Category\CategoryService;
 use scrum\ScotchLodge\Entities\Whisky;
 use scrum\ScotchLodge\Entities\User;
 
@@ -47,8 +48,11 @@ class WhiskyController extends Controller{
         $blends = $blendsrv->getBlends();
         $countrysrv = new CountryService($this->em, $this->app);
         $countries = $countrysrv->getCountries();
+        $categorysrv = new CategoryService($this->em, $this->app);
+        $categories = $categorysrv->getCategories();
+        
         $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
+        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
     }
 
     /**
@@ -75,7 +79,9 @@ class WhiskyController extends Controller{
                 $countrysrv = new CountryService($this->em, $this->app);
                 $countries = $countrysrv->getCountries();                
                 $globals = $this->getGlobals();
-                $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries));
+                $categorysrv = new CategoryService($this->em, $this->app);
+                $categories = $categorysrv->getCategories();        
+                $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'errors' => $errors, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

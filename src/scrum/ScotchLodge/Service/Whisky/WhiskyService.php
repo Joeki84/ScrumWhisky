@@ -8,12 +8,15 @@ use scrum\ScotchLodge\Entities\Whisky;
 use scrum\ScotchLodge\Entities\Comment;
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Entities\CommentReview;
+use scrum\ScotchLodge\Entities\WhiskyScore;
 use scrum\ScotchLodge\Service\Validation\WhiskyValidation as Val;
 use scrum\ScotchLodge\Service\Region\RegionService;
 use scrum\ScotchLodge\Service\Distillery\DistilleryService;
 use scrum\ScotchLodge\Service\Barrel\BarrelService;
 use scrum\ScotchLodge\Service\Blend\BlendService;
 use scrum\ScotchLodge\Service\Country\CountryService;
+use scrum\ScotchLodge\Service\Category\CategoryService;
+
 use DateTime;
 
 /**
@@ -68,6 +71,10 @@ class WhiskyService {
       $date_bot = str_replace('/', '-', $bottled);
       $country = $this->app->request->post('country');
       $cap = $this->app->request->post('capacity');
+      
+      
+      
+      
       $capacity = $cap * 100;
 
       /* @var $whisky Whisky */
@@ -117,6 +124,22 @@ class WhiskyService {
 
       $this->em->persist($whisky);
       $this->em->flush();
+      
+      $tab = $this->app->request->post('catparam');
+      
+      for($i=0;$i<count($tab);$i++)
+      {
+      $categoryscore = new Whiskyscore();      
+      $cat=explode("|",$tab[$i]);
+      $categoryscore->setScore($cat[1]*100);
+      $categorysrv = new CategoryService($this->em, $this->app);
+      $category = $categorysrv->retrieveCategoryById($cat[0]);
+      $categoryscore->setCategory($category);
+      $categoryscore->setWhisky($whisky);
+      $this->em->persist($categoryscore);
+      $this->em->flush();
+      }
+      
       return $whisky;
     }
     $this->errors = $val->getErrors();

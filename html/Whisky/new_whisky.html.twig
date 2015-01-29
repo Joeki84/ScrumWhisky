@@ -66,6 +66,19 @@
           </select>   
           <label for="capacity">Capacity</label>
           <input class="form-control" type="number" id="capacity" name="capacity" value="{% if app.request.isPost() %}{{app.request.post('capacity')}}{% endif %}" />
+        
+        <div id="score">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        {% for category in categories %}         
+          {% set catid =  category.getID  %}
+          <label for="cat{{ catid }}">{{ category.category }}</label>  
+          <input id="cat{{ catid }}" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.5" data-slider-value="0" />
+          <input id="catparam{{ catid }}" name="catparam[]" type="hidden" value="" />
+          <span id="cat{{ catid }}CurrentSliderValLabel">Current value selected: <span id="cat{{ catid }}SliderVal"></span> / 10</span>                
+         <p>&nbsp;</p>
+            {% endfor %}
+          </div>
         </div>
  
         <input class="form-control btn submit btn-default" type="submit" id="verzend" name="whisky" value="Add whisky" />
@@ -73,3 +86,20 @@
       </form>
     </div>
 {% endblock content %}
+
+
+{% block extrajs %}   
+    {# Slider for bootstrap http://seiyria.github.io/bootstrap-slider/ #}
+   <script type="text/javascript" src="/js/bootstrap/js/bootstrap-slider.js"></script>     
+   <script> 
+   {% for category in categories %}   
+    {% set catid =  category.getID  %}
+   $("#cat{{ catid }}").slider();
+   $("#cat{{ catid }}").on("slide", function(slideEvt) {
+   $("#cat{{ catid }}SliderVal").text(slideEvt.value);
+   $("#catparam{{ catid }}").val("{{ catid }}|"+slideEvt.value);
+   })
+   {% endfor %}
+   
+   </script>
+{% endblock extrajs %}

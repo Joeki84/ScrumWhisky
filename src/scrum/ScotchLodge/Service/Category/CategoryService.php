@@ -33,6 +33,9 @@ class CategoryService {
 /* Olivier */ 
     
     
+
+    
+    
     public function addCategory(){
                 
         $name = $this->app->request->post('name');        
@@ -92,6 +95,18 @@ class CategoryService {
     return $categories;
     
     }
+    
+    public function getCategories(){
+    //$em = $this->getEntityManager();    
+    $categories = $this->em->getRepository('scrum\ScotchLodge\Entities\Category')->findAll();
+    if(count($categories)> 0){
+            return $categories;
+        }else{
+            return null;
+        }
+    return $categories;
+    
+    }    
 /* End Olivier */
 
 

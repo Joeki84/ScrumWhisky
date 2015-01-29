@@ -16,6 +16,18 @@
     <div><strong>ABV:</strong></div><div>{{ (whisky.getAlcohol/100)|number_format(1) }} %</div>
     <div><strong>Price:</strong></div><div>&euro; {{ (whisky.getPrice/100)|number_format(2) }} </div>
     <div><strong>Review:</strong></div><div>{{ whisky.short_description }} </div>
+    
+    
+    
+    
+        <p>&nbsp;</p>
+        <p>Score</p>
+        {% set scores =  whisky.getScores  %}
+        {% for score in scores %}         
+          <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/10)|number_format(1) }} /10</div>
+        {% endfor %}
+    
+    
     <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">
       Return to main menu</a>
 
