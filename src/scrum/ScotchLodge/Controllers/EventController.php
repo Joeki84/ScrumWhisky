@@ -118,10 +118,9 @@ class EventController extends Controller{
               $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals, 'events' => $events));
           }
           else{
-                $errors = $this->eventsrv->getErrors();
-                 $app = $this->getApp();
-                $app->flash('error', 'No events');
-                $this->getApp()->render('Events/show_event_list.html.twig', array('globals' => $globals,'errors' => $errors, 'events' => $events));
+                $app = $this->getApp();
+                $app->flash('error', 'The requested events does not exist');
+                $app->redirectTo('error_404');
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');
@@ -142,10 +141,9 @@ class EventController extends Controller{
               $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals,  'event' => $event));
           }
           else{
-                $errors = $this->eventsrv->getErrors();
-                 $app = $this->getApp();
-                $app->flash('error', 'No whiskys');
-                $this->getApp()->render('Events/show_event_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'event' => $event));
+                $app = $this->getApp();
+                $app->flash('error', 'The requested event does not exist');
+                $app->redirectTo('error_404');
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

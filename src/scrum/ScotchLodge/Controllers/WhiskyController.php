@@ -170,10 +170,9 @@ class WhiskyController extends Controller{
               $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
           }
           else{
-                $errors = $this->whiskysrv->getErrors();
-                 $app = $this->getApp();
-                $app->flash('error', 'No whiskys');
-                $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'errors' => $errors, 'whisky' => $whisky));
+                $app = $this->getApp();
+                $app->flash('error', 'The requested whisky does not exist');
+                $app->redirectTo('error_404');
             }
         } catch (Exception $ex) {
             $this->getApp()->render('probleem.twig.html');

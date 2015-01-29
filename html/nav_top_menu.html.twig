@@ -6,6 +6,9 @@
         <li><a href="{{ app.urlFor('main_page') }}">Home</a></li>
         <li><a href="{{ globals.app.urlFor('advanced_search_whisky') }}">Whisky</a></li>
         <li><a href="{{ globals.app.urlFor('current_event_list') }}"> Events </a></li>
+        {% if globals.user is defined and globals.user is not null %}
+        <li><a href="{{ app.urlFor('member_list') }}">Members</a></li>
+        {% endif %}
       </ul>
     </nav>
 </div>
