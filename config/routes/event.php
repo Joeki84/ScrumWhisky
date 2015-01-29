@@ -12,10 +12,6 @@ $app->post('/event/new', function() use ($contr){
     $contr->insertEvent();
 })->name('new_event_process');
 
-$app->get('/event/new/ok', function() use ($contr){
-    echo("todo new event stored");
-})->name('new_event_ok');
-
 $app->get('/events', function() use ($contr) {
   $contr->getEvents();
 })->name('current_event_list');
