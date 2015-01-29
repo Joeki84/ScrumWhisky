@@ -27,6 +27,6 @@ scrum\ScotchLodge\Entities\WhiskyLike:
         name: whisky_id
         referencedColumnName: id
         
-    fields:
-      state:
-        type: integer
+  fields:
+    state:
+      type: integer
