@@ -24,7 +24,7 @@
         <p>Score</p>
         {% set scores =  whisky.getScores  %}
         {% for score in scores %}         
-          <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/10)|number_format(1) }} /10</div>
+          <div><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</div>
         {% endfor %}
     
     
