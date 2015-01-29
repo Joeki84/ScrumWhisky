@@ -66,9 +66,48 @@
           </select>   
           <label for="capacity">Capacity</label>
           <input class="form-control" type="number" id="capacity" name="capacity" value="{{ (whisky.capacity/100)|number_format(2) }}" />
+        
+        
+        
+        <div id="score">
+        <p><strong>SCORES</strong></p>
+        <p>&nbsp;</p>
+        {% set scores =  whisky.getScores  %}
+        {% for score in scores %}         
+          {% set catid =  score.getCategory.getId  %}
+          <label for="cat{{ catid }}">{{ score.getCategory.getCategory }}</label>  
+          <input id="cat{{ catid }}" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.5" data-slider-value="{{ (score.getScore/100)|number_format(1) }}" />
+          <input id="catparam{{ catid }}" name="catparam[]" type="hidden" value="" />
+          <span id="cat{{ catid }}CurrentSliderValLabel">Current value selected: <span id="cat{{ catid }}SliderVal">{{ (score.getScore/100)|number_format(1) }}</span> / 10</span>                
+         <p>&nbsp;</p>
+            {% endfor %}
+          </div>
+        </div>
+        
+        
+        
         </div> 
         <input class="form-control btn btn-default" type="submit" id="verzend" name="whisky" value="Update whisky" />
 
       </form>
     </div>
 {% endblock content %}
+
+
+
+{% block extrajs %}   
+    {# Slider for bootstrap http://seiyria.github.io/bootstrap-slider/ #}
+   <script type="text/javascript" src="/js/bootstrap/js/bootstrap-slider.js"></script>     
+   <script> 
+   {% set scores =  whisky.getScores  %}    
+   {% for score in scores %}    
+    {% set catid =  score.getCategory.getId  %}
+   $("#cat{{ catid }}").slider();
+   $("#cat{{ catid }}").on("slide", function(slideEvt) {
+   $("#cat{{ catid }}SliderVal").text(slideEvt.value);
+   $("#catparam{{ catid }}").val("{{ catid }}|"+slideEvt.value);
+   })
+   {% endfor %}
+   
+   </script>
+{% endblock extrajs %}
