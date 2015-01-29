@@ -381,18 +381,20 @@ class WhiskyService {
     if ($this->app->request->post('bottler') != null)
       $req["barrel"] = $this->app->request->post('bottler');
 
-    if ($this->app->request->post('age') != null)
+    /*if ($this->app->request->post('age') != null)
       $req["age"] = $this->app->request->post('age');
 
     if ($this->app->request->post('abv') != null)
-      $req["alcohol"] = $this->app->request->post('abv');
+      $req["alcohol"] = $this->app->request->post('abv');*/
 
     if ($this->app->request->post('name') != null)
       $req["name"] = $this->app->request->post('name');
+    
+  
 
     if (isset($req)) {
-      $whisky = $this->em->getRepository($this->entity)->findBy($req);
-      return $whisky;
+      $whisky_results = $this->em->getRepository($this->entity)->findFiltered($req);
+      return $whisky_results;
     } else {
       $whisky = $this->em->getRepository($this->entity)->findall();
       return $whisky;
