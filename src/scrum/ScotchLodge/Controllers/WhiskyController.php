@@ -15,6 +15,7 @@ use scrum\ScotchLodge\Service\Category\CategoryService;
 use scrum\ScotchLodge\Entities\Whisky;
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\WhiskyLike\WhiskyLikeService;
+use scrum\ScotchLodge\Service\CommentLike\CommentLikeService;
 
 /**
  * WhiskyController controller
@@ -188,7 +189,14 @@ class WhiskyController extends Controller {
       $whisky = $this->whiskysrv->retrieveWhiskyById($id);
       $whisky = $this->whiskysrv->ViewWhisky($whisky);
       if ($whisky) {
-        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky));
+          
+        $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+        $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());  
+        
+        $commentlikesrv = new CommentLikeService($this->em, $this->app);
+        $commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
+        
+        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
       }
       else {
         $app = $this->getApp();

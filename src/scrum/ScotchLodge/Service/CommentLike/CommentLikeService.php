@@ -60,9 +60,9 @@ public function addlike(){
   }
 
   public function retrieveWhiskyLikeById($id) {
-    $whiskyLike = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->find($id);
-    if (count($whiskyLike) > 0) {
-      return $whiskyLike;
+    $commentLike = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->find($id);
+    if (count($commentkyLike) > 0) {
+      return $commentLike;
     }
     else {
       return null;
