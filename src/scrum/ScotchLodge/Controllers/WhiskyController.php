@@ -43,27 +43,27 @@ class WhiskyController extends Controller {
     $user = $this->getUser();
 
     /* @var $user User */
-    if (isset($user)) {
-      if ($user->isAdmin() || $user->canReview()) {
-        $regsrv = new RegionService($this->em, $this->app);
-        $regions = $regsrv->getRegions();
-        $distsrv = new DistilleryService($this->em, $this->app);
-        $distillerys = $distsrv->getDistillerys();
-        $barsrv = new BarrelService($this->em, $this->app);
-        $barrels = $barsrv->getBarrels();
-        $blendsrv = new BlendService($this->em, $this->app);
-        $blends = $blendsrv->getBlends();
-        $countrysrv = new CountryService($this->em, $this->app);
-        $countries = $countrysrv->getCountries();
-        $categorysrv = new CategoryService($this->em, $this->app);
-        $categories = $categorysrv->getCategories();
-        $globals = $this->getGlobals();
-        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
-      }
+    if (isset($user) && ($user->isAdmin() || $user->canReview())) {
+      $regsrv = new RegionService($this->em, $this->app);
+      $regions = $regsrv->getRegions();
+      $distsrv = new DistilleryService($this->em, $this->app);
+      $distillerys = $distsrv->getDistillerys();
+      $barsrv = new BarrelService($this->em, $this->app);
+      $barrels = $barsrv->getBarrels();
+      $blendsrv = new BlendService($this->em, $this->app);
+      $blends = $blendsrv->getBlends();
+      $countrysrv = new CountryService($this->em, $this->app);
+      $countries = $countrysrv->getCountries();
+      $categorysrv = new CategoryService($this->em, $this->app);
+      $categories = $categorysrv->getCategories();
+      $globals = $this->getGlobals();
+      $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
     }
-    /* @var $app Slim */
-    $app->flash('error', 'Access denied');
-    $app->redirectTo('main_page');
+    else {
+      /* @var $app Slim */
+      $app->flash('error', 'Access denied');
+      $app->redirectTo('main_page');
+    }
   }
 
   /**
