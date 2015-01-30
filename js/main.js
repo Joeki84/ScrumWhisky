@@ -332,33 +332,44 @@ $(function() {
         
         function  like(el){
             eImg=$(el).children("img");
-            
-                       
+            reset=""; 
                 
                 if($(el).attr('data-name')=="Like")
                 {
-                   if($(el).attr('data-status'))
+                   
+                
+                
+                   if($(el).attr('data-pos')==1)
                    {
-                       newstatus=0;bgcolor="black";bgimg="none";
-                       newsrc="http://www.whisky.dev/img/like_icon.png";
+                       newstatus=0;bgcolor="white";bgimg="none";
+                       newsrc="../img/like_icon.png";
+                       
+                       
                    }
                    else
                    {
-                       newstatus=1;bgcolor="white";
-                       newsrc="http://www.whisky.dev/img/like_icon_active.png";
+                       newstatus=1;bgcolor="black";bgimg="none";
+                       newsrc="../img/like_icon_active.png";
+                       eOtherlink=$(el).next();
+                       eOtherimage=$(eOtherlink).children("img");
+                       reset="../img/dislike_icon.png";
                    }    
                 }
                 else
                 {
-                    if($(el).attr('data-status')==-1)                
+                    if($(el).attr('data-pos')==-1)                
                    {
-                       newstatus=0;bgcolor="black";bgimg="none";
-                       newsrc="http://www.whisky.dev/img/dislike_icon.png";
+                       newstatus=0;bgcolor="white";bgimg="none";
+                       newsrc="../img/dislike_icon.png";
+                       
                    }
                    else
                    {
-                       newstatus=-1;bgcolor="white";
-                       newsrc="http://www.whisky.dev/img/dislike_icon_active.png";
+                       newstatus=-1;bgcolor="black";bgimg="none";
+                       newsrc="../img/dislike_icon_active.png";
+                       eOtherlink=$(el).prev();
+                       eOtherimage=$(eOtherlink).children("img");
+                       reset="../img/like_icon.png";
                    }    
                }
                 
@@ -370,10 +381,82 @@ $(function() {
                 success: function(id){
                         console.log("success");
                         $(eImg).attr({ src: newsrc });
-                        $(el).data('status', newstatus);
+                        $(el).attr("data-pos", newstatus);
+                        console.log("POSITION="+$(el).attr('data-pos'));
                         $(el).css("background-color",bgcolor);
                         $(el).css("background-image",bgimg);
-                         
+                        if(reset!="") { $(eOtherimage).attr({ src: reset });  $(eOtherlink).css("background-color","#FFFFFF"); $(eOtherlink).attr("data-pos", ""); }
+                },
+                error: function(result,status){
+                console.log(result);
+                console.log(status);
+                strtxt=' <strong style="color:red">error try again</strong>';
+                $(el).parent().append(strtxt);
+                }
+            });
+            
+          
+     
+        }
+                    
+  
+        
+        function  likecomment(el){
+            eImg=$(el).children("img");
+            reset=""; 
+                
+                if($(el).attr('data-name')=="Like")
+                {
+                   
+                
+                
+                   if($(el).attr('data-pos')==1)
+                   {
+                       newstatus=0;bgcolor="white";bgimg="none";
+                       newsrc="../img/like_icon.png";
+                       
+                       
+                   }
+                   else
+                   {
+                       newstatus=1;bgcolor="black";bgimg="none";
+                       newsrc="../img/like_icon_active.png";
+                       eOtherlink=$(el).next();
+                       eOtherimage=$(eOtherlink).children("img");
+                       reset="../img/dislike_icon.png";
+                   }    
+                }
+                else
+                {
+                    if($(el).attr('data-pos')==-1)                
+                   {
+                       newstatus=0;bgcolor="white";bgimg="none";
+                       newsrc="../img/dislike_icon.png";
+                       
+                   }
+                   else
+                   {
+                       newstatus=-1;bgcolor="black";bgimg="none";
+                       newsrc="../img/dislike_icon_active.png";
+                       eOtherlink=$(el).prev();
+                       eOtherimage=$(eOtherlink).children("img");
+                       reset="../img/like_icon.png";
+                   }    
+               }
+                
+                $.ajax({                                                
+                type:"POST",
+                url:"../commentlike",
+                data:'commentid='+$(el).attr('data-commentid')+'&userid='+$(el).attr('data-userid')+'&likeid='+$(el).attr('data-id')+'&status='+newstatus,
+                dataType: "html",
+                success: function(id){
+                        console.log("success");
+                        $(eImg).attr({ src: newsrc });
+                        $(el).attr("data-pos", newstatus);
+                        console.log("POSITION="+$(el).attr('data-pos'));
+                        $(el).css("background-color",bgcolor);
+                        $(el).css("background-image",bgimg);
+                        if(reset!="") { $(eOtherimage).attr({ src: reset });  $(eOtherlink).css("background-color","#FFFFFF"); $(eOtherlink).attr("data-pos", ""); }
                 },
                 error: function(result,status){
                 console.log(result);

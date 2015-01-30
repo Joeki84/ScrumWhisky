@@ -21,23 +21,49 @@ class CommentLikeService {
     }
 
     
+    
 public function addlike(){
     
-   $commenLike= new CommentLike();
-   $comment=$this->app->request->post('comment_id');
-   $user=$this->app->request->post('user_id');
+   $commentid=$this->app->request->post('commentid');
+   $likeid=$this->app->request->post('likeid');
+   $userid=$this->app->request->post('userid');
+   $status=$this->app->request->post('status');
    
-   $commentLike->setUser($user);
-   $commentLike->setComment($comment); 
-   $this->em->persist($commentLike);
-   $this->em->flush();
-   return $commentLike;  
+   $usersrv = new ProfileService($this->em, $this->app);
+   $user = $usersrv->searchUserById($userid);
+
+   $commentsrv = new CommentService($this->em, $this->app);
+   $comment = $commentsrv->retrieveCommentById($commentid);
+   
+   $CommentLike = $this->isalreadyLike($commentid,$userid);
+   
+   $c = $CommentLike;
+   if($CommentLike)
+   {
+         //$CommentLike->setUser($user);
+         //$CommentLike->setWhisky($comment);
+         $CommentLike->setState($status);         
+   }
+   else
+   {
+       $CommentLike= new WhiskyLike();
+       $CommentLike->setUser($user);
+       $CommentLike->setWhisky($comment);
+       $CommentLike->setState($status);
+       
+   }    
+
+      $this->em->persist($CommentLike);
+      $this->em->flush();    
+
+   return $CommentLike;  
    
 }    
+    
     public function isalreadyLike($id_comment,$id_user){                      
-       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->findBy(array('user_id'=> $id_user  ,'comment_id' => $id_comment));
+       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->findBy(array('user'=> $id_user  ,'comment' => $id_comment));
        if(count($like)> 0){
-            return true;
+            return like;
         }else{
             return null;
         }

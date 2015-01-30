@@ -7,7 +7,7 @@
       <dt>{{ whisky.review_date|date('Y-m-d') }} - 
         <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': whisky.id}) }}">{{ whisky.name }}</a>
       </dt>    
-      <dd>"{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}"</dd>
+      <dd><a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': whisky.id}) }}">"{{ whisky.short_description|length > 50 ? whisky.short_description|slice(0, 50) ~ '...' : whisky.short_description }}"</a></dd>
       <dt class="comment review_likes">Likes: {{ rev.likes }}</dt>  
       {% endfor %}
   </dl>
