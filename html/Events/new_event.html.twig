@@ -33,6 +33,7 @@
           <label for="description">Description</label>
           <textarea class="form-control" id="description" name="description">{% if app.request.isPost() %}{{app.request.post('description')}}{% endif %}</textarea>
         </div>
+        <!--
         <div class="form-group">
           <label for="whiskies">Whiskies at the event</label>
           <select class="form-control" id="whiskies" name="whiskies" multiple="multiple">
@@ -41,7 +42,7 @@
             {% endfor %}
           </select>
         </div>
-
+        -->
         <input class="form-control submit btn btn-default" type="submit" id="verzend" name="event" value="Add event" />
 
       </form>
