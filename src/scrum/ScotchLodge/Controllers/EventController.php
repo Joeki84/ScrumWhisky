@@ -7,9 +7,11 @@ use Slim\Slim;
 use \Slim\View;
 use scrum\ScotchLodge\Controllers\Controller;
 use scrum\ScotchLodge\Service\Event\EventService;
+use scrum\ScotchLodge\Service\Whisky\WhiskyService;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
 use scrum\ScotchLodge\Entities\Event;
 use scrum\ScotchLodge\Entities\User;
+use scrum\ScotchLodge\Entities\Whisky;
 
 /**
  * EventController controller
@@ -43,10 +45,12 @@ class EventController extends Controller{
         $can_create = $user->canCreateEvent();
 
         if ($admin || $can_create) {
-        $regsrv = new RegistrationService($this->em, $this->app);
-        $postcodes = $regsrv->getPostcodes();
-        $globals = $this->getGlobals();
-        $this->getApp()->render('Events/new_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes));
+            $regsrv = new RegistrationService($this->em, $this->app);
+            $postcodes = $regsrv->getPostcodes();
+            $whiskiessrv = new WhiskyService($this->em, $this->app);
+            $whiskies = $whiskiessrv->advanced_search_whisky_result();            
+            $globals = $this->getGlobals();
+            $this->getApp()->render('Events/new_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'whiskies' => $whiskies));
         } else {
           $app->flash('error', 'Action not allowed');
           $app->redirectTo('main_page');
@@ -81,8 +85,10 @@ class EventController extends Controller{
         $event = $this->eventsrv->retrieveEventById($id);
         $regsrv = new RegistrationService($this->em, $this->app);
         $postcodes = $regsrv->getPostcodes();
+        $whiskiessrv = new WhiskyService($this->em, $this->app);
+        $whiskies = $whiskiessrv->advanced_search_whisky_result();                    
         $globals = $this->getGlobals();
-        $this->getApp()->render('Events/edit_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'event' => $event));        
+        $this->getApp()->render('Events/edit_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'event' => $event, 'whiskies' => $whiskies));        
     }
     
     /**
@@ -153,6 +159,27 @@ class EventController extends Controller{
         
     
 /* End Olivier    */
+    
+    public function addWhiskytoEvent(){
+        /* @var $app Slim */
+        $app = $this->getApp();
+        /* @var $user User */
+        $admin = $this->getUser()->isAdmin();
+        $can_create = $this->getUser()->canCreateEvent();
+
+        if ($admin || $can_create) {
+            $eventsrv = new EventService($this->em, $this->app);
+            $events = $eventsrv->ShowAllCurrentEvents($this->em, $this->app);
+            $whiskiessrv = new WhiskyService($this->em, $this->app);
+            $whiskies = $whiskiessrv->advanced_search_whisky_result();
+            $globals = $this->getGlobals();
+            $this->getApp()->render('Events/add_whisky_to_event.html.twig', array('globals' => $globals, 'events' => $events, 'whiskies' => $whiskies));
+        } else {
+            $app->flash('error', 'Action not allowed');
+            $app->redirectTo('main_page');
+        }
+        
+    }
     
     
 }

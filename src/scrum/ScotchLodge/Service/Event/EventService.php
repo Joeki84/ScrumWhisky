@@ -6,8 +6,11 @@ use Doctrine\ORM\EntityManager;
 use Slim\Slim;
 use scrum\ScotchLodge\Entities\Event;
 use scrum\ScotchLodge\Entities\User;
+use scrum\ScotchLodge\Entities\Whisky;
+use scrum\ScotchLodge\Entities\EventWhisky;
 use scrum\ScotchLodge\Service\Validation\EventValidation as Val;
 use scrum\ScotchLodge\Service\Registration\RegistrationService;
+use scrum\ScotchLodge\Service\Whisky\WhiskyService;
 use DateTime;
 
 /**
@@ -48,6 +51,7 @@ class EventService {
             $date_stop = $this->app->request->post('event_stop');
             $date_stop = str_replace('/', '-', $date_stop);
             $description = $this->app->request->post('description');
+            $whiskies = $this->app->request-post('whiskies');
 
             /* @var $event Event */
             $event = new Event();
@@ -66,6 +70,8 @@ class EventService {
 
             $this->em->persist($event);
             $this->em->flush();
+            
+            $this->insertWhiskiestoEvent();
             return $event;
         }
         $this->errors = $val->getErrors();
@@ -111,6 +117,24 @@ class EventService {
         $description = $this->app->request->post('description');
         if($event->getDescription() != $description){
             $event->setDescription($description);
+        }
+        
+        $whiskies = $this->app->request->post('whiskies');
+        if($whiskies != null){
+            foreach ($whiskies as $whisky){
+                $whiskysrv = new WhiskyService($this->em, $this->app);
+                $whisky_object = $whiskysrv->retrieveWhiskyById($whisky);
+                $whiskiesbyevent = $event->getWhiskys();
+                if($event->getWhiskys()->count()){
+                    foreach ($whiskiesbyevent as $whiskybyevent){
+                        if($whiskybyevent->getId() == $whisky->getId()){
+                            $this->addWhiskytoEvent($whisky_object, $event);                    
+                        }
+                    }
+                }else{
+                    $this->addWhiskytoEvent($whisky_object, $event);
+                }
+            }
         }
 
         $this->em->persist($event);
@@ -204,5 +228,39 @@ class EventService {
 /*end Filip */
     
     /* End Search functions */
+    
+    /* Begin Add whiskies to a event function */
+    
+    /**
+     * Add all selected whiskies to a event,
+     */
+    public function insertWhiskiestoEvent(Event $event, $whiskies){
+        foreach ($whiskies as $whisky){
+            $whiskysrv = new WhiskyService($this->em, $this->app);
+            $whisky_object = $whiskysrv->retrieveWhiskyById($whisky);
+            $whisky_event = $this->addWhiskytoEvent($whisky_object, $event);
+            //$this->em->persist($whisky_event);
+            //$this->em->flush();
+            echo($whisky_event);
+        }
+        
+    }
+    
+    /* End Add whiskies to a event function */
+    
+    /* Begin Add a whisky to a event function */
+    /**
+     * @param Whisky $whisky
+     * @param Event $event
+     */
+    public function addWhiskytoEvent(Whisky $whisky, Event $event){
+        /* @var $EventWhisky */
+        $event_whisky = new EventWhisky();
+        $event_whisky->setWhisky($whisky);
+        $event_whisky->setEvent($event);
+        $this->em->persist($event_whisky);
+        $this->em->flush();
+    }
+    /* End Add whisky to event function */
 
 }
