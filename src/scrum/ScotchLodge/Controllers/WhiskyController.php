@@ -179,7 +179,10 @@ class WhiskyController extends Controller {
     $globals = $this->getGlobals();
     $whisky = $this->whiskysrv->advanced_search_whisky_result($this->em, $this->app);
     $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+    
+    if($globals["user"]!= null) 
     $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+    
     $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky, 'whiskylike' => $whiskylike));
   }
 
@@ -192,9 +195,13 @@ class WhiskyController extends Controller {
       if ($whisky) {
           
         $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+        
+        if($globals["user"]!= null) 
         $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());  
         
         $commentlikesrv = new CommentLikeService($this->em, $this->app);
+        
+        if($globals["user"]!= null)            
         $commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
         
         $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
