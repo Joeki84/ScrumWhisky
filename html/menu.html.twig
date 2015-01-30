@@ -19,7 +19,12 @@
       <ul class="nav nav-pills">
         <li><a href="{{ app.urlFor('profile_show') }}">Profile</a></li>
         <li><a href="{{ app.urlFor('user_logoff') }}">Logoff</a></li>
-        <li><a href="{{ app.urlFor('new_whisky') }}">Logoff</a></li>
+        {% if globals.user.isAdmin() or globals.user.canAddWhisky()  %}
+        <li><a href="{{ app.urlFor('new_whisky') }}">Add whisky</a></li>
+        {% endif %}
+        {% if globals.user.isAdmin() or globals.user.canCreateEvent()  %}
+        <li><a href="{{ app.urlFor('new_event') }}">New event</a></li>
+        {% endif %}
       </ul>
     </nav>
   {% endif %}
