@@ -1,4 +1,4 @@
-scrum\ScotchLodge\Entities\EventWhiskys:
+scrum\ScotchLodge\Entities\EventWhisky:
   type: entity
   #repositoryClass: scrum\ScotchLodge\Data\CountryRepo
   table: event_whiskys  
