@@ -311,7 +311,7 @@ div.form label {
 div.form .sliders input {
   margin: 0 10px;
 }
-div.form .form-group input, div.form select {
+div.form .form-group input, div.form select, div.form textarea {
   margin-top: 5px;
   width: 50%;
   min-width: 300px;
@@ -394,6 +394,7 @@ div.sliders label {
   width: 50px;
 }
 .like-btn img {
+  width: 100%;
   display: block;
   margin: 0 auto;
 }
