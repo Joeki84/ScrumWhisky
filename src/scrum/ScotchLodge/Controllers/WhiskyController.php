@@ -60,10 +60,11 @@ class WhiskyController extends Controller {
         $globals = $this->getGlobals();
         $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
       }
+    } else {
+   /* @var $app Slim */
+      $app->flash('error', 'Access denied');
+      $app->redirectTo('main_page');
     }
-    /* @var $app Slim */
-    $app->flash('error', 'Access denied');
-    $app->redirectTo('main_page');
   }
 
   /**
