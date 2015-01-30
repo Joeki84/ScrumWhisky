@@ -3,7 +3,7 @@
   <head>
     <title>{% block title %}The Scotch Lodge{% endblock title %}</title>
     <meta charset="utf-8">
-    
+
     <link href="/js/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="/js/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
     <link href="/js/bootstrap/css/bootstrap-slider.css" rel="stylesheet" type="text/css" />
@@ -21,17 +21,18 @@
 
     <div id="wrapper">      
 
-      {% block header %}
-        {% include 'header.html.twig' %}
-      {% endblock header %}
-      {% block nav_menu %}
-        {% include 'nav_top_menu.html.twig' %}
-      {% endblock nav_menu%}
+      <div class="container">
+        {% block header %}
+          {% include 'header.html.twig' %}
+        {% endblock header %}
+        {% block nav_menu %}
+          {% include 'nav_top_menu.html.twig' %}
+        {% endblock nav_menu%}
 
-      {% block messages %}
-        {% block error_messages %}
-          {% if flash['error'] is defined %}
-              <div class="errors flash">
+        {% block messages %}
+          {% block error_messages %}
+            {% if flash['error'] is defined %}
+              <div class="flagged errors flash">
                 <ul>                  
                   <li>{{ flash['error'] }}</li>
                 </ul>
@@ -39,33 +40,42 @@
             {% endif %}
 
             {% if errors is defined %}
-              <div class="container">
-                <div class="errors flash">
-                  <ul>                  
-                    {% for error in errors %}
-                      <li>{{ error }}</li>
-                      {% endfor %}                  
-                  </ul>
-                </div>
+              <div class="flagged errors flash">
+                <ul>                  
+                  {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}                  
+                </ul>
+              </div>
+            {% endif %}
+
+            {% if errors['flash'] is defined %}
+              <div class="flagged errors flash">
+                <ul>                  
+                  {% for error in errors['flash'] %}
+                    <li>{{ error }}</li>
+                    {% endfor %}                  
+                </ul>
+              </div>
             {% endif %}
           {% endblock error_messages %}
 
           {% block info_messages %}
 
             {% if flash['info'] is defined %}
-              
-                <div class="info flash">
-                  {{ flash['info'] }}
-                </div>
-              
+
+              <div class="flagged info flash">
+                {{ flash['info'] }}
+              </div>
+
             {% endif %}
 
             {% if  info is defined %}
-              
-                <div class="info flash">
-                  {{ info }}
-                </div>
-            
+
+              <div class="flagged info flash">
+                {{ info }}
+              </div>
+
             {% endif %}
           {% endblock info_messages %}
 
@@ -83,8 +93,15 @@
 
     <!-- js -->
 
+    <script type="text/javascript">
+      $(function() {
+        $('.flagged').on('click', function() {
+          $(this).hide();
+        });
+      });
+    </script>
 
-     
+
     {% block extrajs %}      
     {% endblock extrajs %}
 
