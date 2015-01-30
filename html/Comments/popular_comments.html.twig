@@ -8,9 +8,15 @@
         <a href="{{ globals.app.urlFor('profile_show_by_id', {'id': comm.comment.user.id } ) }}">{{ comm.comment.user.username }}</a> said:
       </dt>
       <dd>
-        <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comm.comment.user.id } ) }}">
-          "{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}
-        "</a>
+        {% if comm.comment.comment.review_comment is not null %}
+          <a href="{{ globals.app.urlFor('show_whisky_by_id', {'id': comm.comment.comment.review_comment.whisky.id } ) }}">
+            "{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}"
+          </a>
+          {% else %}
+          <a href="{{ globals.app.urlFor('show_event_by_id', {'id': comm.comment.comment.event_comment.event.id } ) }}">
+            "{{ c_out|length > 50 ? c_out|slice(0, 50) ~ '...' : c_out }}"
+          </a>
+          {% endif %}
       </dd>
       <dt class="comment comment-like">Likes: {{ comm.likes }}</dt>
     {% endfor %}
