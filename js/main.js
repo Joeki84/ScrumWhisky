@@ -300,7 +300,7 @@ function like(el) {
         else
         {
             newstatus = 1;
-            bgcolor = "black";
+            bgcolor = "green";
             bgimg = "none";
             newsrc = "../img/like_icon_active.png";
             eOtherlink = $(el).next();
@@ -320,7 +320,7 @@ function like(el) {
         else
         {
             newstatus = -1;
-            bgcolor = "black";
+            bgcolor = "darkred";
             bgimg = "none";
             newsrc = "../img/dislike_icon_active.png";
             eOtherlink = $(el).prev();
