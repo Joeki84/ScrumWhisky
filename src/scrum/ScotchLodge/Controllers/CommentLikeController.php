@@ -31,8 +31,7 @@ class CommentLikeController extends Controller{
      * Render the page to add a new event.
      */
     public function addLike(){  
-        $this->commentlikesrv->addlike();  
-        echo '{"id":"0"}';
+        $this->commentlikesrv->addlike();        
     }
 
 }
