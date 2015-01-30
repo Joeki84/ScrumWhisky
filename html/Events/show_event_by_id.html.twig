@@ -25,7 +25,11 @@
     {% set comments = event.comments %}    
     {% include 'Comments/_include_comments.html.twig' %}
 
-    <a href="/" id="return_to_main" class="btn submit btn-default margin-bottom-24">Return to main menu</a>
+    {% if globals.user.isAdmin() or globals.user.canCreateEvent()  %}
+    <a href="{{ globals.app.urlFor('edit_event', { 'id' : event.getId()} ) }}" class="btn submit btn-default">Edit event</a>
+    {% endif %}
+
+    <a href="/" id="return_to_main" class="btn submit btn-default">Return to main menu</a>
     
   </div>
 {% endblock content %}

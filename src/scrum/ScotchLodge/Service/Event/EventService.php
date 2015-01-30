@@ -51,7 +51,7 @@ class EventService {
             $date_stop = $this->app->request->post('event_stop');
             $date_stop = str_replace('/', '-', $date_stop);
             $description = $this->app->request->post('description');
-            $whiskies = $this->app->request-post('whiskies');
+            /*$whiskies = $this->app->request-post('whiskies');*/
 
             /* @var $event Event */
             $event = new Event();
@@ -118,7 +118,7 @@ class EventService {
         if($event->getDescription() != $description){
             $event->setDescription($description);
         }
-        
+        /*
         $whiskies = $this->app->request->post('whiskies');
         if($whiskies != null){
             foreach ($whiskies as $whisky){
@@ -135,7 +135,7 @@ class EventService {
                     $this->addWhiskytoEvent($whisky_object, $event);
                 }
             }
-        }
+        }*/
 
         $this->em->persist($event);
         $this->em->flush();

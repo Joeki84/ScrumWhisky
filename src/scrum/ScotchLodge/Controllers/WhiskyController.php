@@ -181,6 +181,7 @@ class WhiskyController extends Controller {
     $whisky = $this->whiskysrv->advanced_search_whisky_result($this->em, $this->app);
     $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
 
+
     $user = $globals['user'];
     if (isset($globals['user'])) {
       $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
@@ -189,6 +190,12 @@ class WhiskyController extends Controller {
     else {
       $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky));
     }
+
+
+    if ($globals["user"] != null)
+      $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+
+    $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky, 'whiskylike' => $whiskylike));
   }
 
   public function show_whisky_by_id($id) {
@@ -201,9 +208,6 @@ class WhiskyController extends Controller {
 
         $user = $globals['user'];
 
-
-
-
         if (isset($user)) {
           //$whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
           //$whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
@@ -215,6 +219,18 @@ class WhiskyController extends Controller {
         else {
           $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky));
         }
+
+        $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+
+        if ($globals["user"] != null)
+          $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+
+        $commentlikesrv = new CommentLikeService($this->em, $this->app);
+
+        if ($globals["user"] != null)
+          $commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
+
+        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
       }
       else {
         $app = $this->getApp();
