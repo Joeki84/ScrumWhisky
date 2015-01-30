@@ -12,11 +12,16 @@ use scrum\ScotchLodge\Entities\Comment;
  */
 class CommentLike {
 
+  const LIKED = 1;
+  const DISLIKED = -1;
+  const CLEAR = 0;
+    
     private $id;
     /* @var $user User */
     private $user;
     /* @var $comment Comment */
     private $comment;
+    private $state; 
     
     function getId(){
         return $this->id;
@@ -42,4 +47,13 @@ class CommentLike {
         $this->comment = $comment;
     }
     
+    
+    function getState() {
+        return $this->state;
+    }
+
+    function setState($state) {
+        $this->state = $state;
+    }
+
 }
