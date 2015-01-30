@@ -14,7 +14,6 @@ use scrum\ScotchLodge\Entities\WhiskyLike;
  */
 class WhiskyLikeController extends Controller{
     
-    /*@var $commentlikesrv WhyskiLikeService */
     private $Whiskylikesrv;
     private $em;
     private $app;
@@ -26,9 +25,7 @@ class WhiskyLikeController extends Controller{
         $this->app = $app;
     }
     
-    /**
-     * Render the page to add a new event.
-     */
+    
     public function addLike(){          
        $like= $this->Whiskylikesrv->addlike();
        echo '{"id":"0"}';
