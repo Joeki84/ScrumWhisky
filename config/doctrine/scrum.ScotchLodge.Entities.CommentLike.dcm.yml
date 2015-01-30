@@ -22,7 +22,3 @@ scrum\ScotchLodge\Entities\CommentLike:
       joinColumn: 
         name: comment_id
         referencedColumnName: id
-        
-  fields:
-    state:
-      type: integer

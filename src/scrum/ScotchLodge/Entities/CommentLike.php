@@ -1,6 +1,6 @@
 <?php
 
-namespace scrum\ScotchLodge\Entities;
+namespace scrum\ScotchLodge\Entities; 
 
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Entities\Comment;
@@ -15,60 +15,45 @@ class CommentLike {
   const LIKED = 1;
   const DISLIKED = -1;
   const CLEAR = 0;
+    
+    private $id;
+    /* @var $user User */
+    private $user;
+    /* @var $comment Comment */
+    private $comment;
+    private $state; 
+    
+    function getId(){
+        return $this->id;
+    }
+    
+    function getUser(){
+        return $this->user;
+    }
+    
+    function getComment(){
+        return $this->comment;
+    }
+    
+    function setId($id){
+        $this->id = $id;
+    }
+    
+    function setUser(User $user){
+        $this->user = $user;
+    }
+    
+    function setComment(Comment $comment){
+        $this->comment = $comment;
+    }
+    
+    
+    function getState() {
+        return $this->state;
+    }
 
-  private $id;
-  /* @var $user User */
-  private $user;
-  /* @var $comment Comment */
-  private $comment;
-  private $state;
-
-  function __construct() {
-    $this->state = 0;
-  }
-
-  function getId() {
-    return $this->id;
-  }
-
-  function getUser() {
-    return $this->user;
-  }
-
-  function getComment() {
-    return $this->comment;
-  }
-
-  function setId($id) {
-    $this->id = $id;
-  }
-
-  function setUser(User $user) {
-    $this->user = $user;
-  }
-
-  function setComment(Comment $comment) {
-    $this->comment = $comment;
-  }
-
-  function getState() {
-    return $this->state;
-  }
-
-  function setState($state) {
-    $this->state = $state;
-  }
-
-  function setLike() {
-    $this->state = 1;
-  }
-
-  function setDislike() {
-    $this->state = -1;
-  }
-
-  function setClearState() {
-    $this->state = 0;
-  }
+    function setState($state) {
+        $this->state = $state;
+    }
 
 }

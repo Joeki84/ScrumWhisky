@@ -35,13 +35,41 @@ public function addlike(){
    
 }    
     public function isalreadyLike($id_comment,$id_user){                      
-       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->findBy(array('user_id'=> $id_user  ,'comment_id' => $id_comment));
+       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->findBy(array('user'=> $id_user  ,'comment' => $id_comment));
        if(count($like)> 0){
-            return true;
+            return $like[0];
         }else{
             return null;
         }
         
     }
     
+    
+    public function isalreadyLikeMulti($id_user) {
+    $like = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->findBy(array('user' => $id_user));
+    if (count($like) > 0) {
+      foreach ($like as $value) {
+        $index = "like" . $value->getComment()->getId();
+        $tab[$index] = $value->getState();
+      }
+      return $tab;
+    }
+    else {
+      return null;
+    }
+  }
+
+  public function retrieveWhiskyLikeById($id) {
+    $commentLike = $this->em->getRepository('scrum\ScotchLodge\Entities\CommentLike')->find($id);
+    if (count($commentkyLike) > 0) {
+      return $commentLike;
+    }
+    else {
+      return null;
+    }
+  }
+
 }
+    
+    
+    

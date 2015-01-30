@@ -39,10 +39,12 @@ class EventController extends Controller{
       /* @var $app Slim */
         $app = $this->getApp();
         /* @var $user User */
+        $user = $this->getUser();
         
-        $user = $this->getUser();        
+        $admin = $user->isAdmin();
+        $can_create = $user->canCreateEvent();
 
-        if (isset($user) && ($user->isAdmin() || $user->canCreateEvent())) {
+        if ($admin || $can_create) {
             $regsrv = new RegistrationService($this->em, $this->app);
             $postcodes = $regsrv->getPostcodes();
             $whiskiessrv = new WhiskyService($this->em, $this->app);
@@ -50,7 +52,7 @@ class EventController extends Controller{
             $globals = $this->getGlobals();
             $this->getApp()->render('Events/new_event.html.twig', array('globals' => $globals, 'postcodes' => $postcodes, 'whiskies' => $whiskies));
         } else {
-          $app->flash('error', 'Access denied.');
+          $app->flash('error', 'Action not allowed');
           $app->redirectTo('main_page');
         }
     }

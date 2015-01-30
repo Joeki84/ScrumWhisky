@@ -37,6 +37,7 @@ class CategoryController extends Controller{
      * Insert a category.
      */
     public function insertCategory(){
+      
         try{            
             $category = $this->catsrv->addCategory();
             if($category){
