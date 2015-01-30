@@ -389,7 +389,7 @@ function likecomment(el) {
         else
         {
             newstatus = -1;
-            bgcolor = "darkred";
+            bgcolor = "green";
             bgimg = "none";
             newsrc = "../img/dislike_icon_active.png";
             eOtherlink = $(el).prev();
