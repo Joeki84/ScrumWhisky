@@ -165,8 +165,12 @@ class WhiskyController extends Controller{
 
         $globals = $this->getGlobals();        
         $whisky=$this->whiskysrv->advanced_search_whisky_result($this->em, $this->app); 
+        
+              $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+              $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+        
                 
-        $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals,  'whiskys'  => $whisky));
+        $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals,  'whiskys'  => $whisky, 'whiskylike' => $whiskylike));
     }
     
     public function show_whisky_by_id($id) {
@@ -176,6 +180,8 @@ class WhiskyController extends Controller{
         $whisky = $this->whiskysrv->retrieveWhiskyById($id);
         $whisky = $this->whiskysrv->ViewWhisky($whisky);
         if($whisky){
+            
+        
               $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals,  'whisky' => $whisky));
           }
           else{

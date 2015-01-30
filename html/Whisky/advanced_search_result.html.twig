@@ -15,6 +15,7 @@
     <ul> 
       {% for whisky in whiskys %}
           
+            {% set status = whiskylike['like' ~ whisky.getId ] %}
           
           <li class="cf">
               <a href="{{ app.urlFor('show_whisky_by_id', {"id" : whisky.getId } ) }}">
@@ -32,6 +33,7 @@
                   <img src="../img/dislike_icon.png" >
                 </a>
               </div>
+                  
           </li>        
       {% endfor %} 
     </ul>

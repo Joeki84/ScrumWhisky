@@ -73,6 +73,27 @@ public function addlike(){
         
     }
     
+
+    
+    
+        public function isalreadyLikeMulti($id_user){                      
+       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->findBy(array('user'=> $id_user ));
+       if(count($like)> 0){
+            
+           foreach($like as $value)               
+           {
+               $index="like".$value->getWhisky()->getId();
+               $tab[$index]=$value->getState();
+           }
+           return $tab;
+           
+        }else{
+            return null;
+        }
+        
+    }
+    
+    
     
     
     public function retrieveWhiskyLikeById($id) {
