@@ -40,14 +40,4 @@ class CommentService {
     return $comments;
   }
 
-      public function retrieveCommentById($id){
-        $comment = $this->em->getRepository('scrum\ScotchLodge\Entities\Comment')->find($id);
-        if(count($comment)> 0){
-            return $comment;
-        }else{
-            return null;
-        }
-    }
-  
-  
 }

@@ -21,14 +21,14 @@
 
     <div id="wrapper">      
 
-      <div class="container">
-        {% block header %}
-          {% include 'header.html.twig' %}
-        {% endblock header %}
-        {% block nav_menu %}
-          {% include 'nav_top_menu.html.twig' %}
-        {% endblock nav_menu%}
+      {% block header %}
+        {% include 'header.html.twig' %}
+      {% endblock header %}
+      {% block nav_menu %}
+        {% include 'nav_top_menu.html.twig' %}
+      {% endblock nav_menu%}
 
+      <div class="container">
         {% block messages %}
           {% block error_messages %}
             {% if flash['error'] is defined %}
@@ -39,20 +39,20 @@
               </div>
             {% endif %}
 
-            {% if errors is defined %}
+            {% if flash['errors'] is defined %}
               <div class="flagged errors flash">
                 <ul>                  
-                  {% for error in errors %}
+                  {% for error in flash['errors'] %}
                     <li>{{ error }}</li>
-                    {% endfor %}                  
+                  {% endfor %}              
                 </ul>
               </div>
             {% endif %}
 
-            {% if errors['flash'] is defined %}
+            {% if errors is defined %}
               <div class="flagged errors flash">
                 <ul>                  
-                  {% for error in errors['flash'] %}
+                  {% for error in errors %}
                     <li>{{ error }}</li>
                     {% endfor %}                  
                 </ul>
@@ -93,15 +93,12 @@
 
     <!-- js -->
 
+
     <script type="text/javascript">
-      $(function() {
-        $('.flagged').on('click', function() {
-          $(this).hide();
-        });
+      $('.flagged').on('click', function(e) {
+        $(this).hide();
       });
     </script>
-
-
     {% block extrajs %}      
     {% endblock extrajs %}
 

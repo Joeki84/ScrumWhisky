@@ -6,6 +6,8 @@
   Profile details for {{ user.username }}
 {% endblock title %}
 
+{% if globals.user is defined and globals.user is not null %}
+{% endif %}
 
 {% block content %}
   <div class="container form">
@@ -13,7 +15,6 @@
     {#<div><img src="../img/nophoto.jpg"></div>#}
     <div><img src="http://static.comicvine.com/uploads/original/11114/111143722/3697177-kufu.jpg"></div>
 
-    {% if globals.user is defined and globals.user is not null %}
     <dl>
       <dt>Name:</dt>
       <dd>{{ user.firstName }} {{ user.surname }}</dd>
@@ -24,7 +25,6 @@
       <dt>Postcode</dt>
       <dd>{{ user.postcode.postcode }}</dd>
     </dl>
-    {% endif %}
 
 
     <div class="clearboth topline">{# include expects 'reviews' objects #}
