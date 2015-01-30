@@ -403,8 +403,11 @@ div.sliders label {
 .like-btn:nth-of-type(even) {
   border-left: 1px solid #696969;
 }
-.like-btn.active {
-  background-color: #696969;
+.like-btn.active_pos {
+  background-color: green;
+}
+.like-btn.active_neg {
+  background-color: darkred;
 }
 
 /*ID pages*/
