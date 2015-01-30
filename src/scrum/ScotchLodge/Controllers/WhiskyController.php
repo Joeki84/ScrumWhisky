@@ -61,8 +61,9 @@ class WhiskyController extends Controller {
         $globals = $this->getGlobals();
         $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
       }
-    } else {
-   /* @var $app Slim */
+    }
+    else {
+      /* @var $app Slim */
       $app->flash('error', 'Access denied');
       $app->redirectTo('main_page');
     }
@@ -179,8 +180,15 @@ class WhiskyController extends Controller {
     $globals = $this->getGlobals();
     $whisky = $this->whiskysrv->advanced_search_whisky_result($this->em, $this->app);
     $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
-    $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
-    $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky, 'whiskylike' => $whiskylike));
+
+    $user = $globals['user'];
+    if (isset($globals['user'])) {
+      $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+      $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky, 'whiskylike' => $whiskylike));
+    }
+    else {
+      $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky));
+    }
   }
 
   public function show_whisky_by_id($id) {
@@ -190,14 +198,23 @@ class WhiskyController extends Controller {
       $whisky = $this->whiskysrv->retrieveWhiskyById($id);
       $whisky = $this->whiskysrv->ViewWhisky($whisky);
       if ($whisky) {
-          
-        $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
-        $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());  
-        
-        $commentlikesrv = new CommentLikeService($this->em, $this->app);
-        $commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
-        
-        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
+
+        $user = $globals['user'];
+
+
+
+
+        if (isset($user)) {
+          //$whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+          //$whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+          //$commentlikesrv = new CommentLikeService($this->em, $this->app);
+          //$commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
+          //$this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
+          $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky));
+        }
+        else {
+          $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky));
+        }
       }
       else {
         $app = $this->getApp();
