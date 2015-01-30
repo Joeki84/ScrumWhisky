@@ -39,14 +39,14 @@ public function addlike(){
    $whiskysrv = new WhiskyService($this->em, $this->app);
    $whisky = $whiskysrv->retrieveWhiskyById($whiskyid);
    
-   $WhiskyLike = $this->isalreadyLike($whiskyid,$userid);
    
-   $c = $WhiskyLike;
-   if($WhiskyLike)
+   $WhiskyLike = $this->em->find('scrum\ScotchLodge\Entities\WhiskyLike',$likeid );
+   if($WhiskyLike != NULL)
    {
-         //$WhiskyLike->setUser($user);
-         //$WhiskyLike->setWhisky($whisky);
-         $WhiskyLike->setState($status);         
+         $WhiskyLike->setUser($user);
+         $WhiskyLike->setWhisky($whisky);
+         $WhiskyLike->setState($status);
+         //$this->em->merge($WhiskyLike);
    }
    else
    {
@@ -64,48 +64,13 @@ public function addlike(){
    
 }    
     public function isalreadyLike($id_comment,$id_user){                      
-       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->findBy(array('user'=> $id_user  ,'whisky' => $id_comment));
+       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->findBy(array('user_id'=> $id_user  ,'Whisky_id' => $id_comment));
        if(count($like)> 0){
-            return $like[0];
+            return true;
         }else{
             return null;
         }
         
     }
-    
-
-    
-    
-        public function isalreadyLikeMulti($id_user){                      
-       $like = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->findBy(array('user'=> $id_user ));
-       if(count($like)> 0){
-            
-           foreach($like as $value)               
-           {
-               $index="like".$value->getWhisky()->getId();
-               $tab[$index]=$value->getState();
-           }
-           return $tab;
-           
-        }else{
-            return null;
-        }
-        
-    }
-    
-    
-    
-    
-    public function retrieveWhiskyLikeById($id) {
-    $whiskyLike = $this->em->getRepository('scrum\ScotchLodge\Entities\WhiskyLike')->find($id);
-    if (count($whiskyLike) > 0) {
-      return $whiskyLike;
-    } else {
-      return null;
-    }
-  }
-    
-  
-    
     
 }
