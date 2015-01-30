@@ -15,6 +15,7 @@ use scrum\ScotchLodge\Service\Category\CategoryService;
 use scrum\ScotchLodge\Entities\Whisky;
 use scrum\ScotchLodge\Entities\User;
 use scrum\ScotchLodge\Service\WhiskyLike\WhiskyLikeService;
+use scrum\ScotchLodge\Service\CommentLike\CommentLikeService;
 
 /**
  * WhiskyController controller
@@ -39,21 +40,32 @@ class WhiskyController extends Controller {
    * Render the page to add a new whisky.
    */
   public function addWhisky() {
-    $regsrv = new RegionService($this->em, $this->app);
-    $regions = $regsrv->getRegions();
-    $distsrv = new DistilleryService($this->em, $this->app);
-    $distillerys = $distsrv->getDistillerys();
-    $barsrv = new BarrelService($this->em, $this->app);
-    $barrels = $barsrv->getBarrels();
-    $blendsrv = new BlendService($this->em, $this->app);
-    $blends = $blendsrv->getBlends();
-    $countrysrv = new CountryService($this->em, $this->app);
-    $countries = $countrysrv->getCountries();
-    $categorysrv = new CategoryService($this->em, $this->app);
-    $categories = $categorysrv->getCategories();
+    $app = $this->app;
+    $user = $this->getUser();
 
-    $globals = $this->getGlobals();
-    $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
+    /* @var $user User */
+    if (isset($user)) {
+      if ($user->isAdmin() || $user->canReview()) {
+        $regsrv = new RegionService($this->em, $this->app);
+        $regions = $regsrv->getRegions();
+        $distsrv = new DistilleryService($this->em, $this->app);
+        $distillerys = $distsrv->getDistillerys();
+        $barsrv = new BarrelService($this->em, $this->app);
+        $barrels = $barsrv->getBarrels();
+        $blendsrv = new BlendService($this->em, $this->app);
+        $blends = $blendsrv->getBlends();
+        $countrysrv = new CountryService($this->em, $this->app);
+        $countries = $countrysrv->getCountries();
+        $categorysrv = new CategoryService($this->em, $this->app);
+        $categories = $categorysrv->getCategories();
+        $globals = $this->getGlobals();
+        $this->getApp()->render('Whisky/new_whisky.html.twig', array('globals' => $globals, 'regions' => $regions, 'distillerys' => $distillerys, 'barrels' => $barrels, 'blends' => $blends, 'countries' => $countries, 'categories' => $categories));
+      }
+    } else {
+   /* @var $app Slim */
+      $app->flash('error', 'Access denied');
+      $app->redirectTo('main_page');
+    }
   }
 
   /**
@@ -167,7 +179,10 @@ class WhiskyController extends Controller {
     $globals = $this->getGlobals();
     $whisky = $this->whiskysrv->advanced_search_whisky_result($this->em, $this->app);
     $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+    
+    if($globals["user"]!= null) 
     $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());
+    
     $this->getApp()->render('Whisky/advanced_search_result.html.twig', array('globals' => $globals, 'whiskys' => $whisky, 'whiskylike' => $whiskylike));
   }
 
@@ -178,7 +193,18 @@ class WhiskyController extends Controller {
       $whisky = $this->whiskysrv->retrieveWhiskyById($id);
       $whisky = $this->whiskysrv->ViewWhisky($whisky);
       if ($whisky) {
-        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky));
+          
+        $whiskylikesrv = new WhiskyLikeService($this->em, $this->app);
+        
+        if($globals["user"]!= null) 
+        $whiskylike = $whiskylikesrv->isalreadyLikeMulti($globals["user"]->getId());  
+        
+        $commentlikesrv = new CommentLikeService($this->em, $this->app);
+        
+        if($globals["user"]!= null)            
+        $commentlike = $commentlikesrv->isalreadyLikeMulti($globals["user"]->getId());
+        
+        $this->getApp()->render('Whisky/show_whisky_by_id.html.twig', array('globals' => $globals, 'whisky' => $whisky, 'whiskylike' => $whiskylike, 'commentlike', $commentlike));
       }
       else {
         $app = $this->getApp();

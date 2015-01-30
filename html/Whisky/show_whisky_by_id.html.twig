@@ -39,12 +39,17 @@
     </dl>
 
     {% set scores =  whisky.getScores  %}
+    {% set total = 0  %}
     <ul>
       {% for score in scores %}     
       <li><strong>{{ score.getCategory.getCategory }}:</strong> {{ (score.getScore/100)|number_format(1) }} /10</li>
-    {% endfor %}
+    {% set total = total + (score.getScore/100)  %}
+      {% endfor %}
     </ul>
-
+{% if  scores.length >0 %}     
+{% set avg = total / scores|length  %}
+<strong>Average:</strong> {{avg|number_format(2) }} / 10
+{% endif %}
     <dl>
       <dt>Overall score</dt>
       <dd>TO BE CALCULATED</dd>
